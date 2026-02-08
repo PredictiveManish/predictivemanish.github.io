@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on Manish Tiwari</title>
+    <link>https://predictivemanish.github.io/blog/</link>
+    <description>Recent content in Blog on Manish Tiwari - ML, Data Science, and Open Source</description>
+    <generator>Hugo</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2025, Manish Tiwari.</copyright>
+    <lastBuildDate>Sat, 24 May 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://predictivemanish.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Beyond the Scorecard: Decoding Team Strategies in IPL 2025 Using Data Science</title>
+      <link>https://medium.com/@manishthoughts/beyond-the-scorecard-decoding-team-strategies-in-ipl-2025-using-data-science-40914d091655</link>
+      <pubDate>Sat, 24 May 2025 00:00:00 +0000</pubDate>
+      <guid>https://medium.com/@manishthoughts/beyond-the-scorecard-decoding-team-strategies-in-ipl-2025-using-data-science-40914d091655</guid>
+      <description>&lt;p&gt;An analytical deep dive into IPL 2025 using data science techniques to uncover team strategies, player performance patterns, and predictive insights beyond traditional cricket statistics.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>From Raw Data to Actionable Insights: My 3-Day Deep Dive into Data Science Salaries</title>
+      <link>https://medium.com/@manishthoughts/from-raw-data-to-actionable-insights-my-3-day-deep-dive-into-data-science-salaries-c4b89316744d</link>
+      <pubDate>Thu, 22 May 2025 00:00:00 +0000</pubDate>
+      <guid>https://medium.com/@manishthoughts/from-raw-data-to-actionable-insights-my-3-day-deep-dive-into-data-science-salaries-c4b89316744d</guid>
+      <description>&lt;p&gt;A comprehensive analysis of data science salary trends across industries, experience levels, and geographic locations based on real-world data, providing actionable career insights for aspiring data scientists.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
