@@ -2,54 +2,233 @@
 <html lang="en-US">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Projects & Roadmap | Manish Tiwari</title>
+  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon" href="https://predictivemanish.github.io/images/favicon.png" />
+<title>Updates | Manish Tiwari</title>
+<meta name="title" content="Updates" />
+<meta name="description" content="Current projects and roadmap - focused on open source, ML systems, and deployment pipelines." />
+<meta name="keywords" content="machine learning,open source,mlops,projects,roadmap,updates" />
+
+
+<meta property="og:url" content="https://predictivemanish.github.io/updates/">
+  <meta property="og:site_name" content="Manish Tiwari">
+  <meta property="og:title" content="Updates">
+  <meta property="og:description" content="Current projects and roadmap - focused on open source, ML systems, and deployment pipelines.">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="article">
+    <meta property="og:image" content="https://predictivemanish.github.io/images/share.png">
+
+
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://predictivemanish.github.io/images/share.png">
+  <meta name="twitter:title" content="Updates">
+  <meta name="twitter:description" content="Current projects and roadmap - focused on open source, ML systems, and deployment pipelines.">
+
+
+
+
+  <meta itemprop="name" content="Updates">
+  <meta itemprop="description" content="Current projects and roadmap - focused on open source, ML systems, and deployment pipelines.">
+  <meta itemprop="datePublished" content="2026-02-01T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2026-02-01T00:00:00+00:00">
+  <meta itemprop="wordCount" content="250">
+  <meta itemprop="image" content="https://predictivemanish.github.io/images/share.png">
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
   <style>
-    body {
-      font-family: Verdana, sans-serif;
-      margin: auto;
-      padding: 24px;
-      max-width: 720px;
-      line-height: 1.6;
-      color: #333;
-    }
-    h1, h2, h3 {
-      color: #222;
-    }
-    a {
-      color: #3273dc;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    .project {
-      margin-bottom: 24px;
-    }
-    .tech {
-      font-size: 0.9em;
-      color: #555;
-    }
-  </style>
+  :root {
+    --width: 720px;
+    --font-main: Verdana, sans-serif;
+    --font-secondary: Verdana, sans-serif;
+    --font-scale: 1em;
+    --background-color: #fdfdfd;
+    --heading-color: #222;
+    --text-color: #444;
+    --link-color: #3273dc;
+    --visited-color: #8b6fcb;
+    --blockquote-color: #222;
+  }
+
+   
+
+  body {
+    font-family: var(--font-secondary);
+    font-size: var(--font-scale);
+    margin: auto;
+    padding: 20px;
+    max-width: var(--width);
+    text-align: left;
+    background-color: var(--background-color);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.5;
+    color: var(--text-color);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-main);
+    color: var(--heading-color);
+  }
+
+  a {
+    color: var(--link-color);
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  nav a {
+    margin-right: 8px;
+  }
+
+  strong,
+  b {
+    color: var(--heading-color);
+  }
+
+  button {
+    margin: 0;
+    cursor: pointer;
+  }
+
+  time {
+    font-family: monospace;
+    font-style: normal;
+    font-size: 15px;
+  }
+
+  main {
+    line-height: 1.6;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px dashed;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  code {
+    font-family: monospace;
+    padding: 2px;
+    border-radius: 3px;
+  }
+
+  blockquote {
+    border-left: 1px solid #999;
+    color: var(--blockquote-color);
+    padding-left: 20px;
+    font-style: italic;
+  }
+
+  footer {
+    padding: 25px 0;
+    text-align: center;
+  }
+
+  .title:hover {
+    text-decoration: none;
+  }
+
+  .title h1 {
+    font-size: 1.5em;
+  }
+
+  .inline {
+    width: auto !important;
+  }
+
+  .highlight,
+  .code {
+    border-radius: 3px;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    overflow-x: auto;
+  }
+
+   
+  ul.blog-posts {
+    list-style-type: none;
+    padding: unset;
+  }
+
+  ul.blog-posts li {
+    display: flex;
+  }
+
+  ul.blog-posts li span {
+    flex: 0 0 130px;
+  }
+
+  ul.blog-posts li a:visited {
+    color: var(--visited-color);
+  }
+
+  .project {
+    margin-bottom: 32px;
+  }
+  
+  .tech {
+    font-size: 0.9em;
+    color: #555;
+    font-style: italic;
+    margin-top: 8px;
+  }
+
+</style>
+
 </head>
 
 <body>
-  <header>
-    <h1>Current Projects & Roadmap</h1>
-    <p>What I’m building and learning right now — focused on open source, ML systems, and deployment pipelines.</p>
-    <hr>
-  </header>
+  <header><a href="/" class="title">
+  <h2>Manish Tiwari</h2>
+</a>
+<nav>
+<a href="/">Home</a>
 
+<a href="/blog/">Blog</a>
+
+<a href="/now/">Now</a>
+
+<a href="/contact/">Contact</a>
+
+<a href="/updates">Updates</a>
+
+</nav>
+<hr>
+</header>
+  <main>
+<content>
+  
+  <h1>Current Projects & Roadmap</h1>
+  <p>What I'm building and learning right now — focused on open source, ML systems, and deployment pipelines.</p>
+  
   <section class="project">
     <h2>Open Source Contributions</h2>
     <p>Actively contributing to:</p>
     <ul>
-      <li><a href="https://github.com/sktime/sktime">sktime</a> — Python library for time series machine learning, unified API for forecasting, classification, and more. :contentReference[oaicite:0]{index=0}</li>
-      <li><a href="https://github.com/chaoss/augur">chaoss/augur</a> — Open source project for measuring community health and sustainability metrics. :contentReference[oaicite:1]{index=1}</li>
+      <li><a href="https://github.com/sktime/sktime">sktime</a> — Python library for time series machine learning, unified API for forecasting, classification, and more.</li>
+      <li><a href="https://github.com/chaoss/augur">chaoss/augur</a> — Open source project for measuring community health and sustainability metrics.</li>
     </ul>
     <p>Recent PRs:  
-       <!-- Replace these placeholders with actual URLs -->
        <a href="https://github.com/sktime/sktime/issues?q=is%3Apr+is%3Aopen+author%3APredictiveManish">first PR on sktime</a>,  
        <a href="https://github.com/chaoss/augur/issues?q=is%3Apr+is%3Aopen+author%3APredictiveManish">My PRs on CHAOSS/augur</a>
     </p>
@@ -74,12 +253,26 @@
     <p>Next step: Plan to deploy this model to learn how inference pipelines work in the real world (latency, scaling, cost, logging).</p>
     <p class="tech">Frameworks: PyTorch, experimentation frameworks, deployment engines.</p>
   </section>
+  
+  <section class="project">
+    <h2>Learning Focus</h2>
+    <p>Currently diving deep into:</p>
+    <ul>
+      <li>ML systems architecture and design patterns</li>
+      <li>Production deployment strategies for ML models</li>
+      <li>Monitoring and maintaining ML systems in production</li>
+      <li>Cost optimization for inference at scale</li>
+    </ul>
+    <p><em>Updated: February 2026</em></p>
+  </section>
 
-  <footer>
-    <hr>
-    <p>Updated: February 2026</p>
-    <p><a href="/">Back to Home</a></p>
-  </footer>
+</content>
+
+  </main>
+  <footer>Made with <a href="https://github.com/janraasch/hugo-bearblog/">Hugo Bear</a>
+</footer>
+
+  
 </body>
 
 </html>
