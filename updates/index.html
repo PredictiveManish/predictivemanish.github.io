@@ -236,16 +236,33 @@
   </section>
 
   <section class="project">
-    <h2>End-to-End ML Systems (MLOps)</h2>
-    <p>Building a complete production pipeline to learn modern MLOps:</p>
-    <ul>
-      <li>Data ingestion & preprocessing</li>
-      <li>Training models & validation</li>
-      <li>Deployment strategy, containerization, monitoring</li>
-      <li>Inference performance & latency considerations</li>
-    </ul>
-    <p class="tech">Tools explored: Docker, CI, serverless inference, model monitoring, DVC, MLFlow.</p>
-  </section>
+  <h2>Production Model Drift Monitoring System</h2>
+  <p class="meta">Feb 2026 • <a href="#">GitHub</a> • <a href="#">Live Demo</a></p>
+
+  <p>
+    Designed and built an end-to-end MLOps prototype to monitor model drift in production-like settings.
+    The system tracks changes in prediction distributions over time and triggers alerts when significant drift is detected.
+  </p>
+
+  <ul>
+    <li>Developed FastAPI service for model inference with logging of predictions and timestamps</li>
+    <li>Implemented drift detection using statistical methods (PSI, KS test)</li>
+    <li>Built interactive Streamlit dashboard with Plotly to visualize drift trends in real time</li>
+    <li>Integrated Discord webhook alerts for threshold-based drift notifications</li>
+    <li>Containerized application using Docker and set up basic CI using GitHub Actions</li>
+  </ul>
+
+  <p class="tech">
+    <strong>Tech Stack:</strong> FastAPI, Streamlit, Scikit-learn, Docker, GitHub Actions, SQLite, Plotly
+  </p>
+
+  <p class="note">
+    <em>
+      Note: This is a prototype system focused on demonstrating end-to-end monitoring.
+      Future improvements include better scalability, feature-level drift tracking, and performance benchmarking.
+    </em>
+  </p>
+</section>
 
   <section class="project">
     <h2>Custom ML Model Training</h2>
