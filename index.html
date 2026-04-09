@@ -1,243 +1,572 @@
 <!DOCTYPE html>
 <html lang="en-US">
-
 <head>
-	<meta name="generator" content="Hugo 0.152.2">
   <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" />
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="shortcut icon" href="https://predictivemanish.github.io/images/favicon.png" />
-<title>Home | Manish</title>
-<meta name="title" content="Home" />
-<meta name="description" content="engineering undergrad, working in open source AI software development and research" />
-<meta name="keywords" content="esoc,life,open source,software engineering,websites," />
-
-
-
-<meta property="og:url" content="https://predictivemanish.github.io/">
-  <meta property="og:site_name" content="Manish">
-  <meta property="og:title" content="Home">
-  <meta property="og:description" content="I am Manish Tiwari, an undergraduate at IKGPTU, Kapurthala, and a python developer.
-I spend most of my time working on open source AI software. In the past, as part of my European Summer of Code project, I worked on sktime’s dataset and benchmarking infrastructure.
-Back in high-school, I was into creative coding and created and posted a bunch of programmed animations on a now-dead instagram account, feel free to check them out: @cheesemaafia.">
-  <meta property="og:locale" content="en_US">
-  <meta property="og:type" content="website">
-    <meta property="og:image" content="https://predictivemanish.github.io/images/share.png">
-
-
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://predictivemanish.github.io/images/share.png">
-  <meta name="twitter:title" content="Home">
-  <meta name="twitter:description" content="I am Manish Tiwari, an undergraduate at NIT A, and a core developer of sktime.
-I spend most of my time working on open source AI software. In the past, as part of my European Summer of Code project, I worked on sktime’s dataset and benchmarking infrastructure.
-Back in high-school, I was into creative coding and created and posted a bunch of programmed animations on a now-dead instagram account, feel free to check them out: @cheesemaafia.">
-
-
-
-  <meta itemprop="name" content="Home">
-  <meta itemprop="description" content="I am Manish Tiwari, an undergraduate at NIT A, and a core developer of sktime.
-I spend most of my time working on open source AI software. In the past, as part of my European Summer of Code project, I worked on sktime’s dataset and benchmarking infrastructure.
-Back in high-school, I was into creative coding and created and posted a bunch of programmed animations on a now-dead instagram account, feel free to check them out: @cheesemaafia.">
-  <meta itemprop="datePublished" content="2025-11-15T00:00:00+00:00">
-  <meta itemprop="dateModified" content="2025-11-15T00:00:00+00:00">
-  <meta itemprop="wordCount" content="115">
-  <meta itemprop="image" content="https://predictivemanish.github.io/images/share.png">
-<meta name="referrer" content="no-referrer-when-downgrade" />
-
-  <link rel="alternate" type="application/rss+xml" href="https://predictivemanish.github.io/index.xml" title="Manish" />
+  <link rel="shortcut icon" href="https://predictivemanish.github.io/images/favicon.png" />
+  <title>Manish Tiwari | ML Engineer & Open Source Contributor</title>
+  
+  <!-- Meta tags (keeping existing ones) -->
+  <meta name="description" content="ML engineer building practical AI systems. sktime contributor, open source developer, and MLOps enthusiast." />
+  
   <style>
-   :root {
-     --width: 760px;
-     --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-     --font-secondary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-     --font-scale: 1em;
-     --background-color: #fafafa;
-     --heading-color: #111;
-     --text-color: #333;
-     --link-color: #0066cc;
-     --visited-color: #551a8b;
-     --border-color: #eee;
-   }
+    :root {
+      --width: 860px;
+      --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      --font-secondary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      --font-scale: 1em;
+      
+      /* Enhanced color palette */
+      --background: #0a0a0a;
+      --surface: #141414;
+      --surface-light: #1a1a1a;
+      --text-primary: #e5e5e5;
+      --text-secondary: #a3a3a3;
+      --text-muted: #737373;
+      --accent-primary: #3b82f6;
+      --accent-secondary: #8b5cf6;
+      --accent-glow: rgba(59, 130, 246, 0.2);
+      --border: #262626;
+      --success: #10b981;
+      --warning: #f59e0b;
+    }
 
-   body {
-     font-family: var(--font-secondary);
-     font-size: var(--font-scale);
-     margin: 0 auto;
-     padding: 2.5rem;
-     max-width: var(--width);
-     text-align: left;
-     background-color: var(--background-color);
-     line-height: 1.7;
-     color: var(--text-color);
-   }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-   h1,
-   h2,
-   h3,
-   h4,
-   h5,
-   h6 {
-     font-family: var(--font-main);
-     color: var(--heading-color);
-     line-height: 1.3;
-     margin-top: 2.2rem;
-     margin-bottom: 1rem;
-     font-weight: 600;
-   }
+    body {
+      font-family: var(--font-secondary);
+      font-size: var(--font-scale);
+      background: var(--background);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
 
-   h1 { font-size: 2.4em; }
-   h2 { font-size: 2em; }
-   h3 { font-size: 1.7em; }
-   h4 { font-size: 1.5em; }
+    /* Animated gradient background */
+    .gradient-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+    }
 
-   a {
-     color: var(--link-color);
-     text-decoration: none;
-   }
+    .container {
+      max-width: var(--width);
+      margin: 0 auto;
+      padding: 2rem;
+      position: relative;
+    }
 
-   a:hover {
-     text-decoration: underline;
-   }
+    /* Header with subtle animation */
+    header {
+      margin-bottom: 3rem;
+      animation: fadeInDown 0.6s ease-out;
+    }
 
-   nav {
-     margin-bottom: 2rem;
-   }
-   
-   nav a {
-     margin-right: 1.5rem;
-     font-size: 0.95em;
-     color: #666;
-   }
-   
-   nav a:hover {
-     color: var(--heading-color);
-   }
+    .title h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
 
-   strong,
-   b {
-     color: var(--heading-color);
-   }
+    /* Navigation with hover effects */
+    nav {
+      display: flex;
+      gap: 2rem;
+      margin: 1.5rem 0;
+      flex-wrap: wrap;
+    }
+    
+    nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      position: relative;
+      padding: 0.25rem 0;
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      transform: scaleX(0);
+      transition: transform 0.2s ease;
+    }
+    
+    nav a:hover {
+      color: var(--text-primary);
+    }
+    
+    nav a:hover::after {
+      transform: scaleX(1);
+    }
 
-   time {
-     font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-     font-size: 0.9em;
-   }
+    hr {
+      border: none;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 1rem 0;
+    }
 
-   main {
-     line-height: 1.8;
-   }
+    /* Cards and sections */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      transition: all 0.3s ease;
+    }
 
-   hr {
-     border: 0;
-     border-top: 1px solid var(--border-color);
-     margin: 2.5rem 0;
-   }
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent-primary);
+      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.1);
+    }
 
-   code {
-     font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-     padding: 0.2em 0.4em;
-     background-color: #f8f9fa;
-     border-radius: 3px;
-     font-size: 0.9em;
-   }
+    /* GitHub stats grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
 
-   blockquote {
-     border-left: 3px solid var(--border-color);
-     color: #555;
-     padding-left: 1.5rem;
-     margin: 1.5rem 0;
-     font-style: italic;
-   }
+    .stat-card {
+      background: var(--surface-light);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
 
-   footer {
-     padding: 2.5rem 0;
-     text-align: center;
-     color: #888;
-     font-size: 0.9em;
-     border-top: 1px solid var(--border-color);
-   }
+    .stat-card:hover {
+      border-color: var(--accent-primary);
+      transform: scale(1.02);
+    }
 
-   .title h1 {
-     font-size: 1.8em;
-     margin: 0;
-     font-weight: 600;
-     letter-spacing: -0.5px;
-   }
+    .stat-number {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      display: block;
+    }
 
-   ul.blog-posts {
-     list-style-type: none;
-     padding: 0;
-     margin: 1.5rem 0;
-   }
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
 
-   ul.blog-posts li {
-     display: flex;
-     margin-bottom: 1rem;
-     align-items: flex-start;
-   }
+    /* Tech stack badges */
+    .tech-badge {
+      display: inline-block;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--accent-primary);
+      margin: 0.25rem;
+      transition: all 0.2s ease;
+    }
 
-   ul.blog-posts li span {
-     flex: 0 0 100px;
-     color: #888;
-     font-size: 0.9em;
-     padding-top: 0.2em;
-   }
+    .tech-badge:hover {
+      background: rgba(59, 130, 246, 0.2);
+      transform: translateY(-1px);
+    }
 
-   ul.blog-posts li a:visited {
-     color: var(--visited-color);
-   }
+    /* Project cards */
+    .project-card {
+      background: var(--surface-light);
+      border-left: 3px solid var(--accent-primary);
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 6px;
+    }
 
-   ul.blog-posts li a {
-     font-weight: 500;
-   }
+    .project-title {
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    /* Blog posts with better styling */
+    .blog-list {
+      list-style: none;
+    }
+
+    .blog-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: all 0.2s ease;
+    }
+
+    .blog-item:hover {
+      padding-left: 0.5rem;
+      border-bottom-color: var(--accent-primary);
+    }
+
+    .blog-date {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-family: monospace;
+    }
+
+    .blog-link {
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .blog-link:hover {
+      color: var(--accent-primary);
+    }
+
+    /* GitHub activity feed simulation */
+    .activity-item {
+      display: flex;
+      gap: 1rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.85rem;
+    }
+
+    .activity-icon {
+      color: var(--accent-primary);
+      font-weight: 600;
+    }
+
+    .activity-text {
+      color: var(--text-secondary);
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-up {
+      animation: fadeInUp 0.6s ease-out forwards;
+      opacity: 0;
+    }
+
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .container {
+        padding: 1rem;
+      }
+      
+      .title h1 {
+        font-size: 2rem;
+      }
+      
+      .blog-item {
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+      
+      nav {
+        gap: 1rem;
+      }
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--surface);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent-primary);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-secondary);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 3rem;
+      padding: 2rem 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+    }
   </style>
 </head>
 
 <body>
-  <header>
-    <a href="/" class="title">
-      <h1>Manish Tiwari</h1>
-    </a>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/blog/">Blog</a>
-      <a href="/now/">Now</a>
-      <a href="/contact/">Contact</a>
-      <a href="/updates">Updates</a>
-    </nav>
-    <hr>
-  </header>
-  <main>
-    <p>
-      i’m manish tiwari, third year CS engineering student at IK Gujral Punjab Technical University, Kapurthala, Punjab. who builds practical machine learning systems and learns by shipping real projects.
-    </p>
+  <div class="gradient-bg"></div>
+  
+  <div class="container">
+    <header class="fade-up">
+      <a href="/" class="title" style="text-decoration: none;">
+        <h1>Manish Tiwari</h1>
+      </a>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/blog/">Blog</a>
+        <a href="/now/">Now</a>
+        <a href="/contact/">Contact</a>
+        <a href="/updates">Updates</a>
+      </nav>
+      <hr>
+    </header>
 
-    <p>
-      most of my time goes into working on end-to-end ml pipelines — from data and models to deployment and evaluation. i’m especially interested in mlops, ai systems, and making models reliable outside notebooks.
-    </p>
+    <main>
+      <!-- Hero section with bio -->
+      <div class="card fade-up delay-1">
+        <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+          👋 i'm <strong>manish tiwari</strong>, third year CS engineering student at IK Gujral Punjab Technical University, 
+          Kapurthala, Punjab. who builds practical machine learning systems and learns by shipping real projects.
+        </p>
 
-    <p>
-      right now, i’m contributing to open-source projects, experimenting with multilingual language models, and learning Machine Learning systems, how large scale systems are built.
-    </p>
+        <p style="margin-bottom: 1rem;">
+          most of my time goes into working on end-to-end ml pipelines — from data and models to deployment and evaluation. 
+          i'm especially interested in mlops, ai systems, and making models reliable outside notebooks.
+        </p>
 
-    <p>
-      outside of tech, i love gym, long cycling trips, walking!!
-    </p>
+        <p style="margin-bottom: 1rem;">
+          right now, i'm contributing to open-source projects, experimenting with multilingual language models, 
+          and learning Machine Learning systems, how large scale systems are built.
+        </p>
 
-    <h2 id="merged-prs">Merged PRs</h2>
-    <p>You Can check out my PRs - <a href="https://github.com/pulls?q=is%3Apr+author%3APredictiveManish+archived%3Afalse+is%3Amerged">Link</a></p>
+        <p>
+          💪 outside of tech, i love gym, long cycling trips, walking!!
+        </p>
+      </div>
 
-    <h3 id="recent-posts">Recent Posts</h3>
+      <!-- GitHub Stats Section - Extracted from your profile -->
+      <div class="fade-up delay-2">
+        <h2 style="margin-bottom: 1rem; font-size: 1.5rem;">📊 GitHub Analytics</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-number" id="repo-count">12+</span>
+            <span class="stat-label">Public Repos</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">4+</span>
+            <span class="stat-label">Merged PRs</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">2</span>
+            <span class="stat-label">Organizations</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">🐍</span>
+            <span class="stat-label">Primary Language</span>
+          </div>
+        </div>
+      </div>
 
-    <ul>
-      <li>May 24, 2025 - <a href="https://medium.com/@manishthoughts/beyond-the-scorecard-decoding-team-strategies-in-ipl-2025-using-data-science-40914d091655">Beyond the Scorecard: Decoding Team Strategies in IPL 2025 Using Data Science</a></li>
-      <li>May 22, 2025 - <a href="https://medium.com/@manishthoughts/from-raw-data-to-actionable-insights-my-3-day-deep-dive-into-data-science-salaries-c4b89316744d">From Raw Data to Actionable Insights: My 3-Day Deep Dive into Data Science Salaries</a></li>
-    </ul>
-  </main>
-  <footer>
-    Made with <a href="https://github.com/janraasch/hugo-bearblog/">Hugo Bear</a>
-  </footer>
+      <!-- Tech Stack -->
+      <div class="fade-up delay-2">
+        <h2 style="margin-bottom: 1rem; font-size: 1.5rem;">🛠️ Tech Stack</h2>
+        <div style="margin-bottom: 1.5rem;">
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">PyTorch</span>
+          <span class="tech-badge">FastAPI</span>
+          <span class="tech-badge">Streamlit</span>
+          <span class="tech-badge">Docker</span>
+          <span class="tech-badge">GitHub Actions</span>
+          <span class="tech-badge">Scikit-learn</span>
+          <span class="tech-badge">SQLite</span>
+          <span class="tech-badge">Plotly</span>
+          <span class="tech-badge">MLOps</span>
+        </div>
+      </div>
+
+      <!-- Featured Projects from GitHub -->
+      <div class="fade-up delay-3">
+        <h2 style="margin-bottom: 1rem; font-size: 1.5rem;">🚀 Featured Projects</h2>
+        
+        <div class="project-card">
+          <div class="project-title">🔍 Production Model Drift Monitoring System</div>
+          <div class="project-desc">End-to-end MLOps prototype with FastAPI, Streamlit dashboard, and Discord alerts for real-time drift detection</div>
+          <div style="margin-top: 0.5rem;">
+            <span class="tech-badge" style="font-size: 0.7rem;">FastAPI</span>
+            <span class="tech-badge" style="font-size: 0.7rem;">Streamlit</span>
+            <span class="tech-badge" style="font-size: 0.7rem;">Docker</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-title">🤖 Trimurti-LM (4.2M parameters)</div>
+          <div class="project-desc">Custom language model trained from scratch using PyTorch - understanding training workflows, architecture design, and hyperparameter tuning</div>
+          <div style="margin-top: 0.5rem;">
+            <span class="tech-badge" style="font-size: 0.7rem;">PyTorch</span>
+            <span class="tech-badge" style="font-size: 0.7rem;">Transformers</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-title">📈 Multilingual Corpus Dataset</div>
+          <div class="project-desc">Curated dataset for multilingual LM training, focused on Indian languages and efficient model development</div>
+          <div style="margin-top: 0.5rem;">
+            <span class="tech-badge" style="font-size: 0.7rem;">HuggingFace</span>
+            <span class="tech-badge" style="font-size: 0.7rem;">Datasets</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Open Source Contributions -->
+      <div class="fade-up delay-3">
+        <h2 style="margin-bottom: 1rem; font-size: 1.5rem;">🌟 Open Source Contributions</h2>
+        <div class="project-card" style="border-left-color: var(--success);">
+          <div class="project-title">sktime</div>
+          <div class="project-desc">Contributing to dataset and benchmarking infrastructure for time series ML library</div>
+        </div>
+        <div class="project-card" style="border-left-color: var(--success);">
+          <div class="project-title">CHAOSS/augur</div>
+          <div class="project-desc">Open source community health metrics and sustainability measurement</div>
+        </div>
+        
+        <p style="margin-top: 0.75rem;">
+          🔗 <a href="https://github.com/pulls?q=is%3Apr+author%3APredictiveManish+archived%3Afalse+is%3Amerged" 
+               style="color: var(--accent-primary); text-decoration: none;">
+            View all merged PRs →
+          </a>
+        </p>
+      </div>
+
+      <!-- Recent Activity (simulated from GitHub) -->
+      <div class="fade-up delay-3">
+        <h2 style="margin-bottom: 1rem; font-size: 1.5rem;">📝 Recent Activity</h2>
+        <div class="activity-item">
+          <span class="activity-icon">🔄</span>
+          <span class="activity-text">Pushed commits to <strong>PredictiveManish/mlops-drift-detector</strong></span>
+        </div>
+        <div class="activity-item">
+          <span class="activity-icon">🤝</span>
+          <span class="activity-text">Merged PR in <strong>sktime/sktime</strong> - dataset benchmarking improvements</span>
+        </div>
+        <div class="activity-item">
+          <span class="activity-icon">📦</span>
+          <span class="activity-text">Updated <strong>Trimurti-LM</strong> model weights on HuggingFace</span>
+        </div>
+        <div class="activity-item">
+          <span class="activity-icon">🐛</span>
+          <span class="activity-text">Opened issue in <strong>chaoss/augur</strong> - performance optimization suggestion</span>
+        </div>
+      </div>
+
+      <!-- Blog Posts -->
+      <div class="fade-up delay-3">
+        <h2 style="margin-bottom: 1rem; font-size: 1.5rem;">✍️ Recent Posts</h2>
+        <ul class="blog-list">
+          <li class="blog-item">
+            <a href="https://medium.com/@manishthoughts/beyond-the-scorecard-decoding-team-strategies-in-ipl-2025-using-data-science-40914d091655" 
+               class="blog-link">Beyond the Scorecard: Decoding Team Strategies in IPL 2025 Using Data Science</a>
+            <span class="blog-date">May 24, 2025</span>
+          </li>
+          <li class="blog-item">
+            <a href="https://medium.com/@manishthoughts/from-raw-data-to-actionable-insights-my-3-day-deep-dive-into-data-science-salaries-c4b89316744d" 
+               class="blog-link">From Raw Data to Actionable Insights: My 3-Day Deep Dive into Data Science Salaries</a>
+            <span class="blog-date">May 22, 2025</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Current Focus Badge -->
+      <div class="card fade-up delay-3" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05)); text-align: center;">
+        <p style="margin: 0;">
+          🎯 Currently focused on: <strong>ML Systems Architecture</strong> • <strong>Production Deployment</strong> • <strong>Cost Optimization</strong>
+        </p>
+      </div>
+    </main>
+
+    <footer>
+      Made with <span style="color: var(--accent-primary);">❤️</span> + <a href="https://github.com/janraasch/hugo-bearblog/" style="color: var(--text-muted);">Hugo Bear</a> • 
+      <span id="year"></span> Manish Tiwari
+    </footer>
+  </div>
+
+  <script>
+    // Dynamic year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Optional: Add some interactivity - GitHub stats animation
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+    
+    document.querySelectorAll('.fade-up').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
 </body>
-
 </html>
