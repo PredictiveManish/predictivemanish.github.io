@@ -284,6 +284,28 @@
       flex: 1;
       color: var(--text-secondary);
     }
+    /* PR link styles */
+    .pr-title a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: inline-block;
+    }
+
+    .pr-title a:hover {
+      color: var(--accent-primary);
+      text-decoration: underline;
+      transform: translateX(2px);
+    }
+
+    /* Optional: Different color for merged vs open PR links */
+    .pr-status.merged + .pr-title a:hover {
+      color: #10b981;
+    }
+
+    .pr-status.open + .pr-title a:hover {
+      color: #f59e0b;
+    }
     
     .pr-date {
       font-size: 0.65rem;
@@ -592,27 +614,46 @@
               <span style="font-weight: 600; font-size: 0.85rem;">Recent Pull Requests</span>
             </div>
             <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+<div class="pr-item">
+  <span class="pr-status merged">✅</span>
+  <span class="pr-title">
+    <a href="https://github.com/usemoss/moss/pull/87" target="_blank">
+      Added unit tests & docs - <strong>usemoss/moss</strong>
+    </a>
+  </span>
+  <span class="pr-date">Apr 3, 2026</span>
+</div>
+
+<div class="pr-item">
+  <span class="pr-status merged">✅</span>
+  <span class="pr-title">
+    <a href="https://github.com/usemoss/moss/pull/74" target="_blank">
+      test(sdk/python): Add comprehensive pytest-based tests for Python SDK - <strong>usemoss/moss</strong>
+    </a>
+  </span>
+  <span class="pr-date">Apr 1, 2026</span>
+</div>
+
+<div class="pr-item">
+  <span class="pr-status merged">✅</span>
+  <span class="pr-title">
+    <a href="https://github.com/ShivaniSharma14/TrackWise/pull/2" target="_blank">
+      Updated README.md with better details - <strong>TrackWise</strong>
+    </a>
+  </span>
+  <span class="pr-date">Apr 3, 2026</span>
+</div>
+
+<div class="pr-item">
+  <span class="pr-status merged">✅</span>
+  <span class="pr-title">
+    <a href="https://github.com/ShivaniSharma14/TrackWise/pull/1" target="_blank">
+      Format & minor bugs fixed - <strong>TrackWise</strong>
+    </a>
+  </span>
+  <span class="pr-date">Apr 3, 2026</span>
+</div>
               
-              <div class="pr-item">
-                <span class="pr-status open">✅</span>
-                <span class="pr-title">Added unit tests & docs - <strong>usemoss/moss</strong></span>
-                <span class="pr-date">Apr 3, 2026</span>
-              </div>
-              <div class="pr-item">
-                <span class="pr-status open">✅</span>
-                <span class="pr-title">test(sdk/python): Add comprehensive pytest-based tests for Python SDK</span>
-                <span class="pr-date">Apr 1, 2026</span>
-              </div>
-              <div class="pr-item">
-                <span class="pr-status merged">✅</span>
-                <span class="pr-title">Updated README.md with better details - <strong>TrackWise</strong></span>
-                <span class="pr-date">Apr 3, 2026</span>
-              </div>
-              <div class="pr-item">
-                <span class="pr-status merged">✅</span>
-                <span class="pr-title">Format & minor bugs fixed - <strong>TrackWise</strong></span>
-                <span class="pr-date">Apr 3, 2026</span>
-              </div>
             </div>
             <a href="https://github.com/pulls?q=is%3Apr+author%3APredictiveManish+archived%3Afalse+is%3Amerged" 
               target="_blank"
