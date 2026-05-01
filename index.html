@@ -407,6 +407,80 @@
       font-size: 0.8rem;
       border-top: 1px solid var(--border);
     }
+    /* Visited India Map */
+.visited-map-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+}
+
+.visited-map-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-primary);
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.1);
+}
+
+.visited-map-header {
+  margin-bottom: 1rem;
+}
+
+.visited-map-header h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.visited-map-header p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+#india-map-container {
+  width: 100%;
+  overflow: hidden;
+  background: var(--surface-light);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+#india-map-container svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+#india-map-container svg path,
+#india-map-container svg polygon {
+  fill: #262626;
+  stroke: #404040;
+  stroke-width: 0.7;
+  transition: fill 0.2s ease, filter 0.2s ease;
+  cursor: pointer;
+}
+
+#india-map-container svg .visited-state {
+  fill: var(--accent-primary);
+}
+
+#india-map-container svg path:hover,
+#india-map-container svg polygon:hover {
+  fill: var(--accent-secondary);
+  filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.35));
+}
+
+.visited-map-note {
+  margin-top: 0.9rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.visited-map-note strong {
+  color: var(--text-secondary);
+}
+
   </style>
 </head>
 
@@ -686,6 +760,29 @@
           🎯 Currently focused on: <strong>ML Systems Architecture</strong> • <strong>Production Deployment</strong> • <strong>Cost Optimization</strong>
         </p>
       </div>
+
+      <!-- Visited India Map -->
+<div class="visited-map-card fade-up delay-3">
+  <div class="visited-map-header">
+    <h2>🗺️ India, so far</h2>
+    <p>
+      States and union territories I have visited across India.
+    </p>
+  </div>
+
+  <div id="india-map-container">
+    <p style="color: var(--text-muted); text-align: center; padding: 2rem 0;">
+      Loading map...
+    </p>
+  </div>
+
+  <p class="visited-map-note">
+    <strong>Visited:</strong>
+    Punjab, Delhi, Haryana, Himachal Pradesh, Uttar Pradesh, Rajasthan,
+    Bihar, Jammu & Kashmir, Jharkhand, Madhya Pradesh.
+  </p>
+</div>
+
     </main>
 
     <footer>
@@ -716,6 +813,101 @@
     document.querySelectorAll('.fade-up').forEach(el => {
       observer.observe(el);
     });
+    // Visited India Map
+const visitedIndianStates = [
+  "Punjab",
+  "Delhi",
+  "Haryana",
+  "Himachal Pradesh",
+  "Uttar Pradesh",
+  "Rajasthan",
+  "Bihar",
+  "Jammu and Kashmir",
+  "Jharkhand",
+  "Madhya Pradesh"
+];
+
+const indianStateIdMap = {
+  "Andaman and Nicobar": "INAN",
+  "Telangana": "INTG",
+  "Andhra Pradesh": "INAP",
+  "Arunachal Pradesh": "INAR",
+  "Assam": "INAS",
+  "Bihar": "INBR",
+  "Chandigarh": "INCH",
+  "Chhattisgarh": "INCT",
+  "Dadra and Nagar Haveli and Daman and Diu": "INDH",
+  "Delhi": "INDL",
+  "Goa": "INGA",
+  "Gujarat": "INGJ",
+  "Haryana": "INHR",
+  "Himachal Pradesh": "INHP",
+  "Jharkhand": "INJH",
+  "Karnataka": "INKA",
+  "Kerala": "INKL",
+  "Madhya Pradesh": "INMP",
+  "Maharashtra": "INMH",
+  "Manipur": "INMN",
+  "Meghalaya": "INML",
+  "Mizoram": "INMZ",
+  "Nagaland": "INNL",
+  "Odisha": "INOR",
+  "Puducherry": "INPY",
+  "Punjab": "INPB",
+  "Rajasthan": "INRJ",
+  "Sikkim": "INSK",
+  "Tamil Nadu": "INTN",
+  "Tripura": "INTR",
+  "Uttar Pradesh": "INUP",
+  "Uttarakhand": "INUT",
+  "West Bengal": "INWB",
+  "Lakshadweep": "INLD",
+  "Jammu and Kashmir": "INJK",
+  "Ladakh": "INLA"
+};
+
+async function loadVisitedIndiaMap() {
+  const container = document.getElementById("india-map-container");
+
+  if (!container) return;
+
+  try {
+    const response = await fetch("/visited/in.svg");
+
+    if (!response.ok) {
+      throw new Error("Could not load SVG map.");
+    }
+
+    const svgText = await response.text();
+    container.innerHTML = svgText;
+
+    visitedIndianStates.forEach((state) => {
+      const stateId = indianStateIdMap[state];
+      const element = document.getElementById(stateId);
+
+      if (!element) {
+        console.warn(`State not found in SVG: ${state}`);
+        return;
+      }
+
+      element.classList.add("visited-state");
+
+      const title = document.createElementNS("http://www.w3.org/2000/svg", "title");
+      title.textContent = `${state} — visited`;
+      element.appendChild(title);
+    });
+  } catch (error) {
+    container.innerHTML = `
+      <p style="color: var(--text-muted); text-align: center; padding: 2rem 0;">
+        Could not load India map.
+      </p>
+    `;
+    console.error(error);
+  }
+}
+
+loadVisitedIndiaMap();
+
   </script>
 </body>
 </html>
