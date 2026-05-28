@@ -492,37 +492,57 @@
       <a href="/" class="title" style="text-decoration: none;">
         <h1>Manish Tiwari</h1>
       </a>
-      <nav>
-        <a href="/">Home</a>
-        <a href="/blog/">Blog</a>
-        <a href="/now/">Now</a>
-        <a href="/contact/">Contact</a>
-        <a href="/updates">Updates</a>
-      </nav>
+      <nav style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin: 1.5rem 0;">
+  <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+    <a href="/">Home</a>
+    <a href="/blog/">Blog</a>
+    <a href="/now/">Now</a>
+    <a href="/contact/">Contact</a>
+    <a href="/updates">Updates</a>
+  </div>
+  <a href="ManishTiwari_Resume.pdf" download
+     style="display: inline-flex; align-items: center; gap: 0.4rem;
+            background: #3b82f6; color: #fff; font-size: 0.8rem;
+            font-weight: 600; padding: 0.4rem 1rem; border-radius: 8px;
+            text-decoration: none; transition: opacity 0.2s ease;"
+     onmouseover="this.style.opacity='0.85'"
+     onmouseout="this.style.opacity='1'">
+    ↓ Resume
+  </a>
+</nav>
       <hr>
     </header>
 
     <main>
       <!-- Hero section with bio -->
-      <div class="card fade-up delay-1">
-        <p style="font-size: 1.1rem; margin-bottom: 1rem;">
-          👋 Hi, myself <strong>manish tiwari</strong>, third year CS engineering student at IK Gujral Punjab Technical University, 
-          Kapurthala, Punjab. who builds practical machine learning systems and learns by shipping real projects.
-        </p>
+<div class="card fade-up delay-1">
+  <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+    👋 Hi, myself <strong>manish tiwari</strong>, third year CS engineering student at IK Gujral Punjab Technical University, 
+    Kapurthala, Punjab. who builds practical machine learning systems and learns by shipping real projects.
+  </p>
 
-        <p style="margin-bottom: 1rem;">
-          most of my time goes into working on end-to-end ml pipelines — from data and models to deployment and evaluation. 
-          i'm especially interested in mlops, ai systems, and making models reliable outside notebooks.
-        </p>
+  <p style="margin-bottom: 1rem;">
+    most of my time goes into working on end-to-end ml pipelines — from data and models to deployment and evaluation. 
+    i'm especially interested in mlops, ai systems, and making models reliable outside notebooks.
+  </p>
 
-        <p style="margin-bottom: 1rem;">
-          Merged PRs across Augur, SunPy, holidays, and other OSS projects, including security-conscious logging changes, package behavior updates, documentation fixes, and compatibility improvements; actively respond to maintainer review and ship accepted changes into release branches.
-        </p>
+  <p style="margin-bottom: 1rem;">
+    Merged PRs across Augur, SunPy, holidays, and other OSS projects, including security-conscious logging changes, package behavior updates, documentation fixes, and compatibility improvements; actively respond to maintainer review and ship accepted changes into release branches.
+  </p>
 
-        <p>
-          💪 outside of tech, i love gym, long cycling trips, walking!!
-        </p>
-      </div>
+  <p>
+    💪 outside of tech, i love gym, long cycling trips, walking!!
+  </p>
+  
+  <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+    <a href="ManishTiwari_Resume.pdf" download class="project-link-btn">
+      📄 Download Resume
+    </a>
+    <a href="https://drive.google.com/file/d/1k-RhIINjMYX0fbsENaUYgKlbDoAbeQMg/view?usp=sharing" target="_blank" class="project-link-btn">
+      ☁️ View on Drive
+    </a>
+  </div>
+</div>
 
       <!-- Tech Stack -->
       <div class="fade-up delay-2">
@@ -544,6 +564,32 @@
       <!-- Featured Projects from GitHub -->
       <div class="fade-up delay-3">
         <h2 style="margin-bottom: 1rem; font-size: 1.5rem;">🚀 Featured Projects</h2>
+
+        <div class="project-card">
+  <div class="project-header">
+    <div class="project-title">🛡️ SafeRun AI – Secure Sandbox Execution Platform</div>
+    <div class="project-links">
+      <a href="https://github.com/PredictiveManish/SafeRun-AI" target="_blank" class="project-link-btn">
+        📦 GitHub
+      </a>
+      <a href="https://saferun-ai.onrender.com/" target="_blank" class="project-link-btn">
+        🔗 Live
+      </a>
+      <a href="https://pypi.org/project/saferun-ai/" target="_blank" class="project-link-btn">
+        📦 PyPI
+      </a>
+    </div>
+  </div>
+  <div class="project-desc">Docker-based sandbox with AST scanner, YAML policy engine, and FastAPI backend for secure execution of untrusted AI-generated Python code</div>
+  <div style="margin-top: 0.5rem;">
+    <span class="tech-badge" style="font-size: 0.7rem;">Python</span>
+    <span class="tech-badge" style="font-size: 0.7rem;">FastAPI</span>
+    <span class="tech-badge" style="font-size: 0.7rem;">Docker</span>
+    <span class="tech-badge" style="font-size: 0.7rem;">SQLAlchemy</span>
+    <span class="tech-badge" style="font-size: 0.7rem;">AST</span>
+    <span class="tech-badge" style="font-size: 0.7rem;">Streamlit</span>
+  </div>
+</div>
         
         <div class="project-card">
           <div class="project-header">
