@@ -1,358 +1,391 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" />
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="shortcut icon" href="https://predictivemanish.github.io/images/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact | Manish Tiwari</title>
-  <meta name="title" content="Contact" />
-  <meta name="description" content="Get in touch with Manish Tiwari - ML Engineer and Open Source Contributor" />
+  <meta name="description" content="Get in touch with Manish Tiwari - ML Engineer and Open Source Contributor">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --width: 860px;
-      --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      --font-secondary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      --font-scale: 1em;
-      
-      --background: #0a0a0a;
-      --surface: #141414;
-      --surface-light: #1a1a1a;
-      --text-primary: #e5e5e5;
-      --text-secondary: #a3a3a3;
-      --text-muted: #737373;
-      --accent-primary: #3b82f6;
-      --accent-secondary: #8b5cf6;
-      --border: #262626;
+      --bg:        #111113;
+      --bg-raised: #18181b;
+      --border:    #27272a;
+      --border-light: #3f3f46;
+      --text:      #e4e4e7;
+      --text-2:    #a1a1aa;
+      --text-3:    #71717a;
+      --accent:    #d4a96a;   /* warm amber — the editorial warmth */
+      --accent-dim:#7c5e35;
+      --green:     #6ee7b7;
+      --red:       #fca5a5;
+      --serif:     'Lora', Georgia, serif;
+      --mono:      'DM Mono', 'Courier New', monospace;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: var(--font-secondary);
-      font-size: var(--font-scale);
-      background: var(--background);
-      color: var(--text-primary);
-      line-height: 1.6;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--serif);
+      font-size: 17px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .gradient-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .container {
-      max-width: var(--width);
+    /* ── Layout ── */
+    .wrap {
+      max-width: 680px;
       margin: 0 auto;
-      padding: 2rem;
-      position: relative;
+      padding: 0 1.5rem;
     }
 
-    header {
-      margin-bottom: 3rem;
-      animation: fadeInDown 0.6s ease-out;
-    }
-
-    .title h1 {
-      font-size: 2.8rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.02em;
-    }
-
+    /* ── Nav ── */
     nav {
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 0;
+    }
+
+    nav .inner {
       display: flex;
-      gap: 2rem;
-      margin: 1.5rem 0;
-      flex-wrap: wrap;
-    }
-    
-    nav a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 500;
-      transition: all 0.2s ease;
-      position: relative;
-      padding: 0.25rem 0;
-    }
-    
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-      transform: scaleX(0);
-      transition: transform 0.2s ease;
-    }
-    
-    nav a:hover {
-      color: var(--text-primary);
-    }
-    
-    nav a:hover::after {
-      transform: scaleX(1);
-    }
-
-    hr {
-      border: none;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--border), transparent);
-      margin: 1rem 0;
-    }
-
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      transition: all 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-2px);
-      border-color: var(--accent-primary);
-      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.1);
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
-
-    .contact-method {
-      background: var(--surface-light);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.5rem;
-      text-align: center;
-      transition: all 0.2s ease;
-    }
-
-    .contact-method:hover {
-      border-color: var(--accent-primary);
-      transform: translateY(-2px);
-    }
-
-    .contact-icon {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .contact-title {
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: var(--text-primary);
-    }
-
-    .contact-detail {
-      color: var(--accent-primary);
-      font-family: monospace;
-      font-size: 0.9rem;
-      word-break: break-all;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      margin-top: 1.5rem;
-    }
-
-    .social-btn {
-      background: var(--surface-light);
-      border: 1px solid var(--border);
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
-      color: var(--text-primary);
-      text-decoration: none;
-      transition: all 0.2s ease;
-      display: inline-flex;
       align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .nav-name {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--text-2);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    .resume-btn {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: transparent;
+      border: 1px solid var(--accent-dim);
+      color: var(--accent);
+      padding: 0.3rem 0.75rem;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .resume-btn:hover {
+      background: rgba(212, 169, 106, 0.08);
+      border-color: var(--accent);
+    }
+
+    /* ── Sections ── */
+    section {
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section:last-child { border-bottom: none; }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── Project cards ── */
+    .project {
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project:last-child { border-bottom: none; }
+
+    .project-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.4rem;
+    }
+
+    .project-name {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .project-links {
+      display: flex;
       gap: 0.5rem;
+      flex-shrink: 0;
     }
 
-    .social-btn:hover {
-      border-color: var(--accent-primary);
-      transform: translateY(-2px);
-      color: var(--accent-primary);
+    .pill {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.04em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 2px;
+      border: 1px solid var(--border-light);
+      color: var(--text-3);
+      text-decoration: none;
+      transition: color 0.15s, border-color 0.15s;
     }
 
-    @keyframes fadeInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .pill:hover {
+      color: var(--accent);
+      border-color: var(--accent-dim);
     }
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .project-desc {
+      font-size: 0.9rem;
+      color: var(--text-2);
+      line-height: 1.65;
     }
 
-    .fade-up {
-      animation: fadeInUp 0.6s ease-out forwards;
-      opacity: 0;
+    .project-tags {
+      margin-top: 0.6rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
     }
 
-    .delay-1 { animation-delay: 0.1s; }
-    .delay-2 { animation-delay: 0.2s; }
-
-    @media (max-width: 640px) {
-      .container {
-        padding: 1rem;
-      }
-      
-      .title h1 {
-        font-size: 2rem;
-      }
-      
-      nav {
-        gap: 1rem;
-      }
-      
-      .contact-grid {
-        grid-template-columns: 1fr;
-      }
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--text-3);
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      padding: 0.15rem 0.45rem;
+      border-radius: 2px;
+      letter-spacing: 0.03em;
     }
 
-    ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: var(--surface);
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--accent-primary);
+    /* ── Stats row ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
       border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 1.75rem;
     }
 
-    footer {
-      margin-top: 3rem;
-      padding: 2rem 0;
+    .stat {
+      background: var(--bg-raised);
+      padding: 1rem 0.75rem;
       text-align: center;
-      color: var(--text-muted);
-      font-size: 0.8rem;
+    }
+
+    .stat-n {
+      font-family: var(--mono);
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--accent);
+      display: block;
+    }
+
+    .stat-l {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--text-3);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      display: block;
+      margin-top: 0.2rem;
+    }
+
+    /* ── Learning Focus ── */
+    .learning-list {
+      margin: 0.75rem 0 0 1.5rem;
+      color: var(--text-2);
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 2rem 0;
       border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    footer p {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--text-3);
+      letter-spacing: 0.03em;
+    }
+
+    footer a {
+      color: var(--text-3);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    footer a:hover { color: var(--accent); }
+
+    /* ── Fade in ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade { opacity: 0; animation: fadeUp 0.5s ease forwards; }
+    .f1 { animation-delay: 0.05s; }
+    .f2 { animation-delay: 0.15s; }
+    .f3 { animation-delay: 0.25s; }
+    .f4 { animation-delay: 0.35s; }
+    .f5 { animation-delay: 0.45s; }
+
+    /* ── Responsive ── */
+    @media (max-width: 540px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { gap: 1rem; }
     }
   </style>
 </head>
 
 <body>
-  <div class="gradient-bg"></div>
-  
-  <div class="container">
-    <header class="fade-up">
-      <a href="/" class="title" style="text-decoration: none;">
-        <h1>Manish Tiwari</h1>
-      </a>
-      <nav>
-        <a href="/">Home</a>
-        <a href="/blog/">Blog</a>
-        <a href="/now/">Now</a>
-        <a href="/contact/">Contact</a>
-        <a href="/updates">Updates</a>
-      </nav>
-      <hr>
-    </header>
 
-    <main>
-      <div class="card fade-up delay-1">
-        <h1 style="font-size: 1.8rem; margin-bottom: 0.5rem;">📬 Get in Touch</h1>
-        <p style="color: var(--text-secondary);">I'm always open to interesting conversations, collaborations, or just a friendly hello.</p>
-      </div>
-
-      <div class="fade-up delay-2">
-        <div class="contact-grid">
-          <div class="contact-method">
-            <div class="contact-icon">📧</div>
-            <div class="contact-title">Email</div>
-            <div class="contact-detail">manish.tiwari.09 [at] zohomail.in</div>
-          </div>
-          
-          <div class="contact-method">
-            <div class="contact-icon">💬</div>
-            <div class="contact-title">Quick Response</div>
-            <div class="contact-detail">Typically within 48 hours</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card fade-up delay-2">
-        <h2 style="margin-bottom: 1rem; font-size: 1.4rem;">🌐 Find me online</h2>
-        <div class="social-links">
-          <a href="https://github.com/predictivemanish" class="social-btn">
-            <span>🐙</span> GitHub
-          </a>
-          <a href="https://linkedin.com/in/manish-tiwari-977741286/" class="social-btn">
-            <span>🔗</span> LinkedIn
-          </a>
-          <a href="https://x.com/compmanish" class="social-btn">
-            <span>🐦</span> X (Twitter)
-          </a>
-          <a href="https://peerlist.io/decisive" class="social-btn">
-            Peerlist 
-          </a>
-        </div>
-      </div>
-
-      <div class="card fade-up delay-2" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05));">
-        <h2 style="margin-bottom: 0.5rem; font-size: 1.2rem;">💼 Open to</h2>
-        <ul style="margin-left: 1.5rem; color: var(--text-secondary);">
-          <li>ML/MLOps engineering opportunities</li>
-          <li>Open source collaborations</li>
-          <li>Technical writing & speaking</li>
-          <li>Research partnerships</li>
-        </ul>
-        <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.85rem;">
-          ⚡ Note: I may take a day or two to respond, but I read every message.
-        </p>
-      </div>
-    </main>
-
-    <footer>
-      Made with <span style="color: var(--accent-primary);">❤️</span> + <a href="https://github.com/janraasch/hugo-bearblog/" style="color: var(--text-muted);">Hugo Bear</a> • 
-      <span id="year"></span> Manish Tiwari
-    </footer>
+<!-- ── Nav -->
+<nav>
+  <div class="wrap inner">
+    <a href="/" class="nav-name">Manish Tiwari</a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="/now/">Now</a></li>
+      <li><a href="/contact/">Contact</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="ManishTiwari_Resume.pdf" download class="resume-btn">Resume ↓</a></li>
+    </ul>
   </div>
+</nav>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+<div class="wrap">
+
+  <!-- ── Get in Touch -->
+  <section class="fade f1">
+    <p class="section-label">Get in Touch</p>
+    <h1 style="font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 600; line-height: 1.15; color: var(--text); margin-bottom: 1.25rem; letter-spacing: -0.02em;">
+      📬 Get in Touch
+    </h1>
+    <p style="font-size: 1.05rem; color: var(--text-2); max-width: 540px; line-height: 1.8;">
+      I'm always open to interesting conversations, collaborations, or just a friendly hello.
+    </p>
+  </section>
+
+  <!-- ── Contact Methods -->
+  <section class="fade f2">
+    <div class="contact-grid">
+      <div class="contact-method">
+        <div class="contact-icon">📧</div>
+        <div class="contact-title">Email</div>
+        <div class="contact-detail">manish.tiwari.09 [at] zohomail.in</div>
+      </div>
+      
+      <div class="contact-method">
+        <div class="contact-icon">💬</div>
+        <div class="contact-title">Quick Response</div>
+        <div class="contact-detail">Typically within 48 hours</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Find me online -->
+  <section class="fade f3">
+    <p class="section-label">Find me online</p>
+    <div class="social-links">
+      <a href="https://github.com/predictivemanish" class="social-btn">
+        <span>🐙</span> GitHub
+      </a>
+      <a href="https://linkedin.com/in/manish-tiwari-977741286/" class="social-btn">
+        <span>🔗</span> LinkedIn
+      </a>
+      <a href="https://x.com/compmanish" class="social-btn">
+        <span>🐦</span> X (Twitter)
+      </a>
+      <a href="https://peerlist.io/decisive" class="social-btn">
+        Peerlist 
+      </a>
+    </div>
+  </section>
+
+  <!-- ── Open to -->
+  <section class="fade f4" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05));">
+    <p class="section-label">Open to</p>
+    <h2 style="margin-bottom: 0.5rem; font-size: 1.2rem;">💼 Open to</h2>
+    <ul style="margin-left: 1.5rem; color: var(--text-2);">
+      <li>ML/MLOps engineering opportunities</li>
+      <li>Open source collaborations</li>
+      <li>Technical writing & speaking</li>
+      <li>Research partnerships</li>
+    </ul>
+    <p style="margin-top: 1rem; color: var(--text-3); font-size: 0.68rem;">
+      <em>Note: I may take a day or two to respond, but I read every message.</em>
+    </p>
+  </section>
+
+</div><!-- /wrap -->
+
+<!-- ── Footer -->
+<footer>
+  <div class="wrap" style="width:100%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;">
+    <p>© <span id="yr"></span> Manish Tiwari</p>
+    <p>
+      <a href="https://github.com/predictivemanish" target="_blank">GitHub</a> ·
+      <a href="https://linkedin.com/in/manish-tiwari-977741286" target="_blank">LinkedIn</a> ·
+      <a href="https://x.com/compmanish" target="_blank">X</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  /* ── Fade in ── */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.style.opacity = 1; });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade').forEach(el => io.observe(el));
+</script>
 </body>
 </html>

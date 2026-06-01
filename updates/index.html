@@ -347,6 +347,7 @@
       <li><a href="/blog/">Blog</a></li>
       <li><a href="/now/">Now</a></li>
       <li><a href="/contact/">Contact</a></li>
+      <li><a href="/about/">About</a></li>
       <li><a href="ManishTiwari_Resume.pdf" download class="resume-btn">Resume ↓</a></li>
     </ul>
   </div>
@@ -412,88 +413,4 @@
          style="font-family:var(--mono);font-size:0.7rem;color:var(--accent);text-decoration:none;letter-spacing:0.04em;">
         View all PRs on GitHub →
       </a>
-    </div>
-  </section>
-
-  <!-- ── Production Model Drift Monitoring -->
-  <section class="fade f3">
-    <p class="section-label">Production Model Drift Monitoring</p>
-    <div class="project">
-      <div class="project-top">
-        <span class="project-name">ML Drift Monitor</span>
-        <div class="project-links">
-          <a href="https://github.com/PredictiveManish/mlops-drift-detector" class="pill" target="_blank">GitHub</a>
-          <a href="https://huggingface.co/spaces/PredictiveManish/drift-monitor" class="pill" target="_blank">Live</a>
-        </div>
-      </div>
-      <p class="project-desc">End-to-end MLOps prototype with FastAPI, Streamlit dashboard, and Discord alerts for real-time drift detection</p>
-      <div class="project-tags">
-        <span class="tag">FastAPI</span>
-        <span class="tag">Streamlit</span>
-        <span class="tag">Docker</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Custom Language Model Training -->
-  <section class="fade f4">
-    <p class="section-label">Custom Language Model Training</p>
-    <div class="project">
-      <div class="project-top">
-        <span class="project-name">Trimurti-LM <span style="font-size:0.8rem;color:var(--text-3);font-weight:400;">4.2M params</span></span>
-        <div class="project-links">
-          <a href="https://github.com/PredictiveManish/Trimurti-LM" class="pill" target="_blank">GitHub</a>
-          <a href="https://huggingface.co/spaces/PredictiveManish/Trimurti-LM-Demo" class="pill" target="_blank">Demo</a>
-          <a href="https://huggingface.co/datasets/PredictiveManish/multilingual-corpus" class="pill" target="_blank">Dataset</a>
-        </div>
-      </div>
-      <p class="project-desc">Custom language model trained from scratch using PyTorch - understanding training workflows, architecture design, and hyperparameter tuning</p>
-      <div class="project-tags">
-        <span class="tag">PyTorch</span>
-        <span class="tag">Transformers</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Learning Focus -->
-  <section class="fade f5">
-    <p class="section-label">Learning Focus</p>
-    <p style="font-size: 1.05rem; color: var(--text-2); max-width: 540px; line-height: 1.8;">
-      Currently diving deep into:
-    </p>
-    <ul class="learning-list">
-      <li>ML systems architecture and design patterns</li>
-      <li>Production deployment strategies for ML models</li>
-      <li>Monitoring and maintaining ML systems in production</li>
-      <li>Cost optimization for inference at scale</li>
-    </ul>
-    <p style="margin-top: 1rem; color: var(--text-3); font-size: 0.68rem;">
-      <em>Updated: February 2026</em>
-    </p>
-  </section>
-
-</div><!-- /wrap -->
-
-<!-- ── Footer -->
-<footer>
-  <div class="wrap" style="width:100%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;">
-    <p>© <span id="yr"></span> Manish Tiwari</p>
-    <p>
-      <a href="https://github.com/predictivemanish" target="_blank">GitHub</a> ·
-      <a href="https://linkedin.com/in/manish-tiwari-977741286" target="_blank">LinkedIn</a> ·
-      <a href="https://x.com/compmanish" target="_blank">X</a>
-    </p>
-  </div>
-</footer>
-
-<script>
-  document.getElementById('yr').textContent = new Date().getFullYear();
-
-  /* ── Fade in ── */
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.style.opacity = 1; });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fade').forEach(el => io.observe(el));
-</script>
-</body>
-</html>
+    </div
