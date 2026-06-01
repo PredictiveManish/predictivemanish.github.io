@@ -1,971 +1,772 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" />
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="shortcut icon" href="https://predictivemanish.github.io/images/favicon.png" />
-  <title>Manish Tiwari | ML Engineer & Open Source Contributor</title>
-  
-  <!-- Meta tags -->
-  <meta name="description" content="ML engineer building practical AI systems. sktime contributor, open source developer, and MLOps enthusiast." />
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manish Tiwari</title>
+  <meta name="description" content="CS student building practical ML systems. sktime contributor, MLOps enthusiast.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --width: 860px;
-      --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      --font-secondary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      --font-scale: 1em;
-      
-      --background: #0a0a0a;
-      --surface: #141414;
-      --surface-light: #1a1a1a;
-      --text-primary: #e5e5e5;
-      --text-secondary: #a3a3a3;
-      --text-muted: #737373;
-      --accent-primary: #3b82f6;
-      --accent-secondary: #8b5cf6;
-      --accent-glow: rgba(59, 130, 246, 0.2);
-      --border: #262626;
-      --success: #10b981;
-      --warning: #f59e0b;
+      --bg:        #111113;
+      --bg-raised: #18181b;
+      --border:    #27272a;
+      --border-light: #3f3f46;
+      --text:      #e4e4e7;
+      --text-2:    #a1a1aa;
+      --text-3:    #71717a;
+      --accent:    #d4a96a;   /* warm amber — the editorial warmth */
+      --accent-dim:#7c5e35;
+      --green:     #6ee7b7;
+      --red:       #fca5a5;
+      --serif:     'Lora', Georgia, serif;
+      --mono:      'DM Mono', 'Courier New', monospace;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: var(--font-secondary);
-      font-size: var(--font-scale);
-      background: var(--background);
-      color: var(--text-primary);
-      line-height: 1.6;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--serif);
+      font-size: 17px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .gradient-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .container {
-      max-width: var(--width);
+    /* ── Layout ── */
+    .wrap {
+      max-width: 680px;
       margin: 0 auto;
-      padding: 2rem;
-      position: relative;
+      padding: 0 1.5rem;
     }
 
-    header {
-      margin-bottom: 3rem;
-      animation: fadeInDown 0.6s ease-out;
+    /* ── Nav ── */
+    nav {
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 0;
     }
 
-    .title h1 {
-      font-size: 2.8rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 0.5rem;
+    nav .inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .nav-name {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--text-2);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    .resume-btn {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: transparent;
+      border: 1px solid var(--accent-dim);
+      color: var(--accent);
+      padding: 0.3rem 0.75rem;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .resume-btn:hover {
+      background: rgba(212, 169, 106, 0.08);
+      border-color: var(--accent);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 4rem 0 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 1.25rem;
       letter-spacing: -0.02em;
     }
 
-    nav {
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--text-2);
+      max-width: 540px;
+      line-height: 1.8;
+    }
+
+    .hero p + p { margin-top: 0.85rem; }
+
+    .hero-meta {
+      margin-top: 2rem;
       display: flex;
-      gap: 2rem;
-      margin: 1.5rem 0;
+      align-items: center;
+      gap: 1.5rem;
       flex-wrap: wrap;
     }
-    
-    nav a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 500;
-      transition: all 0.2s ease;
-      position: relative;
-      padding: 0.25rem 0;
-    }
-    
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-      transform: scaleX(0);
-      transition: transform 0.2s ease;
-    }
-    
-    nav a:hover {
-      color: var(--text-primary);
-    }
-    
-    nav a:hover::after {
-      transform: scaleX(1);
+
+    .status-dot {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--text-3);
+      letter-spacing: 0.03em;
     }
 
-    hr {
-      border: none;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--border), transparent);
-      margin: 1rem 0;
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s infinite;
     }
 
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-      transition: all 0.3s ease;
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
     }
 
-    .card:hover {
-      transform: translateY(-2px);
-      border-color: var(--accent-primary);
-      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.1);
+    /* ── Sections ── */
+    section {
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border);
     }
 
-    /* Project card with buttons */
-    .project-card {
-      background: var(--surface-light);
-      border-left: 3px solid var(--accent-primary);
-      padding: 1rem;
-      margin: 1rem 0;
-      border-radius: 6px;
-      position: relative;
+    section:last-child { border-bottom: none; }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 1.5rem;
     }
 
-    .project-header {
+    /* ── Projects ── */
+    .project {
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project:last-child { border-bottom: none; }
+
+    .project-top {
       display: flex;
-      justify-content: space-between;
       align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
 
-    .project-title {
-      font-weight: 600;
-      color: var(--text-primary);
+    .project-name {
+      font-family: var(--serif);
       font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
     }
 
     .project-links {
       display: flex;
       gap: 0.5rem;
+      flex-shrink: 0;
     }
 
-    .project-link-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
-      background: rgba(59, 130, 246, 0.1);
-      border: 1px solid rgba(59, 130, 246, 0.3);
-      padding: 0.25rem 0.6rem;
-      border-radius: 6px;
-      font-size: 0.7rem;
-      font-weight: 500;
-      color: var(--accent-primary);
+    .pill {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.04em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 2px;
+      border: 1px solid var(--border-light);
+      color: var(--text-3);
       text-decoration: none;
-      transition: all 0.2s ease;
+      transition: color 0.15s, border-color 0.15s;
     }
 
-    .project-link-btn:hover {
-      background: rgba(59, 130, 246, 0.2);
-      transform: translateY(-1px);
+    .pill:hover {
+      color: var(--accent);
+      border-color: var(--accent-dim);
     }
 
     .project-desc {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-2);
+      line-height: 1.65;
     }
 
-    .tech-badge {
-      display: inline-block;
-      background: rgba(59, 130, 246, 0.1);
-      border: 1px solid rgba(59, 130, 246, 0.3);
-      padding: 0.25rem 0.75rem;
-      border-radius: 20px;
+    .project-tags {
+      margin-top: 0.6rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--text-3);
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      padding: 0.15rem 0.45rem;
+      border-radius: 2px;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── Open Source ── */
+    .org-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .org {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--text-2);
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+      letter-spacing: 0.03em;
+    }
+
+    .pr-list { list-style: none; }
+
+    .pr-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+
+    .pr-list li:last-child { border-bottom: none; }
+
+    .pr-status {
       font-size: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    .pr-list a {
+      color: var(--text-2);
+      text-decoration: none;
+      flex: 1;
+      transition: color 0.15s;
+    }
+
+    .pr-list a:hover { color: var(--text); }
+
+    .pr-date {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--text-3);
+      flex-shrink: 0;
+    }
+
+    /* ── Stats row ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 1.75rem;
+    }
+
+    .stat {
+      background: var(--bg-raised);
+      padding: 1rem 0.75rem;
+      text-align: center;
+    }
+
+    .stat-n {
+      font-family: var(--mono);
+      font-size: 1.4rem;
       font-weight: 500;
-      color: var(--accent-primary);
-      margin: 0.25rem;
-      transition: all 0.2s ease;
+      color: var(--accent);
+      display: block;
     }
 
-    .tech-badge:hover {
-      background: rgba(59, 130, 246, 0.2);
-      transform: translateY(-1px);
+    .stat-l {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--text-3);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      display: block;
+      margin-top: 0.2rem;
     }
 
-    /* Blog posts */
-    .blog-list {
-      list-style: none;
-    }
+    /* ── Blog ── */
+    .post-list { list-style: none; }
 
-    .blog-item {
+    .post-list li {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
+      gap: 1rem;
       padding: 0.75rem 0;
       border-bottom: 1px solid var(--border);
-      transition: all 0.2s ease;
     }
 
-    .blog-item:hover {
-      padding-left: 0.5rem;
-      border-bottom-color: var(--accent-primary);
-    }
+    .post-list li:last-child { border-bottom: none; }
 
-    .blog-date {
-      color: var(--text-muted);
-      font-size: 0.8rem;
-      font-family: monospace;
-    }
-
-    .blog-link {
-      color: var(--text-primary);
+    .post-list a {
+      color: var(--text-2);
       text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    .blog-link:hover {
-      color: var(--accent-primary);
-    }
-
-    /* Open Source Impact Section Styles */
-    .org-badge {
-      background: rgba(59, 130, 246, 0.1);
-      border: 1px solid rgba(59, 130, 246, 0.3);
-      padding: 0.25rem 0.75rem;
-      border-radius: 20px;
-      font-size: 0.7rem;
-      font-weight: 500;
-      color: var(--accent-primary);
-      transition: all 0.2s ease;
-      display: inline-block;
-    }
-    
-    .org-badge:hover {
-      background: rgba(59, 130, 246, 0.2);
-      transform: translateY(-1px);
-    }
-    
-    .pr-item {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 0.8rem;
-      padding: 0.5rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-    
-    .pr-status {
-      font-size: 0.9rem;
-      min-width: 24px;
-    }
-    
-    .pr-title {
+      font-size: 0.95rem;
+      transition: color 0.15s;
       flex: 1;
-      color: var(--text-secondary);
-    }
-    /* PR link styles */
-    .pr-title a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: all 0.2s ease;
-      display: inline-block;
     }
 
-    .pr-title a:hover {
-      color: var(--accent-primary);
-      text-decoration: underline;
-      transform: translateX(2px);
-    }
+    .post-list a:hover { color: var(--text); }
 
-    /* Optional: Different color for merged vs open PR links */
-    .pr-status.merged + .pr-title a:hover {
-      color: #10b981;
-    }
-
-    .pr-status.open + .pr-title a:hover {
-      color: #f59e0b;
-    }
-    
-    .pr-date {
+    .post-date {
+      font-family: var(--mono);
       font-size: 0.65rem;
-      color: var(--text-muted);
-      font-family: monospace;
+      color: var(--text-3);
+      flex-shrink: 0;
     }
 
-    /* Animations */
-    @keyframes fadeInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    /* ── Skills ── */
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
     }
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .fade-up {
-      animation: fadeInUp 0.6s ease-out forwards;
-      opacity: 0;
-    }
-
-    .delay-1 { animation-delay: 0.1s; }
-    .delay-2 { animation-delay: 0.2s; }
-    .delay-3 { animation-delay: 0.3s; }
-
-    /* Responsive */
-    @media (max-width: 640px) {
-      .container {
-        padding: 1rem;
-      }
-      
-      .title h1 {
-        font-size: 2rem;
-      }
-      
-      .blog-item {
-        flex-direction: column;
-        gap: 0.25rem;
-      }
-      
-      nav {
-        gap: 1rem;
-      }
-
-      .pr-item {
-        flex-wrap: wrap;
-      }
-      
-      .pr-date {
-        margin-left: 1.75rem;
-      }
-
-      .project-header {
-        flex-direction: column;
-      }
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: var(--surface);
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--accent-primary);
+    /* ── Map ── */
+    .map-wrap {
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
       border-radius: 4px;
+      padding: 1rem;
+      margin-top: 1rem;
     }
 
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--accent-secondary);
+    #india-map-container svg {
+      width: 100%;
+      height: auto;
+      display: block;
     }
 
+    #india-map-container svg path,
+    #india-map-container svg polygon {
+      fill: var(--bg-raised);
+      stroke: var(--border-light);
+      stroke-width: 0.6;
+      transition: fill 0.2s;
+      cursor: default;
+    }
+
+    #india-map-container svg .visited-state {
+      fill: var(--accent-dim);
+      stroke: var(--accent);
+    }
+
+    .map-note {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--text-3);
+      margin-top: 0.75rem;
+      line-height: 1.6;
+    }
+
+    /* ── Footer ── */
     footer {
-      margin-top: 3rem;
       padding: 2rem 0;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 0.8rem;
       border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
     }
-    /* Visited India Map */
-.visited-map-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-  transition: all 0.3s ease;
-}
 
-.visited-map-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--accent-primary);
-  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.1);
-}
+    footer p {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--text-3);
+      letter-spacing: 0.03em;
+    }
 
-.visited-map-header {
-  margin-bottom: 1rem;
-}
+    footer a {
+      color: var(--text-3);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
 
-.visited-map-header h2 {
-  font-size: 1.5rem;
-  margin-bottom: 0.35rem;
-}
+    footer a:hover { color: var(--accent); }
 
-.visited-map-header p {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-}
+    /* ── Divider ── */
+    .divider {
+      width: 2rem;
+      height: 1px;
+      background: var(--border-light);
+      margin: 1.5rem 0;
+    }
 
-#india-map-container {
-  width: 100%;
-  overflow: hidden;
-  background: var(--surface-light);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1rem;
-}
+    /* ── Responsive ── */
+    @media (max-width: 540px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { gap: 1rem; }
+      .hero { padding: 2.5rem 0 2rem; }
+    }
 
-#india-map-container svg {
-  width: 100%;
-  height: auto;
-  display: block;
-}
+    /* ── Fade in ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
-#india-map-container svg path,
-#india-map-container svg polygon {
-  fill: #262626;
-  stroke: #404040;
-  stroke-width: 0.7;
-  transition: fill 0.2s ease, filter 0.2s ease;
-  cursor: pointer;
-}
-
-#india-map-container svg .visited-state {
-  fill: var(--accent-primary);
-}
-
-#india-map-container svg path:hover,
-#india-map-container svg polygon:hover {
-  fill: var(--accent-secondary);
-  filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.35));
-}
-
-.visited-map-note {
-  margin-top: 0.9rem;
-  color: var(--text-muted);
-  font-size: 0.8rem;
-}
-
-.visited-map-note strong {
-  color: var(--text-secondary);
-}
-
+    .fade { opacity: 0; animation: fadeUp 0.5s ease forwards; }
+    .f1 { animation-delay: 0.05s; }
+    .f2 { animation-delay: 0.15s; }
+    .f3 { animation-delay: 0.25s; }
+    .f4 { animation-delay: 0.35s; }
+    .f5 { animation-delay: 0.45s; }
   </style>
 </head>
 
 <body>
-  <div class="gradient-bg"></div>
-  
-  <div class="container">
-    <header class="fade-up">
-      <a href="/" class="title" style="text-decoration: none;">
-        <h1>Manish Tiwari</h1>
-      </a>
-      <nav style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin: 1.5rem 0;">
-  <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
-    <a href="/">Home</a>
-    <a href="/blog/">Blog</a>
-    <a href="/now/">Now</a>
-    <a href="/contact/">Contact</a>
-    <a href="/updates">Updates</a>
+
+<!-- ── Nav ── -->
+<nav>
+  <div class="wrap inner">
+    <a href="/" class="nav-name">Manish Tiwari</a>
+    <ul class="nav-links">
+      <li><a href="/about/">About</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="/now/">Now</a></li>
+      <li><a href="/contact/">Contact</a></li>
+      <li><a href="ManishTiwari_Resume.pdf" download class="resume-btn">Resume ↓</a></li>
+    </ul>
   </div>
-  <a href="ManishTiwari_Resume.pdf" download
-     style="display: inline-flex; align-items: center; gap: 0.4rem;
-            background: #3b82f6; color: #fff; font-size: 0.8rem;
-            font-weight: 600; padding: 0.4rem 1rem; border-radius: 8px;
-            text-decoration: none; transition: opacity 0.2s ease;"
-     onmouseover="this.style.opacity='0.85'"
-     onmouseout="this.style.opacity='1'">
-    ↓ Resume
-  </a>
 </nav>
-      <hr>
-    </header>
 
-    <main>
-      <!-- Hero section with bio -->
-<div class="card fade-up delay-1">
-  <p style="font-size: 1.1rem; margin-bottom: 1rem;">
-    👋 Hi, myself <strong>manish tiwari</strong>, third year CS engineering student at IK Gujral Punjab Technical University, 
-    Kapurthala, Punjab. who builds practical machine learning systems and learns by shipping real projects.
-  </p>
+<div class="wrap">
 
-  <p style="margin-bottom: 1rem;">
-    most of my time goes into working on end-to-end ml pipelines — from data and models to deployment and evaluation. 
-    i'm especially interested in mlops, ai systems, and making models reliable outside notebooks.
-  </p>
-
-  <p style="margin-bottom: 1rem;">
-    Merged PRs across Augur, SunPy, holidays, and other OSS projects, including security-conscious logging changes, package behavior updates, documentation fixes, and compatibility improvements; actively respond to maintainer review and ship accepted changes into release branches.
-  </p>
-
-  <p>
-    💪 outside of tech, i love gym, long cycling trips, walking!!
-  </p>
+  <!-- ── Hero ── -->
+  <header class="hero fade f1">
   
-  <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
-    <a href="ManishTiwari_Resume.pdf" download class="project-link-btn">
-      📄 Download Resume
-    </a>
-    <a href="https://drive.google.com/file/d/1k-RhIINjMYX0fbsENaUYgKlbDoAbeQMg/view?usp=sharing" target="_blank" class="project-link-btn">
-      ☁️ View on Drive
-    </a>
-  </div>
-</div>
+    <h1>Building <em>practical</em><br>ML systems.</h1>
+    <p>
+      👋 Hi, myself <strong>manish tiwari</strong>, final year CS engineering student at IK Gujral Punjab Technical University, 
+      Kapurthala, Punjab. who builds practical machine learning systems and learns by shipping real projects.
+    </p>
+    <p>
+      most of my time goes into working on end-to-end ml pipelines — from data and models to deployment and evaluation. 
+      i'm especially interested in mlops, ai systems, and making models reliable outside notebooks.
+    </p>
+    <p>
+      Merged PRs across Augur, SunPy, holidays, and other OSS projects, including security-conscious logging changes, package behavior updates, documentation fixes, and compatibility improvements; actively respond to maintainer review and ship accepted changes into release branches.
+    </p>
+    <p>
+      💪 outside of tech, i love gym, long cycling trips, walking!!
+    </p>
+    <div class="hero-meta">
+      <span class="status-dot"><span class="dot"></span> Open to opportunities</span>
+      <span class="status-dot">📍 Punjab, India</span>
+    </div>
+  </header>
 
-      <!-- Tech Stack -->
-      <div class="fade-up delay-2">
-        <h2 style="margin-bottom: 1rem; font-size: 1.5rem;">🛠️ Tech Stack</h2>
-        <div style="margin-bottom: 1.5rem;">
-          <span class="tech-badge">Python</span>
-          <span class="tech-badge">PyTorch</span>
-          <span class="tech-badge">FastAPI</span>
-          <span class="tech-badge">Streamlit</span>
-          <span class="tech-badge">Docker</span>
-          <span class="tech-badge">GitHub Actions</span>
-          <span class="tech-badge">Scikit-learn</span>
-          <span class="tech-badge">SQLite</span>
-          <span class="tech-badge">Plotly</span>
-          <span class="tech-badge">MLOps</span>
+  <!-- ── Projects ── -->
+  <section class="fade f2">
+    <p class="section-label">Selected projects</p>
+
+    <div class="project">
+      <div class="project-top">
+        <span class="project-name">SafeRun AI</span>
+        <div class="project-links">
+          <a href="https://github.com/PredictiveManish/SafeRun-AI" class="pill" target="_blank">GitHub</a>
+          <a href="https://saferun-ai.onrender.com/" class="pill" target="_blank">Live</a>
+          <a href="https://pypi.org/project/saferun-ai/" class="pill" target="_blank">PyPI</a>
         </div>
       </div>
+      <p class="project-desc">Docker-based sandbox with AST scanner, YAML policy engine, and FastAPI backend for secure execution of untrusted AI-generated Python code</p>
+      <div class="project-tags">
+        <span class="tag">Python</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">Docker</span>
+        <span class="tag">SQLAlchemy</span>
+        <span class="tag">AST</span>
+        <span class="tag">Streamlit</span>
+      </div>
+    </div>
 
-      <!-- Featured Projects from GitHub -->
-      <div class="fade-up delay-3">
-        <h2 style="margin-bottom: 1rem; font-size: 1.5rem;">🚀 Featured Projects</h2>
+    <div class="project">
+      <div class="project-top">
+        <span class="project-name">ML Drift Monitor</span>
+        <div class="project-links">
+          <a href="https://github.com/PredictiveManish/mlops-drift-detector" class="pill" target="_blank">GitHub</a>
+          <a href="https://huggingface.co/spaces/PredictiveManish/drift-monitor" class="pill" target="_blank">Demo</a>
+        </div>
+      </div>
+      <p class="project-desc">End-to-end MLOps prototype with FastAPI, Streamlit dashboard, and Discord alerts for real-time drift detection</p>
+      <div class="project-tags">
+        <span class="tag">FastAPI</span>
+        <span class="tag">Streamlit</span>
+        <span class="tag">Docker</span>
+      </div>
+    </div>
 
-        <div class="project-card">
-  <div class="project-header">
-    <div class="project-title">🛡️ SafeRun AI – Secure Sandbox Execution Platform</div>
-    <div class="project-links">
-      <a href="https://github.com/PredictiveManish/SafeRun-AI" target="_blank" class="project-link-btn">
-        📦 GitHub
-      </a>
-      <a href="https://saferun-ai.onrender.com/" target="_blank" class="project-link-btn">
-        🔗 Live
-      </a>
-      <a href="https://pypi.org/project/saferun-ai/" target="_blank" class="project-link-btn">
-        📦 PyPI
+    <div class="project">
+      <div class="project-top">
+        <span class="project-name">Trimurti-LM <span style="font-size:0.8rem;color:var(--text-3);font-weight:400;">4.2M params</span></span>
+        <div class="project-links">
+          <a href="https://github.com/PredictiveManish/Trimurti-LM" class="pill" target="_blank">GitHub</a>
+          <a href="https://huggingface.co/spaces/PredictiveManish/Trimurti-LM-Demo" class="pill" target="_blank">Demo</a>
+          <a href="https://huggingface.co/datasets/PredictiveManish/multilingual-corpus" class="pill" target="_blank">Dataset</a>
+        </div>
+      </div>
+      <p class="project-desc">Custom language model trained from scratch using PyTorch - understanding training workflows, architecture design, and hyperparameter tuning</p>
+      <div class="project-tags">
+        <span class="tag">PyTorch</span>
+        <span class="tag">Transformers</span>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <span class="project-name">Multilingual Corpus Dataset</span>
+        <div class="project-links">
+          <a href="https://huggingface.co/datasets/PredictiveManish/multilingual-corpus" class="pill" target="_blank">Dataset</a>
+          <a href="https://huggingface.co/PredictiveManish/Trimurti-LM" class="pill" target="_blank">Model</a>
+        </div>
+      </div>
+      <p class="project-desc">Curated dataset for multilingual LM training, focused on Indian languages and efficient model development</p>
+      <div class="project-tags">
+        <span class="tag">HuggingFace</span>
+        <span class="tag">Datasets</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Open Source ── -->
+  <section class="fade f3">
+    <p class="section-label">Open source</p>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-n">25+</span><span class="stat-l">Total PRs Opened</span></div>
+      <div class="stat"><span class="stat-n">35+</span><span class="stat-l">✅ Merged PRs</span></div>
+      <div class="stat"><span class="stat-n">10</span><span class="stat-l">Organizations</span></div>
+      <div class="stat"><span class="stat-n">30+</span><span class="stat-l">Repositories</span></div>
+    </div>
+
+    <div class="org-row">
+      <span class="org">sktime</span>
+      <span class="org">CHAOSS/augur</span>
+      <span class="org">shap</span>
+      <span class="org">usemoss/moss</span>
+      <span class="org">HuggingFace</span>
+      <span class="org">Skrub</span>
+    </div>
+
+    <ul class="pr-list">
+      <li>
+        <span class="pr-status">✅</span>
+        <a href="https://github.com/usemoss/moss/pull/189" target="_blank">Bharat Benefits Live Voice agents using moss & sarvamAI — <strong>usemoss/moss</strong></a>
+        <span class="pr-date">May 1, 2026</span>
+      </li>
+      <li>
+        <span class="pr-status">✅</span>
+        <a href="https://github.com/ankitjh4/indic-ai-skills/pull/9" target="_blank">Cashfree Skills — <strong>Indic AI Skills</strong></a>
+        <span class="pr-date">Apr 28, 2026</span>
+      </li>
+      <li>
+        <span class="pr-status">✅</span>
+        <a href="https://github.com/Zyora-Dev/zse/pull/6" target="_blank">fix: Add extra='ignore' to chat models for OpenAI client compatibility — <strong>Zyora-Dev/Zse</strong></a>
+        <span class="pr-date">Apr 25, 2026</span>
+      </li>
+      <li>
+        <span class="pr-status">✅</span>
+        <a href="https://github.com/ShivaniSharma14/TrackWise/pull/2" target="_blank">Added Shiprocket skills — <strong>Indic AI Skills</strong></a>
+        <span class="pr-date">Apr 24, 2026</span>
+      </li>
+    </ul>
+
+    <div style="margin-top:1rem;">
+      <a href="https://github.com/pulls?q=is%3Apr+author%3APredictiveManish+archived%3Afalse+is%3Amerged" target="_blank"
+         style="font-family:var(--mono);font-size:0.7rem;color:var(--accent);text-decoration:none;letter-spacing:0.04em;">
+        View all PRs on GitHub →
       </a>
     </div>
-  </div>
-  <div class="project-desc">Docker-based sandbox with AST scanner, YAML policy engine, and FastAPI backend for secure execution of untrusted AI-generated Python code</div>
-  <div style="margin-top: 0.5rem;">
-    <span class="tech-badge" style="font-size: 0.7rem;">Python</span>
-    <span class="tech-badge" style="font-size: 0.7rem;">FastAPI</span>
-    <span class="tech-badge" style="font-size: 0.7rem;">Docker</span>
-    <span class="tech-badge" style="font-size: 0.7rem;">SQLAlchemy</span>
-    <span class="tech-badge" style="font-size: 0.7rem;">AST</span>
-    <span class="tech-badge" style="font-size: 0.7rem;">Streamlit</span>
-  </div>
-</div>
-        
-        <div class="project-card">
-          <div class="project-header">
-            <div class="project-title">🔍 Production Model Drift Monitoring System</div>
-            <div class="project-links">
-              <a href="https://github.com/PredictiveManish/mlops-drift-detector" target="_blank" class="project-link-btn">
-                📦 GitHub
-              </a>
-              <a href="https://huggingface.co/spaces/PredictiveManish/drift-monitor" target="_blank" class="project-link-btn">
-                🔗 Live Demo
-              </a>
-            </div>
-          </div>
-          <div class="project-desc">End-to-end MLOps prototype with FastAPI, Streamlit dashboard, and Discord alerts for real-time drift detection</div>
-          <div style="margin-top: 0.5rem;">
-            <span class="tech-badge" style="font-size: 0.7rem;">FastAPI</span>
-            <span class="tech-badge" style="font-size: 0.7rem;">Streamlit</span>
-            <span class="tech-badge" style="font-size: 0.7rem;">Docker</span>
-          </div>
-        </div>
+  </section>
 
-        <div class="project-card">
-          <div class="project-header">
-            <div class="project-title">🤖 Trimurti-LM (4.2M parameters)</div>
-            <div class="project-links">
-              <a href="https://github.com/PredictiveManish/Trimurti-LM" target="_blank" class="project-link-btn">
-                📦 GitHub
-              </a>
-              <a href="https://huggingface.co/spaces/PredictiveManish/Trimurti-LM-Demo" target="_blank" class="project-link-btn">
-                🔗 Live Demo
-              </a>
-            </div>
-          </div>
-          <div class="project-desc">Custom language model trained from scratch using PyTorch - understanding training workflows, architecture design, and hyperparameter tuning</div>
-          <div style="margin-top: 0.5rem;">
-            <span class="tech-badge" style="font-size: 0.7rem;">PyTorch</span>
-            <span class="tech-badge" style="font-size: 0.7rem;">Transformers</span>
-          </div>
-        </div>
+  <!-- ── Stack ── -->
+  <section class="fade f4">
+    <p class="section-label">Stack</p>
+    <div class="skills">
+      <span class="tag">Python</span>
+      <span class="tag">PyTorch</span>
+      <span class="tag">FastAPI</span>
+      <span class="tag">Streamlit</span>
+      <span class="tag">Docker</span>
+      <span class="tag">GitHub Actions</span>
+      <span class="tag">Scikit-learn</span>
+      <span class="tag">SQLite</span>
+      <span class="tag">Plotly</span>
+      <span class="tag">MLOps</span>
+    </div>
+  </section>
 
-        <div class="project-card">
-          <div class="project-header">
-            <div class="project-title">📈 Multilingual Corpus Dataset</div>
-            <div class="project-links">
-              <a href="https://huggingface.co/datasets/PredictiveManish/multilingual-corpus" target="_blank" class="project-link-btn">
-                📦 Dataset
-              </a>
-              <a href="https://huggingface.co/PredictiveManish/Trimurti-LM" target="_blank" class="project-link-btn">
-                🔗 Model
-              </a>
-            </div>
-          </div>
-          <div class="project-desc">Curated dataset for multilingual LM training, focused on Indian languages and efficient model development</div>
-          <div style="margin-top: 0.5rem;">
-            <span class="tech-badge" style="font-size: 0.7rem;">HuggingFace</span>
-            <span class="tech-badge" style="font-size: 0.7rem;">Datasets</span>
-          </div>
-        </div>
+  <!-- ── Writing ── -->
+  <section class="fade f4">
+    <p class="section-label">Writing</p>
+    <ul class="post-list">
+      <li>
+        <a href="https://medium.com/@manishthoughts/beyond-the-scorecard-decoding-team-strategies-in-ipl-2025-using-data-science-40914d091655" target="_blank">
+          Beyond the Scorecard: Decoding Team Strategies in IPL 2025 Using Data Science
+        </a>
+        <span class="post-date">May 24, 2025</span>
+      </li>
+      <li>
+        <a href="https://medium.com/@manishthoughts/from-raw-data-to-actionable-insights-my-3-day-deep-dive-into-data-science-salaries-c4b89316744d" target="_blank">
+          From Raw Data to Actionable Insights: My 3-Day Deep Dive into Data Science Salaries
+        </a>
+        <span class="post-date">May 22, 2025</span>
+      </li>
+    </ul>
+    <div style="margin-top:1rem;">
+      <a href="/blog/" style="font-family:var(--mono);font-size:0.7rem;color:var(--accent);text-decoration:none;letter-spacing:0.04em;">
+        All posts →
+      </a>
+    </div>
+  </section>
+
+  <!-- ── Current Focus Badge -->
+  <section class="fade f4" style="text-align: center; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <p style="margin: 0;">
+      🎯 Currently focused on: <strong>ML Systems Architecture</strong> • <strong>Production Deployment</strong> • <strong>Cost Optimization</strong>
+    </p>
+  </section>
+
+  <!-- ── India Map ── -->
+  <section class="fade f5">
+    <p class="section-label">Places visited — India</p>
+    <div class="map-wrap">
+      <div id="india-map-container">
+        <p style="font-family:var(--mono);font-size:0.7rem;color:var(--text-3);text-align:center;padding:2rem 0;">Loading map…</p>
       </div>
+    </div>
+    <p class="map-note">
+      Punjab · Delhi · Haryana · Himachal Pradesh · Uttar Pradesh ·
+      Rajasthan · Bihar · Jammu &amp; Kashmir · Jharkhand · Madhya Pradesh
+    </p>
+  </section>
 
-      <!-- Open Source Impact Section -->
-      <div class="fade-up delay-2">
-        <div class="card" style="padding: 0; overflow: hidden; margin-bottom: 2rem;">
-          <!-- Header -->
-          <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.05)); padding: 1.5rem 1.5rem 1rem 1.5rem; border-bottom: 1px solid var(--border);">
-            <h2 style="margin-bottom: 0.25rem; font-size: 1.5rem;">🌍 Open Source Impact</h2>
-            <p style="color: var(--text-secondary); font-size: 0.85rem;">Contributions to the global open source ecosystem</p>
-          </div>
-          
-          <!-- Impact Stats Grid -->
-          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border);">
-            <div style="background: var(--surface); padding: 1.25rem 0.5rem; text-align: center;">
-              <div style="font-size: 1.8rem; font-weight: 700; color: var(--accent-primary);" id="total-prs">25+</div>
-              <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.25rem;">Total PRs Opened</div>
-            </div>
-            <div style="background: var(--surface); padding: 1.25rem 0.5rem; text-align: center;">
-              <div style="font-size: 1.8rem; font-weight: 700; color: #10b981;" id="merged-prs">35+</div>
-              <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.25rem;">✅ Merged PRs</div>
-            </div>
-            <div style="background: var(--surface); padding: 1.25rem 0.5rem; text-align: center;">
-              <div style="font-size: 1.8rem; font-weight: 700; color: var(--accent-secondary);">10</div>
-              <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.25rem;">Organizations</div>
-            </div>
-            <div style="background: var(--surface); padding: 1.25rem 0.5rem; text-align: center;">
-              <div style="font-size: 1.8rem; font-weight: 700; color: #f59e0b;">30+</div>
-              <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.25rem;">Repositories</div>
-            </div>
-          </div>
-          
-          <!-- Organizations -->
-          <div style="padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border);">
-            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
-              <span style="font-size: 1.1rem;">🏢</span>
-              <span style="font-weight: 600; font-size: 0.9rem;">Organizations & Projects</span>
-            </div>
-            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
-              <span class="org-badge">sktime</span>
-              <span class="org-badge">CHAOSS/augur</span>
-              <span class="org-badge">shap</span>
-              <span class="org-badge">usemoss/moss</span>
-              <span class="org-badge">HuggingFace</span>
-              <span class="org-badge">Skrub</span>
-            </div>
-          </div>
-          
-          <!-- Contribution Graph + Activity Row -->
-          <div style="display: flex; flex-wrap: wrap;">
-            <div style="flex: 2; padding: 1.25rem 1.5rem; border-right: 1px solid var(--border); min-width: 200px;">
-              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
-                <span style="font-size: 1rem;">📅</span>
-                <span style="font-weight: 600; font-size: 0.85rem;">Last Year Activity</span>
-              </div>
-              <picture>
-                <source media="(prefers-color-scheme: dark)" srcset="https://ghchart.rshah.org/predictivemanish" />
-                <img 
-                  src="https://ghchart.rshah.org/predictivemanish" 
-                  alt="Contribution Graph"
-                  style="width: 100%; border-radius: 6px; cursor: pointer;"
-                  onclick="window.open('https://github.com/predictivemanish', '_blank')"
-                />
-              </picture>
-            </div>
-            
-            <div style="flex: 1; padding: 1.25rem 1.5rem; min-width: 150px;">
-              <div style="margin-bottom: 1rem;">
-                <div style="font-size: 0.7rem; color: var(--text-muted);">Total Contributions</div>
-                <div style="font-size: 1.3rem; font-weight: 700; color: var(--accent-primary);">500+</div>
-                <div style="font-size: 0.65rem; color: var(--text-muted);">in the last year</div>
-              </div>
-              <div>
-                <div style="font-size: 0.7rem; color: var(--text-muted);">Total Commits (2026)</div>
-                <div style="font-size: 1.3rem; font-weight: 700; color: var(--accent-primary);">300+</div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Recent PR Activity -->
-          <div style="padding: 1.25rem 1.5rem; background: var(--surface-light); border-top: 1px solid var(--border);">
-            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
-              <span style="font-size: 1rem;">🔀</span>
-              <span style="font-weight: 600; font-size: 0.85rem;">Recent Pull Requests</span>
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+</div><!-- /wrap -->
 
-<div class="pr-item">
-  <span class="pr-status merged">✅</span>
-  <span class="pr-title">
-    <a href="https://github.com/usemoss/moss/pull/189" target="_blank">
-      Bharat Benefits Live Voice agents using moss & sarvamAI- <strong>usemoss/moss</strong>
-    </a>
-  </span>
-  <span class="pr-date">May 1, 2026</span>
-</div>
-
-<div class="pr-item">
-  <span class="pr-status merged">✅</span>
-  <span class="pr-title">
-    <a href="https://github.com/ankitjh4/indic-ai-skills/pull/9" target="_blank">
-      Cashfree Skills - <strong>Indic AI Skills</strong>
-    </a>
-  </span>
-  <span class="pr-date">Apr 28, 2026</span>
-</div>
-
-<div class="pr-item">
-  <span class="pr-status merged">✅</span>
-  <span class="pr-title">
-    <a href="https://github.com/Zyora-Dev/zse/pull/6" target="_blank">
-      fix: Add extra='ignore' to chat models for OpenAI client compatibility - <strong>Zyora-Dev/Zse</strong>
-    </a>
-  </span>
-  <span class="pr-date">Apr 25, 2026</span>
-</div>
-
-<div class="pr-item">
-  <span class="pr-status merged">✅</span>
-  <span class="pr-title">
-    <a href="https://github.com/ShivaniSharma14/TrackWise/pull/2" target="_blank">
-      Added Shiprocket skills - <strong>Indic AI Skills</strong>
-    </a>
-  </span>
-  <span class="pr-date">Apr 24, 2026</span>
-</div>
-
-
-              
-            </div>
-            <a href="https://github.com/pulls?q=is%3Apr+author%3APredictiveManish+archived%3Afalse+is%3Amerged" 
-              target="_blank"
-              style="display: inline-block; margin-top: 1rem; font-size: 0.75rem; color: var(--accent-primary); text-decoration: none;">
-              View all PRs on GitHub →
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Blog Posts -->
-      <div class="fade-up delay-3">
-        <h2 style="margin-bottom: 1rem; font-size: 1.5rem;">✍️ Recent Posts</h2>
-        <ul class="blog-list">
-          <li class="blog-item">
-            <a href="https://medium.com/@manishthoughts/beyond-the-scorecard-decoding-team-strategies-in-ipl-2025-using-data-science-40914d091655" 
-               class="blog-link">Beyond the Scorecard: Decoding Team Strategies in IPL 2025 Using Data Science</a>
-            <span class="blog-date">May 24, 2025</span>
-          </li>
-          <li class="blog-item">
-            <a href="https://medium.com/@manishthoughts/from-raw-data-to-actionable-insights-my-3-day-deep-dive-into-data-science-salaries-c4b89316744d" 
-               class="blog-link">From Raw Data to Actionable Insights: My 3-Day Deep Dive into Data Science Salaries</a>
-            <span class="blog-date">May 22, 2025</span>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Current Focus Badge -->
-      <div class="card fade-up delay-3" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05)); text-align: center;">
-        <p style="margin: 0;">
-          🎯 Currently focused on: <strong>ML Systems Architecture</strong> • <strong>Production Deployment</strong> • <strong>Cost Optimization</strong>
-        </p>
-      </div>
-
-      <!-- Visited India Map -->
-<div class="visited-map-card fade-up delay-3">
-  <div class="visited-map-header">
-    <h2>🗺️ Bharat, so far</h2>
+<!-- ── Footer ── -->
+<footer>
+  <div class="wrap" style="width:100%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;">
+    <p>© <span id="yr"></span> Manish Tiwari</p>
     <p>
-      States and union territories I have visited across India.
+      <a href="https://github.com/predictivemanish" target="_blank">GitHub</a> ·
+      <a href="https://linkedin.com/in/manish-tiwari-977741286" target="_blank">LinkedIn</a> ·
+      <a href="https://x.com/compmanish" target="_blank">X</a>
     </p>
   </div>
-
-  <div id="india-map-container">
-    <p style="color: var(--text-muted); text-align: center; padding: 2rem 0;">
-      Loading map...
-    </p>
-  </div>
-
-  <p class="visited-map-note">
-    <strong>Visited:</strong>
-    Punjab, Delhi, Haryana, Himachal Pradesh, Uttar Pradesh, Rajasthan,
-    Bihar, Jammu & Kashmir, Jharkhand, Madhya Pradesh.
-  </p>
-</div>
-
-    </main>
-
-    <footer>
-      Made with <span style="color: var(--accent-primary);">❤️</span> + <a href="https://github.com/janraasch/hugo-bearblog/" style="color: var(--text-muted);">Hugo Bear</a> • 
-      <span id="year"></span> Manish Tiwari
-    </footer>
-  </div>
+</footer>
 
 <script>
-// Visited India Map
-  const visitedIndianStates = [
-    "Punjab",
-    "Delhi",
-    "Haryana",
-    "Himachal Pradesh",
-    "Uttar Pradesh",
-    "Rajasthan",
-    "Bihar",
-    "Jammu and Kashmir",
-    "Jharkhand",
-    "Madhya Pradesh",
-    "Chandigarh",
-    "Uttarakhand"
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  /* ── India Map ── */
+  const VISITED = [
+    "Punjab","Delhi","Haryana","Himachal Pradesh","Uttar Pradesh",
+    "Rajasthan","Bihar","Jammu and Kashmir","Jharkhand","Madhya Pradesh","Chandigarh"
   ];
 
-  const indianStateIdMap = {
-    "Andaman and Nicobar": "INAN",
-    "Telangana": "INTG",
-    "Andhra Pradesh": "INAP",
-    "Arunachal Pradesh": "INAR",
-    "Assam": "INAS",
-    "Bihar": "INBR",
-    "Chandigarh": "INCH",
-    "Chhattisgarh": "INCT",
-    "Dadra and Nagar Haveli and Daman and Diu": "INDH",
-    "Delhi": "INDL",
-    "Goa": "INGA",
-    "Gujarat": "INGJ",
-    "Haryana": "INHR",
-    "Himachal Pradesh": "INHP",
-    "Jharkhand": "INJH",
-    "Karnataka": "INKA",
-    "Kerala": "INKL",
-    "Madhya Pradesh": "INMP",
-    "Maharashtra": "INMH",
-    "Manipur": "INMN",
-    "Meghalaya": "INML",
-    "Mizoram": "INMZ",
-    "Nagaland": "INNL",
-    "Odisha": "INOR",
-    "Puducherry": "INPY",
-    "Punjab": "INPB",
-    "Rajasthan": "INRJ",
-    "Sikkim": "INSK",
-    "Tamil Nadu": "INTN",
-    "Tripura": "INTR",
-    "Uttar Pradesh": "INUP",
-    "Uttarakhand": "INUT",
-    "West Bengal": "INWB",
-    "Lakshadweep": "INLD",
-    "Jammu and Kashmir": "INJK",
-    "Ladakh": "INLA"
+  const ID_MAP = {
+    "Andaman and Nicobar":"INAN","Telangana":"INTG","Andhra Pradesh":"INAP",
+    "Arunachal Pradesh":"INAR","Assam":"INAS","Bihar":"INBR","Chandigarh":"INCH",
+    "Chhattisgarh":"INCT","Delhi":"INDL","Goa":"INGA","Gujarat":"INGJ",
+    "Haryana":"INHR","Himachal Pradesh":"INHP","Jharkhand":"INJH",
+    "Karnataka":"INKA","Kerala":"INKL","Madhya Pradesh":"INMP","Maharashtra":"INMH",
+    "Manipur":"INMN","Meghalaya":"INML","Mizoram":"INMZ","Nagaland":"INNL",
+    "Odisha":"INOR","Puducherry":"INPY","Punjab":"INPB","Rajasthan":"INRJ",
+    "Sikkim":"INSK","Tamil Nadu":"INTN","Tripura":"INTR","Uttar Pradesh":"INUP",
+    "Uttarakhand":"INUT","West Bengal":"INWB","Lakshadweep":"INLD",
+    "Jammu and Kashmir":"INJK","Ladakh":"INLA"
   };
 
-  async function loadVisitedIndiaMap() {
-    const container = document.getElementById("india-map-container");
-
-    if (!container) {
-      console.error("india-map-container not found");
-      return;
-    }
-
+  async function loadMap() {
+    const container = document.getElementById('india-map-container');
     try {
-      const response = await fetch("https://predictivemanish.github.io/visited/in.svg");
-
-      if (!response.ok) {
-        throw new Error(`SVG fetch failed with status ${response.status}`);
-      }
-
-      const svgText = await response.text();
-      container.innerHTML = svgText;
-
-      visitedIndianStates.forEach((state) => {
-        const stateId = indianStateIdMap[state];
-
-        if (!stateId) {
-          console.warn(`No id mapped for state: ${state}`);
-          return;
-        }
-
-        const element = container.querySelector(`#${stateId}`);
-
-        if (!element) {
-          console.warn(`State not found in SVG: ${state} (${stateId})`);
-          return;
-        }
-
-        element.classList.add("visited-state");
-
-        const title = document.createElementNS("http://www.w3.org/2000/svg", "title");
-        title.textContent = `${state} — visited`;
-        element.appendChild(title);
+      const res = await fetch('https://predictivemanish.github.io/visited/in.svg');
+      if (!res.ok) throw new Error('fetch failed');
+      container.innerHTML = await res.text();
+      VISITED.forEach(state => {
+        const el = container.querySelector('#' + ID_MAP[state]);
+        if (el) el.classList.add('visited-state');
       });
-    } catch (error) {
-      console.error("Map loading failed:", error);
-
-      container.innerHTML = `
-        <p style="color: var(--text-muted); text-align: center; padding: 2rem 0;">
-          Could not load India map.
-        </p>
-      `;
+    } catch {
+      container.innerHTML = '<p style="font-family:var(--mono);font-size:0.7rem;color:var(--text-3);text-align:center;padding:2rem 0;">Could not load map.</p>';
     }
   }
 
-  loadVisitedIndiaMap();
+  loadMap();
 
-  // Intersection Observer for animations
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, observerOptions);
-
-  document.querySelectorAll('.fade-up').forEach(el => {
-    observer.observe(el);
-  });
+  /* ── Scroll fade ── */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.style.opacity = 1; });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade').forEach(el => io.observe(el));
 </script>
 </body>
 </html>
