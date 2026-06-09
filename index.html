@@ -383,11 +383,26 @@
     }
 
     /* ── Skills ── */
-    .skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
+    .skill-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.skill-group h3 {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+
+.skill-group p {
+  color: var(--text-2);
+  line-height: 1.8;
+  font-size: 0.95rem;
+}
 
     /* ── Map ── */
     .map-wrap {
@@ -500,101 +515,46 @@
 
 <div class="wrap">
 
-  <!-- ── Hero ── -->
   <header class="hero fade f1">
-  
-    <h1>Building <em>practical</em><br>ML systems.</h1>
-    <p>
-      👋 Hi, myself <strong>manish tiwari</strong>, final year CS engineering student at IK Gujral Punjab Technical University, 
-      Kapurthala, Punjab. who builds practical machine learning systems and learns by shipping real projects.
-    </p>
-    <p>
-      most of my time goes into working on end-to-end ml pipelines — from data and models to deployment and evaluation. 
-      i'm especially interested in mlops, ai systems, and making models reliable outside notebooks.
-    </p>
-    <p>
-      Merged PRs across Augur, SunPy, holidays, and other OSS projects, including security-conscious logging changes, package behavior updates, documentation fixes, and compatibility improvements; actively respond to maintainer review and ship accepted changes into release branches.
-    </p>
-    <p>
-      💪 outside of tech, i love gym, long cycling trips, walking!!
-    </p>
-    <div class="hero-meta">
-      <span class="status-dot"><span class="dot"></span> Open to opportunities</span>
-      <span class="status-dot">📍 Punjab, India</span>
-    </div>
-  </header>
 
-  <!-- ── Projects ── -->
-  <section class="fade f2">
-    <p class="section-label">Selected projects</p>
+  <div class="hero-eyebrow">AI Engineer · Open Source Contributor</div>
 
-    <div class="project">
-      <div class="project-top">
-        <span class="project-name">SafeRun AI</span>
-        <div class="project-links">
-          <a href="https://github.com/PredictiveManish/SafeRun-AI" class="pill" target="_blank">GitHub</a>
-          <a href="https://saferun-ai.onrender.com/" class="pill" target="_blank">Live</a>
-          <a href="https://pypi.org/project/saferun-ai/" class="pill" target="_blank">PyPI</a>
-        </div>
-      </div>
-      <p class="project-desc">Docker-based sandbox with AST scanner, YAML policy engine, and FastAPI backend for secure execution of untrusted AI-generated Python code</p>
-      <div class="project-tags">
-        <span class="tag">Python</span>
-        <span class="tag">FastAPI</span>
-        <span class="tag">Docker</span>
-        <span class="tag">SQLAlchemy</span>
-        <span class="tag">AST</span>
-        <span class="tag">Streamlit</span>
-      </div>
-    </div>
+  <h1>Building <em>reliable</em><br>AI systems.</h1>
 
-    <div class="project">
-      <div class="project-top">
-        <span class="project-name">ML Drift Monitor</span>
-        <div class="project-links">
-          <a href="https://github.com/PredictiveManish/mlops-drift-detector" class="pill" target="_blank">GitHub</a>
-          <a href="https://huggingface.co/spaces/PredictiveManish/drift-monitor" class="pill" target="_blank">Demo</a>
-        </div>
-      </div>
-      <p class="project-desc">End-to-end MLOps prototype with FastAPI, Streamlit dashboard, and Discord alerts for real-time drift detection</p>
-      <div class="project-tags">
-        <span class="tag">FastAPI</span>
-        <span class="tag">Streamlit</span>
-        <span class="tag">Docker</span>
-      </div>
-    </div>
+  <p>
+    👋 Hi, I'm <strong>Manish Tiwari</strong>, a final-year Computer Science student at
+    IK Gujral Punjab Technical University, India.
+    I build practical AI systems, contribute to open source, and learn by shipping.
+  </p>
 
-    <div class="project">
-      <div class="project-top">
-        <span class="project-name">Trimurti-LM <span style="font-size:0.8rem;color:var(--text-3);font-weight:400;">4.2M params</span></span>
-        <div class="project-links">
-          <a href="https://github.com/PredictiveManish/Trimurti-LM" class="pill" target="_blank">GitHub</a>
-          <a href="https://huggingface.co/spaces/PredictiveManish/Trimurti-LM-Demo" class="pill" target="_blank">Demo</a>
-          <a href="https://huggingface.co/datasets/PredictiveManish/multilingual-corpus" class="pill" target="_blank">Dataset</a>
-        </div>
-      </div>
-      <p class="project-desc">Custom language model trained from scratch using PyTorch - understanding training workflows, architecture design, and hyperparameter tuning</p>
-      <div class="project-tags">
-        <span class="tag">PyTorch</span>
-        <span class="tag">Transformers</span>
-      </div>
-    </div>
+  <p>
+    My interests lie at the intersection of machine learning engineering,
+    LLM systems, MLOps, and backend infrastructure. I enjoy taking ideas
+    from experimentation to production by building data pipelines,
+    training workflows, APIs, and deployment systems in this journey I've built around 15 projects.
+  </p>
 
-    <div class="project">
-      <div class="project-top">
-        <span class="project-name">Multilingual Corpus Dataset</span>
-        <div class="project-links">
-          <a href="https://huggingface.co/datasets/PredictiveManish/multilingual-corpus" class="pill" target="_blank">Dataset</a>
-          <a href="https://huggingface.co/PredictiveManish/Trimurti-LM" class="pill" target="_blank">Model</a>
-        </div>
-      </div>
-      <p class="project-desc">Curated dataset for multilingual LM training, focused on Indian languages and efficient model development</p>
-      <div class="project-tags">
-        <span class="tag">HuggingFace</span>
-        <span class="tag">Datasets</span>
-      </div>
-    </div>
-  </section>
+  <p>
+    I've built AI products ranging from secure execution environments for
+    AI-generated code to model monitoring systems and custom language models.
+    Along the way I've contributed around 78 pull requests across open-source projects and 
+    collaborated with maintainers across AI, ML, and developer tooling ecosystems.
+  </p>
+
+  <p>
+    Outside technology, you'll usually find me in the gym, on long cycling
+    rides, exploring new ideas, or thinking about the next project to build.
+  </p>
+
+  <div class="hero-meta">
+    <span class="status-dot"><span class="dot"></span> Open to internships & opportunities</span>
+    <span class="status-dot">📍 Punjab, India</span>
+  </div>
+
+</header>
+
+
+ 
 
   <!-- ── Open Source ── -->
   <section class="fade f3">
@@ -616,29 +576,6 @@
       <span class="org">Skrub</span>
     </div>
 
-    <ul class="pr-list">
-      <li>
-        <span class="pr-status">✅</span>
-        <a href="https://github.com/usemoss/moss/pull/189" target="_blank">Bharat Benefits Live Voice agents using moss & sarvamAI — <strong>usemoss/moss</strong></a>
-        <span class="pr-date">May 1, 2026</span>
-      </li>
-      <li>
-        <span class="pr-status">✅</span>
-        <a href="https://github.com/ankitjh4/indic-ai-skills/pull/9" target="_blank">Cashfree Skills — <strong>Indic AI Skills</strong></a>
-        <span class="pr-date">Apr 28, 2026</span>
-      </li>
-      <li>
-        <span class="pr-status">✅</span>
-        <a href="https://github.com/Zyora-Dev/zse/pull/6" target="_blank">fix: Add extra='ignore' to chat models for OpenAI client compatibility — <strong>Zyora-Dev/Zse</strong></a>
-        <span class="pr-date">Apr 25, 2026</span>
-      </li>
-      <li>
-        <span class="pr-status">✅</span>
-        <a href="https://github.com/ShivaniSharma14/TrackWise/pull/2" target="_blank">Added Shiprocket skills — <strong>Indic AI Skills</strong></a>
-        <span class="pr-date">Apr 24, 2026</span>
-      </li>
-    </ul>
-
     <div style="margin-top:1rem;">
       <a href="https://github.com/pulls?q=is%3Apr+author%3APredictiveManish+archived%3Afalse+is%3Amerged" target="_blank"
          style="font-family:var(--mono);font-size:0.7rem;color:var(--accent);text-decoration:none;letter-spacing:0.04em;">
@@ -647,22 +584,46 @@
     </div>
   </section>
 
-  <!-- ── Stack ── -->
   <section class="fade f4">
-    <p class="section-label">Stack</p>
-    <div class="skills">
-      <span class="tag">Python</span>
-      <span class="tag">PyTorch</span>
-      <span class="tag">FastAPI</span>
-      <span class="tag">Streamlit</span>
-      <span class="tag">Docker</span>
-      <span class="tag">GitHub Actions</span>
-      <span class="tag">Scikit-learn</span>
-      <span class="tag">SQLite</span>
-      <span class="tag">Plotly</span>
-      <span class="tag">MLOps</span>
+  <p class="section-label">Technical Skills</p>
+
+  <div class="skill-groups">
+
+    <div class="skill-group">
+      <h3>Languages</h3>
+      <p>Python · SQL · Rust (learning) · Bash</p>
     </div>
-  </section>
+
+    <div class="skill-group">
+      <h3>AI / ML</h3>
+      <p>
+        PyTorch · HuggingFace · Transformers · RAG · LLM Workflows ·
+        LoRA · Fine-Tuning · Tokenization
+      </p>
+    </div>
+
+    <div class="skill-group">
+      <h3>Backend & Infrastructure</h3>
+      <p>
+        FastAPI · REST APIs · Docker · Linux · GitHub Actions
+      </p>
+    </div>
+
+    <div class="skill-group">
+      <h3>Databases</h3>
+      <p>PostgreSQL · SQLite</p>
+    </div>
+
+    <div class="skill-group">
+      <h3>Tools</h3>
+      <p>
+        Git · GitHub · Streamlit · Ollama · Plotly ·
+        SentencePiece · Scikit-learn
+      </p>
+    </div>
+
+  </div>
+</section>
 
   <!-- ── Writing ── -->
   <section class="fade f4">
