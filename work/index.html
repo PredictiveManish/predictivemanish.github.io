@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Works | Manish Tiwari</title>
+  <meta name="description" content="Portfolio of ML systems, open source contributions, and side projects by Manish Tiwari.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:        #111113;
+      --bg-raised: #18181b;
+      --border:    #27272a;
+      --border-light: #3f3f46;
+      --text:      #e4e4e7;
+      --text-2:    #a1a1aa;
+      --text-3:    #71717a;
+      --accent:    #d4a96a;   /* warm amber — the editorial warmth */
+      --accent-dim:#7c5e35;
+      --green:     #6ee7b7;
+      --red:       #fca5a5;
+      --serif:     'Lora', Georgia, serif;
+      --mono:      'DM Mono', 'Courier New', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--serif);
+      font-size: 17px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Layout */
+    .wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Navigation */
+    nav {
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 0;
+    }
+
+    nav .inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .nav-name {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--text-2);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    .resume-btn {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: transparent;
+      border: 1px solid var(--accent-dim);
+      color: var(--accent);
+      padding: 0.3rem 0.75rem;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .resume-btn:hover {
+      background: rgba(212, 169, 106, 0.08);
+      border-color: var(--accent);
+    }
+
+    /* Sections */
+    section {
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section:last-child { border-bottom: none; }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Works header */
+    .works-header {
+      padding: 2.5rem 0 1.5rem;
+    }
+
+    .works-header h1 {
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .works-header p {
+      font-size: 1.05rem;
+      color: var(--text-2);
+      max-width: 540px;
+      line-height: 1.8;
+    }
+
+    /* Project cards */
+    .project {
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project:last-child { border-bottom: none; }
+
+    .project-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.4rem;
+    }
+
+    .project-name {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .project-links {
+      display: flex;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .pill {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.04em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 2px;
+      border: 1px solid var(--border-light);
+      color: var(--text-3);
+      text-decoration: none;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .pill:hover {
+      color: var(--accent);
+      border-color: var(--accent-dim);
+    }
+
+    .project-desc {
+      font-size: 0.9rem;
+      color: var(--text-2);
+      line-height: 1.65;
+    }
+
+    .project-tags {
+      margin-top: 0.6rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--text-3);
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      padding: 0.15rem 0.45rem;
+      border-radius: 2px;
+      letter-spacing: 0.03em;
+    }
+
+    .project-date {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--text-3);
+      margin-top: 0.5rem;
+      display: inline-block;
+    }
+
+    /* Divider between sections */
+    .section-divider {
+      margin: 0.5rem 0 1rem;
+    }
+
+    /* Footer */
+    footer {
+      padding: 2rem 0;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    footer p {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--text-3);
+      letter-spacing: 0.03em;
+    }
+
+    footer a {
+      color: var(--text-3);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    footer a:hover { color: var(--accent); }
+
+    /* Fade animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade { opacity: 0; animation: fadeUp 0.5s ease forwards; }
+    .f1 { animation-delay: 0.05s; }
+    .f2 { animation-delay: 0.15s; }
+    .f3 { animation-delay: 0.25s; }
+    .f4 { animation-delay: 0.35s; }
+
+    /* Responsive */
+    @media (max-width: 540px) {
+      .nav-links { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation (matches main site) -->
+<nav>
+  <div class="wrap inner">
+    <a href="/" class="nav-name">Manish Tiwari</a>
+    <ul class="nav-links">
+      <li><a href="/about/">About</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="/mywork/">Works</a></li>
+      <li><a href="/contact/">Contact</a></li>
+      <li><a href="ManishTiwari_Resume.pdf" download class="resume-btn">Resume ↓</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- Page Header -->
+  <div class="works-header fade f1">
+    <h1>⚙️ My Works</h1>
+    <p>A collection of projects I've built — from ML systems and dev tools to exploratory data analysis and utilities. Sorted by recency, with featured work highlighted.</p>
+  </div>
+
+  <!-- Featured Projects Section -->
+  <section class="fade f2">
+    <p class="section-label">⭐ Featured Projects</p>
+    <p style="color: var(--text-3); font-size: 0.85rem; margin-bottom: 1.5rem;">
+      Best representation of my current skills: ML systems, MLOps, secure code execution, and applied AI.
+    </p>
+
+    <!-- Bharat Benefits (Jun 2026) -->
+    <div class="project">
+      <div class="project-top">
+        <span class="project-name">Bharat Benefits</span>
+        <div class="project-links">
+          <a href="https://github.com/PredictiveManish/bharat-benefits" class="pill" target="_blank">GitHub</a>
+        </div>
+      </div>
+      <p class="project-desc">Platform for discovering and applying to government welfare schemes using AI-driven eligibility matching and vernacular support.</p>
+      <div class="project-tags">
+        <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">LLM</span><span class="tag">RAG</span>
+      </div>
+      <span class="project-date">June 2026</span>
+    </div>
+
+    <!-- SafeRun AI (May 2026) -->
+    <div class="project">
+      <div class="project-top">
+        <span class="project-name">SafeRun AI</span>
+        <div class="project-links">
+          <a href="https://github.com/PredictiveManish/SafeRun-AI" class="pill" target="_blank">GitHub</a>
+        </div>
+      </div>
+      <p class="project-desc">Docker-based sandbox with AST scanner, YAML policy engine, and FastAPI backend for secure execution of untrusted AI-generated Python code.</p>
+      <div class="project-tags">
+        <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Docker</span><span class="tag">AST</span>
+      </div>
+      <span class="project-date">May 2026</span>
+    </div>
+
+    <!-- Energix Copilot (Apr 2026) -->
+    <div class="project">
+      <div class="project-top">
+        <span class="project-name">Energix Copilot</span>
+        <div class="project-links">
+          <a href="https://github.com/PredictiveManish/Energy-Optimization-Platform" class="pill" target="_blank">GitHub</a>
+        </div>
+      </div>
+      <p class="project-desc">Energy optimization platform using predictive analytics and real-time monitoring to reduce industrial power consumption.</p>
+      <div class="project-tags">
+        <span class="tag">Python</span><span class="tag">Streamlit</span><span class="tag">Prophet</span><span class="tag">ML</span>
+      </div>
+      <span class="project-date">April 2026</span>
+    </div>
+
+    <!-- Trimurti LM (Feb 2026) -->
+    <div class="project">
+      <div class="project-top">
+        <span class="project-name">Trimurti LM</span>
+        <div class="project-links">
+          <a href="https://github.com/PredictiveManish/trimurti-lm" class="pill" target="_blank">GitHub</a>
+        </div>
+      </div>
+      <p class="project-desc">Custom language model (4.2M params) trained from scratch using PyTorch — understanding training workflows, architecture design, and hyperparameter tuning.</p>
+      <div class="project-tags">
+        <span class="tag">PyTorch</span><span class="tag">Transformers</span><span class="tag">NLP</span>
+      </div>
+      <span class="project-date">February 2026</span>
+    </div>
+
+    <!-- Model Drift Detection (Feb 2026) -->
+    <div class="project">
+      <div class="project-top">
+        <span class="project-name">ML Drift Monitor</span>
+        <div class="project-links">
+          <a href="https://github.com/PredictiveManish/mlops-drift-detector" class="pill" target="_blank">GitHub</a>
+        </div>
+      </div>
+      <p class="project-desc">End-to-end MLOps prototype with FastAPI, Streamlit dashboard, and Discord alerts for real-time drift detection.</p>
+      <div class="project-tags">
+        <span class="tag">FastAPI</span><span class="tag">Streamlit</span><span class="tag">Docker</span><span class="tag">MLOps</span>
+      </div>
+      <span class="project-date">February 2026</span>
+    </div>
+
+    <!-- Swasthya Saathi (Oct 2025) -->
+    <div class="project">
+      <div class="project-top">
+        <span class="project-name">Swasthya Saathi</span>
+        <div class="project-links">
+          <a href="https://github.com/PredictiveManish/Swasthya-Saathi" class="pill" target="_blank">GitHub</a>
+        </div>
+      </div>
+      <p class="project-desc">Health assistant for rural areas — symptom checker, medicine reminder, and nearby clinic locator with offline-first support.</p>
+      <div class="project-tags">
+        <span class="tag">Flask</span><span class="tag">SQLite</span><span class="tag">Bootstrap</span>
+      </div>
+      <span class="project-date">October 2025</span>
+    </div>
+  </section>
+
+  <!-- Archive / Other Projects Section -->
+  <section class="fade f3">
+    <p class="section-label">📦 Archive & Experiments</p>
+    <p style="color: var(--text-3); font-size: 0.85rem; margin-bottom: 1.5rem;">
+      Side projects, learning experiments, and utilities — sorted by most recent.
+    </p>
+
+    <!-- Q-A with Sarvam (Dec 2025) -->
+    <div class="project">
+      <div class="project-top">
+        <span class="project-name">Q&A with Sarvam</span>
+        <div class="project-links">
+          <a href="https://github.com/PredictiveManish/Q-A-with-sarvam" class="pill" target="_blank">GitHub</a>
+        </div>
+      </div>
+      <p class="project-desc">Question answering system using Sarvam AI models and Indic language support.</p>
+      <div class="project-tags"><span class="tag">LLM</span><span class="tag">RAG</span><span class="tag">FastAPI</span></div>
+      <span class="project-date">December 2025</span>
+    </div>
+
+    <!-- AI Caption Generator (Dec 2025) -->
+    <div class="project">
+      <div class="project-top">
+        <span class="project-name">AI Caption Generator</span>
+        <div class="project-links">
+          <a href="https://github.com/PredictiveManish/ai-caption-generator" class="pill" target="_blank">GitHub</a>
+        </div>
+      </div>
+      <p class="project-desc">Generate engaging social media captions using transformer-based models.</p>
+      <div class="project-tags"><span class="tag">HuggingFace</span><span class="tag">Gradio</span></div>
+      <span class="project-date">December 2025</span>
+    </div>
+
+    <!-- Wall Crack Detection (Sep 2025) -->
+    <div class="project">
+      <div class="project-top">
+        <span class="project-name">Wall Crack Detection</span>
+        <div class="project-links">
+          <a href="https://github.com/PredictiveManish/wall-crack-detection-project" class="pill" target="_blank">GitHub</a>
+        </div>
+      </div>
+      <p class="project-desc">Computer vision system to identify structural cracks in walls using CNNs.</p>
+      <div class="project-tags"><span class="tag">PyTorch</span><span class="tag">OpenCV</span></div>
+      <span class="project-date">September 2025</span>
+    </div>
+
+    <!-- 21 Days of EDA (May 2025) -->
+    <div class="project">
+      <div class="project-top">
+        <span class="project-name">21 Days of EDA</span>
+        <div class="project-links">
+          <a href="https://github.com/PredictiveManish/21DaysofEDA" class="pill" target="_blank">GitHub</a>
+        </div>
+      </div>
+      <p class="project-desc">21-day challenge — exploratory data analysis notebooks covering real-world datasets and insights.</p>
+      <div class="project-tags"><span class="tag">Pandas</span><span class="tag">Matplotlib</span><span class="tag">Seaborn</span></div>
+      <span class="project-date">May 2025</span>
+    </div>
+
+    <!-- Network Device Scanner (Dec 2024) -->
+    <div class="project">
+      <div class="project-top">
+        <span class="project-name">Network Device Scanner</span>
+        <div class="project-links">
+          <a href="https://github.com/PredictiveManish/Network-Device-Scanner" class="pill" target="_blank">GitHub</a>
+        </div>
+      </div>
+      <p class="project-desc">Python tool to scan local networks, discover active devices, and retrieve basic info.</p>
+      <div class="project-tags"><span class="tag">Python</span><span class="tag">Scapy</span></div>
+      <span class="project-date">December 2024</span>
+    </div>
+
+    <!-- YouTube Playlist Downloader (Oct 2024) -->
+    <div class="project">
+      <div class="project-top">
+        <span class="project-name">YouTube Playlist Downloader</span>
+        <div class="project-links">
+          <a href="https://github.com/PredictiveManish/Youtube-playlist-downloader" class="pill" target="_blank">GitHub</a>
+        </div>
+      </div>
+      <p class="project-desc">CLI tool to download entire YouTube playlists in high quality with progress tracking.</p>
+      <div class="project-tags"><span class="tag">pytube</span><span class="tag">CLI</span></div>
+      <span class="project-date">October 2024</span>
+    </div>
+
+    <!-- Scientific Calculator (Aug 2024) -->
+    <div class="project">
+      <div class="project-top">
+        <span class="project-name">Scientific Calculator (C++)</span>
+        <div class="project-links">
+          <a href="https://github.com/PredictiveManish/Scientific-Calculator-in-Cpp" class="pill" target="_blank">GitHub</a>
+        </div>
+      </div>
+      <p class="project-desc">Console-based scientific calculator with trigonometric, logarithmic, and algebraic functions.</p>
+      <div class="project-tags"><span class="tag">C++</span></div>
+      <span class="project-date">August 2024</span>
+    </div>
+
+    <!-- Spam Classifier (Dec 2023) -->
+    <div class="project">
+      <div class="project-top">
+        <span class="project-name">PhishKavach (Spam Classifier)</span>
+        <div class="project-links">
+          <a href="https://github.com/PredictiveManish/phishKavach" class="pill" target="_blank">GitHub</a>
+        </div>
+      </div>
+      <p class="project-desc">NLP-based SMS/email spam detection using TF-IDF and Naive Bayes.</p>
+      <div class="project-tags"><span class="tag">Scikit-learn</span><span class="tag">NLP</span></div>
+      <span class="project-date">December 2023</span>
+    </div>
+
+    <!-- DataDream Coursefinder (Oct 2023) -->
+    <div class="project">
+      <div class="project-top">
+        <span class="project-name">DataDream Coursefinder</span>
+        <div class="project-links">
+          <a href="https://github.com/PredictiveManish/datadreamer-coursefinder" class="pill" target="_blank">GitHub</a>
+        </div>
+      </div>
+      <p class="project-desc">Course recommendation engine for data science learners based on skill level and interests.</p>
+      <div class="project-tags"><span class="tag">Streamlit</span><span class="tag">Pandas</span></div>
+      <span class="project-date">October 2023</span>
+    </div>
+
+  </section>
+
+  <!-- GitHub Stats / Callout -->
+  <section class="fade f4" style="text-align: center; border-bottom: none; padding: 1.5rem 0 2rem;">
+    <p style="color: var(--text-3);">
+      🧩 Full source code and more experiments on 
+      <a href="https://github.com/predictivemanish" style="color: var(--accent); text-decoration: none;">GitHub</a> — 10+ Project repositories, 30+ merged PRs across OSS.
+    </p>
+  </section>
+
+</div> <!-- /.wrap -->
+
+<!-- Footer -->
+<footer>
+  <div class="wrap" style="width:100%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;">
+    <p>© <span id="yr"></span> Manish Tiwari</p>
+    <p>
+      <a href="https://github.com/predictivemanish" target="_blank">GitHub</a> ·
+      <a href="https://linkedin.com/in/manish-tiwari-977741286" target="_blank">LinkedIn</a> ·
+      <a href="https://x.com/compmanish" target="_blank">X</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Fade-in on scroll (matches main site behavior)
+  const faders = document.querySelectorAll('.fade');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = 1;
+      }
+    });
+  }, { threshold: 0.1 });
+  faders.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
