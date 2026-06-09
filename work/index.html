@@ -18,7 +18,7 @@
       --text:      #e4e4e7;
       --text-2:    #a1a1aa;
       --text-3:    #71717a;
-      --accent:    #d4a96a;   /* warm amber — the editorial warmth */
+      --accent:    #d4a96a;
       --accent-dim:#7c5e35;
       --green:     #6ee7b7;
       --red:       #fca5a5;
@@ -111,7 +111,6 @@
       padding: 2.5rem 0;
       border-bottom: 1px solid var(--border);
     }
-
     section:last-child { border-bottom: none; }
 
     .section-label {
@@ -127,7 +126,6 @@
     .works-header {
       padding: 2.5rem 0 1.5rem;
     }
-
     .works-header h1 {
       font-size: clamp(2rem, 5vw, 2.8rem);
       font-weight: 600;
@@ -136,7 +134,6 @@
       margin-bottom: 1.25rem;
       letter-spacing: -0.02em;
     }
-
     .works-header p {
       font-size: 1.05rem;
       color: var(--text-2);
@@ -144,12 +141,11 @@
       line-height: 1.8;
     }
 
-    /* Project cards */
+    /* Project cards (featured) */
     .project {
       padding: 1.25rem 0;
       border-bottom: 1px solid var(--border);
     }
-
     .project:last-child { border-bottom: none; }
 
     .project-top {
@@ -185,7 +181,6 @@
       text-decoration: none;
       transition: color 0.15s, border-color 0.15s;
     }
-
     .pill:hover {
       color: var(--accent);
       border-color: var(--accent-dim);
@@ -223,9 +218,45 @@
       display: inline-block;
     }
 
-    /* Divider between sections */
-    .section-divider {
-      margin: 0.5rem 0 1rem;
+    /* Archive list (compact) */
+    .archive-list {
+      list-style: none;
+    }
+    .archive-item {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.75rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .archive-item:last-child { border-bottom: none; }
+    .archive-info {
+      flex: 1;
+    }
+    .archive-title {
+      font-family: var(--serif);
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .archive-title:hover {
+      color: var(--accent);
+    }
+    .archive-desc {
+      font-size: 0.8rem;
+      color: var(--text-3);
+      margin-top: 0.2rem;
+      line-height: 1.5;
+    }
+    .archive-date {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--text-3);
+      flex-shrink: 0;
+      white-space: nowrap;
     }
 
     /* Footer */
@@ -238,20 +269,17 @@
       flex-wrap: wrap;
       gap: 0.75rem;
     }
-
     footer p {
       font-family: var(--mono);
       font-size: 0.68rem;
       color: var(--text-3);
       letter-spacing: 0.03em;
     }
-
     footer a {
       color: var(--text-3);
       text-decoration: none;
       transition: color 0.15s;
     }
-
     footer a:hover { color: var(--accent); }
 
     /* Fade animations */
@@ -259,29 +287,28 @@
       from { opacity: 0; transform: translateY(14px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
     .fade { opacity: 0; animation: fadeUp 0.5s ease forwards; }
     .f1 { animation-delay: 0.05s; }
     .f2 { animation-delay: 0.15s; }
     .f3 { animation-delay: 0.25s; }
     .f4 { animation-delay: 0.35s; }
 
-    /* Responsive */
     @media (max-width: 540px) {
       .nav-links { gap: 1rem; }
+      .archive-item { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+      .archive-date { white-space: normal; }
     }
   </style>
 </head>
 <body>
 
-<!-- Navigation (matches main site) -->
 <nav>
   <div class="wrap inner">
     <a href="/" class="nav-name">Manish Tiwari</a>
     <ul class="nav-links">
       <li><a href="/about/">About</a></li>
       <li><a href="/blog/">Blog</a></li>
-      <li><a href="/mywork/">Works</a></li>
+      <li><a href="/mywork/" style="color: var(--accent);">Works</a></li>
       <li><a href="/contact/">Contact</a></li>
       <li><a href="ManishTiwari_Resume.pdf" download class="resume-btn">Resume ↓</a></li>
     </ul>
@@ -290,20 +317,19 @@
 
 <div class="wrap">
 
-  <!-- Page Header -->
   <div class="works-header fade f1">
     <h1>⚙️ My Works</h1>
-    <p>A collection of projects I've built — from ML systems and dev tools to exploratory data analysis and utilities. Sorted by recency, with featured work highlighted.</p>
+    <p>Projects I've built — from production ML systems and MLOps tooling to side experiments and utilities. Sorted by recency, with featured work highlighted.</p>
   </div>
 
-  <!-- Featured Projects Section -->
+  <!-- Featured Projects -->
   <section class="fade f2">
     <p class="section-label">⭐ Featured Projects</p>
     <p style="color: var(--text-3); font-size: 0.85rem; margin-bottom: 1.5rem;">
-      Best representation of my current skills: ML systems, MLOps, secure code execution, and applied AI.
+      Best representation of my current skills: ML systems, secure code execution, MLOps, and applied AI.
     </p>
 
-    <!-- Bharat Benefits (Jun 2026) -->
+    <!-- Bharat Benefits - Jun 2026 -->
     <div class="project">
       <div class="project-top">
         <span class="project-name">Bharat Benefits</span>
@@ -311,29 +337,26 @@
           <a href="https://github.com/PredictiveManish/bharat-benefits" class="pill" target="_blank">GitHub</a>
         </div>
       </div>
-      <p class="project-desc">Platform for discovering and applying to government welfare schemes using AI-driven eligibility matching and vernacular support.</p>
-      <div class="project-tags">
-        <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">LLM</span><span class="tag">RAG</span>
-      </div>
+      <p class="project-desc">AI-driven platform to discover and apply for government welfare schemes using eligibility matching and vernacular support.</p>
+      <div class="project-tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">LLM</span><span class="tag">RAG</span></div>
       <span class="project-date">June 2026</span>
     </div>
 
-    <!-- SafeRun AI (May 2026) -->
+    <!-- SafeRun AI - May 2026 -->
     <div class="project">
       <div class="project-top">
         <span class="project-name">SafeRun AI</span>
         <div class="project-links">
           <a href="https://github.com/PredictiveManish/SafeRun-AI" class="pill" target="_blank">GitHub</a>
+          <a href="https://saferun-ai.onrender.com/" class="pill" target="_blank">Live</a>
         </div>
       </div>
-      <p class="project-desc">Docker-based sandbox with AST scanner, YAML policy engine, and FastAPI backend for secure execution of untrusted AI-generated Python code.</p>
-      <div class="project-tags">
-        <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Docker</span><span class="tag">AST</span>
-      </div>
+      <p class="project-desc">Docker sandbox with AST scanner + YAML policy engine for secure execution of untrusted AI-generated Python code.</p>
+      <div class="project-tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Docker</span><span class="tag">AST</span></div>
       <span class="project-date">May 2026</span>
     </div>
 
-    <!-- Energix Copilot (Apr 2026) -->
+    <!-- Energix Copilot - Apr 2026 -->
     <div class="project">
       <div class="project-top">
         <span class="project-name">Energix Copilot</span>
@@ -342,43 +365,39 @@
         </div>
       </div>
       <p class="project-desc">Energy optimization platform using predictive analytics and real-time monitoring to reduce industrial power consumption.</p>
-      <div class="project-tags">
-        <span class="tag">Python</span><span class="tag">Streamlit</span><span class="tag">Prophet</span><span class="tag">ML</span>
-      </div>
+      <div class="project-tags"><span class="tag">Python</span><span class="tag">Streamlit</span><span class="tag">Prophet</span></div>
       <span class="project-date">April 2026</span>
     </div>
 
-    <!-- Trimurti LM (Feb 2026) -->
+    <!-- Trimurti LM - Feb 2026 -->
     <div class="project">
       <div class="project-top">
         <span class="project-name">Trimurti LM</span>
         <div class="project-links">
           <a href="https://github.com/PredictiveManish/trimurti-lm" class="pill" target="_blank">GitHub</a>
+          <a href="https://huggingface.co/spaces/PredictiveManish/Trimurti-LM-Demo" class="pill" target="_blank">Demo</a>
         </div>
       </div>
-      <p class="project-desc">Custom language model (4.2M params) trained from scratch using PyTorch — understanding training workflows, architecture design, and hyperparameter tuning.</p>
-      <div class="project-tags">
-        <span class="tag">PyTorch</span><span class="tag">Transformers</span><span class="tag">NLP</span>
-      </div>
+      <p class="project-desc">4.2M parameter language model trained from scratch using PyTorch — deep dive into training workflows and architecture.</p>
+      <div class="project-tags"><span class="tag">PyTorch</span><span class="tag">Transformers</span></div>
       <span class="project-date">February 2026</span>
     </div>
 
-    <!-- Model Drift Detection (Feb 2026) -->
+    <!-- Model Drift Detection - Feb 2026 -->
     <div class="project">
       <div class="project-top">
         <span class="project-name">ML Drift Monitor</span>
         <div class="project-links">
           <a href="https://github.com/PredictiveManish/mlops-drift-detector" class="pill" target="_blank">GitHub</a>
+          <a href="https://huggingface.co/spaces/PredictiveManish/drift-monitor" class="pill" target="_blank">Demo</a>
         </div>
       </div>
-      <p class="project-desc">End-to-end MLOps prototype with FastAPI, Streamlit dashboard, and Discord alerts for real-time drift detection.</p>
-      <div class="project-tags">
-        <span class="tag">FastAPI</span><span class="tag">Streamlit</span><span class="tag">Docker</span><span class="tag">MLOps</span>
-      </div>
+      <p class="project-desc">End-to-end MLOps prototype: FastAPI backend, Streamlit dashboard, Discord alerts for real-time drift detection.</p>
+      <div class="project-tags"><span class="tag">FastAPI</span><span class="tag">Streamlit</span><span class="tag">Docker</span></div>
       <span class="project-date">February 2026</span>
     </div>
 
-    <!-- Swasthya Saathi (Oct 2025) -->
+    <!-- Swasthya Saathi - Oct 2025 -->
     <div class="project">
       <div class="project-top">
         <span class="project-name">Swasthya Saathi</span>
@@ -386,151 +405,104 @@
           <a href="https://github.com/PredictiveManish/Swasthya-Saathi" class="pill" target="_blank">GitHub</a>
         </div>
       </div>
-      <p class="project-desc">Health assistant for rural areas — symptom checker, medicine reminder, and nearby clinic locator with offline-first support.</p>
-      <div class="project-tags">
-        <span class="tag">Flask</span><span class="tag">SQLite</span><span class="tag">Bootstrap</span>
-      </div>
+      <p class="project-desc">Health assistant for rural areas — symptom checker, medicine reminders, and nearby clinic locator with offline-first support.</p>
+      <div class="project-tags"><span class="tag">Flask</span><span class="tag">SQLite</span></div>
       <span class="project-date">October 2025</span>
     </div>
   </section>
 
-  <!-- Archive / Other Projects Section -->
+  <!-- Archive (Other Projects) - one line description each -->
   <section class="fade f3">
     <p class="section-label">📦 Archive & Experiments</p>
-    <p style="color: var(--text-3); font-size: 0.85rem; margin-bottom: 1.5rem;">
-      Side projects, learning experiments, and utilities — sorted by most recent.
+    <p style="color: var(--text-3); font-size: 0.85rem; margin-bottom: 1rem;">
+      Side projects, learning experiments, and utilities — sorted newest first.
     </p>
-
-    <!-- Q-A with Sarvam (Dec 2025) -->
-    <div class="project">
-      <div class="project-top">
-        <span class="project-name">Q&A with Sarvam</span>
-        <div class="project-links">
-          <a href="https://github.com/PredictiveManish/Q-A-with-sarvam" class="pill" target="_blank">GitHub</a>
+    <ul class="archive-list">
+      <!-- Q-A with Sarvam - Dec 2025 -->
+      <li class="archive-item">
+        <div class="archive-info">
+          <a href="https://github.com/PredictiveManish/Q-A-with-sarvam" class="archive-title" target="_blank">Q&A with Sarvam</a>
+          <div class="archive-desc">Question answering system using Sarvam AI models with Indic language support.</div>
         </div>
-      </div>
-      <p class="project-desc">Question answering system using Sarvam AI models and Indic language support.</p>
-      <div class="project-tags"><span class="tag">LLM</span><span class="tag">RAG</span><span class="tag">FastAPI</span></div>
-      <span class="project-date">December 2025</span>
-    </div>
-
-    <!-- AI Caption Generator (Dec 2025) -->
-    <div class="project">
-      <div class="project-top">
-        <span class="project-name">AI Caption Generator</span>
-        <div class="project-links">
-          <a href="https://github.com/PredictiveManish/ai-caption-generator" class="pill" target="_blank">GitHub</a>
+        <span class="archive-date">Dec 2025</span>
+      </li>
+      <!-- AI Caption generator - Dec 2025 -->
+      <li class="archive-item">
+        <div class="archive-info">
+          <a href="https://github.com/PredictiveManish/ai-caption-generator" class="archive-title" target="_blank">AI Caption Generator</a>
+          <div class="archive-desc">Generate engaging social media captions using transformer-based models (HuggingFace + Gradio).</div>
         </div>
-      </div>
-      <p class="project-desc">Generate engaging social media captions using transformer-based models.</p>
-      <div class="project-tags"><span class="tag">HuggingFace</span><span class="tag">Gradio</span></div>
-      <span class="project-date">December 2025</span>
-    </div>
-
-    <!-- Wall Crack Detection (Sep 2025) -->
-    <div class="project">
-      <div class="project-top">
-        <span class="project-name">Wall Crack Detection</span>
-        <div class="project-links">
-          <a href="https://github.com/PredictiveManish/wall-crack-detection-project" class="pill" target="_blank">GitHub</a>
+        <span class="archive-date">Dec 2025</span>
+      </li>
+      <!-- Wall Crack Detection - Sep 2025 -->
+      <li class="archive-item">
+        <div class="archive-info">
+          <a href="https://github.com/PredictiveManish/wall-crack-detection-project" class="archive-title" target="_blank">Wall Crack Detection</a>
+          <div class="archive-desc">Computer vision system to identify structural cracks in walls using CNNs (PyTorch, OpenCV).</div>
         </div>
-      </div>
-      <p class="project-desc">Computer vision system to identify structural cracks in walls using CNNs.</p>
-      <div class="project-tags"><span class="tag">PyTorch</span><span class="tag">OpenCV</span></div>
-      <span class="project-date">September 2025</span>
-    </div>
-
-    <!-- 21 Days of EDA (May 2025) -->
-    <div class="project">
-      <div class="project-top">
-        <span class="project-name">21 Days of EDA</span>
-        <div class="project-links">
-          <a href="https://github.com/PredictiveManish/21DaysofEDA" class="pill" target="_blank">GitHub</a>
+        <span class="archive-date">Sep 2025</span>
+      </li>
+      <!-- 21 Days of EDA - May 2025 -->
+      <li class="archive-item">
+        <div class="archive-info">
+          <a href="https://github.com/PredictiveManish/21DaysofEDA" class="archive-title" target="_blank">21 Days of EDA</a>
+          <div class="archive-desc">21‑day exploratory data analysis challenge covering real‑world datasets and visual insights.</div>
         </div>
-      </div>
-      <p class="project-desc">21-day challenge — exploratory data analysis notebooks covering real-world datasets and insights.</p>
-      <div class="project-tags"><span class="tag">Pandas</span><span class="tag">Matplotlib</span><span class="tag">Seaborn</span></div>
-      <span class="project-date">May 2025</span>
-    </div>
-
-    <!-- Network Device Scanner (Dec 2024) -->
-    <div class="project">
-      <div class="project-top">
-        <span class="project-name">Network Device Scanner</span>
-        <div class="project-links">
-          <a href="https://github.com/PredictiveManish/Network-Device-Scanner" class="pill" target="_blank">GitHub</a>
+        <span class="archive-date">May 2025</span>
+      </li>
+      <!-- Network Device Scanner - Dec 2024 -->
+      <li class="archive-item">
+        <div class="archive-info">
+          <a href="https://github.com/PredictiveManish/Network-Device-Scanner" class="archive-title" target="_blank">Network Device Scanner</a>
+          <div class="archive-desc">Python tool to scan local networks, discover active devices, and retrieve basic info (Scapy).</div>
         </div>
-      </div>
-      <p class="project-desc">Python tool to scan local networks, discover active devices, and retrieve basic info.</p>
-      <div class="project-tags"><span class="tag">Python</span><span class="tag">Scapy</span></div>
-      <span class="project-date">December 2024</span>
-    </div>
-
-    <!-- YouTube Playlist Downloader (Oct 2024) -->
-    <div class="project">
-      <div class="project-top">
-        <span class="project-name">YouTube Playlist Downloader</span>
-        <div class="project-links">
-          <a href="https://github.com/PredictiveManish/Youtube-playlist-downloader" class="pill" target="_blank">GitHub</a>
+        <span class="archive-date">Dec 2024</span>
+      </li>
+      <!-- YouTube Playlist Downloader - Oct 2024 -->
+      <li class="archive-item">
+        <div class="archive-info">
+          <a href="https://github.com/PredictiveManish/Youtube-playlist-downloader" class="archive-title" target="_blank">YouTube Playlist Downloader</a>
+          <div class="archive-desc">CLI tool to download entire YouTube playlists in high quality with progress tracking.</div>
         </div>
-      </div>
-      <p class="project-desc">CLI tool to download entire YouTube playlists in high quality with progress tracking.</p>
-      <div class="project-tags"><span class="tag">pytube</span><span class="tag">CLI</span></div>
-      <span class="project-date">October 2024</span>
-    </div>
-
-    <!-- Scientific Calculator (Aug 2024) -->
-    <div class="project">
-      <div class="project-top">
-        <span class="project-name">Scientific Calculator (C++)</span>
-        <div class="project-links">
-          <a href="https://github.com/PredictiveManish/Scientific-Calculator-in-Cpp" class="pill" target="_blank">GitHub</a>
+        <span class="archive-date">Oct 2024</span>
+      </li>
+      <!-- Scientific Calculator - Aug 2024 -->
+      <li class="archive-item">
+        <div class="archive-info">
+          <a href="https://github.com/PredictiveManish/Scientific-Calculator-in-Cpp" class="archive-title" target="_blank">Scientific Calculator (C++)</a>
+          <div class="archive-desc">Console‑based scientific calculator with trigonometric, logarithmic and algebraic functions.</div>
         </div>
-      </div>
-      <p class="project-desc">Console-based scientific calculator with trigonometric, logarithmic, and algebraic functions.</p>
-      <div class="project-tags"><span class="tag">C++</span></div>
-      <span class="project-date">August 2024</span>
-    </div>
-
-    <!-- Spam Classifier (Dec 2023) -->
-    <div class="project">
-      <div class="project-top">
-        <span class="project-name">PhishKavach (Spam Classifier)</span>
-        <div class="project-links">
-          <a href="https://github.com/PredictiveManish/phishKavach" class="pill" target="_blank">GitHub</a>
+        <span class="archive-date">Aug 2024</span>
+      </li>
+      <!-- Spam Classifier - Dec 2023 -->
+      <li class="archive-item">
+        <div class="archive-info">
+          <a href="https://github.com/PredictiveManish/phishKavach" class="archive-title" target="_blank">PhishKavach (Spam Classifier)</a>
+          <div class="archive-desc">NLP‑based SMS/email spam detection using TF‑IDF and Naive Bayes.</div>
         </div>
-      </div>
-      <p class="project-desc">NLP-based SMS/email spam detection using TF-IDF and Naive Bayes.</p>
-      <div class="project-tags"><span class="tag">Scikit-learn</span><span class="tag">NLP</span></div>
-      <span class="project-date">December 2023</span>
-    </div>
-
-    <!-- DataDream Coursefinder (Oct 2023) -->
-    <div class="project">
-      <div class="project-top">
-        <span class="project-name">DataDream Coursefinder</span>
-        <div class="project-links">
-          <a href="https://github.com/PredictiveManish/datadreamer-coursefinder" class="pill" target="_blank">GitHub</a>
+        <span class="archive-date">Dec 2023</span>
+      </li>
+      <!-- DataDream Coursefinder - Oct 2023 -->
+      <li class="archive-item">
+        <div class="archive-info">
+          <a href="https://github.com/PredictiveManish/datadreamer-coursefinder" class="archive-title" target="_blank">DataDream Coursefinder</a>
+          <div class="archive-desc">Course recommendation engine for data science learners based on skill level and interests.</div>
         </div>
-      </div>
-      <p class="project-desc">Course recommendation engine for data science learners based on skill level and interests.</p>
-      <div class="project-tags"><span class="tag">Streamlit</span><span class="tag">Pandas</span></div>
-      <span class="project-date">October 2023</span>
-    </div>
-
+        <span class="archive-date">Oct 2023</span>
+      </li>
+    </ul>
   </section>
 
-  <!-- GitHub Stats / Callout -->
-  <section class="fade f4" style="text-align: center; border-bottom: none; padding: 1.5rem 0 2rem;">
+  <!-- GitHub footer callout -->
+  <section class="fade f4" style="text-align: center; border-bottom: none; padding: 1rem 0 2rem;">
     <p style="color: var(--text-3);">
       🧩 Full source code and more experiments on 
-      <a href="https://github.com/predictivemanish" style="color: var(--accent); text-decoration: none;">GitHub</a> — 10+ Project repositories, 30+ merged PRs across OSS.
+      <a href="https://github.com/predictivemanish" style="color: var(--accent); text-decoration: none;">GitHub</a> — 30+ repositories, 35+ merged PRs.
     </p>
   </section>
 
-</div> <!-- /.wrap -->
+</div>
 
-<!-- Footer -->
 <footer>
   <div class="wrap" style="width:100%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;">
     <p>© <span id="yr"></span> Manish Tiwari</p>
@@ -544,14 +516,10 @@
 
 <script>
   document.getElementById('yr').textContent = new Date().getFullYear();
-
-  // Fade-in on scroll (matches main site behavior)
   const faders = document.querySelectorAll('.fade');
-  const observer = new IntersectionObserver((entries) => {
+  const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = 1;
-      }
+      if (entry.isIntersecting) entry.target.style.opacity = 1;
     });
   }, { threshold: 0.1 });
   faders.forEach(el => observer.observe(el));
