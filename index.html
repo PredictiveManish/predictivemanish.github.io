@@ -491,62 +491,6 @@
       height: 100%;
       pointer-events: none;
       z-index: 0;
-      opacity: 0.15;
-    }
-
-    #scroll-text-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    #scroll-text-overlay .word {
-      position: absolute;
-      font-family: var(--serif);
-      font-size: clamp(2rem, 6vw, 4rem);
-      font-weight: 600;
-      color: var(--accent);
-      opacity: 0;
-      transform: scale(0.5) rotate(-5deg);
-      transition: opacity 0.3s, transform 0.3s;
-      white-space: nowrap;
-      letter-spacing: -0.02em;
-    }
-
-    #scroll-text-overlay .word.visible {
-      opacity: 1;
-      transform: scale(1) rotate(0deg);
-    }
-
-    #scroll-text-overlay .final-msg {
-      position: absolute;
-      font-family: var(--serif);
-      font-size: clamp(1.5rem, 4vw, 2.5rem);
-      font-weight: 600;
-      font-style: italic;
-      color: var(--green);
-      opacity: 0;
-      transform: scale(0.8);
-      transition: opacity 0.5s, transform 0.5s;
-      text-align: center;
-    }
-
-    #scroll-text-overlay .final-msg.visible {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    body > *:not(#webgl-canvas):not(#scroll-text-overlay) {
-      position: relative;
-      z-index: 2;
     }
 
     /* ── Fade in ── */
@@ -567,11 +511,6 @@
 <body>
 
 <canvas id="webgl-canvas"></canvas>
-
-<div id="scroll-text-overlay">
-  <div class="word" id="word-display">Builders</div>
-  <div class="final-msg" id="final-msg">You're still here?</div>
-</div>
 
 <!-- ── Nav ── -->
 <nav>
@@ -797,89 +736,135 @@
 
   loadMap();
 
-  /* ── WebGL Scroll Animation ── */
+  /* ── WebGL Particle Text ── */
   (function() {
     const canvas = document.getElementById('webgl-canvas');
-    const gl = canvas.getContext('webgl');
+    const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: false });
     if (!gl) return;
 
-    const wordDisplay = document.getElementById('word-display');
-    const finalMsg = document.getElementById('final-msg');
-    const overlay = document.getElementById('scroll-text-overlay');
+    const NUM_PARTICLES = 6000;
+    const TEXTS = ['Builders', "You're still here?"];
+    const SAMPLE_SCALE = 2;
+    const PARTICLE_SPREAD = 3.0;
+
+    let textTargets = [];
+    let currentText = 0;
+    let particles = [];
+    let scrollPhase = 0;
+    let lastPhase = -1;
+    let finalShown = false;
 
     function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth * devicePixelRatio;
+      canvas.height = window.innerHeight * devicePixelRatio;
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
       gl.viewport(0, 0, canvas.width, canvas.height);
+      sampleText();
     }
-    resize();
-    window.addEventListener('resize', resize);
 
+    function sampleText() {
+      const offscreen = document.createElement('canvas');
+      const ctx = offscreen.getContext('2d');
+      const w = canvas.width;
+      const h = canvas.height;
+      offscreen.width = w;
+      offscreen.height = h;
+
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = '#fff';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+
+      const fontSize = Math.min(w * 0.12, 160);
+      ctx.font = '600 ' + fontSize + "px 'Lora', Georgia, serif";
+      ctx.fillText(TEXTS[currentText], w / 2, h / 2);
+
+      const imageData = ctx.getImageData(0, 0, w, h);
+      const data = imageData.data;
+      const targets = [];
+
+      const step = Math.max(2, Math.floor(SAMPLE_SCALE * devicePixelRatio));
+
+      for (let y = 0; y < h; y += step) {
+        for (let x = 0; x < w; x += step) {
+          const i = (y * w + x) * 4;
+          if (data[i + 3] > 128) {
+            targets.push({
+              x: (x / w - 0.5) * 2.0,
+              y: -(y / h - 0.5) * 2.0 * (canvas.width / canvas.height)
+            });
+          }
+        }
+      }
+
+      textTargets = targets;
+    }
+
+    function initParticles() {
+      particles = [];
+      for (let i = 0; i < NUM_PARTICLES; i++) {
+        particles.push({
+          x: (Math.random() - 0.5) * PARTICLE_SPREAD,
+          y: (Math.random() - 0.5) * PARTICLE_SPREAD * (canvas.height / canvas.width),
+          vx: 0,
+          vy: 0,
+          size: Math.random() * 2.5 + 1.0,
+          alpha: Math.random() * 0.5 + 0.5,
+          targetIndex: i % textTargets.length
+        });
+      }
+    }
+
+    function updateParticles() {
+      const maxTargets = textTargets.length;
+
+      for (let i = 0; i < NUM_PARTICLES; i++) {
+        const p = particles[i];
+
+        if (maxTargets > 0) {
+          const target = textTargets[p.targetIndex % maxTargets];
+          const ease = 0.04 + Math.random() * 0.03;
+
+          p.vx += (target.x - p.x) * ease;
+          p.vy += (target.y - p.y) * ease;
+          p.vx *= 0.88;
+          p.vy *= 0.88;
+        } else {
+          p.x += (Math.random() - 0.5) * 0.05;
+          p.y += (Math.random() - 0.5) * 0.05;
+        }
+
+        p.x += p.vx;
+        p.y += p.vy;
+      }
+    }
+
+    // Shader sources
     const vsSource = `
       attribute vec2 a_position;
+      attribute float a_size;
+      attribute float a_alpha;
+      uniform vec2 u_resolution;
+      varying float v_alpha;
       void main() {
-        gl_Position = vec4(a_position, 0.0, 1.0);
+        vec2 clipSpace = (a_position / u_resolution) * 2.0 - 1.0;
+        gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1);
+        gl_PointSize = a_size * (u_resolution.y / 600.0);
+        v_alpha = a_alpha;
       }
     `;
 
     const fsSource = `
       precision mediump float;
-      uniform vec2 u_resolution;
-      uniform float u_scroll;
-      uniform float u_count;
-
-      float hash(vec2 p) {
-        return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
-      }
-
-      float noise(vec2 p) {
-        vec2 i = floor(p);
-        vec2 f = fract(p);
-        f = f * f * (3.0 - 2.0 * f);
-        float a = hash(i);
-        float b = hash(i + vec2(1.0, 0.0));
-        float c = hash(i + vec2(0.0, 1.0));
-        float d = hash(i + vec2(1.0, 1.0));
-        return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
-      }
-
+      varying float v_alpha;
       void main() {
-        vec2 uv = gl_FragCoord.xy / u_resolution;
-        float scroll = u_scroll;
-        float count = u_count;
-
-        float cycle = mod(scroll, 1.0);
-        float phase = floor(scroll);
-
-        vec2 p = (gl_FragCoord.xy - 0.5 * u_resolution) / min(u_resolution.x, u_resolution.y);
-
-        float t = cycle;
-
-        float n = noise(p * 3.0 + t * 5.0 + phase);
-        float n2 = noise(p * 6.0 - t * 3.0);
-
-        float ring = length(p) - 0.3 * sin(t * 6.28 + phase);
-        float ring2 = length(p - vec2(0.1 * sin(t * 3.14), 0.1 * cos(t * 3.14))) - 0.25;
-
-        float scatter = smoothstep(0.0, 0.3, t) * smoothstep(1.0, 0.7, t);
-        float reveal = smoothstep(0.0, 0.2, t);
-
-        float sparkle = step(0.97, hash(p * 100.0 + phase)) * smoothstep(0.0, 0.1, t);
-
-        vec3 col1 = vec3(0.835, 0.663, 0.416);
-        vec3 col2 = vec3(0.067, 0.067, 0.071);
-        vec3 col3 = vec3(0.49, 0.906, 0.718);
-
-        float alpha = 0.0;
-        alpha += scatter * 0.4 * n;
-        alpha += ring * 0.15 * reveal;
-        alpha += ring2 * 0.1 * n2;
-        alpha += sparkle * 0.6;
-
-        vec3 finalColor = mix(col2, col1, alpha);
-        finalColor = mix(finalColor, col3, sparkle * 0.3);
-
-        gl_FragColor = vec4(finalColor, alpha * 0.5);
+        vec2 center = gl_PointCoord - 0.5;
+        float dist = length(center);
+        if (dist > 0.5) discard;
+        float alpha = smoothstep(0.5, 0.2, dist) * v_alpha;
+        gl_FragColor = vec4(0.835, 0.663, 0.416, alpha);
       }
     `;
 
@@ -902,107 +887,89 @@
     gl.attachShader(program, vs);
     gl.attachShader(program, fs);
     gl.linkProgram(program);
-
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) return;
-
     gl.useProgram(program);
 
-    const vertices = new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]);
-    const buffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-    gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+    const posLoc = gl.getAttribLocation(program, 'a_position');
+    const sizeLoc = gl.getAttribLocation(program, 'a_size');
+    const alphaLoc = gl.getAttribLocation(program, 'a_alpha');
+    const resLoc = gl.getUniformLocation(program, 'u_resolution');
 
-    const aPos = gl.getAttribLocation(program, 'a_position');
-    gl.enableVertexAttribArray(aPos);
-    gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+    const posData = new Float32Array(NUM_PARTICLES * 2);
+    const sizeData = new Float32Array(NUM_PARTICLES);
+    const alphaData = new Float32Array(NUM_PARTICLES);
 
-    const uRes = gl.getUniformLocation(program, 'u_resolution');
-    const uScroll = gl.getUniformLocation(program, 'u_scroll');
-    const uCount = gl.getUniformLocation(program, 'u_count');
+    const posBuffer = gl.createBuffer();
+    const sizeBuffer = gl.createBuffer();
+    const alphaBuffer = gl.createBuffer();
 
-    let totalScroll = 0;
-    let lastScroll = 0;
-    let scrollCount = 0;
-    let maxCount = 0;
-    let finalShown = false;
-
-    window.addEventListener('scroll', function() {
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = window.scrollY / maxScroll;
-      totalScroll = progress * 50;
-      const newCount = Math.floor(totalScroll);
-      if (newCount > maxCount) {
-        maxCount = newCount;
-        scrollCount = maxCount;
-      }
-
-      if (maxCount >= 45 && !finalShown) {
-        finalShown = true;
-        wordDisplay.classList.remove('visible');
-        setTimeout(() => {
-          finalMsg.classList.add('visible');
-        }, 300);
-      } else if (maxCount < 45 && finalShown) {
-        finalShown = false;
-        finalMsg.classList.remove('visible');
-        setTimeout(() => {
-          wordDisplay.classList.add('visible');
-        }, 300);
-      }
+    window.addEventListener('resize', function() {
+      resize();
+      initParticles();
     });
+    resize();
+    initParticles();
 
-    gl.clearColor(0.067, 0.067, 0.071, 1.0);
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
-    function render() {
+    let lastTime = 0;
+    function render(time) {
+      const dt = Math.min((time - lastTime) / 1000, 0.05);
+      lastTime = time;
+
+      updateParticles();
+
+      for (let i = 0; i < NUM_PARTICLES; i++) {
+        posData[i * 2] = (particles[i].x + 1.0) * 0.5 * canvas.width;
+        posData[i * 2 + 1] = (1.0 - (particles[i].y + 1.0) * 0.5) * canvas.height;
+        sizeData[i] = particles[i].size;
+        alphaData[i] = particles[i].alpha;
+      }
+
+      gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.uniform2f(uRes, canvas.width, canvas.height);
-      gl.uniform1f(uScroll, totalScroll);
-      gl.uniform1f(uCount, scrollCount);
-      gl.drawArrays(gl.TRIANGLES, 0, 6);
+      gl.uniform2f(resLoc, canvas.width, canvas.height);
+
+      gl.bindBuffer(gl.ARRAY_BUFFER, posBuffer);
+      gl.bufferData(gl.ARRAY_BUFFER, posData, gl.DYNAMIC_DRAW);
+      gl.enableVertexAttribArray(posLoc);
+      gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+      gl.bindBuffer(gl.ARRAY_BUFFER, sizeBuffer);
+      gl.bufferData(gl.ARRAY_BUFFER, sizeData, gl.STATIC_DRAW);
+      gl.enableVertexAttribArray(sizeLoc);
+      gl.vertexAttribPointer(sizeLoc, 1, gl.FLOAT, false, 0, 0);
+
+      gl.bindBuffer(gl.ARRAY_BUFFER, alphaBuffer);
+      gl.bufferData(gl.ARRAY_BUFFER, alphaData, gl.STATIC_DRAW);
+      gl.enableVertexAttribArray(alphaLoc);
+      gl.vertexAttribPointer(alphaLoc, 1, gl.FLOAT, false, 0, 0);
+
+      gl.drawArrays(gl.POINTS, 0, NUM_PARTICLES);
       requestAnimationFrame(render);
     }
-    render();
-  })();
+    requestAnimationFrame(render);
 
-  /* ── Scroll text fade ── */
-  (function() {
-    const wordDisplay = document.getElementById('word-display');
-    const finalMsg = document.getElementById('final-msg');
-    let flashCount = 0;
-    let lastFlash = -1;
-    let finalShown = false;
-
+    // Scroll tracking for text transitions
     window.addEventListener('scroll', function() {
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (maxScroll <= 0) return;
       const progress = window.scrollY / maxScroll;
-      const currentFlash = Math.floor(progress * 45);
+      scrollPhase = progress * 50;
+      const phase = Math.floor(scrollPhase);
 
-      if (currentFlash > lastFlash && currentFlash < 45) {
-        lastFlash = currentFlash;
-        flashCount++;
-        wordDisplay.style.opacity = '0';
-        wordDisplay.style.transform = 'scale(0.5) rotate(-5deg)';
-        setTimeout(() => {
-          wordDisplay.style.opacity = '1';
-          wordDisplay.style.transform = 'scale(1) rotate(0deg)';
-        }, 80);
-      }
-
-      if (flashCount >= 45 && !finalShown) {
+      if (phase >= 45 && !finalShown) {
         finalShown = true;
-        wordDisplay.style.opacity = '0';
-        setTimeout(() => {
-          finalMsg.classList.add('visible');
-        }, 400);
+        currentText = 1;
+        sampleText();
+        initParticles();
+      } else if (phase < 45 && finalShown) {
+        finalShown = false;
+        currentText = 0;
+        sampleText();
+        initParticles();
       }
     });
-
-    setTimeout(() => {
-      wordDisplay.style.opacity = '1';
-      wordDisplay.style.transform = 'scale(1) rotate(0deg)';
-    }, 500);
   })();
 
   /* ── Scroll fade ── */
