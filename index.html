@@ -504,7 +504,7 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 0;
+      z-index: 9999;
     }
 
     /* ── Fade in ── */
@@ -827,21 +827,20 @@
     const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: false });
     if (!gl) return;
 
-    const NUM_PARTICLES = 6000;
+    const NUM_PARTICLES = 8000;
     const TEXTS = ['Builders', "You're still here?"];
-    const SAMPLE_SCALE = 2;
-    const PARTICLE_SPREAD = 3.0;
+    const SAMPLE_SCALE = 3;
+    const PARTICLE_SPREAD = 5.0;
 
     let textTargets = [];
     let currentText = 0;
     let particles = [];
     let scrollPhase = 0;
-    let lastPhase = -1;
     let finalShown = false;
 
     // Theme-aware color
-    const darkColor = [0.835, 0.663, 0.416, 0.85];
-    const lightColor = [0.18, 0.18, 0.19, 0.75];
+    const darkColor = [0.835, 0.663, 0.416, 1.0];
+    const lightColor = [0.18, 0.18, 0.19, 1.0];
     let currentColor = darkColor.slice();
 
     function updateParticleColor() {
@@ -872,7 +871,7 @@
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
 
-      const fontSize = Math.min(w * 0.12, 160);
+      const fontSize = Math.min(w * 0.15, 200);
       ctx.font = '600 ' + fontSize + "px 'Lora', Georgia, serif";
       ctx.fillText(TEXTS[currentText], w / 2, h / 2);
 
@@ -880,7 +879,7 @@
       const data = imageData.data;
       const targets = [];
 
-      const step = Math.max(2, Math.floor(SAMPLE_SCALE * devicePixelRatio));
+      const step = Math.max(3, Math.floor(SAMPLE_SCALE * devicePixelRatio));
 
       for (let y = 0; y < h; y += step) {
         for (let x = 0; x < w; x += step) {
@@ -905,8 +904,8 @@
           y: (Math.random() - 0.5) * PARTICLE_SPREAD * (canvas.height / canvas.width),
           vx: 0,
           vy: 0,
-          size: Math.random() * 2.5 + 1.0,
-          alpha: Math.random() * 0.5 + 0.5,
+          size: Math.random() * 8.0 + 8.0,
+          alpha: Math.random() * 0.3 + 0.7,
           targetIndex: i % textTargets.length
         });
       }
@@ -920,12 +919,12 @@
 
         if (maxTargets > 0) {
           const target = textTargets[p.targetIndex % maxTargets];
-          const ease = 0.04 + Math.random() * 0.03;
+          const ease = 0.008 + Math.random() * 0.005;
 
           p.vx += (target.x - p.x) * ease;
           p.vy += (target.y - p.y) * ease;
-          p.vx *= 0.88;
-          p.vy *= 0.88;
+          p.vx *= 0.94;
+          p.vy *= 0.94;
         } else {
           p.x += (Math.random() - 0.5) * 0.05;
           p.y += (Math.random() - 0.5) * 0.05;
@@ -946,7 +945,7 @@
       void main() {
         vec2 clipSpace = (a_position / u_resolution) * 2.0 - 1.0;
         gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1);
-        gl_PointSize = a_size * (u_resolution.y / 600.0);
+        gl_PointSize = a_size;
         v_alpha = a_alpha;
       }
     `;
@@ -959,7 +958,7 @@
         vec2 center = gl_PointCoord - 0.5;
         float dist = length(center);
         if (dist > 0.5) discard;
-        float alpha = smoothstep(0.5, 0.15, dist) * v_alpha;
+        float alpha = smoothstep(0.5, 0.0, dist) * v_alpha;
         gl_FragColor = vec4(u_color.rgb, u_color.a * alpha);
       }
     `;
