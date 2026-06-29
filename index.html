@@ -827,32 +827,30 @@
     const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: false });
     if (!gl) return;
 
-    const NUM_PARTICLES = 8000;
+    const NUM_PARTICLES = 7000;
     const TEXTS = ['Builders', "You're still here?"];
     const SAMPLE_SCALE = 3;
-    const PARTICLE_SPREAD = 5.0;
 
     let textTargets = [];
     let currentText = 0;
     let particles = [];
     let scrollPhase = 0;
     let finalShown = false;
+    let isLight = false;
 
-    // Theme-aware color
-    const darkColor = [0.835, 0.663, 0.416, 1.0];
-    const lightColor = [0.18, 0.18, 0.19, 1.0];
+    // Theme-aware color - much more visible
+    const darkColor = [0.9, 0.75, 0.45, 1.0];
+    const lightColor = [0.1, 0.1, 0.12, 1.0];
     let currentColor = darkColor.slice();
 
     function updateParticleColor() {
-      const isLight = document.body.classList.contains('light');
+      isLight = document.body.classList.contains('light');
       currentColor = isLight ? lightColor.slice() : darkColor.slice();
     }
 
     function resize() {
-      canvas.width = window.innerWidth * devicePixelRatio;
-      canvas.height = window.innerHeight * devicePixelRatio;
-      canvas.style.width = window.innerWidth + 'px';
-      canvas.style.height = window.innerHeight + 'px';
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
       gl.viewport(0, 0, canvas.width, canvas.height);
       sampleText();
     }
@@ -871,7 +869,7 @@
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
 
-      const fontSize = Math.min(w * 0.15, 200);
+      const fontSize = Math.min(w * 0.14, 180);
       ctx.font = '600 ' + fontSize + "px 'Lora', Georgia, serif";
       ctx.fillText(TEXTS[currentText], w / 2, h / 2);
 
@@ -879,7 +877,7 @@
       const data = imageData.data;
       const targets = [];
 
-      const step = Math.max(3, Math.floor(SAMPLE_SCALE * devicePixelRatio));
+      const step = Math.max(3, Math.floor(SAMPLE_SCALE));
 
       for (let y = 0; y < h; y += step) {
         for (let x = 0; x < w; x += step) {
@@ -898,16 +896,31 @@
 
     function initParticles() {
       particles = [];
+      const maxTargets = textTargets.length;
+
       for (let i = 0; i < NUM_PARTICLES; i++) {
-        particles.push({
-          x: (Math.random() - 0.5) * PARTICLE_SPREAD,
-          y: (Math.random() - 0.5) * PARTICLE_SPREAD * (canvas.height / canvas.width),
-          vx: 0,
-          vy: 0,
-          size: Math.random() * 8.0 + 8.0,
-          alpha: Math.random() * 0.3 + 0.7,
-          targetIndex: i % textTargets.length
-        });
+        if (maxTargets > 0) {
+          const target = textTargets[i % maxTargets];
+          particles.push({
+            x: target.x + (Math.random() - 0.5) * 0.02,
+            y: target.y + (Math.random() - 0.5) * 0.02,
+            vx: 0,
+            vy: 0,
+            size: Math.random() * 2.0 + 2.5,
+            alpha: Math.random() * 0.2 + 0.8,
+            targetIndex: i % maxTargets
+          });
+        } else {
+          particles.push({
+            x: (Math.random() - 0.5) * 2.0,
+            y: (Math.random() - 0.5) * 2.0,
+            vx: 0,
+            vy: 0,
+            size: Math.random() * 2.0 + 2.5,
+            alpha: Math.random() * 0.2 + 0.8,
+            targetIndex: 0
+          });
+        }
       }
     }
 
@@ -919,15 +932,12 @@
 
         if (maxTargets > 0) {
           const target = textTargets[p.targetIndex % maxTargets];
-          const ease = 0.008 + Math.random() * 0.005;
+          const ease = 0.06;
 
           p.vx += (target.x - p.x) * ease;
           p.vy += (target.y - p.y) * ease;
-          p.vx *= 0.94;
-          p.vy *= 0.94;
-        } else {
-          p.x += (Math.random() - 0.5) * 0.05;
-          p.y += (Math.random() - 0.5) * 0.05;
+          p.vx *= 0.85;
+          p.vy *= 0.85;
         }
 
         p.x += p.vx;
@@ -1008,11 +1018,7 @@
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
-    let lastTime = 0;
-    function render(time) {
-      const dt = Math.min((time - lastTime) / 1000, 0.05);
-      lastTime = time;
-
+    function render() {
       updateParticles();
 
       for (let i = 0; i < NUM_PARTICLES; i++) {
