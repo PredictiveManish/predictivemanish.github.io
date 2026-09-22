@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Everyone Benchmarks AI Decision Models on Datacenter GPUs. I Used My 2019 Laptop.</title>
+<meta name="description" content="First measured numbers for the open-source Laya decision model on a GTX 1650 laptop — latency, a memory anomaly, and what ten labeled emails taught me.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --font-display: 'Instrument Serif', Georgia, serif;
+    --font-body: 'Literata', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+
+    --bg: #faf7f5;
+    --surface: #ffffff;
+    --surface-elevated: #ffffff;
+    --border: rgba(60, 40, 30, 0.10);
+    --border-bright: rgba(60, 40, 30, 0.18);
+    --text: #2b2118;
+    --text-dim: #7a6a5c;
+    --accent: #c2410c;         /* terracotta */
+    --accent-dim: rgba(194, 65, 12, 0.08);
+    --accent-2: #65a30d;       /* sage */
+    --accent-2-dim: rgba(101, 163, 13, 0.10);
+    --amber: #b45309;
+    --amber-dim: rgba(180, 83, 9, 0.09);
+    --red: #b91c1c;
+    --red-dim: rgba(185, 28, 28, 0.07);
+    --green: #3f6212;
+    --green-dim: rgba(63, 98, 18, 0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17120e;
+      --surface: #201913;
+      --surface-elevated: #261e17;
+      --border: rgba(250, 240, 230, 0.09);
+      --border-bright: rgba(250, 240, 230, 0.16);
+      --text: #ede4d8;
+      --text-dim: #a39486;
+      --accent: #e8763f;
+      --accent-dim: rgba(232, 118, 63, 0.10);
+      --accent-2: #a3c76a;
+      --accent-2-dim: rgba(163, 199, 106, 0.10);
+      --amber: #e3a04a;
+      --amber-dim: rgba(227, 160, 74, 0.10);
+      --red: #e8746a;
+      --red-dim: rgba(232, 116, 106, 0.09);
+      --green: #b5cf7a;
+      --green-dim: rgba(181, 207, 122, 0.10);
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    color: var(--text);
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(ellipse 60% 30% at 50% -5%, var(--accent-dim) 0%, transparent 70%);
+    overflow-wrap: break-word;
+    -webkit-font-smoothing: antialiased;
+  }
+  .grid > *, .flex > * { min-width: 0; }
+
+  .page { max-width: 720px; margin: 0 auto; padding: 0 24px 96px; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 72px 0 8px; }
+  .hero__category {
+    font-family: var(--font-mono);
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--accent);
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 22px;
+  }
+  .hero__category::before {
+    content: ''; width: 9px; height: 9px; border-radius: 50%;
+    background: currentColor; flex-shrink: 0;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(34px, 6.2vw, 52px);
+    line-height: 1.08;
+    letter-spacing: -0.5px;
+    margin: 0 0 18px;
+  }
+  .hero__subtitle {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(19px, 2.6vw, 24px);
+    line-height: 1.4;
+    color: var(--text-dim);
+    margin: 0 0 30px;
+  }
+  .byline {
+    display: flex; align-items: center; gap: 14px;
+    padding-bottom: 26px;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .byline__avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--amber));
+    color: #fff; font-family: var(--font-display); font-size: 20px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .byline__name { font-weight: 600; display: block; }
+  .byline__meta { font-size: 13px; color: var(--text-dim); font-family: var(--font-body); }
+  .hw-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+  .chip {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--text-dim);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 5px 12px;
+  }
+
+  /* ---------- KPI row ---------- */
+  .kpi-row {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px; margin: 44px 0 8px;
+  }
+  .kpi-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 18px 16px;
+    animation: fadeScale 0.4s ease-out both;
+    animation-delay: calc(var(--i, 0) * 0.08s);
+  }
+  .kpi-card__value {
+    font-family: var(--font-mono);
+    font-size: 30px; font-weight: 600;
+    letter-spacing: -1px; line-height: 1.05;
+    font-variant-numeric: tabular-nums;
+    color: var(--accent);
+  }
+  .kpi-card__value--alt { color: var(--accent-2); }
+  .kpi-card__value--warn { color: var(--amber); }
+  .kpi-card__label {
+    font-family: var(--font-mono);
+    font-size: 9.5px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1.4px;
+    color: var(--text-dim); margin-top: 8px; line-height: 1.5;
+  }
+
+  /* ---------- Prose ---------- */
+  .prose {
+    font-size: clamp(17px, 1.1vw + 14px, 18.5px);
+    line-height: 1.72;
+    max-width: 65ch;
+    text-wrap: pretty;
+  }
+  .lead {
+    font-size: clamp(19px, 1.6vw + 15px, 22px);
+    line-height: 1.55;
+    margin: 40px 0 12px;
+  }
+  .prose p { margin: 0 0 1.5em; }
+  .prose code, .callout code {
+    font-family: var(--font-mono); font-size: 0.82em;
+    background: var(--accent-dim); color: var(--accent);
+    padding: 1px 6px; border-radius: 4px;
+  }
+  .prose strong { font-weight: 600; }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--accent);
+    display: flex; align-items: center; gap: 9px;
+    margin: 58px 0 6px;
+  }
+  .section-label::before {
+    content: ''; width: 8px; height: 8px; border-radius: 50%;
+    background: currentColor; flex-shrink: 0;
+  }
+  .section-label--alt { color: var(--accent-2); }
+  h2 {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: clamp(26px, 3.6vw, 34px);
+    line-height: 1.15; margin: 6px 0 18px;
+  }
+
+  /* ---------- Table ---------- */
+  .table-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 26px 0 8px;
+    animation: fadeUp 0.45s ease-out both;
+  }
+  .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .data-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .data-table th {
+    font-family: var(--font-mono);
+    font-size: 10.5px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1.2px;
+    color: var(--text-dim);
+    text-align: left; padding: 12px 16px;
+    border-bottom: 2px solid var(--border-bright);
+    white-space: nowrap;
+  }
+  .data-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    font-variant-numeric: tabular-nums;
+  }
+  .data-table td.num, .data-table th.num {
+    text-align: right; font-family: var(--font-mono);
+  }
+  .data-table tbody tr:nth-child(even) { background: var(--accent-dim); }
+  .data-table tbody tr:last-child td { border-bottom: none; }
+  .data-table .pub { color: var(--text-dim); }
+  .table-note {
+    font-size: 13px; color: var(--text-dim); font-style: italic;
+    margin: 10px 0 0;
+  }
+
+  /* ---------- Bar chart ---------- */
+  .bars { margin: 30px 0 6px; }
+  .bar-row { margin-bottom: 16px; }
+  .bar-row__head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: var(--font-mono); font-size: 12px; margin-bottom: 6px;
+  }
+  .bar-row__label { color: var(--text-dim); letter-spacing: 0.5px; }
+  .bar-row__value { font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
+  .bar-track {
+    height: 14px; border-radius: 7px;
+    background: var(--border);
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%; border-radius: 7px;
+    background: linear-gradient(90deg, var(--accent), var(--amber));
+    animation: growX 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    transform-origin: left;
+  }
+  .bar-fill--alt { background: linear-gradient(90deg, var(--accent-2), var(--accent)); }
+  .bars-note {
+    font-size: 13px; color: var(--text-dim); font-style: italic; margin-top: 14px;
+  }
+
+  /* ---------- Callouts ---------- */
+  .callout {
+    padding: 18px 22px;
+    border-radius: 10px;
+    border-left: 4px solid var(--callout-border, var(--accent));
+    background: var(--callout-bg, var(--accent-dim));
+    margin: 26px 0;
+  }
+  .callout--warn { --callout-border: var(--amber); --callout-bg: var(--amber-dim); }
+  .callout--good { --callout-border: var(--green); --callout-bg: var(--green-dim); }
+  .callout__title {
+    font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1.6px;
+    margin-bottom: 8px; color: var(--callout-border, var(--accent));
+  }
+  .callout p { font-size: 15.5px; line-height: 1.65; margin: 0; }
+  .callout p + p { margin-top: 10px; }
+  .callout ul { margin: 8px 0 0; padding-left: 1.4em; font-size: 15px; line-height: 1.7; }
+  .callout li + li { margin-top: 6px; }
+
+  /* ---------- Pull quote ---------- */
+  .pullquote {
+    margin: 52px 0;
+    padding-left: 26px;
+    border-left: 3px solid var(--accent);
+  }
+  .pullquote p {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(23px, 3vw, 28px);
+    line-height: 1.38;
+    margin: 0;
+  }
+
+  /* ---------- Score grid ---------- */
+  .score-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 14px; margin: 26px 0;
+  }
+  .score-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    animation: fadeUp 0.45s ease-out both;
+    animation-delay: calc(var(--i, 0) * 0.07s);
+  }
+  .score-card__head {
+    font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1.3px;
+    color: var(--text-dim); margin-bottom: 10px;
+  }
+  .score-card__row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 14px; padding: 3px 0;
+  }
+  .score-card__row b { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .ok { color: var(--green); } .miss { color: var(--red); }
+
+  /* ---------- Divider / footer ---------- */
+  .divider { text-align: center; margin: 60px 0; color: var(--text-dim); letter-spacing: 14px; font-size: 15px; }
+  footer {
+    margin-top: 70px; padding-top: 28px;
+    border-top: 1px solid var(--border);
+    font-size: 14px; color: var(--text-dim); line-height: 1.8;
+  }
+  footer a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ---------- Animations ---------- */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @keyframes fadeScale { from { opacity: 0; transform: scale(0.93); } to { opacity: 1; transform: none; } }
+  @keyframes growX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  .prose > *, .hero > * { animation: fadeUp 0.5s ease-out both; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <div class="hero__category">Benchmark log &middot; September 22, 2026</div>
+    <h1>Everyone benchmarks AI decision models on datacenter GPUs. I used my 2019 laptop.</h1>
+    <p class="hero__subtitle">First measured numbers for the open-source Laya decision model on a GTX&nbsp;1650 — including a memory problem the T4 tables won&rsquo;t show you.</p>
+    <div class="byline">
+      <div class="byline__avatar">MT</div>
+      <div>
+        <span class="byline__name">Manish Tiwari</span>
+        <span class="byline__meta">Independent benchmark &middot; no affiliation with Convai Innovations or TypeSafe</span>
+      </div>
+    </div>
+    <div class="hw-chips">
+      <span class="chip">Acer Aspire 7</span>
+      <span class="chip">i5-12450H</span>
+      <span class="chip">16 GB RAM</span>
+      <span class="chip">GTX 1650 &middot; 4 GB VRAM</span>
+      <span class="chip">torch 2.12.1+cu126</span>
+      <span class="chip">fp32 &middot; cuda:0</span>
+    </div>
+  </header>
+
+  <!-- ================= KPI ================= -->
+  <div class="kpi-row" aria-label="Key results">
+    <div class="kpi-card" style="--i:0">
+      <div class="kpi-card__value">847<span style="font-size:16px">&nbsp;ms</span></div>
+      <div class="kpi-card__label">median latency<br>one typed question</div>
+    </div>
+    <div class="kpi-card" style="--i:1">
+      <div class="kpi-card__value">15&ndash;22&times;</div>
+      <div class="kpi-card__label">slower than the<br>published T4 figures</div>
+    </div>
+    <div class="kpi-card" style="--i:2">
+      <div class="kpi-card__value kpi-card__value--alt">3.8&times;</div>
+      <div class="kpi-card__label">per-question savings<br>when batching 50 at once</div>
+    </div>
+    <div class="kpi-card" style="--i:3">
+      <div class="kpi-card__value kpi-card__value--warn">2.4&times;</div>
+      <div class="kpi-card__label">mean vs median on the<br>50-question workload</div>
+    </div>
+  </div>
+
+  <!-- ================= PROSE ================= -->
+  <article class="prose">
+
+    <p class="lead">On September 15, 2026, a company called TypeSafe launched <strong>Jev</strong> — a &ldquo;System&nbsp;1&rdquo; decision model. You hand it a state (an email, a ticket, a JSON document) plus typed questions, and it returns choices, scores and calibrated probabilities instead of paragraphs. Three days later, Convai Innovations released <strong>Laya</strong>: the same idea, but open weights, Apache&nbsp;2.0, 421 million parameters, installable with <code>pip install laya</code>.</p>
+
+    <p>Every latency figure in that debate since — the 38&nbsp;ms headlines, the &ldquo;faster than Jev&rdquo; claims — comes from Tesla T4s, RTX 5090s and Mac M2s. Hardware most people will never touch. Nobody asked the obvious question: what happens on the laptop most of us actually own?</p>
+
+    <p>So I ran it on mine: an Acer Aspire 7 with an i5-12450H, 16&nbsp;GB of RAM and a GTX&nbsp;1650 with 4&nbsp;GB of VRAM. A 2019-class gaming laptop — the kind a student buys, not the kind a lab benchmarks on.</p>
+
+    <div class="section-label">Methodology</div>
+    <h2>What I actually measured</h2>
+
+    <p>I wrote a small benchmark harness (published, with raw JSON output) that measures cold load time and warm latency for 1, 10 and 50 typed questions answered in a single call — the three scenarios the model card publishes T4 numbers for. Each scenario ran 100 timed calls after 5 warmup calls, reporting p50, p95 and mean.</p>
+
+    <p>Two details matter more than they sound. First, <code>torch.cuda.synchronize()</code> fires before every timer stops — CUDA calls are asynchronous, and without the sync you time the <em>launch</em>, not the work. Second, every timed call receives a different input email, so no pass ever sees byte-identical input. My environment is in the repo, because a latency number without its environment is a vibe, not a measurement.</p>
+
+    <div class="section-label section-label--alt">Results</div>
+    <h2>The numbers</h2>
+
+    <div class="table-wrap">
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>questions</th>
+              <th class="num">my p50 (ms)</th>
+              <th class="num">my p95 (ms)</th>
+              <th class="num pub">published T4 p50 (ms)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td class="num">847.08</td><td class="num">852.28</td><td class="num pub">38.4</td></tr>
+            <tr><td>10</td><td class="num">2,389.86</td><td class="num">2,630.56</td><td class="num pub">156.0</td></tr>
+            <tr><td>50</td><td class="num">11,202.70</td><td class="num">11,896.01</td><td class="num pub">721.4</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="table-note">The T4 column is the model card&rsquo;s published figure — quoted, never measured here. Cross-hardware comparisons are indicative only.</p>
+
+    <p>Read it plainly: a 2019 consumer laptop is <strong>15&ndash;22&times; slower</strong> than the published T4 figures. Every single-question decision still completes in under a second — not fast, but real, local, free and offline. Cold load took 29.7&nbsp;s and 57.1&nbsp;s on two consecutive runs from a warm cache: &ldquo;time to first decision&rdquo; on a laptop is a different story from a warm server.</p>
+
+    <p>One number surprised me in the good direction: batching still amortizes on weak hardware.</p>
+
+    <div class="bars" aria-label="Per-question cost by batch size">
+      <div class="bar-row">
+        <div class="bar-row__head"><span class="bar-row__label">1 question &middot; cost per question</span><span class="bar-row__value">847 ms</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-row__head"><span class="bar-row__label">10 questions in one call</span><span class="bar-row__value">239 ms</span></div>
+        <div class="bar-track"><div class="bar-fill bar-fill--alt" style="width:28.2%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-row__head"><span class="bar-row__label">50 questions in one call</span><span class="bar-row__value">224 ms</span></div>
+        <div class="bar-track"><div class="bar-fill bar-fill--alt" style="width:26.4%"></div></div>
+      </div>
+    </div>
+    <p class="bars-note">Per-question cost, by number of questions answered in one forward pass (my p50 values).</p>
+
+    <p>Per-question cost drops from 847&nbsp;ms to 224&nbsp;ms — a 3.8&times; reduction. The &ldquo;one forward pass for everything&rdquo; design argument, which is Laya&rsquo;s whole pitch against paying per API call, holds even on a GTX&nbsp;1650. It is just uniformly slower.</p>
+
+    <div class="section-label">The anomaly</div>
+    <h2>The thing the T4 tables can&rsquo;t show you</h2>
+
+    <p>On the 50-question scenario, my <strong>mean (26.5&nbsp;s) is 2.4&times; my own median (11.2&nbsp;s)</strong> — and above my p95 (11.9&nbsp;s). That is not noise; that is a signature. A small number of runs took minutes instead of seconds.</p>
+
+    <div class="callout callout--warn">
+      <div class="callout__title">Working hypothesis</div>
+      <p>The 50-question batch briefly needs more memory than the GTX&nbsp;1650&rsquo;s 4&nbsp;GB, and Windows spills into &ldquo;shared GPU memory&rdquo; — system RAM reached over the PCIe bus, which is brutally slow. Thermal throttling cannot produce a mean above the p95; memory spillover can. Stated as a hypothesis until I instrument GPU memory to confirm it.</p>
+    </div>
+
+    <p>If you are deploying anything like this on 4&nbsp;GB consumer cards: batch smaller, or verify your headroom first. Nobody publishing T4 numbers will ever tell you where the ceiling is, because their ceiling is nowhere in sight.</p>
+
+    <div class="section-label section-label--alt">Smoke test</div>
+    <h2>Does it get decisions right?</h2>
+
+    <p>Latency is only half the story. I also ran ten hand-labeled emails — billing complaints, phishing attempts, HR notices, bug reports, a lottery scam — and asked the model three questions about each.</p>
+
+    <div class="score-grid" aria-label="Smoke test scores">
+      <div class="score-card" style="--i:0">
+        <div class="score-card__head">Phishing detection</div>
+        <div class="score-card__row"><span>agreement</span><b class="ok">9 / 10</b></div>
+        <div class="score-card__row"><span>true scams</span><b>P = 0.93&ndash;1.00</b></div>
+        <div class="score-card__row"><span>legitimate mail</span><b>P = 0.00&ndash;0.15</b></div>
+      </div>
+      <div class="score-card" style="--i:1">
+        <div class="score-card__head">Churn risk</div>
+        <div class="score-card__row"><span>agreement</span><b class="ok">8 / 10</b></div>
+        <div class="score-card__row"><span>worst miss</span><b class="miss">P = 0.33</b></div>
+        <div class="score-card__row"><span>on a real threat</span><b>underconfident</b></div>
+      </div>
+      <div class="score-card" style="--i:2">
+        <div class="score-card__head">Dept. routing</div>
+        <div class="score-card__row"><span>agreement</span><b class="miss">6 / 10</b></div>
+        <div class="score-card__row"><span>all 4 misses</span><b>scam / abuse</b></div>
+        <div class="score-card__row"><span>root cause</span><b>my schema</b></div>
+      </div>
+    </div>
+
+    <p>Phishing was the standout: the single miss was a P=0.60 shrug, not a confident error, and the separation between scams and legitimate mail was decisive. Department routing was the interesting failure: every miss was a scam or complaint email absorbed into &ldquo;billing&rdquo; or &ldquo;technical&rdquo; — because my answer space had <em>no security option</em>. The model reads your option descriptions and routes into the best semantic overlap. One of my own labels was arguably wrong too.</p>
+
+    <div class="pullquote">
+      <p>With this class of model, your question schema is part of the model. Design the answer space badly and you measure your own schema, not the model.</p>
+    </div>
+
+    <p>To be clear about what this is not: ten emails is a smoke test, not an accuracy benchmark. The model&rsquo;s own card says base Laya scores near chance zero-shot on decision benchmarks — the intended workflow is fine-tuning on your own data.</p>
+
+    <div class="section-label">Fine print</div>
+    <h2>Honest caveats</h2>
+
+    <div class="callout">
+      <ul>
+        <li>The T4 column is the model card&rsquo;s published figure. I did not measure it.</li>
+        <li>The Jev numbers circulating in this debate are third-party, from different prompts and sample sizes. Every cross-model comparison — including the vendors&rsquo; — is indicative at best.</li>
+        <li>The spillover explanation for the mean anomaly is my best diagnosis, stated as a hypothesis until instrumented with GPU memory telemetry.</li>
+        <li>One machine, one session, fp32, plugged into power, no GPU-utilization telemetry for every run.</li>
+      </ul>
+    </div>
+
+    <div class="divider">✦ ✦ ✦</div>
+
+    <div class="section-label section-label--alt">Takeaway</div>
+    <h2>Why this number matters</h2>
+
+    <p>On a 2019 gaming laptop, the open decision model answers any single typed question in under a second — free, offline, on your own weights. The cloud one is faster and bills per call. Neither number tells you which is right for you; but only one of them runs when the wifi is down, and only one of them you can fine-tune on a free Kaggle GPU and put back in the same folder as your college notes.</p>
+
+    <p>The gap between the benchmark world and the real world is 15&ndash;22&times;, measured. It is not a reason to stay off this wave. It is just the number nobody had written down.</p>
+
+  </article>
+
+  <footer>
+    <p><strong>Reproduce it:</strong> the script, raw JSON, labeled emails and full methodology are in the repo &mdash; <a href="#">github.com/predictivemanish/laya-gtx1650-benchmark</a> (link to be added).</p>
+    <p><strong>Model:</strong> convaiinnovations/laya (Apache&nbsp;2.0), by Convai Innovations. <strong>Published T4 figures</strong> are quoted from the model card, third-party. This is an independent benchmark with no affiliation to Convai Innovations or TypeSafe. Measured on Windows&nbsp;10, Python&nbsp;3.11.15, torch&nbsp;2.12.1+cu126, fp32, September&nbsp;22,&nbsp;2026.</p>
+  </footer>
+
+</div>
+</body>
+</html>
