@@ -7,10 +7,17 @@
     <generator>Hugo</generator>
     <language>en-US</language>
     <copyright>Copyright © 2025, Manish Tiwari.</copyright>
-    <lastBuildDate>Sat, 24 May 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 22 Sep 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://predictivemanish.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Benchmarking an Open-Source AI Decision Model on a 2019 Laptop</title>
+      <link>https://predictivemanish.github.io/blog/laya-gtx1650-benchmark/</link>
+      <pubDate>Mon, 22 Sep 2026 00:00:00 +0000</pubDate>
+      <guid>https://predictivemanish.github.io/blog/laya-gtx1650-benchmark/</guid>
+      <description><p>First measured numbers for the open-source Laya decision model on a GTX 1650 laptop: latency, a 4GB VRAM memory anomaly, and what ten hand-labeled emails taught me about question design.</p></description>
+    </item>
+        <item>
       <title>Beyond the Scorecard: Decoding Team Strategies in IPL 2025 Using Data Science</title>
       <link>https://medium.com/@manishthoughts/beyond-the-scorecard-decoding-team-strategies-in-ipl-2025-using-data-science-40914d091655</link>
       <pubDate>Sat, 24 May 2025 00:00:00 +0000</pubDate>
