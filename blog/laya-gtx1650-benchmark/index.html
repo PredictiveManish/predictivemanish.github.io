@@ -120,6 +120,59 @@
       .score-grid { grid-template-columns: 1fr; }
       .credits .k { min-width: 100%; }
     }
+  
+    /* ── Brutalist re-skin ── */
+    :root { --bg:#f2f1ea; --bg-raised:#ffffff; --border:#0d0d0d; --border-light:#0d0d0d; --text:#0d0d0d; --text-2:#2b2b2b; --text-3:#5a5a55; --accent:#ff3d00; --accent-dim:#0d0d0d; --green:#0d0d0d; --red:#ff3d00; --amber:#ffe600; }
+    body { background:#f2f1ea; color:#0d0d0d; }
+    nav { padding:1rem 0; border-bottom:3px solid #0d0d0d; background:#f2f1ea; position:sticky; top:0; z-index:60; }
+    .nav-name { font-family:'DM Mono',monospace; font-weight:500; text-transform:uppercase; letter-spacing:.06em; color:#0d0d0d; font-size:.95rem; }
+    .nav-links a { font-family:'DM Mono',monospace; font-size:.7rem; text-transform:uppercase; letter-spacing:.06em; color:#0d0d0d; }
+    .nav-links a:hover { color:#ff3d00; }
+    .resume-btn { font-family:'DM Mono',monospace; background:#0d0d0d; color:#f2f1ea; border:2px solid #0d0d0d; box-shadow:4px 4px 0 #ff3d00; border-radius:0; text-transform:uppercase; padding:.45rem .85rem; }
+    .post-hero h1, .post-body h1 { font-family:'DM Mono',monospace; text-transform:uppercase; font-weight:500; letter-spacing:-.02em; color:#0d0d0d; }
+    .dek { color:#2b2b2b; }
+    .post-meta { color:#0d0d0d; }
+    .post-meta a { color:#0d0d0d; }
+    .hw-chips .chip { border:2px solid #0d0d0d; border-radius:0; background:#fff; color:#0d0d0d; font-family:'DM Mono',monospace; text-transform:uppercase; }
+    .post-body { color:#2b2b2b; }
+    .post-body h2 { font-family:'DM Mono',monospace; text-transform:uppercase; font-weight:500; letter-spacing:-.01em; color:#0d0d0d; }
+    .post-body a { color:#ff3d00; }
+    .post-body code { background:#fff; border:2px solid #0d0d0d; border-radius:0; padding:.05rem .3rem; font-size:.85em; }
+    .post-body .section-label { color:#0d0d0d; background:#ffe600; display:inline-block; padding:.15rem .5rem; border:2px solid #0d0d0d; font-family:'DM Mono',monospace; }
+    .stats .stat { background:#fff; border:3px solid #0d0d0d; box-shadow:5px 5px 0 #0d0d0d; border-radius:0; }
+    .stat-n { font-family:'DM Mono',monospace; color:#0d0d0d; }
+    .stat-l { color:#0d0d0d; opacity:.65; font-family:'DM Mono',monospace; text-transform:uppercase; }
+    .table-wrap { border:3px solid #0d0d0d; box-shadow:5px 5px 0 #0d0d0d; background:#fff; border-radius:0; overflow:hidden; }
+    table { border-collapse:collapse; width:100%; }
+    th { background:#0d0d0d; color:#f2f1ea; font-family:'DM Mono',monospace; text-transform:uppercase; border:2px solid #0d0d0d; }
+    td { border:2px solid #0d0d0d; color:#2b2b2b; }
+    .table-note { color:#5a5a55; }
+    .callout { background:#fff; border:3px solid #0d0d0d; box-shadow:5px 5px 0 #0d0d0d; border-radius:0; }
+    .callout li, .callout p { color:#2b2b2b; }
+    .c-label { font-family:'DM Mono',monospace; text-transform:uppercase; color:#ff3d00; }
+    .bar-track { background:#f2f1ea; border:2px solid #0d0d0d; border-radius:0; }
+    .bar-fill { background:#ff3d00; }
+    .bar-label, .bar-value { font-family:'DM Mono',monospace; color:#0d0d0d; }
+    .bars-note { color:#5a5a55; }
+    .score { background:#fff; border:3px solid #0d0d0d; box-shadow:5px 5px 0 #0d0d0d; border-radius:0; }
+    .s-label { font-family:'DM Mono',monospace; text-transform:uppercase; color:#0d0d0d; }
+    .s-main { font-family:'DM Mono',monospace; color:#0d0d0d; }
+    .s-sub { color:#2b2b2b; }
+    .pullquote { border:3px solid #0d0d0d; border-left:8px solid #ff3d00; background:#fff; border-radius:0; }
+    .pullquote p { font-family:'DM Mono',monospace; color:#0d0d0d; }
+    .credits { background:#fff; border:3px solid #0d0d0d; box-shadow:5px 5px 0 #0d0d0d; border-radius:0; }
+    .credits .k { font-family:'DM Mono',monospace; text-transform:uppercase; color:#0d0d0d; }
+    .credits .row { border-color:#0d0d0d; }
+    .credits a { color:#ff3d00; }
+    footer { border-top:3px solid #0d0d0d; background:#0d0d0d; }
+    footer p { color:#f2f1ea; font-family:'DM Mono',monospace; }
+    footer a { color:#f2f1ea; }
+    footer a:hover { color:#ff3d00; }
+
+    /* ── Bottom wordmark ── */
+    .wordmark { overflow: hidden; padding: 2.5rem 0 1.25rem; line-height: 0; }
+    .wordmark svg { display: block; width: 100%; height: auto; }
+    .wordmark svg text { fill: #0d0d0d; }
   </style>
 </head>
 <body>
@@ -301,9 +354,27 @@
     <p><a href="https://github.com/predictivemanish" target="_blank">GitHub</a> · <a href="https://linkedin.com/in/manish-tiwari-977741286" target="_blank">LinkedIn</a> · <a href="https://x.com/compmanish" target="_blank">X</a></p>
   </div>
 </footer>
+<div class="wordmark" aria-hidden="true">
+  <svg viewBox="0 0 1000 150" preserveAspectRatio="none" role="img" aria-label="Manish Tiwari">
+    <text x="0" y="116" textLength="1000" lengthAdjust="spacingAndGlyphs" font-family="DM Mono, ui-monospace, monospace" font-size="130" font-weight="500" letter-spacing="-3">MANISH TIWARI</text>
+  </svg>
+</div>
+
 
 <script>
   document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+<script>
+document.getElementById('yr') && (document.getElementById('yr').textContent = new Date().getFullYear());
+(function(){
+  var c = document.getElementById('india-map-container');
+  if (!c) return;
+  var VISITED = ["Punjab","Delhi","Haryana","Himachal Pradesh","Uttar Pradesh","Rajasthan","Bihar","Jammu and Kashmir","Jharkhand","Madhya Pradesh","Chandigarh","Uttarakhand"];
+  var ID_MAP = {"Andaman and Nicobar":"INAN","Telangana":"INTG","Andhra Pradesh":"INAP","Arunachal Pradesh":"INAR","Assam":"INAS","Bihar":"INBR","Chandigarh":"INCH","Chhattisgarh":"INCT","Delhi":"INDL","Goa":"INGA","Gujarat":"INGJ","Haryana":"INHR","Himachal Pradesh":"INHP","Jharkhand":"INJH","Karnataka":"INKA","Kerala":"INKL","Madhya Pradesh":"INMP","Maharashtra":"INMH","Manipur":"INMN","Meghalaya":"INML","Mizoram":"INMZ","Nagaland":"INNL","Odisha":"INOR","Puducherry":"INPY","Punjab":"INPB","Rajasthan":"INRJ","Sikkim":"INSK","Tamil Nadu":"INTN","Tripura":"INTR","Uttar Pradesh":"INUP","Uttarakhand":"INUT","West Bengal":"INWB","Lakshadweep":"INLD","Jammu and Kashmir":"INJK","Ladakh":"INLA"};
+  fetch('/visited/in.svg').then(function(r){ if(!r.ok) throw 0; return r.text(); })
+    .then(function(t){ c.innerHTML = t; VISITED.forEach(function(s){ var el = c.querySelector('#' + ID_MAP[s]); if (el) el.classList.add('visited-state'); }); })
+    .catch(function(){ c.innerHTML = '<p class="map-load">Could not load map.</p>'; });
+})();
 </script>
 </body>
 </html>
