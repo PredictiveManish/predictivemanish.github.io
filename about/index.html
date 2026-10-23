@@ -3,51 +3,236 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About | Manish Tiwari</title>
-  <meta name="description" content="About Manish Tiwari: CS student building practical ML systems. sktime contributor, MLOps enthusiast.">
+  <title>About | Manish Tiwari — AI Engineer</title>
+  <meta name="description" content="Manish Tiwari is an AI engineer and final-year CS student at IK Gujral Punjab Technical University, building ML systems, MLOps tooling and open-source software.">
+  <link rel="canonical" href="https://predictivemanish.github.io/about/">
+  <meta name="theme-color" content="#111113">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Manish Tiwari">
+  <meta property="og:title" content="About | Manish Tiwari — AI Engineer">
+  <meta property="og:description" content="Manish Tiwari is an AI engineer and final-year CS student at IK Gujral Punjab Technical University, building ML systems, MLOps tooling and open-source software.">
+  <meta property="og:url" content="https://predictivemanish.github.io/about/">
+  <meta property="og:image" content="https://predictivemanish.github.io/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:creator" content="@compmanish">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #111113; --bg-raised: #18181b; --border: #27272a; --border-light: #3f3f46;
-      --text: #e4e4e7; --text-2: #a1a1aa; --text-3: #71717a;
-      --accent: #d4a96a; --accent-dim: #7c5e35; --green: #6ee7b7;
-      --serif: 'Lora', Georgia, serif; --mono: 'DM Mono', 'Courier New', monospace;
+:root {
+      --bg:        #111113;
+      --bg-raised: #18181b;
+      --border:    #27272a;
+      --border-light: #3f3f46;
+      --text:      #e4e4e7;
+      --text-2:    #a1a1aa;
+      --text-3:    #71717a;
+      --accent:    #d4a96a;
+      --accent-dim:#7c5e35;
+      --green:     #6ee7b7;
+      --red:       #fca5a5;
+      --serif:     'Lora', Georgia, serif;
+      --mono:      'DM Mono', 'Courier New', monospace;
     }
+
+    body.light {
+      --bg:        #f5f5f4;
+      --bg-raised: #e7e5e4;
+      --border:    #d6d3d1;
+      --border-light: #a8a29e;
+      --text:      #18181b;
+      --text-2:    #3f3f46;
+      --text-3:    #71717a;
+      --accent:    #b45309;
+      --accent-dim:#92400e;
+      --green:     #059669;
+      --red:       #dc2626;
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+
     body {
-      background: var(--bg); color: var(--text); font-family: var(--serif);
-      font-size: 17px; line-height: 1.75; -webkit-font-smoothing: antialiased;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--serif);
+      font-size: 17px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
     }
-    .wrap { max-width: 680px; margin: 0 auto; padding: 0 1.5rem; }
-    nav { border-bottom: 1px solid var(--border); padding: 1.25rem 0; }
-    nav .inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-    .nav-name { font-family: var(--serif); font-size: 1rem; font-weight: 600; color: var(--text); text-decoration: none; }
-    .nav-links { display: flex; align-items: center; gap: 1.5rem; list-style: none; }
+
+    .wrap { max-width: 720px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ── Nav ── */
+    nav { border-bottom: 1px solid var(--border); padding: 1.25rem 0; position: sticky; top: 0; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); z-index: 50; }
+    nav .inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .nav-name { font-family: var(--serif); font-size: 1rem; font-weight: 600; color: var(--text); text-decoration: none; letter-spacing: 0.01em; }
+    .nav-links { display: flex; align-items: center; gap: 1.25rem; list-style: none; flex-wrap: wrap; }
     .nav-links a { font-family: var(--mono); font-size: 0.72rem; color: var(--text-2); text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.15s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+    .nav-links a:hover { color: var(--accent); }
     .resume-btn { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; background: transparent; border: 1px solid var(--accent-dim); color: var(--accent); padding: 0.3rem 0.75rem; border-radius: 3px; text-decoration: none; transition: background 0.15s, border-color 0.15s; }
     .resume-btn:hover { background: rgba(212, 169, 106, 0.08); border-color: var(--accent); }
-    section { padding: 2.5rem 0; border-bottom: 1px solid var(--border); }
-    section:last-child { border-bottom: none; }
-    .section-label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); margin-bottom: 1.5rem; }
-    .hero { padding: 3rem 0 2rem; }
-    .hero h1 { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 600; line-height: 1.15; margin-bottom: 1.25rem; letter-spacing: -0.02em; }
-    .hero p { font-size: 1.05rem; color: var(--text-2); max-width: 540px; line-height: 1.8; margin-bottom: 0.85rem; }
+
+    /* ── Hero ── */
+    .hero { padding: 4rem 0 3rem; border-bottom: 1px solid var(--border); }
+    .hero-eyebrow { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem; }
+    .hero h1 { font-size: clamp(2rem, 5.5vw, 3rem); font-weight: 600; line-height: 1.12; color: var(--text); margin-bottom: 1.4rem; letter-spacing: -0.02em; }
+    .hero h1 em { font-style: italic; color: var(--accent); }
+    .hero-lead { font-size: 1.08rem; color: var(--text-2); max-width: 580px; line-height: 1.75; }
+    .hero-lead + .hero-lead { margin-top: 0.9rem; }
+    .hero-lead strong { color: var(--text); font-weight: 600; }
+
+    .facts { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.75rem; }
+    .fact { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.02em; color: var(--text-2); background: var(--bg-raised); border: 1px solid var(--border); padding: 0.3rem 0.65rem; border-radius: 3px; }
+    .fact b { color: var(--accent); font-weight: 500; }
+
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 0.65rem; margin-top: 2rem; }
+    .btn { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; padding: 0.6rem 1.1rem; border-radius: 3px; border: 1px solid var(--border-light); color: var(--text-2); transition: all 0.15s; }
+    .btn:hover { color: var(--text); border-color: var(--text-3); }
+    .btn-primary { background: var(--accent); border-color: var(--accent); color: #1a1206; font-weight: 500; }
+    .btn-primary:hover { background: #e0b877; border-color: #e0b877; color: #1a1206; }
+
     .hero-meta { margin-top: 2rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
-    .status-dot { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--mono); font-size: 0.7rem; color: var(--text-3); }
+    .status-dot { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--mono); font-size: 0.7rem; color: var(--text-3); letter-spacing: 0.03em; }
     .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
-    footer { padding: 2rem 0; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
-    footer p { font-family: var(--mono); font-size: 0.68rem; color: var(--text-3); }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    /* ── Sections ── */
+    section { padding: 3rem 0; border-bottom: 1px solid var(--border); }
+    section:last-of-type { border-bottom: none; }
+    .section-label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .section-label a { color: var(--accent); text-decoration: none; letter-spacing: 0.04em; }
+    .section-label a:hover { text-decoration: underline; }
+
+    /* ── Work grid ── */
+    .work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .card { background: var(--bg-raised); border: 1px solid var(--border); border-radius: 5px; padding: 1.15rem 1.15rem 1.05rem; display: flex; flex-direction: column; transition: border-color 0.15s, transform 0.15s; }
+    .card:hover { border-color: var(--border-light); transform: translateY(-2px); }
+    .card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.45rem; }
+    .card-name { font-family: var(--serif); font-size: 1.02rem; font-weight: 600; color: var(--text); }
+    .card-desc { font-size: 0.87rem; color: var(--text-2); line-height: 1.6; flex: 1; }
+    .card-tags { margin-top: 0.85rem; display: flex; flex-wrap: wrap; gap: 0.3rem; }
+    .tag { font-family: var(--mono); font-size: 0.6rem; color: var(--text-3); background: var(--bg); border: 1px solid var(--border); padding: 0.12rem 0.4rem; border-radius: 2px; letter-spacing: 0.03em; }
+    .card-links { margin-top: 0.85rem; display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .pill { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.04em; padding: 0.2rem 0.55rem; border-radius: 2px; border: 1px solid var(--border-light); color: var(--text-2); text-decoration: none; transition: color 0.15s, border-color 0.15s; }
+    .pill:hover { color: var(--accent); border-color: var(--accent-dim); }
+
+    /* ── Stats ── */
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 5px; overflow: hidden; margin-bottom: 1.5rem; }
+    .stat { background: var(--bg-raised); padding: 1.1rem 0.75rem; text-align: center; }
+    .stat-n { font-family: var(--mono); font-size: 1.5rem; font-weight: 500; color: var(--accent); display: block; }
+    .stat-l { font-family: var(--mono); font-size: 0.58rem; color: var(--text-3); letter-spacing: 0.05em; text-transform: uppercase; display: block; margin-top: 0.25rem; }
+    .org-row { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .org { font-family: var(--mono); font-size: 0.68rem; color: var(--text-2); background: var(--bg-raised); border: 1px solid var(--border); padding: 0.25rem 0.6rem; border-radius: 2px; letter-spacing: 0.03em; }
+
+    /* ── Experience ── */
+    .exp-item { padding: 1.1rem 0; border-bottom: 1px solid var(--border); }
+    .exp-item:last-child { border-bottom: none; }
+    .exp-item:first-child { padding-top: 0; }
+    .exp-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .exp-role { font-family: var(--serif); font-size: 1rem; font-weight: 600; color: var(--text); }
+    .exp-role span { color: var(--text-3); font-weight: 400; }
+    .exp-when { font-family: var(--mono); font-size: 0.66rem; color: var(--text-3); letter-spacing: 0.03em; flex-shrink: 0; }
+    .exp-item p { font-size: 0.92rem; color: var(--text-2); line-height: 1.7; margin-top: 0.35rem; }
+
+    /* ── Skills ── */
+    .skill-groups { display: flex; flex-direction: column; gap: 1.1rem; }
+    .skill-group { display: grid; grid-template-columns: 130px 1fr; gap: 1rem; align-items: baseline; }
+    .skill-group h3 { font-family: var(--mono); font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); }
+    .skill-group p { color: var(--text-2); line-height: 1.7; font-size: 0.9rem; }
+
+    /* ── Blog ── */
+    .post-list { list-style: none; }
+    .post-list li { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 0.75rem 0; border-bottom: 1px solid var(--border); }
+    .post-list li:last-child { border-bottom: none; }
+    .post-list a { color: var(--text-2); text-decoration: none; font-size: 0.95rem; transition: color 0.15s; flex: 1; }
+    .post-list a:hover { color: var(--text); }
+    .post-date { font-family: var(--mono); font-size: 0.65rem; color: var(--text-3); flex-shrink: 0; }
+
+    /* ── Contact CTA ── */
+    .cta { text-align: center; padding: 3.5rem 0; border-top: 1px solid var(--border); }
+    .cta h2 { font-family: var(--serif); font-size: 1.7rem; font-weight: 600; color: var(--text); letter-spacing: -0.01em; margin-bottom: 0.75rem; }
+    .cta p { color: var(--text-2); max-width: 480px; margin: 0 auto 1.75rem; font-size: 1rem; }
+    .cta-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.65rem; }
+
+    /* ── Map ── */
+    .map-wrap { background: var(--bg-raised); border: 1px solid var(--border); border-radius: 5px; padding: 1rem; margin-top: 1rem; }
+    #india-map-container svg { width: 100%; height: auto; display: block; }
+    #india-map-container svg path, #india-map-container svg polygon { fill: var(--bg-raised); stroke: var(--border-light); stroke-width: 0.6; transition: fill 0.2s; cursor: default; }
+    #india-map-container svg .visited-state { fill: var(--accent-dim); stroke: var(--accent); }
+    .map-note { font-family: var(--mono); font-size: 0.68rem; color: var(--text-3); margin-top: 0.75rem; line-height: 1.6; }
+
+    /* ── Footer ── */
+    footer { padding: 2rem 0 3rem; border-top: 1px solid var(--border); }
+    footer .inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
+    footer p { font-family: var(--mono); font-size: 0.68rem; color: var(--text-3); letter-spacing: 0.03em; }
     footer a { color: var(--text-3); text-decoration: none; transition: color 0.15s; }
     footer a:hover { color: var(--accent); }
+
+    /* ── Responsive ── */
+    @media (max-width: 620px) {
+      .work-grid { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .skill-group { grid-template-columns: 1fr; gap: 0.25rem; }
+      .hero { padding: 2.5rem 0 2rem; }
+      nav { position: static; }
+      .nav-links { gap: 0.9rem; }
+      .nav-links a { font-size: 0.66rem; }
+    }
+
+    /* ── WebGL particle text (background layer) ── */
+    #webgl-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
+
+    /* ── Fade in ── */
     @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
     .fade { opacity: 0; animation: fadeUp 0.5s ease forwards; }
-    .f1 { animation-delay: 0.05s; }
-    @media (max-width: 540px) { .nav-links { gap: 1rem; } }
+    .f1 { animation-delay: 0.05s; } .f2 { animation-delay: 0.15s; } .f3 { animation-delay: 0.25s; }
+    .f4 { animation-delay: 0.35s; } .f5 { animation-delay: 0.45s; }
+    @media (prefers-reduced-motion: reduce) { .fade { animation: none; opacity: 1; } }
+
+    /* ── Theme Toggle ── */
+    .theme-toggle { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 40px; height: 40px; border-radius: 50%; background: var(--bg-raised); border: 1px solid var(--border); color: var(--text-2); cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 100; transition: background 0.2s, border-color 0.2s, color 0.2s; padding: 0; }
+    .theme-toggle:hover { background: var(--border); border-color: var(--border-light); color: var(--text); }
+    .theme-toggle svg { width: 18px; height: 18px; transition: opacity 0.2s; }
+    .theme-toggle .icon-moon, body.light .theme-toggle .icon-sun { display: none; }
+    body.light .theme-toggle .icon-moon { display: block; }
+    body:not(.light) .theme-toggle .icon-sun { display: block; }
+
+    .page-head { padding: 3.5rem 0 2.5rem; border-bottom: 1px solid var(--border); }
+    .page-head h1 { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 0.9rem; }
+    .page-head p { font-size: 1.05rem; color: var(--text-2); max-width: 600px; line-height: 1.75; }
+    .prose p { color: var(--text-2); line-height: 1.8; margin-bottom: 1rem; }
+    .prose p:last-child { margin-bottom: 0; }
+    .prose strong { color: var(--text); font-weight: 600; }
+    .prose a { color: var(--accent); text-decoration: none; }
+
+    /* ── Blog list ── */
+    .post-item { display: flex; justify-content: space-between; align-items: baseline; gap: 1.25rem; padding: 1.05rem 0; border-bottom: 1px solid var(--border); }
+    .post-item:last-child { border-bottom: none; }
+    .post-item .title { color: var(--text); text-decoration: none; font-weight: 600; font-size: 1rem; line-height: 1.5; }
+    .post-item .title:hover { color: var(--accent); }
+    .post-item .sub { color: var(--text-3); font-size: 0.83rem; margin-top: 0.2rem; }
+    .post-item .date { font-family: var(--mono); font-size: 0.65rem; color: var(--text-3); flex-shrink: 0; }
+
+    /* ── Contact ── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .contact-method { background: var(--bg-raised); border: 1px solid var(--border); border-radius: 5px; padding: 1.1rem; }
+    .contact-title { font-family: var(--mono); font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin-bottom: 0.4rem; }
+    .contact-detail { color: var(--text-2); font-size: 0.95rem; }
+    .contact-detail a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border-light); }
+    .contact-detail a:hover { color: var(--accent); border-color: var(--accent); }
+    .social-links { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .social-btn { display: inline-flex; align-items: center; gap: 0.45rem; font-family: var(--mono); font-size: 0.72rem; color: var(--text-2); text-decoration: none; border: 1px solid var(--border-light); border-radius: 3px; padding: 0.5rem 0.9rem; transition: color 0.15s, border-color 0.15s; }
+    .social-btn:hover { color: var(--accent); border-color: var(--accent-dim); }
+
+    /* ── Timeline ── */
+    .timeline { list-style: none; }
+    .timeline li { display: grid; grid-template-columns: 74px 1fr; gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--border); color: var(--text-2); font-size: 0.95rem; line-height: 1.65; }
+    .timeline li:last-child { border-bottom: none; }
+    .timeline .yr { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); }
+    @media (max-width: 620px) { .contact-grid { grid-template-columns: 1fr; } .timeline li { grid-template-columns: 1fr; gap: 0.15rem; } }
+
   </style>
 </head>
 <body>
@@ -55,86 +240,83 @@
   <div class="wrap inner">
     <a href="/" class="nav-name">Manish Tiwari</a>
     <ul class="nav-links">
-      <li><a href="/">Home</a></li>
       <li><a href="/projects/">Projects</a></li>
       <li><a href="/blog/">Blog</a></li>
+      <li><a href="/about/" style="color: var(--accent);">About</a></li>
       <li><a href="/contact/">Contact</a></li>
-      <li><a href="/about/" class="active">About</a></li>
       <li><a href="/Manish-Tiwari-Resume.pdf" download class="resume-btn">Resume ↓</a></li>
     </ul>
   </div>
 </nav>
+
 <div class="wrap">
-  <div class="hero fade f1">
-  <h1>About Me</h1>
 
-  <p>
-    Hi, I'm <strong>Manish Tiwari</strong>, a final-year Computer Science student at IK Gujral Punjab Technical University, Punjab.
-  </p>
-
-  <p>
-    I build practical machine learning systems and enjoy taking ideas from experimentation to deployment. My interests lie in MLOps, AI systems, LLM applications, and the engineering required to make machine learning useful in real-world environments.
-  </p>
-
-  <p>
-    Along the way, I've trained small language models, built production-oriented ML applications, contributed to open source, and explored how reliable AI systems are designed and maintained. Most recently, I worked as an Automation Intern at Smartivity Labs in New Delhi, building Slack-integrated automation used by 100+ people across 200+ projects.
-  </p>
-
-  <div class="hero-meta">
-    <span class="status-dot">
-      <span class="dot"></span>
-      Open to opportunities
-    </span>
-
-    <span class="status-dot">
-      📍 Punjab, India
-    </span>
+  <div class="page-head fade f1">
+    <div class="hero-eyebrow">About</div>
+    <h1>Hi, I'm Manish Tiwari</h1>
+    <p>A final-year Computer Science student at IK Gujral Punjab Technical University, Punjab — building practical machine learning systems and taking ideas from experimentation to deployment.</p>
   </div>
+
+  <section class="fade f2 prose">
+    <p>My interests lie in MLOps, AI systems, LLM applications, and the engineering required to make machine learning useful in real-world environments. Along the way, I've trained small language models, built production-oriented ML applications, contributed to open source, and explored how reliable AI systems are designed and maintained. Most recently, I worked as an Automation Intern at Smartivity Labs in New Delhi, building Slack-integrated automation used by 100+ people across 200+ projects.</p>
+  </section>
+
+  <section class="fade f3">
+    <p class="section-label">More about me</p>
+    <div class="prose">
+      <p>My journey into machine learning started with curiosity about how computers learn from data. Over time, that curiosity expanded beyond model training into the broader challenges surrounding machine learning systems: data pipelines, deployment, monitoring, reliability and scalability.</p>
+      <p>I enjoy learning by building. Most of my projects are end-to-end implementations where I can explore the complete lifecycle of a system rather than a single component. This approach has helped me understand both the technical and practical aspects of turning ideas into usable products.</p>
+      <p>Open source has been an important part of my growth as an engineer. Opening <strong>107 pull requests (41 merged)</strong> to projects such as Hugging Face, CHAOSS/Augur, SHAP, Moss, pandas, sunpy, evo and other community-driven repositories has exposed me to collaborative development, code review and the standards required to build software used by real communities.</p>
+      <p>Beyond engineering, I enjoy writing about technology, research culture and the evolving AI ecosystem. Writing helps me organise my thoughts and better understand the ideas I'm exploring.</p>
+      <p>Outside of technology, I spend time in the gym, enjoy long cycling trips, and take walks that often become brainstorming sessions for future projects.</p>
+    </div>
+  </section>
+
+  <section class="fade f4">
+    <p class="section-label">Journey</p>
+    <ul class="timeline">
+      <li><span class="yr">2023</span><span>Started building ML and data science projects.</span></li>
+      <li><span class="yr">2024</span><span>Explored software engineering and networking projects; began contributing to open source.</span></li>
+      <li><span class="yr">2025</span><span>Focused on machine learning, open source and technical writing.</span></li>
+      <li><span class="yr">2026</span><span>Automation Intern at Smartivity Labs; building AI systems, MLOps tools, LLM apps and local-LLM tooling.</span></li>
+      <li><span class="yr">2027</span><span>Graduating — and nobody knows what comes next. Yet.</span></li>
+    </ul>
+  </section>
+
 </div>
 
-<section class="fade f1">
-  <p class="section-label">More about me</p>
-
-  <p>
-    My journey into machine learning started with curiosity about how computers learn from data. Over time, that curiosity expanded beyond model training into the broader challenges surrounding machine learning systems: data pipelines, deployment, monitoring, reliability, and scalability.
-  </p>
-
-  <p>
-    I enjoy learning by building. Most of my projects are end-to-end implementations where I can explore the complete lifecycle of a system rather than a single component. This approach has helped me understand both the technical and practical aspects of turning ideas into usable products.
-  </p>
-
-  <p>
-    Open source has been an important part of my growth as an engineer. Contributing over 100 pull requests to projects such as Hugging Face, CHAOSS/Augur, SHAP, Moss, pandas, sunpy, evo, and other community-driven repositories has exposed me to collaborative development, code reviews, and the standards required to build software used by real communities.
-  </p>
-
-  <p>
-    Beyond engineering, I enjoy writing about technology, research culture, and the evolving AI ecosystem. Writing helps me organize my thoughts and better understand the ideas I'm exploring.
-  </p>
-
-  <p>
-    Outside of technology, I spend time in the gym, enjoy long cycling trips, and take walks that often become brainstorming sessions for future projects and ideas.
-  </p>
-</section>
-
-<section>
-  <p class="section-label">Journey</p>
-
-  <p><strong>2023</strong> — Started building ML and data science projects.</p>
-
-  <p><strong>2024</strong> — Explored software engineering and networking projects.</p>
-
-  <p><strong>2025</strong> — Focused on machine learning, open source, and technical writing.</p>
-
-  <div class="line">2026 — Automation Intern at Smartivity Labs; building AI systems, MLOps tools, LLM apps, and local-LLM tooling.</div>
-  <p><strong>2027</strong> — Nobody knows!</p>
-</section>
-</div>
 <footer>
-  <div class="wrap" style="width:100%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;">
+  <div class="wrap inner">
     <p>© <span id="yr"></span> Manish Tiwari</p>
-    <p><a href="https://github.com/predictivemanish" target="_blank">GitHub</a> · <a href="https://linkedin.com/in/manish-tiwari-977741286" target="_blank">LinkedIn</a> · <a href="https://x.com/compmanish" target="_blank">X</a></p>
+    <p>
+      <a href="https://github.com/PredictiveManish" target="_blank">GitHub</a> ·
+      <a href="https://linkedin.com/in/manish-tiwari-977741286" target="_blank">LinkedIn</a> ·
+      <a href="https://x.com/compmanish" target="_blank">X</a> ·
+      <a href="https://huggingface.co/PredictiveManish" target="_blank">HuggingFace</a> ·
+      <a href="mailto:manish.tiwari.09@zohomail.in">Email</a>
+    </p>
   </div>
 </footer>
-<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+
+<button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+</button>
+
+<script>
+  (function() {
+    const toggle = document.getElementById('theme-toggle');
+    if (localStorage.getItem('theme') === 'light') document.body.classList.add('light');
+    toggle.addEventListener('click', function() {
+      document.body.classList.toggle('light');
+      localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+    });
+  })();
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  const io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) e.target.style.opacity = 1; });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade').forEach(function(el) { io.observe(el); });
+</script>
 </body>
 </html>
