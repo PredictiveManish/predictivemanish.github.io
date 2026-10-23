@@ -3,11 +3,50 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Manish Tiwari</title>
-  <meta name="description" content="AI engineer building practical AI systems — LLM tooling, MLOps, and automation. 100+ open-source PRs across 30+ organizations.">
+  <title>Manish Tiwari — AI Engineer · LLM Systems, MLOps & Automation</title>
+  <meta name="description" content="AI engineer building reliable LLM systems, MLOps tooling and automation. 41 merged open-source PRs across 30+ organizations, 3 PyPI packages, and a 4.2M-parameter multilingual model trained from scratch.">
+  <link rel="canonical" href="https://predictivemanish.github.io/">
+  <meta name="theme-color" content="#111113">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <!-- Open Graph / social preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Manish Tiwari">
+  <meta property="og:title" content="Manish Tiwari — AI Engineer · LLM Systems, MLOps & Automation">
+  <meta property="og:description" content="I build reliable AI systems that ship to production. 41 merged open-source PRs, 3 PyPI packages, a 4.2M-parameter LLM trained from scratch.">
+  <meta property="og:url" content="https://predictivemanish.github.io/">
+  <meta property="og:image" content="https://predictivemanish.github.io/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Manish Tiwari — AI Engineer">
+  <meta name="twitter:description" content="I build reliable AI systems that ship to production. LLM systems, MLOps and automation.">
+  <meta name="twitter:image" content="https://predictivemanish.github.io/og-image.png">
+  <meta name="twitter:creator" content="@compmanish">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Manish Tiwari",
+    "url": "https://predictivemanish.github.io/",
+    "jobTitle": "AI Engineer",
+    "description": "AI engineer building reliable LLM systems, MLOps tooling and automation.",
+    "alumniOf": "IK Gujral Punjab Technical University",
+    "knowsAbout": ["Machine Learning", "LLM Systems", "MLOps", "FastAPI", "Docker", "PyTorch"],
+    "sameAs": [
+      "https://github.com/PredictiveManish",
+      "https://linkedin.com/in/manish-tiwari-977741286",
+      "https://x.com/compmanish",
+      "https://huggingface.co/PredictiveManish",
+      "https://medium.com/@manishthoughts"
+    ]
+  }
+  </script>
 
   <style>
     :root {
@@ -18,7 +57,7 @@
       --text:      #e4e4e7;
       --text-2:    #a1a1aa;
       --text-3:    #71717a;
-      --accent:    #d4a96a;   /* warm amber — the editorial warmth */
+      --accent:    #d4a96a;
       --accent-dim:#7c5e35;
       --green:     #6ee7b7;
       --red:       #fca5a5;
@@ -41,7 +80,6 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -53,612 +91,278 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── Layout ── */
-    .wrap {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 0 1.5rem; }
 
     /* ── Nav ── */
-    nav {
-      border-bottom: 1px solid var(--border);
-      padding: 1.25rem 0;
-    }
-
-    nav .inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .nav-name {
-      font-family: var(--serif);
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text);
-      text-decoration: none;
-      letter-spacing: 0.01em;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--text-2);
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      transition: color 0.15s;
-    }
-
+    nav { border-bottom: 1px solid var(--border); padding: 1.25rem 0; position: sticky; top: 0; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); z-index: 50; }
+    nav .inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .nav-name { font-family: var(--serif); font-size: 1rem; font-weight: 600; color: var(--text); text-decoration: none; letter-spacing: 0.01em; }
+    .nav-links { display: flex; align-items: center; gap: 1.25rem; list-style: none; flex-wrap: wrap; }
+    .nav-links a { font-family: var(--mono); font-size: 0.72rem; color: var(--text-2); text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.15s; }
     .nav-links a:hover { color: var(--accent); }
-
-    .resume-btn {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      background: transparent;
-      border: 1px solid var(--accent-dim);
-      color: var(--accent);
-      padding: 0.3rem 0.75rem;
-      border-radius: 3px;
-      text-decoration: none;
-      transition: background 0.15s, border-color 0.15s;
-    }
-
-    .resume-btn:hover {
-      background: rgba(212, 169, 106, 0.08);
-      border-color: var(--accent);
-    }
+    .resume-btn { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; background: transparent; border: 1px solid var(--accent-dim); color: var(--accent); padding: 0.3rem 0.75rem; border-radius: 3px; text-decoration: none; transition: background 0.15s, border-color 0.15s; }
+    .resume-btn:hover { background: rgba(212, 169, 106, 0.08); border-color: var(--accent); }
 
     /* ── Hero ── */
-    .hero {
-      padding: 4rem 0 3rem;
-      border-bottom: 1px solid var(--border);
-    }
+    .hero { padding: 4rem 0 3rem; border-bottom: 1px solid var(--border); }
+    .hero-eyebrow { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem; }
+    .hero h1 { font-size: clamp(2rem, 5.5vw, 3rem); font-weight: 600; line-height: 1.12; color: var(--text); margin-bottom: 1.4rem; letter-spacing: -0.02em; }
+    .hero h1 em { font-style: italic; color: var(--accent); }
+    .hero-lead { font-size: 1.08rem; color: var(--text-2); max-width: 580px; line-height: 1.75; }
+    .hero-lead + .hero-lead { margin-top: 0.9rem; }
+    .hero-lead strong { color: var(--text); font-weight: 600; }
 
-    .hero-eyebrow {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1rem;
-    }
+    .facts { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.75rem; }
+    .fact { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.02em; color: var(--text-2); background: var(--bg-raised); border: 1px solid var(--border); padding: 0.3rem 0.65rem; border-radius: 3px; }
+    .fact b { color: var(--accent); font-weight: 500; }
 
-    .hero h1 {
-      font-size: clamp(2rem, 5vw, 2.8rem);
-      font-weight: 600;
-      line-height: 1.15;
-      color: var(--text);
-      margin-bottom: 1.25rem;
-      letter-spacing: -0.02em;
-    }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 0.65rem; margin-top: 2rem; }
+    .btn { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; padding: 0.6rem 1.1rem; border-radius: 3px; border: 1px solid var(--border-light); color: var(--text-2); transition: all 0.15s; }
+    .btn:hover { color: var(--text); border-color: var(--text-3); }
+    .btn-primary { background: var(--accent); border-color: var(--accent); color: #1a1206; font-weight: 500; }
+    .btn-primary:hover { background: #e0b877; border-color: #e0b877; color: #1a1206; }
 
-    .hero h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
-
-    .hero p {
-      font-size: 1.05rem;
-      color: var(--text-2);
-      max-width: 540px;
-      line-height: 1.8;
-    }
-
-    .hero p + p { margin-top: 0.85rem; }
-
-    .hero-meta {
-      margin-top: 2rem;
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .status-dot {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      color: var(--text-3);
-      letter-spacing: 0.03em;
-    }
-
-    .dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--green);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
+    .hero-meta { margin-top: 2rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+    .status-dot { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--mono); font-size: 0.7rem; color: var(--text-3); letter-spacing: 0.03em; }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
     /* ── Sections ── */
-    section {
-      padding: 2.5rem 0;
-      border-bottom: 1px solid var(--border);
-    }
+    section { padding: 3rem 0; border-bottom: 1px solid var(--border); }
+    section:last-of-type { border-bottom: none; }
+    .section-label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .section-label a { color: var(--accent); text-decoration: none; letter-spacing: 0.04em; }
+    .section-label a:hover { text-decoration: underline; }
 
-    section:last-child { border-bottom: none; }
+    /* ── Work grid ── */
+    .work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .card { background: var(--bg-raised); border: 1px solid var(--border); border-radius: 5px; padding: 1.15rem 1.15rem 1.05rem; display: flex; flex-direction: column; transition: border-color 0.15s, transform 0.15s; }
+    .card:hover { border-color: var(--border-light); transform: translateY(-2px); }
+    .card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.45rem; }
+    .card-name { font-family: var(--serif); font-size: 1.02rem; font-weight: 600; color: var(--text); }
+    .card-desc { font-size: 0.87rem; color: var(--text-2); line-height: 1.6; flex: 1; }
+    .card-tags { margin-top: 0.85rem; display: flex; flex-wrap: wrap; gap: 0.3rem; }
+    .tag { font-family: var(--mono); font-size: 0.6rem; color: var(--text-3); background: var(--bg); border: 1px solid var(--border); padding: 0.12rem 0.4rem; border-radius: 2px; letter-spacing: 0.03em; }
+    .card-links { margin-top: 0.85rem; display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .pill { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.04em; padding: 0.2rem 0.55rem; border-radius: 2px; border: 1px solid var(--border-light); color: var(--text-2); text-decoration: none; transition: color 0.15s, border-color 0.15s; }
+    .pill:hover { color: var(--accent); border-color: var(--accent-dim); }
 
-    .section-label {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-3);
-      margin-bottom: 1.5rem;
-    }
+    /* ── Stats ── */
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 5px; overflow: hidden; margin-bottom: 1.5rem; }
+    .stat { background: var(--bg-raised); padding: 1.1rem 0.75rem; text-align: center; }
+    .stat-n { font-family: var(--mono); font-size: 1.5rem; font-weight: 500; color: var(--accent); display: block; }
+    .stat-l { font-family: var(--mono); font-size: 0.58rem; color: var(--text-3); letter-spacing: 0.05em; text-transform: uppercase; display: block; margin-top: 0.25rem; }
+    .org-row { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .org { font-family: var(--mono); font-size: 0.68rem; color: var(--text-2); background: var(--bg-raised); border: 1px solid var(--border); padding: 0.25rem 0.6rem; border-radius: 2px; letter-spacing: 0.03em; }
 
-    /* ── Projects ── */
-    .project {
-      padding: 1.25rem 0;
-      border-bottom: 1px solid var(--border);
-    }
+    /* ── Experience ── */
+    .exp-item { padding: 1.1rem 0; border-bottom: 1px solid var(--border); }
+    .exp-item:last-child { border-bottom: none; }
+    .exp-item:first-child { padding-top: 0; }
+    .exp-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .exp-role { font-family: var(--serif); font-size: 1rem; font-weight: 600; color: var(--text); }
+    .exp-role span { color: var(--text-3); font-weight: 400; }
+    .exp-when { font-family: var(--mono); font-size: 0.66rem; color: var(--text-3); letter-spacing: 0.03em; flex-shrink: 0; }
+    .exp-item p { font-size: 0.92rem; color: var(--text-2); line-height: 1.7; margin-top: 0.35rem; }
 
-    .project:last-child { border-bottom: none; }
-
-    .project-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-bottom: 0.4rem;
-    }
-
-    .project-name {
-      font-family: var(--serif);
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .project-links {
-      display: flex;
-      gap: 0.5rem;
-      flex-shrink: 0;
-    }
-
-    .pill {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.04em;
-      padding: 0.2rem 0.55rem;
-      border-radius: 2px;
-      border: 1px solid var(--border-light);
-      color: var(--text-3);
-      text-decoration: none;
-      transition: color 0.15s, border-color 0.15s;
-    }
-
-    .pill:hover {
-      color: var(--accent);
-      border-color: var(--accent-dim);
-    }
-
-    .project-desc {
-      font-size: 0.9rem;
-      color: var(--text-2);
-      line-height: 1.65;
-    }
-
-    .project-tags {
-      margin-top: 0.6rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
-    }
-
-    .tag {
-      font-family: var(--mono);
-      font-size: 0.62rem;
-      color: var(--text-3);
-      background: var(--bg-raised);
-      border: 1px solid var(--border);
-      padding: 0.15rem 0.45rem;
-      border-radius: 2px;
-      letter-spacing: 0.03em;
-    }
-
-    /* ── Open Source ── */
-    .org-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .org {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      color: var(--text-2);
-      background: var(--bg-raised);
-      border: 1px solid var(--border);
-      padding: 0.25rem 0.6rem;
-      border-radius: 2px;
-      letter-spacing: 0.03em;
-    }
-
-    .pr-list { list-style: none; }
-
-    .pr-list li {
-      display: flex;
-      align-items: baseline;
-      gap: 0.75rem;
-      padding: 0.6rem 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.88rem;
-    }
-
-    .pr-list li:last-child { border-bottom: none; }
-
-    .pr-status {
-      font-size: 0.75rem;
-      flex-shrink: 0;
-    }
-
-    .pr-list a {
-      color: var(--text-2);
-      text-decoration: none;
-      flex: 1;
-      transition: color 0.15s;
-    }
-
-    .pr-list a:hover { color: var(--text); }
-
-    .pr-date {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      color: var(--text-3);
-      flex-shrink: 0;
-    }
-
-    /* ── Stats row ── */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      overflow: hidden;
-      margin-bottom: 1.75rem;
-    }
-
-    .stat {
-      background: var(--bg-raised);
-      padding: 1rem 0.75rem;
-      text-align: center;
-    }
-
-    .stat-n {
-      font-family: var(--mono);
-      font-size: 1.4rem;
-      font-weight: 500;
-      color: var(--accent);
-      display: block;
-    }
-
-    .stat-l {
-      font-family: var(--mono);
-      font-size: 0.6rem;
-      color: var(--text-3);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      display: block;
-      margin-top: 0.2rem;
-    }
+    /* ── Skills ── */
+    .skill-groups { display: flex; flex-direction: column; gap: 1.1rem; }
+    .skill-group { display: grid; grid-template-columns: 130px 1fr; gap: 1rem; align-items: baseline; }
+    .skill-group h3 { font-family: var(--mono); font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); }
+    .skill-group p { color: var(--text-2); line-height: 1.7; font-size: 0.9rem; }
 
     /* ── Blog ── */
     .post-list { list-style: none; }
-
-    .post-list li {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 1rem;
-      padding: 0.75rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-
+    .post-list li { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 0.75rem 0; border-bottom: 1px solid var(--border); }
     .post-list li:last-child { border-bottom: none; }
-
-    .post-list a {
-      color: var(--text-2);
-      text-decoration: none;
-      font-size: 0.95rem;
-      transition: color 0.15s;
-      flex: 1;
-    }
-
+    .post-list a { color: var(--text-2); text-decoration: none; font-size: 0.95rem; transition: color 0.15s; flex: 1; }
     .post-list a:hover { color: var(--text); }
+    .post-date { font-family: var(--mono); font-size: 0.65rem; color: var(--text-3); flex-shrink: 0; }
 
-    .post-date {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      color: var(--text-3);
-      flex-shrink: 0;
-    }
-
-    /* ── Skills ── */
-    .skill-groups {
-  display: flex;
-  flex-direction: column;
-  gap: 1.4rem;
-}
-
-.skill-group h3 {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--accent);
-  margin-bottom: 0.4rem;
-}
-
-.skill-group p {
-  color: var(--text-2);
-  line-height: 1.8;
-  font-size: 0.95rem;
-}
+    /* ── Contact CTA ── */
+    .cta { text-align: center; padding: 3.5rem 0; border-top: 1px solid var(--border); }
+    .cta h2 { font-family: var(--serif); font-size: 1.7rem; font-weight: 600; color: var(--text); letter-spacing: -0.01em; margin-bottom: 0.75rem; }
+    .cta p { color: var(--text-2); max-width: 480px; margin: 0 auto 1.75rem; font-size: 1rem; }
+    .cta-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.65rem; }
 
     /* ── Map ── */
-    .map-wrap {
-      background: var(--bg-raised);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 1rem;
-      margin-top: 1rem;
-    }
-
-    #india-map-container svg {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    #india-map-container svg path,
-    #india-map-container svg polygon {
-      fill: var(--bg-raised);
-      stroke: var(--border-light);
-      stroke-width: 0.6;
-      transition: fill 0.2s;
-      cursor: default;
-    }
-
-    #india-map-container svg .visited-state {
-      fill: var(--accent-dim);
-      stroke: var(--accent);
-    }
-
-    .map-note {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      color: var(--text-3);
-      margin-top: 0.75rem;
-      line-height: 1.6;
-    }
+    .map-wrap { background: var(--bg-raised); border: 1px solid var(--border); border-radius: 5px; padding: 1rem; margin-top: 1rem; }
+    #india-map-container svg { width: 100%; height: auto; display: block; }
+    #india-map-container svg path, #india-map-container svg polygon { fill: var(--bg-raised); stroke: var(--border-light); stroke-width: 0.6; transition: fill 0.2s; cursor: default; }
+    #india-map-container svg .visited-state { fill: var(--accent-dim); stroke: var(--accent); }
+    .map-note { font-family: var(--mono); font-size: 0.68rem; color: var(--text-3); margin-top: 0.75rem; line-height: 1.6; }
 
     /* ── Footer ── */
-    footer {
-      padding: 2rem 0;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-    }
-
-    footer p {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      color: var(--text-3);
-      letter-spacing: 0.03em;
-    }
-
-    footer a {
-      color: var(--text-3);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-
+    footer { padding: 2rem 0 3rem; border-top: 1px solid var(--border); }
+    footer .inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
+    footer p { font-family: var(--mono); font-size: 0.68rem; color: var(--text-3); letter-spacing: 0.03em; }
+    footer a { color: var(--text-3); text-decoration: none; transition: color 0.15s; }
     footer a:hover { color: var(--accent); }
 
-    /* ── Divider ── */
-    .divider {
-      width: 2rem;
-      height: 1px;
-      background: var(--border-light);
-      margin: 1.5rem 0;
-    }
-
     /* ── Responsive ── */
-    @media (max-width: 540px) {
+    @media (max-width: 620px) {
+      .work-grid { grid-template-columns: 1fr; }
       .stats { grid-template-columns: repeat(2, 1fr); }
-      .nav-links { gap: 1rem; }
+      .skill-group { grid-template-columns: 1fr; gap: 0.25rem; }
       .hero { padding: 2.5rem 0 2rem; }
+      nav { position: static; }
+      .nav-links { gap: 0.9rem; }
+      .nav-links a { font-size: 0.66rem; }
     }
 
-    /* ── WebGL Scroll Animation ── */
-    #webgl-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 9999;
-    }
+    /* ── WebGL particle text (background layer) ── */
+    #webgl-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
 
     /* ── Fade in ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(14px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
     .fade { opacity: 0; animation: fadeUp 0.5s ease forwards; }
-    .f1 { animation-delay: 0.05s; }
-    .f2 { animation-delay: 0.15s; }
-    .f3 { animation-delay: 0.25s; }
-    .f4 { animation-delay: 0.35s; }
-    .f5 { animation-delay: 0.45s; }
+    .f1 { animation-delay: 0.05s; } .f2 { animation-delay: 0.15s; } .f3 { animation-delay: 0.25s; }
+    .f4 { animation-delay: 0.35s; } .f5 { animation-delay: 0.45s; }
+    @media (prefers-reduced-motion: reduce) { .fade { animation: none; opacity: 1; } }
 
     /* ── Theme Toggle ── */
-    .theme-toggle {
-      position: fixed;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--bg-raised);
-      border: 1px solid var(--border);
-      color: var(--text-2);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 100;
-      transition: background 0.2s, border-color 0.2s, color 0.2s;
-      padding: 0;
-    }
-
-    .theme-toggle:hover {
-      background: var(--border);
-      border-color: var(--border-light);
-      color: var(--text);
-    }
-
-    .theme-toggle svg {
-      width: 18px;
-      height: 18px;
-      transition: opacity 0.2s;
-    }
-
-    .theme-toggle .icon-moon,
-    body.light .theme-toggle .icon-sun { display: none; }
-
+    .theme-toggle { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 40px; height: 40px; border-radius: 50%; background: var(--bg-raised); border: 1px solid var(--border); color: var(--text-2); cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 100; transition: background 0.2s, border-color 0.2s, color 0.2s; padding: 0; }
+    .theme-toggle:hover { background: var(--border); border-color: var(--border-light); color: var(--text); }
+    .theme-toggle svg { width: 18px; height: 18px; transition: opacity 0.2s; }
+    .theme-toggle .icon-moon, body.light .theme-toggle .icon-sun { display: none; }
     body.light .theme-toggle .icon-moon { display: block; }
-    body.light .theme-toggle .icon-sun { display: none; }
-
-    body:not(.light) .theme-toggle .icon-moon { display: none; }
     body:not(.light) .theme-toggle .icon-sun { display: block; }
   </style>
 </head>
-
 <body>
 
-<canvas id="webgl-canvas"></canvas>
+<canvas id="webgl-canvas" aria-hidden="true"></canvas>
 
 <!-- ── Nav ── -->
 <nav>
   <div class="wrap inner">
     <a href="/" class="nav-name">Manish Tiwari</a>
     <ul class="nav-links">
-      <li><a href="/about/">About</a></li>
+      <li><a href="/projects/">Projects</a></li>
       <li><a href="/blog/">Blog</a></li>
-       <li><a href="/projects/">Projects</a></li>
+      <li><a href="/about/">About</a></li>
       <li><a href="/contact/">Contact</a></li>
-      <li><a href="Manish-Tiwari-Resume.pdf" download class="resume-btn">Resume ↓</a></li>
+      <li><a href="/Manish-Tiwari-Resume.pdf" download class="resume-btn">Resume ↓</a></li>
     </ul>
   </div>
 </nav>
 
 <div class="wrap">
 
+  <!-- ── Hero ── -->
   <header class="hero fade f1">
+    <div class="hero-eyebrow">AI Engineer · LLM Systems · MLOps</div>
 
-  <div class="hero-eyebrow">AI Engineer · Open Source Contributor</div>
+    <h1>I build <em>reliable</em> AI systems<br>that ship to production.</h1>
 
-  <h1>Building <em>reliable</em><br>AI systems.</h1>
+    <p class="hero-lead">
+      Final-year Computer Science student at IK Gujral Punjab Technical University.
+      I take LLM and ML ideas the whole way — training pipelines, FastAPI backends,
+      Docker deployment and monitoring — not just notebooks.
+    </p>
+    <p class="hero-lead">
+      <strong>41 merged pull requests</strong> across 30+ open-source organizations
+      (Hugging Face, CHAOSS/Augur, Moss), <strong>3 packages on PyPI</strong>, and a
+      4.2M-parameter multilingual model trained from scratch on a 4&nbsp;GB laptop GPU.
+    </p>
 
-  <p>
-    👋 Hi, I'm <strong>Manish Tiwari</strong>, a final-year Computer Science student at
-    IK Gujral Punjab Technical University, India.
-    I build practical AI systems, contribute to open source, and learn by shipping.
-  </p>
+    <div class="facts">
+      <span class="fact"><b>41</b> merged PRs</span>
+      <span class="fact"><b>3</b> PyPI packages</span>
+      <span class="fact"><b>4.2M</b>-param LLM from scratch</span>
+      <span class="fact"><b>30+</b> OSS orgs</span>
+    </div>
 
-  <p>
-    My interests lie at the intersection of machine learning engineering,
-    LLM systems, MLOps, and backend infrastructure. I enjoy taking ideas
-    from experimentation to production by building data pipelines,
-    training workflows, APIs, and deployment systems — in this journey I've built more than 20 projects.
-  </p>
+    <div class="hero-cta">
+      <a href="#work" class="btn btn-primary">See my work ↓</a>
+      <a href="/Manish-Tiwari-Resume.pdf" download class="btn">Resume ↓</a>
+      <a href="/contact/" class="btn">Get in touch</a>
+    </div>
 
-  <p>
-    I've built AI products ranging from secure execution environments for
-    AI-generated code to model monitoring systems and custom language models.
-    Along the way I've contributed over 100 pull requests across 30+ open-source organizations and 
-    collaborated with maintainers across AI, ML, and developer tooling ecosystems.
-  </p>
+    <div class="hero-meta">
+      <span class="status-dot"><span class="dot"></span> Open to AI/ML roles — internships &amp; 2027 new-grad</span>
+      <span class="status-dot">📍 Punjab, India</span>
+    </div>
+  </header>
 
-  <p>
-    Outside technology, you'll usually find me in the gym, on long cycling
-    rides, exploring new ideas, or thinking about the next project to build.
-  </p>
+  <!-- ── Selected Work ── -->
+  <section id="work" class="fade f2">
+    <p class="section-label">Selected work <a href="/projects/">All projects →</a></p>
 
-  <div class="hero-meta">
-    <span class="status-dot"><span class="dot"></span> Open to AI/ML engineering opportunities</span>
-    <span class="status-dot">📍 Punjab, India</span>
-  </div>
+    <div class="work-grid">
 
-</header>
+      <article class="card">
+        <div class="card-head"><span class="card-name">SafeRun AI</span></div>
+        <p class="card-desc">Secure sandbox that executes untrusted AI-generated Python in isolated Docker containers — AST scanner + YAML policy engine, four risk levels, full audit log.</p>
+        <div class="card-tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Docker</span></div>
+        <div class="card-links">
+          <a class="pill" href="https://github.com/PredictiveManish/SafeRun-AI" target="_blank">GitHub</a>
+          <a class="pill" href="https://saferun-ai.onrender.com/" target="_blank">Live</a>
+          <a class="pill" href="https://pypi.org/project/saferun-ai/" target="_blank">PyPI</a>
+        </div>
+      </article>
 
+      <article class="card">
+        <div class="card-head"><span class="card-name">Little Sparks</span></div>
+        <p class="card-desc">Slack-integrated product-design platform used by 100+ designers and managers across 200+ projects at Smartivity Labs — OAuth, per-project channels, reminders, analytics.</p>
+        <div class="card-tags"><span class="tag">JavaScript</span><span class="tag">Slack API</span><span class="tag">Full-stack</span></div>
+        <div class="card-links">
+          <a class="pill" href="https://github.com/PredictiveManish/little-sparks" target="_blank">GitHub</a>
+          <a class="pill" href="https://little-sparks-six.vercel.app/" target="_blank">Live</a>
+        </div>
+      </article>
 
+      <article class="card">
+        <div class="card-head"><span class="card-name">JanDrishti</span></div>
+        <p class="card-desc">Government transparency platform covering every Central department and all 28 states + 8 UTs — budgets, expenditure vs budget, CAG audit findings, live PIB feed.</p>
+        <div class="card-tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">APScheduler</span></div>
+        <div class="card-links">
+          <a class="pill" href="https://github.com/PredictiveManish/JanDrishti" target="_blank">GitHub</a>
+        </div>
+      </article>
 
-  <!-- ── Experience ── -->
-  <section class="fade f2">
-    <p class="section-label">Experience</p>
+      <article class="card">
+        <div class="card-head"><span class="card-name">LocalMind</span></div>
+        <p class="card-desc">CLI that scans your hardware, estimates what actually fits, and recommends local LLMs worth running — VRAM-aware comparison with Ollama chat built in.</p>
+        <div class="card-tags"><span class="tag">Python</span><span class="tag">CLI</span><span class="tag">Ollama</span></div>
+        <div class="card-links">
+          <a class="pill" href="https://github.com/PredictiveManish/localmind" target="_blank">GitHub</a>
+          <a class="pill" href="https://pypi.org/project/localmind-ai/" target="_blank">PyPI</a>
+        </div>
+      </article>
 
-    <div class="skill-groups">
+      <article class="card">
+        <div class="card-head"><span class="card-name">Trimurti-LM</span></div>
+        <p class="card-desc">4.2M-parameter multilingual (EN/HI/PA) GPT trained from scratch — perplexity 3.32 in 2.38 hours on a GTX&nbsp;1650 4&nbsp;GB, with a custom SentencePiece tokenizer.</p>
+        <div class="card-tags"><span class="tag">PyTorch</span><span class="tag">Transformers</span><span class="tag">HuggingFace</span></div>
+        <div class="card-links">
+          <a class="pill" href="https://github.com/PredictiveManish/trimurti-lm" target="_blank">GitHub</a>
+          <a class="pill" href="https://huggingface.co/spaces/PredictiveManish/Trimurti-LM-Demo" target="_blank">Demo</a>
+        </div>
+      </article>
 
-      <div class="skill-group">
-        <h3>Automation Intern · Smartivity Labs</h3>
-        <p style="font-family:var(--mono);font-size:0.72rem;color:var(--text-3);margin-top:0.15rem;">New Delhi · June 2026 – August 2026</p>
-        <p>Built a Slack-integrated project automation platform used by 100+ designers and managers across 200+ projects, plus automated certificate and PPT/PDF → Excel extraction pipelines that cut processing time by over 90%.</p>
-      </div>
-
-      <div class="skill-group">
-        <h3>Open Source Contributor · Hugging Face, CHAOSS/Augur, Moss & more</h3>
-        <p style="font-family:var(--mono);font-size:0.72rem;color:var(--text-3);margin-top:0.15rem;">Remote · Jan 2024 – Present</p>
-        <p>100+ PRs opened and 40+ merged across 30+ organizations — SDK improvements, tests, developer tooling, docs, and AI features. Built Bharat Benefits, a voice-first RAG agent merged into Moss.</p>
-      </div>
-
-      <div class="skill-group">
-        <h3>Data Operations Intern · Travintop.com</h3>
-        <p style="font-family:var(--mono);font-size:0.72rem;color:var(--text-3);margin-top:0.15rem;">Remote · Dec 2024 – Feb 2025</p>
-        <p>Python automation for 500+ travel package records and influencer engagement analytics.</p>
-      </div>
+      <article class="card">
+        <div class="card-head"><span class="card-name">ML Drift Monitor</span></div>
+        <p class="card-desc">MLOps concept-drift detection using KS statistical tests, with an async FastAPI logging pipeline, Plotly dashboard and Discord webhook alerts — under 500&nbsp;ms inference.</p>
+        <div class="card-tags"><span class="tag">FastAPI</span><span class="tag">Docker</span><span class="tag">CI/CD</span></div>
+        <div class="card-links">
+          <a class="pill" href="https://github.com/PredictiveManish/mlops-drift-detector" target="_blank">GitHub</a>
+          <a class="pill" href="https://huggingface.co/spaces/PredictiveManish/drift-monitor" target="_blank">Demo</a>
+        </div>
+      </article>
 
     </div>
   </section>
 
   <!-- ── Open Source ── -->
   <section class="fade f3">
-    <p class="section-label">Open source</p>
+    <p class="section-label">Open source <a href="https://github.com/pulls?q=is%3Apr+author%3APredictiveManish" target="_blank">View on GitHub →</a></p>
 
     <div class="stats">
-      <div class="stat"><span class="stat-n">107</span><span class="stat-l">Total PRs Opened</span></div>
-      <div class="stat"><span class="stat-n">41</span><span class="stat-l">✅ Merged PRs</span></div>
+      <div class="stat"><span class="stat-n">107</span><span class="stat-l">PRs opened</span></div>
+      <div class="stat"><span class="stat-n">41</span><span class="stat-l">Merged</span></div>
+      <div class="stat"><span class="stat-n">56</span><span class="stat-l">Public repos</span></div>
       <div class="stat"><span class="stat-n">30+</span><span class="stat-l">Organizations</span></div>
-      <div class="stat"><span class="stat-n">51</span><span class="stat-l">Repositories</span></div>
     </div>
 
     <div class="org-row">
@@ -669,119 +373,104 @@
       <span class="org">pandas</span>
       <span class="org">sktime</span>
       <span class="org">sunpy</span>
-      <span class="org">Skrub</span>
-    </div>
-
-    <div style="margin-top:1rem;">
-      <a href="https://github.com/pulls?q=is%3Apr+author%3APredictiveManish+archived%3Afalse+is%3Amerged" target="_blank"
-         style="font-family:var(--mono);font-size:0.7rem;color:var(--accent);text-decoration:none;letter-spacing:0.04em;">
-        View all PRs on GitHub →
-      </a>
+      <span class="org">skrub</span>
     </div>
   </section>
 
+  <!-- ── Experience ── -->
   <section class="fade f4">
-  <p class="section-label">Technical Skills</p>
+    <p class="section-label">Experience</p>
 
-  <div class="skill-groups">
-
-    <div class="skill-group">
-      <h3>Languages</h3>
-      <p>Python · SQL · Rust (learning) · Bash</p>
+    <div class="exp-item">
+      <div class="exp-head">
+        <span class="exp-role">Automation Intern <span>· Smartivity Labs</span></span>
+        <span class="exp-when">New Delhi · Jun–Aug 2026</span>
+      </div>
+      <p>Built a Slack-integrated project platform used by 100+ designers and managers across 200+ projects, plus certificate and PPT/PDF → Excel pipelines that cut processing time by over 90%.</p>
     </div>
 
-    <div class="skill-group">
-      <h3>AI / ML</h3>
-      <p>
-        PyTorch · HuggingFace · Transformers · RAG · LLM Workflows ·
-        LoRA · Fine-Tuning · Tokenization
-      </p>
+    <div class="exp-item">
+      <div class="exp-head">
+        <span class="exp-role">Open Source Contributor <span>· Hugging Face, CHAOSS/Augur, Moss &amp; more</span></span>
+        <span class="exp-when">Remote · Jan 2024 – Present</span>
+      </div>
+      <p>41 merged PRs across 30+ organizations — SDK improvements, tests, developer tooling, docs and AI features. Built Bharat Benefits, a voice-first RAG agent (STT → Retrieval → LLM → TTS) merged into Moss.</p>
     </div>
 
-    <div class="skill-group">
-      <h3>Backend & Infrastructure</h3>
-      <p>
-        FastAPI · REST APIs · Docker · Linux · GitHub Actions
-      </p>
+    <div class="exp-item">
+      <div class="exp-head">
+        <span class="exp-role">Data Operations Intern <span>· Travintop.com</span></span>
+        <span class="exp-when">Remote · Dec 2024 – Feb 2025</span>
+      </div>
+      <p>Python automation for 500+ travel package records and influencer engagement analytics supporting marketing and listing operations.</p>
     </div>
+  </section>
 
-    <div class="skill-group">
-      <h3>Databases</h3>
-      <p>PostgreSQL · SQLite</p>
+  <!-- ── Skills ── -->
+  <section class="fade f4">
+    <p class="section-label">Technical skills</p>
+    <div class="skill-groups">
+      <div class="skill-group"><h3>Languages</h3><p>Python · SQL · Rust (learning) · Bash</p></div>
+      <div class="skill-group"><h3>AI / ML</h3><p>PyTorch · HuggingFace · Transformers · RAG · LLM workflows · LoRA · Fine-tuning · SentencePiece</p></div>
+      <div class="skill-group"><h3>Backend &amp; infra</h3><p>FastAPI · REST APIs · Docker · Linux · GitHub Actions</p></div>
+      <div class="skill-group"><h3>Data &amp; tools</h3><p>PostgreSQL · SQLite · Streamlit · Ollama · Plotly · Scikit-learn · Git</p></div>
     </div>
-
-    <div class="skill-group">
-      <h3>Tools</h3>
-      <p>
-        Git · GitHub · Streamlit · Ollama · Plotly ·
-        SentencePiece · Scikit-learn
-      </p>
-    </div>
-
-  </div>
-</section>
+  </section>
 
   <!-- ── Writing ── -->
   <section class="fade f4">
-    <p class="section-label">Writing</p>
+    <p class="section-label">Writing <a href="/blog/">All posts →</a></p>
     <ul class="post-list">
       <li>
-        <a href="/blog/laya-gtx1650-benchmark/">
-          Benchmarking an Open-Source AI Decision Model on a 2019 Laptop
-        </a>
-        <span class="post-date">Sep 22, 2026</span>
+        <a href="/blog/laya-gtx1650-benchmark/">Benchmarking an Open-Source AI Decision Model on a 2019 Laptop</a>
+        <span class="post-date">Sep 2026</span>
       </li>
       <li>
-        <a href="https://peerlist.io/decisive/articles/sota-the-hype-vs-confusion" target="_blank">
-          SOTA (State of the Art): The Hype vs Confusion — From My POV
-        </a>
-        <span class="post-date">Apr 27, 2026</span>
+        <a href="https://peerlist.io/decisive/articles/sota-the-hype-vs-confusion" target="_blank">SOTA (State of the Art): The Hype vs Confusion</a>
+        <span class="post-date">Apr 2026</span>
       </li>
       <li>
-        <a href="https://medium.com/@manishthoughts/what-i-understood-cb3a557cde52" target="_blank">
-          what i understood? — a series on learning in public
-        </a>
-        <span class="post-date">Dec 23, 2025</span>
+        <a href="https://medium.com/@manishthoughts/what-i-understood-cb3a557cde52" target="_blank">what i understood? — a series on learning in public</a>
+        <span class="post-date">Dec 2025</span>
       </li>
     </ul>
-    <div style="margin-top:1rem;">
-      <a href="/blog/" style="font-family:var(--mono);font-size:0.7rem;color:var(--accent);text-decoration:none;letter-spacing:0.04em;">
-        All posts →
-      </a>
-    </div>
   </section>
 
-  <!-- ── Current Focus Badge -->
-  <section class="fade f4" style="text-align: center; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
-    <p style="margin: 0;">
-      Working + Reading: <strong>ML Systems Architecture</strong> • <strong>Production Deployment</strong> • <strong>Cost Optimization</strong> • <strong> Research Papers</strong>
-    </p>
-  </section>
+  <!-- ── Contact CTA ── -->
+  <div class="cta fade f5">
+    <h2>Let's build something.</h2>
+    <p>I'm looking for AI/ML engineering internships and 2027 new-grad roles, and I'm always up for open-source collaborations and good conversations.</p>
+    <div class="cta-links">
+      <a href="mailto:manish.tiwari.09@zohomail.in" class="btn btn-primary">Email me</a>
+      <a href="https://github.com/PredictiveManish" target="_blank" class="btn">GitHub</a>
+      <a href="https://linkedin.com/in/manish-tiwari-977741286" target="_blank" class="btn">LinkedIn</a>
+      <a href="/Manish-Tiwari-Resume.pdf" download class="btn">Resume ↓</a>
+    </div>
+  </div>
 
   <!-- ── India Map ── -->
   <section class="fade f5">
-    <p class="section-label">Places visited — India</p>
+    <p class="section-label">Places I've travelled — India</p>
     <div class="map-wrap">
       <div id="india-map-container">
         <p style="font-family:var(--mono);font-size:0.7rem;color:var(--text-3);text-align:center;padding:2rem 0;">Loading map…</p>
       </div>
     </div>
-    <p class="map-note">
-      Punjab · Delhi · Haryana · Himachal Pradesh · Uttar Pradesh ·
-      Rajasthan · Bihar · Jammu &amp; Kashmir · Jharkhand · Madhya Pradesh · Uttrakhand
-    </p>
+    <p class="map-note">Punjab · Delhi · Haryana · Himachal Pradesh · Uttar Pradesh · Rajasthan · Bihar · Jammu &amp; Kashmir · Jharkhand · Madhya Pradesh · Uttarakhand</p>
   </section>
 
 </div><!-- /wrap -->
 
 <!-- ── Footer ── -->
 <footer>
-  <div class="wrap" style="width:100%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;">
+  <div class="wrap inner">
     <p>© <span id="yr"></span> Manish Tiwari</p>
     <p>
-      <a href="https://github.com/predictivemanish" target="_blank">GitHub</a> ·
+      <a href="https://github.com/PredictiveManish" target="_blank">GitHub</a> ·
       <a href="https://linkedin.com/in/manish-tiwari-977741286" target="_blank">LinkedIn</a> ·
-      <a href="https://x.com/compmanish" target="_blank">X</a>
+      <a href="https://x.com/compmanish" target="_blank">X</a> ·
+      <a href="https://huggingface.co/PredictiveManish" target="_blank">HuggingFace</a> ·
+      <a href="mailto:manish.tiwari.09@zohomail.in">Email</a>
     </p>
   </div>
 </footer>
@@ -789,15 +478,7 @@
 <!-- ── Theme Toggle ── -->
 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
   <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="12" cy="12" r="5"></circle>
-    <line x1="12" y1="1" x2="12" y2="3"></line>
-    <line x1="12" y1="21" x2="12" y2="23"></line>
-    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-    <line x1="1" y1="12" x2="3" y2="12"></line>
-    <line x1="21" y1="12" x2="23" y2="12"></line>
-    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    <circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
   </svg>
   <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
@@ -805,63 +486,14 @@
 </button>
 
 <script>
-  /* ── Theme Toggle ── */
-  (function() {
-    const toggle = document.getElementById('theme-toggle');
-    const saved = localStorage.getItem('theme');
-    if (saved === 'light') document.body.classList.add('light');
-
-    toggle.addEventListener('click', function() {
-      document.body.classList.toggle('light');
-      localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
-    });
-  })();
-
-  document.getElementById('yr').textContent = new Date().getFullYear();
-
-  /* ── India Map ── */
-  const VISITED = [
-    "Punjab","Delhi","Haryana","Himachal Pradesh","Uttar Pradesh",
-    "Rajasthan","Bihar","Jammu and Kashmir","Jharkhand","Madhya Pradesh","Chandigarh","Uttarakhand"
-  ];
-
-  const ID_MAP = {
-    "Andaman and Nicobar":"INAN","Telangana":"INTG","Andhra Pradesh":"INAP",
-    "Arunachal Pradesh":"INAR","Assam":"INAS","Bihar":"INBR","Chandigarh":"INCH",
-    "Chhattisgarh":"INCT","Delhi":"INDL","Goa":"INGA","Gujarat":"INGJ",
-    "Haryana":"INHR","Himachal Pradesh":"INHP","Jharkhand":"INJH",
-    "Karnataka":"INKA","Kerala":"INKL","Madhya Pradesh":"INMP","Maharashtra":"INMH",
-    "Manipur":"INMN","Meghalaya":"INML","Mizoram":"INMZ","Nagaland":"INNL",
-    "Odisha":"INOR","Puducherry":"INPY","Punjab":"INPB","Rajasthan":"INRJ",
-    "Sikkim":"INSK","Tamil Nadu":"INTN","Tripura":"INTR","Uttar Pradesh":"INUP",
-    "Uttarakhand":"INUT","West Bengal":"INWB","Lakshadweep":"INLD",
-    "Jammu and Kashmir":"INJK","Ladakh":"INLA"
-  };
-
-  async function loadMap() {
-    const container = document.getElementById('india-map-container');
-    try {
-      const res = await fetch('https://predictivemanish.github.io/visited/in.svg');
-      if (!res.ok) throw new Error('fetch failed');
-      container.innerHTML = await res.text();
-      VISITED.forEach(state => {
-        const el = container.querySelector('#' + ID_MAP[state]);
-        if (el) el.classList.add('visited-state');
-      });
-    } catch {
-      container.innerHTML = '<p style="font-family:var(--mono);font-size:0.7rem;color:var(--text-3);text-align:center;padding:2rem 0;">Could not load map.</p>';
-    }
-  }
-
-  loadMap();
-
-  /* ── WebGL Particle Text ── */
+/* ── WebGL Particle Text ── */
   (function() {
     const canvas = document.getElementById('webgl-canvas');
     const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: false });
     if (!gl) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    const NUM_PARTICLES = 7000;
+    const NUM_PARTICLES = window.innerWidth < 700 ? 3500 : 7000;
     const TEXTS = ['Builders', "You're still here?"];
     const SAMPLE_SCALE = 3;
 
@@ -1116,11 +748,43 @@
     });
   })();
 
+  /* ── Theme Toggle ── */
+  (function() {
+    const toggle = document.getElementById('theme-toggle');
+    if (localStorage.getItem('theme') === 'light') document.body.classList.add('light');
+    toggle.addEventListener('click', function() {
+      document.body.classList.toggle('light');
+      localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+    });
+  })();
+
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  /* ── India Map ── */
+  const VISITED = ["Punjab","Delhi","Haryana","Himachal Pradesh","Uttar Pradesh","Rajasthan","Bihar","Jammu and Kashmir","Jharkhand","Madhya Pradesh","Chandigarh","Uttarakhand"];
+  const ID_MAP = {
+    "Andaman and Nicobar":"INAN","Telangana":"INTG","Andhra Pradesh":"INAP","Arunachal Pradesh":"INAR","Assam":"INAS","Bihar":"INBR","Chandigarh":"INCH","Chhattisgarh":"INCT","Delhi":"INDL","Goa":"INGA","Gujarat":"INGJ","Haryana":"INHR","Himachal Pradesh":"INHP","Jharkhand":"INJH","Karnataka":"INKA","Kerala":"INKL","Madhya Pradesh":"INMP","Maharashtra":"INMH","Manipur":"INMN","Meghalaya":"INML","Mizoram":"INMZ","Nagaland":"INNL","Odisha":"INOR","Puducherry":"INPY","Punjab":"INPB","Rajasthan":"INRJ","Sikkim":"INSK","Tamil Nadu":"INTN","Tripura":"INTR","Uttar Pradesh":"INUP","Uttarakhand":"INUT","West Bengal":"INWB","Lakshadweep":"INLD","Jammu and Kashmir":"INJK","Ladakh":"INLA"
+  };
+  (async function loadMap() {
+    const container = document.getElementById('india-map-container');
+    try {
+      const res = await fetch('/visited/in.svg');
+      if (!res.ok) throw new Error('fetch failed');
+      container.innerHTML = await res.text();
+      VISITED.forEach(function(state) {
+        const el = container.querySelector('#' + ID_MAP[state]);
+        if (el) el.classList.add('visited-state');
+      });
+    } catch (e) {
+      container.innerHTML = '<p style="font-family:var(--mono);font-size:0.7rem;color:var(--text-3);text-align:center;padding:2rem 0;">Could not load map.</p>';
+    }
+  })();
+
   /* ── Scroll fade ── */
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.style.opacity = 1; });
+  const io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) e.target.style.opacity = 1; });
   }, { threshold: 0.1 });
-  document.querySelectorAll('.fade').forEach(el => io.observe(el));
+  document.querySelectorAll('.fade').forEach(function(el) { io.observe(el); });
 </script>
 </body>
 </html>
