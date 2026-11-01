@@ -188,7 +188,16 @@ footer a:hover{color:#ff3d00}
     .wordmark { overflow: hidden; padding: 2.5rem 0 1.25rem; line-height: 0; }
     .wordmark svg { display: block; width: 100%; height: auto; }
     .wordmark svg text { fill: #0d0d0d; }
-  </style>
+  
+.thumb[data-c="me"]{background:#cdeac0}
+.thumb[data-c="ly"]{background:#f6d8ae}
+.btn-wa{background:#25d366;border-color:#0d0d0d;color:#0d0d0d}
+.btn-wa:hover{background:#1ebe5b;color:#0d0d0d;box-shadow:5px 5px 0 #0d0d0d}
+.wa-fab{position:fixed;right:1.1rem;bottom:1.1rem;z-index:90;display:inline-flex;align-items:center;gap:.5rem;font-family:'DM Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;background:#25d366;color:#0d0d0d;border:3px solid #0d0d0d;box-shadow:5px 5px 0 #0d0d0d;padding:.65rem .95rem;text-decoration:none;transition:transform .15s,box-shadow .15s}
+.wa-fab:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 #0d0d0d;color:#0d0d0d}
+.wa-fab svg{width:17px;height:17px;display:block;flex:none;fill:currentColor}
+@media(max-width:600px){.wa-fab span{display:none}.wa-fab{padding:.8rem}}
+</style>
 </head>
 <body>
 <nav><div class="wrap inner"><a href="/" class="nav-name">Manish Tiwari</a><ul class="nav-links"><li><a href="/projects/">Projects</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li><li><a href="/Manish-Tiwari-Resume.pdf" download class="resume-btn">Resume &darr;</a></li></ul></div></nav>
@@ -198,11 +207,12 @@ footer a:hover{color:#ff3d00}
     <div class="hero-copy">
       <span class="eyebrow"><span class="dot"></span> Open to AI/ML roles · 2027 new-grad</span>
       <h1>I build <span class="grad">reliable AI systems</span> that ship to production.</h1>
-      <p class="hero-lead">Final-year CS student at IK Gujral Punjab Technical University. I take LLM and ML ideas the whole way &mdash; training pipelines, FastAPI backends, Docker deployment and monitoring &mdash; not just notebooks. <strong>41 merged pull requests</strong> across 30+ open-source organizations, and <strong>3 packages on PyPI</strong>.</p>
+      <p class="hero-lead">Final-year CS student at IK Gujral Punjab Technical University, currently an AI Engineer (contract) at DALM Labs. I take LLM and ML ideas the whole way &mdash; training pipelines, FastAPI backends, Docker deployment and monitoring &mdash; not just notebooks. <strong>41 merged pull requests</strong> across 30+ open-source organizations, and <strong>3 packages on PyPI</strong>.</p>
       <div class="hero-cta">
         <a href="#work" class="btn btn-primary">See my work &darr;</a>
         <a href="/Manish-Tiwari-Resume.pdf" download class="btn">Resume &darr;</a>
         <a href="/contact/" class="btn">Get in touch</a>
+        <a href="https://wa.me/919779405863?text=Hello%2C%20I%27ve%20an%20opportunity%20for%20you" target="_blank" rel="noopener" class="btn btn-wa">WhatsApp</a>
       </div>
       <span class="status">&#128205; Punjab, India & Delhi NCR &middot; open to remote</span>
     </div>
@@ -215,8 +225,8 @@ manish &mdash; ai engineer
 python &middot; pytorch &middot; fastapi &middot; docker
 
 <span class="p">$</span> <span class="c">ls</span> ~/work
-<span class="a">saferun-ai/</span>   <span class="a">jan-drishti/</span>
-<span class="a">localmind/</span>     <span class="a">trimurti-lm/</span>
+<span class="a">mesh/</span>         <span class="a">saferun-ai/</span>
+<span class="a">localmind/</span>    <span class="a">laya-bench/</span>
 
 <span class="p">$</span> <span class="c">./status</span> --open-to
 <span class="g">new problems &middot;internships &middot; 2027 new-grad</span></pre>
@@ -226,6 +236,15 @@ python &middot; pytorch &middot; fastapi &middot; docker
   <section id="work">
     <div class="sec-head"><h2>Selected work</h2><a href="/projects/">All projects &rarr;</a></div>
     <div class="work-grid">
+      <article class="card">
+        <div class="thumb" data-c="me"><span>ME</span></div>
+        <div class="card-body">
+          <div class="card-name">mesh</div>
+          <p class="card-desc">Capacity planner for heterogeneous GPU fleets &mdash; computes the real training ceiling per node instead of summing pooled VRAM. On 100 consumer GPUs, only 8 can hold a 7B model.</p>
+          <div class="card-tags"><span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">DiLoCo</span></div>
+          <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/mesh" target="_blank">GitHub</a><a class="pill" href="https://pypi.org/project/mesh-train/" target="_blank">PyPI</a></div>
+        </div>
+      </article>
       <article class="card">
         <div class="thumb" data-c="sr"><span>SR</span></div>
         <div class="card-body">
@@ -260,6 +279,15 @@ python &middot; pytorch &middot; fastapi &middot; docker
           <p class="card-desc">CLI that scans your hardware and recommends local LLMs that actually fit — VRAM-aware comparison with Ollama chat built in.</p>
           <div class="card-tags"><span class="tag">Python</span><span class="tag">CLI</span><span class="tag">Ollama</span></div>
           <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/localmind" target="_blank">GitHub</a><a class="pill" href="https://pypi.org/project/localmind-ai/" target="_blank">PyPI</a></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="thumb" data-c="ly"><span>LY</span></div>
+        <div class="card-body">
+          <div class="card-name">Laya on a GTX 1650</div>
+          <p class="card-desc">Honest benchmark of a 421M-parameter LLM on 4GB consumer hardware &mdash; CUDA-synchronised timing, p50/p95, and measured numbers kept separate from published ones.</p>
+          <div class="card-tags"><span class="tag">PyTorch</span><span class="tag">CUDA</span><span class="tag">Benchmarking</span></div>
+          <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/laya-gtx1650-benchmark" target="_blank">GitHub</a><a class="pill" href="/blog/laya-gtx1650-benchmark/">Blog</a></div>
         </div>
       </article>
       <article class="card">
@@ -300,6 +328,12 @@ python &middot; pytorch &middot; fastapi &middot; docker
   <section>
     <div class="sec-head"><h2>Experience</h2></div>
     <div class="exp">
+      <div class="exp-when">Remote<br>Oct 2026 &ndash; Present</div>
+      <div><div class="exp-role">AI Engineer (Contract) <span>&middot; DALM Labs</span></div>
+      <p>Built the AI planner behind a CPaaS audience studio &mdash; a FastAPI service turning a domain, objective and prompt into audience recommendations, per-signal reasoning and a budget plan, with Sarvam and Claude behind a provider-agnostic interface. Enforced server-side LLM guardrails and shipped a 58-test suite.</p></div>
+    </div>
+
+    <div class="exp">
       <div class="exp-when">New Delhi<br>Jun&ndash;Aug 2026</div>
       <div><div class="exp-role">Automation Intern <span>&middot; Smartivity Labs</span></div>
       <p>Built a Slack-integrated project platform used by 100+ designers and managers across 200+ projects, plus certificate and PPT/PDF &rarr; Excel pipelines that cut processing time by over 90%.</p></div>
@@ -337,6 +371,7 @@ python &middot; pytorch &middot; fastapi &middot; docker
     <h2>Let&rsquo;s build something.</h2>
     <p>I&rsquo;m looking for AI/ML engineering internships and 2027 new-grad roles, and I&rsquo;m always up for open-source collaborations and good conversations.</p>
     <div class="cta-links">
+      <a href="https://wa.me/919779405863?text=Hello%2C%20I%27ve%20an%20opportunity%20for%20you" target="_blank" rel="noopener" class="btn btn-wa">Message on WhatsApp</a>
       <a href="mailto:manish.tiwari.09@zohomail.in" class="btn btn-primary">Email me</a>
       <a href="https://github.com/PredictiveManish" target="_blank" class="btn">GitHub</a>
       <a href="https://linkedin.com/in/manish-tiwari-977741286" target="_blank" class="btn">LinkedIn</a>
@@ -503,5 +538,6 @@ var ID_MAP={"Andaman and Nicobar":"INAN","Telangana":"INTG","Andhra Pradesh":"IN
   </svg>
 </div>
 
+<a class="wa-fab" href="https://wa.me/919779405863?text=Hello%2C%20I%27ve%20an%20opportunity%20for%20you" target="_blank" rel="noopener" aria-label="Message me on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.488"/></svg><span>Discuss or Hire</span></a>
 </body>
 </html>
