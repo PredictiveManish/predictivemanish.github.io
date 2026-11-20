@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Man Who Took the Name Tags Off Light — Manish Tiwari</title>
+<meta name="description" content="In 1924 a thirty-year-old lecturer in Dhaka stopped treating identical particles as separate individuals. Every laser, every MRI, every 'God particle' headline runs on that one decision.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f3ec; --bg2:#fffdf8; --ink:#1a1713; --ink2:#565049; --ink3:#8a8279;
+  --rule:#ded6c7; --accent:#9c3d1e; --accent-dim:#c07a5f; --tint:#efe6d7;
+  --serif:"Literata",Georgia,"Times New Roman",serif;
+  --display:"Newsreader",Georgia,serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#131110; --bg2:#1a1715; --ink:#e9e3d8; --ink2:#a49d92; --ink3:#7d766c;
+    --rule:#302b26; --accent:#dd8a5c; --accent-dim:#a35f3d; --tint:#241f1a;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--serif); font-size:clamp(17px,0.55vw + 15.2px,19.5px);
+  line-height:1.72; text-wrap:pretty; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:752px; margin:0 auto; padding:0 26px}
+a{color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent-dim)}
+a:hover{border-bottom-color:var(--accent)}
+
+/* top bar */
+.topbar{border-bottom:1px solid var(--rule); background:color-mix(in srgb,var(--bg) 85%,var(--bg2))}
+.topbar .wrap{display:flex; justify-content:space-between; align-items:center; gap:16px; padding:16px 26px}
+.topbar a{border-bottom:none; color:var(--ink2); font-family:var(--mono); font-size:11.5px; letter-spacing:.11em; text-transform:uppercase}
+.topbar a:hover{color:var(--accent)}
+.topbar .mark{font-family:var(--display); font-size:16px; letter-spacing:-.01em; color:var(--ink)}
+
+/* hero */
+.hero{text-align:center; padding:66px 26px 0; max-width:820px; margin:0 auto}
+.eyebrow{font-family:var(--mono); font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--accent); margin-bottom:26px}
+.eyebrow span{color:var(--ink3)}
+h1{font-family:var(--display); font-weight:600; font-size:clamp(34px,5.6vw,58px); line-height:1.04; letter-spacing:-.022em; margin:0 0 22px}
+.sub{font-family:var(--display); font-style:italic; font-weight:400; font-size:clamp(18px,1.9vw,23px); line-height:1.45; color:var(--ink2); max-width:610px; margin:0 auto 30px}
+.meta{font-family:var(--mono); font-size:11px; letter-spacing:.13em; text-transform:uppercase; color:var(--ink3)}
+.meta b{font-weight:500; color:var(--ink2)}
+
+/* spectrum rule */
+.spectrum{height:3px; margin:38px auto 0; max-width:820px;
+  background:linear-gradient(90deg,#6d3b2a 0%,#9c3d1e 18%,#c07a2e 38%,#8a8a3c 56%,#3f6d5c 74%,#3a4f6d 90%,#4a3a5c 100%);
+  opacity:.55}
+
+/* prose */
+.prose{max-width:66ch; margin:0 auto; padding:0 26px}
+.prose p{margin:0 0 1.45em}
+.prose > p:first-of-type{font-size:1.1em; line-height:1.62; color:var(--ink)}
+.prose p.lead::first-letter{float:left; font-family:var(--display); font-weight:600; font-size:3.6em; line-height:.82; padding:.06em .1em 0 0; color:var(--accent)}
+h2{font-family:var(--display); font-weight:600; font-size:clamp(24px,2.6vw,31px); line-height:1.2; letter-spacing:-.014em; margin:2.4em 0 .75em}
+h2 .num{display:block; font-family:var(--mono); font-size:11px; letter-spacing:.2em; color:var(--accent); margin-bottom:10px; font-weight:400}
+h3{font-family:var(--display); font-weight:600; font-size:1.12em; margin:1.8em 0 .5em}
+em{font-style:italic}
+strong{font-weight:600}
+hr{border:none; height:1px; background:var(--rule); margin:3.4em 0}
+.small{font-size:.88em; color:var(--ink2)}
+
+/* at a glance table */
+.glance{margin:46px auto; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule)}
+.glance table{width:100%; border-collapse:collapse; font-size:.92em}
+.glance td{padding:11px 0; vertical-align:top; border-bottom:1px solid var(--rule)}
+.glance tr:last-child td{border-bottom:none}
+.glance td:first-child{font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink3); width:28%; padding-right:18px; padding-top:14px}
+.glance td:last-child{color:var(--ink)}
+
+/* equation */
+.eq{margin:34px 0; padding:30px 20px; text-align:center; background:var(--bg2); border:1px solid var(--rule); border-radius:2px; font-family:var(--display); font-size:clamp(19px,2.4vw,25px); line-height:1.3}
+.frac{display:inline-flex; flex-direction:column; vertical-align:-0.62em; text-align:center; margin:0 .14em; line-height:1.18}
+.frac > span:first-child{border-bottom:1px solid var(--ink); padding:0 .38em .16em}
+.frac > span:last-child{padding:.2em .38em 0}
+.eq sup{font-size:.62em; vertical-align:super; line-height:0}
+
+/* callouts */
+.callout{margin:40px 0; padding:24px 26px; background:var(--tint); border-left:3px solid var(--accent)}
+.callout .label{font-family:var(--mono); font-size:10.5px; letter-spacing:.17em; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:12px}
+.callout p{margin:0 0 .9em; font-size:.96em; line-height:1.62}
+.callout p:last-child{margin-bottom:0}
+
+/* pull quote */
+.pull{margin:52px auto; max-width:640px; text-align:center; padding:34px 0; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule)}
+.pull p{font-family:var(--display); font-style:italic; font-size:clamp(21px,2.7vw,27px); line-height:1.35; color:var(--ink); margin:0}
+.pull cite{display:block; margin-top:16px; font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; font-style:normal; color:var(--ink3)}
+
+/* tier table */
+.tiers{width:100%; border-collapse:collapse; margin:0; font-size:.9em}
+.breakout{margin:34px 0}
+@media (min-width:920px){
+  .breakout{width:880px; margin-left:calc(50% - 440px)}
+}
+.tiers th{text-align:left; font-family:var(--mono); font-size:10px; letter-spacing:.13em; text-transform:uppercase; color:var(--ink3); font-weight:400; padding:0 12px 10px 0; border-bottom:1px solid var(--ink)}
+.tiers td{padding:14px 12px 14px 0; border-bottom:1px solid var(--rule); vertical-align:top; line-height:1.5}
+.tiers td:first-child{width:20%; font-family:var(--display); font-weight:600; font-size:1.02em; color:var(--accent)}
+.tiers td:nth-child(2){width:40%}
+.tiers td:last-child{color:var(--ink2)}
+
+/* sources */
+.sources{margin-top:60px; padding-top:26px; border-top:1px solid var(--rule)}
+.sources h4{font-family:var(--mono); font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink3); font-weight:400; margin:0 0 16px}
+.sources ol{margin:0; padding-left:20px; font-size:.83em; line-height:1.6; color:var(--ink2)}
+.sources li{margin-bottom:8px}
+.sources a{color:var(--ink2); border-bottom-color:var(--rule)}
+.sources a:hover{color:var(--accent)}
+
+/* next card */
+.next{margin:56px auto 0; padding:28px 30px; background:var(--bg2); border:1px solid var(--rule)}
+.next .label{font-family:var(--mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink3); display:block; margin-bottom:10px}
+.next .t{font-family:var(--display); font-size:1.24em; font-weight:600; line-height:1.3; margin-bottom:8px}
+.next p{margin:0; font-size:.9em; color:var(--ink2); line-height:1.55}
+
+footer{margin:60px 0 0; padding:30px 26px 70px; border-top:1px solid var(--rule); text-align:center}
+footer p{font-family:var(--mono); font-size:10.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--ink3); margin:0}
+
+@media (max-width:620px){
+  .hero{padding-top:44px}
+  .glance td:first-child{width:38%; font-size:10px}
+  .tiers td{display:block; width:100%!important; padding-right:0}
+  .tiers td:first-child{padding-bottom:2px; border-bottom:none}
+  .tiers td:nth-child(2){padding-top:0; padding-bottom:6px; border-bottom:none}
+  .tiers td:last-child{padding-top:0}
+  .tiers thead{display:none}
+}
+@media print{
+  .topbar,.next,footer{display:none}
+  body{background:#fff; color:#000}
+  .spectrum{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a href="/" class="mark">Manish Tiwari</a>
+    <a href="/blog/">← All essays</a>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="eyebrow">Quiet Physics <span>·</span> 01 <span>·</span> Satyendra Nath Bose</div>
+  <h1>The Man Who Took the Name Tags Off Light</h1>
+  <p class="sub">In June 1924, a thirty-year-old lecturer in Dhaka stopped treating identical particles as separate individuals. Every laser, every MRI, every &ldquo;God particle&rdquo; headline runs on that one decision.</p>
+  <p class="meta">Essay &nbsp;·&nbsp; 20 November 2026 &nbsp;·&nbsp; <b>11 min read</b></p>
+</header>
+
+<div class="spectrum"></div>
+
+<article class="prose">
+
+<div class="glance">
+  <table>
+    <tr><td>The man</td><td>Satyendra Nath Bose. Calcutta. A mathematician by training, who never took a degree in physics.</td></tr>
+    <tr><td>The year</td><td>1924. He was thirty, and teaching at the University of Dacca.</td></tr>
+    <tr><td>The paper</td><td>Four pages. <em>Zeitschrift f&uuml;r Physik</em>, volume 26, pages 178&ndash;181.</td></tr>
+    <tr><td>The move</td><td>Stop labelling identical particles as separate individuals.</td></tr>
+    <tr><td>The word</td><td>&ldquo;Boson&rdquo; — coined by Paul Dirac in 1945, after him.</td></tr>
+    <tr><td>The proof</td><td>1995: 2,000 rubidium atoms at 20 nanokelvin. Seventy-one years later.</td></tr>
+    <tr><td>The prize</td><td>Never. Seven Nobel Prizes have since gone to work built on his counting.</td></tr>
+  </table>
+</div>
+
+<p class="lead">Begin with the failure, because that is where this story actually starts — not with a flash of insight in a garret, but with a lecture that was not going the way it was supposed to.</p>
+
+<p>In June 1924, Satyendra Nath Bose was a Reader in physics at the University of Dacca. He was thirty years old, he had been teaching the same material for three years, and he was preparing a class on the theory of radiation. The plan for the hour was straightforward: show the students that the existing theory was broken.</p>
+
+<p>The demonstration was almost too easy. Take the physics of the day — light as a wave in a continuous field, energy shared out smoothly among all possible vibrations — and ask how much energy a hot object should radiate at very short wavelengths. The answer that comes back is infinite. Not large. Infinite. Every heated object in the universe should be emitting an unbounded flood of ultraviolet light, and every object should be at absolute zero within an instant. This is the ultraviolet catastrophe, and it is the most spectacular wrong answer in the history of physics.</p>
+
+<p>So the theory was wrong. Fine. Except that in 1900, Max Planck had written down a formula that matched every measurement ever taken, and it did not blow up at all. Planck got there by assuming that energy is handed out in lumps of size <em>hν</em>, and then — this is the part that embarrassed him for the rest of his life — by fitting his formula to the experimental curve. He later described the step as an act of desperation. He had the right answer and no honest route to it.</p>
+
+<p>Bose stood in front of his class with a broken theory on one side and an unexplained formula on the other, and asked the question that a good teacher asks when the syllabus runs out: <em>why does the formula work?</em></p>
+
+<h2><span class="num">§ 02</span>The formula nobody could justify</h2>
+
+<p>Here is Planck&rsquo;s law, the one that has survived every test for 126 years:</p>
+
+<div class="eq">
+ρ(ν) = <span class="frac"><span>8πν²</span><span>c³</span></span> &nbsp;·&nbsp; <span class="frac"><span>hν</span><span>e<sup>hν/kT</sup> − 1</span></span>
+</div>
+
+<p>You do not need to be able to read that. You only need to know that it is three separate claims multiplied together. The right-hand fraction is about energy: how much energy a single lump of light carries, and how temperature affects how many lumps are around. The <em>h</em> is Planck&rsquo;s constant. The <em>k</em> is Boltzmann&rsquo;s. All of that was understood.</p>
+
+<p>The trouble was the left-hand fraction, <strong>8πν²/c³</strong>. That is a counting term. It answers the question: <em>how many distinct ways can light of frequency ν exist inside a box?</em> It is a number about geometry and bookkeeping, not about energy at all. And nobody could derive it from first principles. Every route to it went through classical electrodynamics — the old wave theory — which is exactly the theory that had just produced infinity. The derivation was borrowing the answer from the framework it was supposed to be replacing.</p>
+
+<p>Einstein had tried. Einstein, who in 1905 had introduced the light quantum in the first place, could not get there either; his own attempt needed Wien&rsquo;s law and Bohr&rsquo;s correspondence principle, both of which smuggled classical physics back in. The logical structure of the most successful formula in physics was, in 1924, held together by a guess.</p>
+
+<h2><span class="num">§ 03</span>The move</h2>
+
+<p>Bose&rsquo;s insight was not a new force, a new particle or a new experiment. It was a decision about bookkeeping, and it took about one sentence to state.</p>
+
+<p>Everyone before him had counted light the way you count people. If you have two photons and two places for them to be, you count the arrangement in which photon A is in place 1 and photon B in place 2 as <em>different</em> from the arrangement where they have swapped. That is how you would count wedding guests at tables, because guests have names, and a name is a fact about the world.</p>
+
+<p>Bose counted light the way you count money. Hand someone two ₹500 notes, then hand them the same two notes in the other order, and nothing has happened. There is no &ldquo;first note&rdquo; and &ldquo;second note.&rdquo; Two identical notes in the same place are just two notes in that place. Swapping them does not create a new situation, so counting it as one double-counts the universe.</p>
+
+<p>He then divided the space of possible states into cells of volume <em>h</em>³ — the smallest cell quantum mechanics allows — and counted the number of ways to put photons into cells, with no labels on the photons. That was the whole method. One assumption, the size of a cell, and one refusal, to label the occupants.</p>
+
+<p>The factor 8πν²/c³ fell out.</p>
+
+<p>He had not put it in. He had not used classical electrodynamics, Wien&rsquo;s law, or the correspondence principle. He had derived Planck&rsquo;s formula — the formula that Planck had guessed — from a counting rule and nothing else.</p>
+
+<div class="callout">
+  <span class="label">The detail worth keeping</span>
+  <p>Bose never used the word &ldquo;indistinguishable.&rdquo; He simply stopped labelling. The interpretation of what he had done — that identical quantum particles are not merely similar but genuinely have no identity, no this-one-and-that-one — was supplied later, largely by others, and it took another decade to become ordinary physics.</p>
+  <p>Which means the discovery was not a theory. It was a refusal to keep doing something everyone else was still doing.</p>
+</div>
+
+<h2><span class="num">§ 04</span>Rejection, and a postcard from Berlin</h2>
+
+<p>He wrote it up. Four pages. He sent it to the <em>Philosophical Magazine</em>, one of the standard journals of the day, and they declined it.</p>
+
+<p>What happened next is the reason this story is remembered at all. Bose did something that was, for a lecturer at a colonial university in 1924, close to unthinkable: he posted the manuscript to Albert Einstein. The covering note was short, and it is worth reading in full because of how plain it is:</p>
+
+<div class="pull">
+  <p>&ldquo;I do not know sufficient German to translate the paper. If you think the paper worth publication I shall be grateful if you arrange for its publication in Zeitschrift f&uuml;r Physik.&rdquo;</p>
+  <cite>S. N. Bose to A. Einstein, June 1924</cite>
+</div>
+
+<p>Einstein read it, and understood immediately what had been done. He translated it into German himself. He added a note of his own to the published version saying that Bose&rsquo;s derivation appeared to him an important step forward. The postcard he sent back, dated 2 July 1924, is almost cheerful: <em>I have translated your paper and given it to Zeitschrift f&uuml;r Physik for publication. It signifies an important step forward and pleases me very much.</em></p>
+
+<p>It appeared that year as &ldquo;Plancks Gesetz und Lichtquantenhypothese,&rdquo; four pages, volume 26, pages 178 to 181. The paper that Indian physics is proudest of needed a translator.</p>
+
+<p>One more consequence, easy to miss. The Einstein endorsement was what finally got Bose&rsquo;s application for two years of research leave approved at Dacca. He went to Paris, met Langevin and de Broglie; in October 1925 he reached Berlin, met Einstein, and sat in on Max Born&rsquo;s lectures on the new quantum theory. A man who had been working alone in Dhaka spent a year at the centre of the world.</p>
+
+<h2><span class="num">§ 05</span>What Einstein did with it</h2>
+
+<p>Bose had counted light, which is special: the number of photons in a box is not fixed. They are created and destroyed freely. Einstein asked the obvious next question — what if the particles are ordinary matter, atoms, with a fixed number of them? — and published the answer in 1924 and 1925.</p>
+
+<p>The statistics carried over. And so did a consequence that Einstein noticed and nobody could confirm: below some critical temperature, a gas of these particles should stop behaving like a gas at all. The particles would abandon the spread of energies they normally occupy and begin piling into the single lowest available state, one on top of another, without limit. Not a few of them. A macroscopic fraction of the whole sample, acting as one object with one wavefunction.</p>
+
+<p>It was a prediction with no experimental support whatsoever, made about a state of matter colder than anything that existed on Earth. Einstein published it and moved on. So did everyone else.</p>
+
+<h2><span class="num">§ 06</span>Seventy-one years of nothing</h2>
+
+<p>The year was 1995. Eric Cornell and Carl Wieman, working at a laboratory in Boulder, cooled a cloud of rubidium atoms with lasers and then with a magnetic trap, and got 2,000 atoms down to 20 nanokelvin — twenty billionths of a degree above absolute zero, colder than interstellar space. The cloud collapsed into a single quantum state. Photographs of it look like a smudge, then a sharper smudge, then a sudden dark spike rising out of nothing as the condensate forms.</p>
+
+<p>Wolfgang Ketterle at MIT did it independently with sodium, in clouds a hundred times larger, and then overlapped two condensates and watched interference fringes appear — proof that the atoms had become one coherent thing. The 2001 Nobel Prize went to the three of them, for confirming a prediction Einstein had published in 1925 — seventy-one years after Bose's four pages reached Berlin.</p>
+
+<p>Seventy-one years between the prediction and the demonstration. In a subject where we sometimes imagine progress as continuous, that is worth pausing on: a result can sit in the literature for most of a century, correct and unused, waiting for the technology that makes it visible.</p>
+
+<h2><span class="num">§ 07</span>Where it is in your life</h2>
+
+<p>Here is the part that the textbooks usually skip, and the part this series exists to fix. Bose&rsquo;s counting rule is not a curiosity at the edge of physics. It is load-bearing, in at least five places you have touched this week.</p>
+
+<p><strong>Lasers.</strong> Because photons are bosons, there is no limit to how many of them can occupy the same state. Pump enough energy into a medium and the photons do not scatter in all directions like a torch beam; they recruit each other into the same mode — same colour, same direction, same phase. That is what coherent light means, and it is a direct consequence of there being no name tags. The barcode scanner at the checkout, the laser in a Blu-ray drive, the fibre amplifier that carries this page to your screen, the LASIK machine: all of them are bosons doing the one thing fermions cannot.</p>
+
+<p><strong>Superconductivity, and therefore MRI.</strong> Two electrons, which are fermions and refuse to share, can pair up. The pair is a boson. Bosons can pile into the same state, so all the pairs do — and the resulting collective state carries current with exactly zero resistance. This is the heart of the theory of superconductivity worked out in 1957. Every MRI scanner in every hospital in India runs on a superconducting magnet. So does the maglev train, and so does the SQUID, the most sensitive magnetic-field detector we have, used to watch brain activity and to prospect for minerals.</p>
+
+<p><strong>Superfluidity.</strong> Cool liquid helium below 2.17 kelvin and it stops behaving like a liquid: it flows through gaps too narrow to pass through, climbs the walls of its container, and conducts heat in ways that make no sense. Same physics, different costume. The helium in a cryocooler, the coolant in a particle accelerator, the working fluid in half of modern low-temperature engineering — all of it is a Bose condensate you can pour.</p>
+
+<p><strong>Clocks and navigation.</strong> The best atomic clocks no longer just interrogate a warm vapour; they laser-cool their atoms and hold them nearly still so the transition can be read cleanly. Rubidium clocks fly on India&rsquo;s NavIC satellites. The precision that lets a receiver on the ground solve for your position to a few metres traces back, through a long chain of engineering, to the physics of many identical particles in one quantum state.</p>
+
+<p><strong>The oldest light in the universe.</strong> The cosmic microwave background — the afterglow of the Big Bang, mapped by satellite — is the most perfect blackbody ever measured. Its spectrum matches Planck&rsquo;s law to a few parts in a hundred thousand. The formula Bose derived in Dhaka is the reason we can read the temperature of the entire universe off a curve.</p>
+
+<p>And one more, less tangible: the word in the headline. When the Higgs boson was announced in 2012, most Indian newspapers ran a paragraph explaining that the &ldquo;boson&rdquo; in the name came from an Indian physicist. That was true. Paul Dirac coined the word in 1945, for the entire family of particles that obey Bose&rsquo;s statistics — and every force-carrying particle in the Standard Model belongs to that family.</p>
+
+<h2><span class="num">§ 08</span>What would not exist</h2>
+
+<p>This is the question the series asks of every subject, and it deserves a more careful answer than &ldquo;everything would collapse.&rdquo; There are three genuinely different kinds of loss here, and it is worth separating them.</p>
+
+<div class="breakout">
+<table class="tiers">
+  <thead>
+    <tr><th>Kind of loss</th><th>What</th><th>Why</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Would not exist</td>
+      <td>Bose&ndash;Einstein condensates. Atom lasers. Atom interferometers. Cold-atom quantum simulators. Neutral-atom quantum computers. The modern theory of superfluid helium. The 1957 theory of superconductivity, and with it the Josephson effect, SQUIDs and superconducting qubits.</td>
+      <td>Each one requires that many identical particles be allowed into one state. Remove the counting rule and the state has nowhere to come from — not as an unexplained fact, but as a thing you cannot even describe.</td>
+    </tr>
+    <tr>
+      <td>Would exist, but be a mystery</td>
+      <td>The laser (built in 1960, and Einstein had written down stimulated emission in 1917). Superconductivity (found in 1911, decades before anyone could explain it). The Higgs boson (found in 2012 by brute force and enormous machines).</td>
+      <td>Experiment outruns theory constantly. What you lose is not the gadget but the reason: no way to know why light coheres, no way to design a better laser, no way to predict which materials might superconduct, no way to build the framework that made the search for the Higgs possible in the first place.</td>
+    </tr>
+    <tr>
+      <td>Would exist, and we would barely notice</td>
+      <td>Almost everything else, including the great majority of engineering.</td>
+      <td>This is the honest part. Most of the built world would still work. That is precisely why the work stays in small circles: it is invisible not because it is unimportant but because it is load-bearing.</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>There is one loss that does not fit neatly into the table, and it is the largest. Bose&rsquo;s counting rule is what separates every particle in the universe into two families. Fermions — electrons, protons, quarks — refuse to share a state. Bosons — photons, gluons, the W and Z, the Higgs — crowd into one. Chemistry exists because electrons are fermions and are forced into shells and bonds. Light exists in the form it does because photons are bosons and are not. You could still measure all of this without the rule. You could not have a theory of matter.</p>
+
+<p>Which gives the cleanest version of the counterfactual: not <em>nothing would work</em>, but <em>everything would still work, and nobody would know why</em>.</p>
+
+<h2><span class="num">§ 09</span>The Indian part</h2>
+
+<p>Bose was born in Calcutta on 1 January 1894, the eldest of seven children. He took his master&rsquo;s in mixed mathematics from Presidency College in 1915, standing first, and joined Calcutta University as a research scholar the next year to work on relativity. From 1916 to 1921 he lectured there.</p>
+
+<p>The detail that explains the rest of his life: he and Meghnad Saha, working in a city with no modern physics library worth the name, taught themselves German and French so they could read Einstein&rsquo;s papers in the original, and then produced one of the first English-language collections of them. They were not waiting for the knowledge to arrive. They went and got it.</p>
+
+<p>In 1921 he moved to Dacca as a Reader, and stayed until 1945, becoming professor and head of department in 1927. It was there, in that isolation, that he did the work. The Royal Society&rsquo;s biographical memoir makes the point without softening it: his important discoveries were made &ldquo;working in isolation from the mainstream developments in Europe.&rdquo; There was no seminar to try the idea on. No colleague down the corridor who had already read the preprint. Just a man, a lecture, and a question his students had asked.</p>
+
+<p>The recognition was uneven. He was elected a Fellow of the Royal Society in 1958, which is as high as British science goes. He was nominated for the Nobel Prize in Physics four times — by K. Banerjee in 1956, D. S. Kothari in 1959, and by S. N. Bagchi and A. K. Dutta in 1962 — and the committee&rsquo;s expert, Oskar Klein, judged the work unworthy of the prize. Seven Nobel Prizes have since been awarded for research built directly on his counting. None of them went to him. He died in Calcutta on 4 February 1974.</p>
+
+<p>What he built besides the paper matters as much. With Saha, the first school of modern physics in India. Students, in two cities, for three decades. A national role in science education, in the Indian Science Congress, in the scientific institutions of a country that had just become a republic and needed them. He read Bengali, English, French, German and Sanskrit, and played the esraj.</p>
+
+<div class="pull">
+  <p>&ldquo;You don&rsquo;t know who he was? Half the particles in the universe obey him!&rdquo;</p>
+  <cite>A physics professor, quoted in The Telegraph, 2012</cite>
+</div>
+
+<h2><span class="num">§ 10</span>The move is the inheritance</h2>
+
+<p>Bose&rsquo;s contribution was not a discovery in the sense of finding a thing that had been hiding. It was a decision to stop doing something that everyone competent was still doing — labelling identical particles — because a convention had been mistaken for a law of nature. That is a move available to anyone, in any field, at any time. It requires no equipment. It requires noticing.</p>
+
+<p>And that is the argument of this series. India&rsquo;s scientific inheritance is not a list of names to be admired from a safe distance. It is a set of specific moves, made by specific people in specific rooms — a lecturer in Dhaka deciding that photons have no name tags, a young man in Allahabad working out how to take a star&rsquo;s temperature from its light, a teacher in Kolkata proving that black holes cannot be avoided — and each of those moves can still be learned from, argued with, and reused.</p>
+
+<p>The minds are not the problem. They never were.</p>
+
+<div class="sources">
+  <h4>Sources &amp; further reading</h4>
+  <ol>
+    <li>S. N. Bose, &ldquo;Plancks Gesetz und Lichtquantenhypothese,&rdquo; <em>Zeitschrift f&uuml;r Physik</em> 26, 178&ndash;181 (1924). English back-translation from Einstein&rsquo;s German available online.</li>
+    <li>J. Mehra, &ldquo;Satyendra Nath Bose, 1 January 1894 &ndash; 4 February 1974,&rdquo; <em>Biographical Memoirs of Fellows of the Royal Society</em> 21 (1975).</li>
+    <li>V. Singh, &ldquo;The man behind Bose statistics,&rdquo; <em>Physics Today</em> 59(10), October 2006 — includes the text of Einstein&rsquo;s postcard of 2 July 1924.</li>
+    <li>J. J. O&rsquo;Connor and E. F. Robertson, &ldquo;Satyendranath Bose,&rdquo; MacTutor History of Mathematics Archive, University of St Andrews.</li>
+    <li>Royal Swedish Academy of Sciences, press release for the Nobel Prize in Physics 2001 (Cornell, Ketterle, Wieman).</li>
+    <li>&ldquo;25 years of BEC,&rdquo; <em>Nature Reviews Physics</em>, July 2020.</li>
+    <li>Nobel nomination records for S. N. Bose, 1956&ndash;1962, Nobel Prize archive.</li>
+  </ol>
+</div>
+
+<div class="next">
+  <span class="label">Next in Quiet Physics</span>
+  <div class="t">02 · How to take a star&rsquo;s temperature from a photograph of its light</div>
+  <p>Meghnad Saha, 1920, and the equation that turned astronomy from a hobby of cataloguing into a science of measurement.</p>
+</div>
+
+</article>
+
+<footer>
+  <p>Quiet Physics · An occasional series on the science India actually did</p>
+</footer>
+
+</body>
+</html>
