@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Benchmarking an Open-Source AI Decision Model on a 2019 Laptop | Manish Tiwari</title>
-  <meta name="description" content="I can't afford the Jev API, so I ran the open-source Laya decision model on a 2019 GTX 1650 laptop instead — 847 ms per decision, a 4 GB VRAM memory problem, and a lesson about question design.">
+  <title>Benchmarking an Open-Source AI Decision Model on a 4GB VRAM Laptop | Manish Tiwari</title>
+  <meta name="description" content="I can't afford the Jev API, so I ran the open-source Laya decision model on a 4GB VRAM GTX 1650 laptop instead — 847 ms per decision, a 4 GB VRAM memory problem, and a lesson about question design.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://predictivemanish.github.io/blog/laya-gtx1650-benchmark/">
-  <meta property="og:title" content="No cloud budget, so I benchmarked Laya on my 2019 laptop">
+  <meta property="og:title" content="No cloud budget, so I benchmarked Laya on my 4GB VRAM laptop">
   <meta property="og:description" content="Everyone quotes T4 numbers. I measured Laya on a GTX 1650 instead: 847 ms per decision and a 4 GB VRAM problem. Full method, code and raw JSON.">
   <meta property="og:site_name" content="Manish Tiwari">
   <meta name="twitter:card" content="summary_large_image">
@@ -15,8 +15,8 @@
   <link rel="canonical" href="https://predictivemanish.github.io/blog/laya-gtx1650-benchmark/">
   <meta name="theme-color" content="#111113">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <meta name="twitter:title" content="No cloud budget, so I benchmarked Laya on my 2019 laptop">
-  <meta name="twitter:description" content="847 ms per decision on a 2019 GTX 1650 — my honest numbers from the Jev vs Laya week.">
+  <meta name="twitter:title" content="No cloud budget, so I benchmarked Laya on my 4GB VRAM laptop">
+  <meta name="twitter:description" content="847 ms per decision on a 4GB VRAM GTX 1650 — my honest numbers from the Jev vs Laya week.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -193,7 +193,7 @@
 
   <div class="post-hero fade f1">
     <p class="section-label" style="margin-top:0;">Benchmark · September 22, 2026 · 5 min read</p>
-    <h1>Benchmarking an Open-Source AI Decision Model on a 2019 Laptop</h1>
+    <h1>Benchmarking an Open-Source AI Decision Model on a 4GB VRAM Laptop</h1>
     <p class="dek">847&nbsp;ms per decision, a 4&nbsp;GB memory problem, and a phishing detector that actually works — everything I measured on a GTX&nbsp;1650, for ₹0.</p>
     <div class="post-meta">
       <span>Manish Tiwari</span>
@@ -212,7 +212,7 @@
 
   <article class="post-body fade f2">
 
-    <p class="lead">The Jev vs Laya argument this week is being settled with numbers from Tesla T4s, RTX 5090s and Mac Studios. I wanted in on the conversation, but Jev is a closed, paid, cloud-only API &mdash; and I&rsquo;m not spending money I don&rsquo;t have on a benchmark. What I do have is a 2019 Acer Aspire 7, a GTX&nbsp;1650 with 4&nbsp;GB of VRAM, and a free weekend. So that&rsquo;s what I tested on, and here are the numbers.</p>
+    <p class="lead">The Jev vs Laya argument this week is being settled with numbers from Tesla T4s, RTX 5090s and Mac Studios. I wanted in on the conversation, but Jev is a closed, paid, cloud-only API &mdash; and I&rsquo;m not spending money I don&rsquo;t have on a benchmark. What I do have is a 4GB VRAM Acer Aspire 7, a GTX&nbsp;1650 with 4&nbsp;GB of VRAM, and a free weekend. So that&rsquo;s what I tested on, and here are the numbers.</p>
 
     <p>Quick honesty note before anything else: <strong>I only used Laya</strong>, the open-source one. People have already run Laya locally on Macs, desktop GPUs, even a browser tab &mdash; I&rsquo;m not claiming to be first at anything. My contribution is narrower: I couldn&rsquo;t find numbers from hardware this small, the 4&nbsp;GB laptop card that thousands of students own. Now there are some.</p>
 
@@ -333,7 +333,7 @@
     <p class="section-label">Takeaway</p>
     <h2>Why I&rsquo;m still glad I ran it</h2>
 
-    <p>On a 2019 gaming laptop, the open model answers any single typed question in under a second &mdash; free, offline, on my own weights. The cloud one is faster and bills per call. Neither number alone tells you which is right for you; but only one of them runs when the wifi is down, and only one of them I can fine-tune on a free Kaggle GPU and keep in the same folder as my college notes.</p>
+    <p>On a 4GB VRAM gaming laptop, the open model answers any single typed question in under a second &mdash; free, offline, on my own weights. The cloud one is faster and bills per call. Neither number alone tells you which is right for you; but only one of them runs when the wifi is down, and only one of them I can fine-tune on a free Kaggle GPU and keep in the same folder as my college notes.</p>
 
     <p>The gap between the benchmark world and my laptop is 15&ndash;22&times;, measured. That&rsquo;s not a reason to stay out of the conversation &mdash; it&rsquo;s my entry ticket into it.</p>
 

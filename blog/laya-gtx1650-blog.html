@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Everyone Benchmarks AI Decision Models on Datacenter GPUs. I Used My 2019 Laptop.</title>
+<title>Everyone Benchmarks AI Decision Models on Datacenter GPUs. I Used My 4GB VRAM Laptop.</title>
 <meta name="description" content="First measured numbers for the open-source Laya decision model on a GTX 1650 laptop — latency, a memory anomaly, and what ten labeled emails taught me.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,7 +35,7 @@
   @media (prefers-color-scheme: dark) {
     :root {
       --bg: #17120e;
-      --surface: #201913;
+      --surface: #4GB VRAM13;
       --surface-elevated: #261e17;
       --border: rgba(250, 240, 230, 0.09);
       --border-bright: rgba(250, 240, 230, 0.16);
@@ -343,7 +343,7 @@
   <!-- ================= HERO ================= -->
   <header class="hero">
     <div class="hero__category">Benchmark log &middot; September 22, 2026</div>
-    <h1>Everyone benchmarks AI decision models on datacenter GPUs. I used my 2019 laptop.</h1>
+    <h1>Everyone benchmarks AI decision models on datacenter GPUs. I used my 4GB VRAM laptop.</h1>
     <p class="hero__subtitle">First measured numbers for the open-source Laya decision model on a GTX&nbsp;1650 — including a memory problem the T4 tables won&rsquo;t show you.</p>
     <div class="byline">
       <div class="byline__avatar">MT</div>
@@ -389,7 +389,7 @@
 
     <p>Every latency figure in that debate since — the 38&nbsp;ms headlines, the &ldquo;faster than Jev&rdquo; claims — comes from Tesla T4s, RTX 5090s and Mac M2s. Hardware most people will never touch. Nobody asked the obvious question: what happens on the laptop most of us actually own?</p>
 
-    <p>So I ran it on mine: an Acer Aspire 7 with an i5-12450H, 16&nbsp;GB of RAM and a GTX&nbsp;1650 with 4&nbsp;GB of VRAM. A 2019-class gaming laptop — the kind a student buys, not the kind a lab benchmarks on.</p>
+    <p>So I ran it on mine: an Acer Aspire 7 with an i5-12450H, 16&nbsp;GB of RAM and a GTX&nbsp;1650 with 4&nbsp;GB of VRAM. A 4GB VRAM-class gaming laptop — the kind a student buys, not the kind a lab benchmarks on.</p>
 
     <div class="section-label">Methodology</div>
     <h2>What I actually measured</h2>
@@ -422,7 +422,7 @@
     </div>
     <p class="table-note">The T4 column is the model card&rsquo;s published figure — quoted, never measured here. Cross-hardware comparisons are indicative only.</p>
 
-    <p>Read it plainly: a 2019 consumer laptop is <strong>15&ndash;22&times; slower</strong> than the published T4 figures. Every single-question decision still completes in under a second — not fast, but real, local, free and offline. Cold load took 29.7&nbsp;s and 57.1&nbsp;s on two consecutive runs from a warm cache: &ldquo;time to first decision&rdquo; on a laptop is a different story from a warm server.</p>
+    <p>Read it plainly: a 4GB VRAM consumer laptop is <strong>15&ndash;22&times; slower</strong> than the published T4 figures. Every single-question decision still completes in under a second — not fast, but real, local, free and offline. Cold load took 29.7&nbsp;s and 57.1&nbsp;s on two consecutive runs from a warm cache: &ldquo;time to first decision&rdquo; on a laptop is a different story from a warm server.</p>
 
     <p>One number surprised me in the good direction: batching still amortizes on weak hardware.</p>
 
@@ -507,7 +507,7 @@
     <div class="section-label section-label--alt">Takeaway</div>
     <h2>Why this number matters</h2>
 
-    <p>On a 2019 gaming laptop, the open decision model answers any single typed question in under a second — free, offline, on your own weights. The cloud one is faster and bills per call. Neither number tells you which is right for you; but only one of them runs when the wifi is down, and only one of them you can fine-tune on a free Kaggle GPU and put back in the same folder as your college notes.</p>
+    <p>On a 4GB VRAM gaming laptop, the open decision model answers any single typed question in under a second — free, offline, on your own weights. The cloud one is faster and bills per call. Neither number tells you which is right for you; but only one of them runs when the wifi is down, and only one of them you can fine-tune on a free Kaggle GPU and put back in the same folder as your college notes.</p>
 
     <p>The gap between the benchmark world and the real world is 15&ndash;22&times;, measured. It is not a reason to stay off this wave. It is just the number nobody had written down.</p>
 

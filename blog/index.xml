@@ -11,11 +11,11 @@
     <atom:link href="https://predictivemanish.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Benchmarking an Open-Source AI Decision Model on a 2019 Laptop</title>
+      <title>Benchmarking an Open-Source AI Decision Model on a 4GB VRAM Laptop</title>
       <link>https://predictivemanish.github.io/blog/laya-gtx1650-benchmark/</link>
       <pubDate>Mon, 22 Sep 2026 00:00:00 +0000</pubDate>
       <guid>https://predictivemanish.github.io/blog/laya-gtx1650-benchmark/</guid>
-      <description><p>I can’t afford the Jev API, so I ran the open-source Laya model on a 2019 GTX 1650 laptop instead: 847 ms per decision, a 4 GB VRAM memory problem, and a lesson about question design.</p></description>
+      <description><p>I can’t afford the Jev API, so I ran the open-source Laya model on a 4GB VRAM GTX 1650 laptop instead: 847 ms per decision, a 4 GB VRAM memory problem, and a lesson about question design.</p></description>
     </item>
         <item>
       <title>Beyond the Scorecard: Decoding Team Strategies in IPL 2025 Using Data Science</title>
