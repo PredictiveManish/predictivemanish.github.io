@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Benchmarking an Open-Source AI Decision Model on a 4GB VRAM Laptop | Manish Tiwari</title>
-  <meta name="description" content="I can't afford the Jev API, so I ran the open-source Laya decision model on a 4GB VRAM GTX 1650 laptop instead — 847 ms per decision, a 4 GB VRAM memory problem, and a lesson about question design.">
+  <meta name="description" content="I can't afford the Jev API, so I ran the open-source Laya decision model on a 4GB VRAM GTX 1650 laptop instead, 847 ms per decision, a 4 GB VRAM memory problem, and a lesson about question design.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://predictivemanish.github.io/blog/laya-gtx1650-benchmark/">
   <meta property="og:title" content="No cloud budget, so I benchmarked Laya on my 4GB VRAM laptop">
@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#111113">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <meta name="twitter:title" content="No cloud budget, so I benchmarked Laya on my 4GB VRAM laptop">
-  <meta name="twitter:description" content="847 ms per decision on a 4GB VRAM GTX 1650 — my honest numbers from the Jev vs Laya week.">
+  <meta name="twitter:description" content="847 ms per decision on a 4GB VRAM GTX 1650, my honest numbers from the Jev vs Laya week.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -194,7 +194,7 @@
   <div class="post-hero fade f1">
     <p class="section-label" style="margin-top:0;">Benchmark · September 22, 2026 · 5 min read</p>
     <h1>Benchmarking an Open-Source AI Decision Model on a 4GB VRAM Laptop</h1>
-    <p class="dek">847&nbsp;ms per decision, a 4&nbsp;GB memory problem, and a phishing detector that actually works — everything I measured on a GTX&nbsp;1650, for ₹0.</p>
+    <p class="dek">847&nbsp;ms per decision, a 4&nbsp;GB memory problem, and a phishing detector that actually works, everything I measured on a GTX&nbsp;1650, for ₹0.</p>
     <div class="post-meta">
       <span>Manish Tiwari</span>
       <span>Independent benchmark</span>
@@ -238,7 +238,7 @@
         </tbody>
       </table>
     </div>
-    <p class="table-note">The T4 column is the model card&rsquo;s published figure — quoted, never measured here. Cross-hardware comparisons are indicative only.</p>
+    <p class="table-note">The T4 column is the model card&rsquo;s published figure, quoted, never measured here. Cross-hardware comparisons are indicative only.</p>
 
     <p>So: my laptop is <strong>15&ndash;22&times; slower</strong> than the T4 figures everyone quotes &mdash; and every single-question decision still completes in under a second. Not fast, but real, local, free and offline. Cold load is its own tax: 29.7&nbsp;s and 57.1&nbsp;s on two consecutive runs from a warm cache.</p>
 
@@ -289,12 +289,12 @@
       <div class="score">
         <div class="s-label">Churn risk</div>
         <div class="s-main ok">8 / 10</div>
-        <div class="s-sub">Worst miss: P&nbsp;=&nbsp;0.33 on an explicit cancellation threat — underconfident, not wrong-headed.</div>
+        <div class="s-sub">Worst miss: P&nbsp;=&nbsp;0.33 on an explicit cancellation threat, underconfident, not wrong-headed.</div>
       </div>
       <div class="score">
         <div class="s-label">Dept. routing</div>
         <div class="s-main miss">6 / 10</div>
-        <div class="s-sub">All four misses were scam or abuse emails — absorbed by my schema&rsquo;s &ldquo;billing&rdquo; and &ldquo;technical&rdquo; options.</div>
+        <div class="s-sub">All four misses were scam or abuse emails, absorbed by my schema&rsquo;s &ldquo;billing&rdquo; and &ldquo;technical&rdquo; options.</div>
       </div>
     </div>
 
@@ -339,8 +339,8 @@
 
     <div class="credits">
       <p class="section-label" style="margin-top:0;">Credits & sources</p>
-      <div class="row"><span class="k">Model</span><span><a href="https://huggingface.co/convaiinnovations/laya" target="_blank">Laya</a> — created by <strong>Nandakishor Mukkunnoth</strong> (Convai Innovations), Apache&nbsp;2.0. Code: <a href="https://github.com/NandhaKishorM/laya" target="_blank">github.com/NandhaKishorM/laya</a> &middot; <code>pip install laya</code> &middot; <a href="https://laya.convaiinnovations.com/" target="_blank">project site</a></span></div>
-      <div class="row"><span class="k">Context</span><span>Jev is a product of TypeSafe. Not used in this benchmark — closed, cloud-only, paid.</span></div>
+      <div class="row"><span class="k">Model</span><span><a href="https://huggingface.co/convaiinnovations/laya" target="_blank">Laya</a>, created by <strong>Nandakishor Mukkunnoth</strong> (Convai Innovations), Apache&nbsp;2.0. Code: <a href="https://github.com/NandhaKishorM/laya" target="_blank">github.com/NandhaKishorM/laya</a> &middot; <code>pip install laya</code> &middot; <a href="https://laya.convaiinnovations.com/" target="_blank">project site</a></span></div>
+      <div class="row"><span class="k">Context</span><span>Jev is a product of TypeSafe. Not used in this benchmark, closed, cloud-only, paid.</span></div>
       <div class="row"><span class="k">My code</span><span>Benchmark script, raw JSON, labeled emails and full methodology: <a href="https://github.com/predictivemanish/laya-gtx1650-benchmark" target="_blank">github.com/predictivemanish/laya-gtx1650-benchmark</a></span></div>
       <div class="row"><span class="k">Measured on</span><span>Windows&nbsp;10 &middot; Python&nbsp;3.11.15 &middot; torch&nbsp;2.12.1+cu126 &middot; fp32 &middot; September&nbsp;22,&nbsp;2026</span></div>
     </div>

@@ -1,356 +1,204 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>I built a post-quantum benchmark. Then I spent a week trying to break it.</title>
-<meta name="description" content="57 tasks, seven tiers and four validation gates — and the three bugs the gates caught in my own grading code.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --font-display: 'Instrument Serif', Georgia, serif;
-    --font-body: 'Literata', Georgia, serif;
-    --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I built a post-quantum benchmark. Then I spent a week trying to break it. | Manish Tiwari</title>
+  <meta name="description" content="57 tasks, seven tiers and four validation gates - and the three bugs the gates caught in my own grading code. PQC-Eval v1.0.0.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://predictivemanish.github.io/blog/pqc-eval-technical-report/">
+  <meta property="og:title" content="I built a post-quantum benchmark. Then I tried to break it.">
+  <meta property="og:description" content="57 tasks, seven tiers, four validation gates. And the three bugs the gates caught in my own grading code.">
+  <meta property="og:site_name" content="Manish Tiwari">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://predictivemanish.github.io/og-image.png">
+  <link rel="canonical" href="https://predictivemanish.github.io/blog/pqc-eval-technical-report/">
+  <meta name="theme-color" content="#111113">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta name="twitter:title" content="I built a post-quantum benchmark. Then I tried to break it.">
+  <meta name="twitter:description" content="57 tasks, seven tiers, four validation gates. And the three bugs the gates caught in my own grading code.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg: #111113; --bg-raised: #18181b; --border: #27272a; --border-light: #3f3f46; --text: #e4e4e7; --text-2: #a1a1aa; --text-3: #71717a; --accent: #d4a96a; --accent-dim: #7c5e35; --green: #6ee7b7; --red: #fca5a5; --amber: #f5c97b; --serif: 'Lora', Georgia, serif; --mono: 'DM Mono', 'Courier New', monospace; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--serif); font-size: 17px; line-height: 1.75; -webkit-font-smoothing: antialiased; }
+    .wrap { max-width: 680px; margin: 0 auto; padding: 0 1.5rem; }
+    a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+    code { font-family: var(--mono); font-size: 0.82em; background: rgba(212,169,106,0.1); color: var(--accent); padding: 1px 6px; border-radius: 3px; }
 
-    --bg: #faf7f5;
-    --surface: #ffffff;
-    --surface-elevated: #ffffff;
-    --border: rgba(60, 40, 30, 0.10);
-    --border-bright: rgba(60, 40, 30, 0.18);
-    --text: #2b2118;
-    --text-dim: #7a6a5c;
-    --accent: #c2410c;         /* terracotta */
-    --accent-dim: rgba(194, 65, 12, 0.08);
-    --accent-2: #65a30d;       /* sage */
-    --accent-2-dim: rgba(101, 163, 13, 0.10);
-    --amber: #b45309;
-    --amber-dim: rgba(180, 83, 9, 0.09);
-    --red: #b91c1c;
-    --red-dim: rgba(185, 28, 28, 0.07);
-    --green: #3f6212;
-    --green-dim: rgba(63, 98, 18, 0.08);
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #17120e;
-      --surface: #4GB VRAM13;
-      --surface-elevated: #261e17;
-      --border: rgba(250, 240, 230, 0.09);
-      --border-bright: rgba(250, 240, 230, 0.16);
-      --text: #ede4d8;
-      --text-dim: #a39486;
-      --accent: #e8763f;
-      --accent-dim: rgba(232, 118, 63, 0.10);
-      --accent-2: #a3c76a;
-      --accent-2-dim: rgba(163, 199, 106, 0.10);
-      --amber: #e3a04a;
-      --amber-dim: rgba(227, 160, 74, 0.10);
-      --red: #e8746a;
-      --red-dim: rgba(232, 116, 106, 0.09);
-      --green: #b5cf7a;
-      --green-dim: rgba(181, 207, 122, 0.10);
+    /* Nav */
+    nav { border-bottom: 1px solid var(--border); padding: 1.25rem 0; }
+    nav .inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .nav-name { font-family: var(--serif); font-size: 1rem; font-weight: 600; color: var(--text); text-decoration: none; }
+    .nav-links { display: flex; align-items: center; gap: 1.5rem; list-style: none; }
+    .nav-links a { font-family: var(--mono); font-size: 0.72rem; color: var(--text-2); text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.15s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+    .resume-btn { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; background: transparent; border: 1px solid var(--accent-dim); color: var(--accent); padding: 0.3rem 0.75rem; border-radius: 3px; text-decoration: none; transition: background 0.15s, border-color 0.15s; }
+    .resume-btn:hover { background: rgba(212, 169, 106, 0.08); border-color: var(--accent); text-decoration: none; }
+
+    /* Post hero */
+    .post-hero { padding: 3rem 0 1.5rem; }
+    .post-hero h1 { font-size: clamp(1.9rem, 5vw, 2.6rem); font-weight: 600; line-height: 1.18; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .post-hero .dek { font-family: var(--serif); font-style: italic; font-size: 1.15rem; color: var(--text-2); line-height: 1.6; margin-bottom: 1.5rem; }
+    .post-meta { font-family: var(--mono); font-size: 0.68rem; color: var(--text-3); letter-spacing: 0.05em; text-transform: uppercase; display: flex; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.75rem; border-bottom: 1px solid var(--border); }
+    .hw-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0 0.5rem; }
+    .chip { font-family: var(--mono); font-size: 0.65rem; color: var(--text-2); background: var(--bg-raised); border: 1px solid var(--border); padding: 0.25rem 0.6rem; border-radius: 2px; }
+
+    /* Body */
+    .post-body { padding-bottom: 1rem; }
+    .post-body p { margin-bottom: 1.4em; color: var(--text); }
+    .post-body p.lead { font-size: 1.12rem; color: var(--text); line-height: 1.7; }
+    .post-body strong { color: var(--text); font-weight: 600; }
+    .section-label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); margin: 2.75rem 0 0.75rem; }
+    .post-body h2 { font-family: var(--serif); font-size: 1.5rem; font-weight: 600; line-height: 1.25; margin: 0.35rem 0 1rem; letter-spacing: -0.01em; }
+
+    /* Stats (site pattern) */
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin: 1.25rem 0 1.75rem; }
+    .stat { background: var(--bg-raised); padding: 1rem 0.6rem; text-align: center; }
+    .stat-n { font-family: var(--mono); font-size: 1.35rem; font-weight: 500; color: var(--accent); display: block; }
+    .stat-l { font-family: var(--mono); font-size: 0.58rem; color: var(--text-3); text-transform: uppercase; display: block; margin-top: 0.25rem; letter-spacing: 0.06em; }
+
+    /* Table */
+    .table-wrap { border: 1px solid var(--border); border-radius: 4px; overflow-x: auto; margin: 1.25rem 0 0.5rem; background: var(--bg-raised); }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    th { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); text-align: right; padding: 0.75rem 1rem; border-bottom: 2px solid var(--border-light); white-space: nowrap; }
+    th:first-child { text-align: left; }
+    td { padding: 0.7rem 1rem; border-bottom: 1px solid var(--border); font-variant-numeric: tabular-nums; text-align: right; font-family: var(--mono); font-size: 0.82rem; }
+    td:first-child { text-align: left; font-family: var(--serif); }
+    tr:last-child td { border-bottom: none; }
+    td.pub { color: var(--text-3); }
+    .table-note { font-size: 0.82rem; color: var(--text-3); font-style: italic; margin-bottom: 1.5rem; }
+
+    /* Bars */
+    .bars { margin: 1.25rem 0 0.5rem; }
+    .bar-row { margin-bottom: 0.9rem; }
+    .bar-head { display: flex; justify-content: space-between; align-items: baseline; font-family: var(--mono); font-size: 0.68rem; margin-bottom: 0.35rem; }
+    .bar-label { color: var(--text-2); } .bar-value { color: var(--text); font-weight: 500; }
+    .bar-track { height: 10px; border-radius: 5px; background: var(--border); overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 5px; background: var(--accent); }
+    .bars-note { font-size: 0.82rem; color: var(--text-3); font-style: italic; margin-bottom: 1.5rem; }
+
+    /* Callouts */
+    .callout { border-left: 3px solid var(--accent-dim); background: var(--bg-raised); padding: 1rem 1.25rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; }
+    .callout .c-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
+    .callout p { font-size: 0.95rem; line-height: 1.65; margin: 0; color: var(--text-2); }
+    .callout ul { margin: 0.5rem 0 0 1.25rem; font-size: 0.92rem; color: var(--text-2); line-height: 1.7; }
+
+    /* Pull quote */
+    .pullquote { border-left: 3px solid var(--accent); padding: 0.25rem 0 0.25rem 1.5rem; margin: 2.5rem 0; }
+    .pullquote p { font-family: var(--serif); font-style: italic; font-size: 1.3rem; line-height: 1.45; color: var(--text); margin: 0; }
+
+    /* Score grid */
+    .score-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin: 1.25rem 0; }
+    .score { background: var(--bg-raised); border: 1px solid var(--border); border-radius: 4px; padding: 0.9rem 1rem; }
+    .score .s-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); margin-bottom: 0.5rem; }
+    .score .s-main { font-family: var(--mono); font-size: 1.15rem; color: var(--accent); }
+    .score .s-sub { font-size: 0.78rem; color: var(--text-2); line-height: 1.5; margin-top: 0.3rem; }
+    .ok { color: var(--green); } .miss { color: var(--red); }
+
+    /* Credits */
+    .credits { border-top: 1px solid var(--border); margin-top: 2.5rem; padding-top: 1.5rem; }
+    .credits .row { display: flex; gap: 0.75rem; padding: 0.5rem 0; font-size: 0.9rem; color: var(--text-2); align-items: baseline; flex-wrap: wrap; }
+    .credits .k { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); min-width: 110px; flex-shrink: 0; }
+
+    /* Footer */
+    footer { padding: 2rem 0; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
+    footer p { font-family: var(--mono); font-size: 0.68rem; color: var(--text-3); }
+    footer a { color: var(--text-3); text-decoration: none; transition: color 0.15s; }
+    footer a:hover { color: var(--accent); }
+
+    .fade { opacity: 0; animation: fadeUp 0.5s ease forwards; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    .f1 { animation-delay: 0.05s; } .f2 { animation-delay: 0.15s; }
+
+    @media (max-width: 540px) {
+      .nav-links { gap: 1rem; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .score-grid { grid-template-columns: 1fr; }
+      .credits .k { min-width: 100%; }
     }
-  }
+  
+    /* ── Brutalist re-skin ── */
+    :root { --bg:#f2f1ea; --bg-raised:#ffffff; --border:#0d0d0d; --border-light:#0d0d0d; --text:#0d0d0d; --text-2:#2b2b2b; --text-3:#5a5a55; --accent:#ff3d00; --accent-dim:#0d0d0d; --green:#0d0d0d; --red:#ff3d00; --amber:#ffe600; }
+    body { background:#f2f1ea; color:#0d0d0d; }
+    nav { padding:1rem 0; border-bottom:3px solid #0d0d0d; background:#f2f1ea; position:sticky; top:0; z-index:60; }
+    .nav-name { font-family:'DM Mono',monospace; font-weight:500; text-transform:uppercase; letter-spacing:.06em; color:#0d0d0d; font-size:.95rem; }
+    .nav-links a { font-family:'DM Mono',monospace; font-size:.7rem; text-transform:uppercase; letter-spacing:.06em; color:#0d0d0d; }
+    .nav-links a:hover { color:#ff3d00; }
+    .resume-btn { font-family:'DM Mono',monospace; background:#0d0d0d; color:#f2f1ea; border:2px solid #0d0d0d; box-shadow:4px 4px 0 #ff3d00; border-radius:0; text-transform:uppercase; padding:.45rem .85rem; }
+    .post-hero h1, .post-body h1 { font-family:'DM Mono',monospace; text-transform:uppercase; font-weight:500; letter-spacing:-.02em; color:#0d0d0d; }
+    .dek { color:#2b2b2b; }
+    .post-meta { color:#0d0d0d; }
+    .post-meta a { color:#0d0d0d; }
+    .hw-chips .chip { border:2px solid #0d0d0d; border-radius:0; background:#fff; color:#0d0d0d; font-family:'DM Mono',monospace; text-transform:uppercase; }
+    .post-body { color:#2b2b2b; }
+    .post-body h2 { font-family:'DM Mono',monospace; text-transform:uppercase; font-weight:500; letter-spacing:-.01em; color:#0d0d0d; }
+    .post-body a { color:#ff3d00; }
+    .post-body code { background:#fff; border:2px solid #0d0d0d; border-radius:0; padding:.05rem .3rem; font-size:.85em; }
+    .post-body .section-label { color:#0d0d0d; background:#ffe600; display:inline-block; padding:.15rem .5rem; border:2px solid #0d0d0d; font-family:'DM Mono',monospace; }
+    .stats .stat { background:#fff; border:3px solid #0d0d0d; box-shadow:5px 5px 0 #0d0d0d; border-radius:0; }
+    .stat-n { font-family:'DM Mono',monospace; color:#0d0d0d; }
+    .stat-l { color:#0d0d0d; opacity:.65; font-family:'DM Mono',monospace; text-transform:uppercase; }
+    .table-wrap { border:3px solid #0d0d0d; box-shadow:5px 5px 0 #0d0d0d; background:#fff; border-radius:0; overflow:hidden; }
+    table { border-collapse:collapse; width:100%; }
+    th { background:#0d0d0d; color:#f2f1ea; font-family:'DM Mono',monospace; text-transform:uppercase; border:2px solid #0d0d0d; }
+    td { border:2px solid #0d0d0d; color:#2b2b2b; }
+    .table-note { color:#5a5a55; }
+    .callout { background:#fff; border:3px solid #0d0d0d; box-shadow:5px 5px 0 #0d0d0d; border-radius:0; }
+    .callout li, .callout p { color:#2b2b2b; }
+    .c-label { font-family:'DM Mono',monospace; text-transform:uppercase; color:#ff3d00; }
+    .bar-track { background:#f2f1ea; border:2px solid #0d0d0d; border-radius:0; }
+    .bar-fill { background:#ff3d00; }
+    .bar-label, .bar-value { font-family:'DM Mono',monospace; color:#0d0d0d; }
+    .bars-note { color:#5a5a55; }
+    .score { background:#fff; border:3px solid #0d0d0d; box-shadow:5px 5px 0 #0d0d0d; border-radius:0; }
+    .s-label { font-family:'DM Mono',monospace; text-transform:uppercase; color:#0d0d0d; }
+    .s-main { font-family:'DM Mono',monospace; color:#0d0d0d; }
+    .s-sub { color:#2b2b2b; }
+    .pullquote { border:3px solid #0d0d0d; border-left:8px solid #ff3d00; background:#fff; border-radius:0; }
+    .pullquote p { font-family:'DM Mono',monospace; color:#0d0d0d; }
+    .credits { background:#fff; border:3px solid #0d0d0d; box-shadow:5px 5px 0 #0d0d0d; border-radius:0; }
+    .credits .k { font-family:'DM Mono',monospace; text-transform:uppercase; color:#0d0d0d; }
+    .credits .row { border-color:#0d0d0d; }
+    .credits a { color:#ff3d00; }
+    footer { border-top:3px solid #0d0d0d; background:#0d0d0d; }
+    footer p { color:#f2f1ea; font-family:'DM Mono',monospace; }
+    footer a { color:#f2f1ea; }
+    footer a:hover { color:#ff3d00; }
 
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    font-family: var(--font-body);
-    color: var(--text);
-    background-color: var(--bg);
-    background-image:
-      radial-gradient(ellipse 60% 30% at 50% -5%, var(--accent-dim) 0%, transparent 70%);
-    overflow-wrap: break-word;
-    -webkit-font-smoothing: antialiased;
-  }
-  .grid > *, .flex > * { min-width: 0; }
-
-  .page { max-width: 720px; margin: 0 auto; padding: 0 24px 96px; }
-
-  /* ---------- Hero ---------- */
-  .hero { padding: 72px 0 8px; }
-  .hero__category {
-    font-family: var(--font-mono);
-    font-size: 11px; font-weight: 600;
-    letter-spacing: 2.5px; text-transform: uppercase;
-    color: var(--accent);
-    display: flex; align-items: center; gap: 10px;
-    margin-bottom: 22px;
-  }
-  .hero__category::before {
-    content: ''; width: 9px; height: 9px; border-radius: 50%;
-    background: currentColor; flex-shrink: 0;
-  }
-  h1 {
-    font-family: var(--font-display);
-    font-weight: 400;
-    font-size: clamp(34px, 6.2vw, 52px);
-    line-height: 1.08;
-    letter-spacing: -0.5px;
-    margin: 0 0 18px;
-  }
-  .hero__subtitle {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: clamp(19px, 2.6vw, 24px);
-    line-height: 1.4;
-    color: var(--text-dim);
-    margin: 0 0 30px;
-  }
-  .byline {
-    display: flex; align-items: center; gap: 14px;
-    padding-bottom: 26px;
-    border-bottom: 1px solid var(--border);
-    flex-wrap: wrap;
-  }
-  .byline__avatar {
-    width: 44px; height: 44px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent), var(--amber));
-    color: #fff; font-family: var(--font-display); font-size: 20px;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-  .byline__name { font-weight: 600; display: block; }
-  .byline__meta { font-size: 13px; color: var(--text-dim); font-family: var(--font-body); }
-  .hw-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
-  .chip {
-    font-family: var(--font-mono); font-size: 11px;
-    color: var(--text-dim);
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: 5px 12px;
-  }
-
-  /* ---------- KPI row ---------- */
-  .kpi-row {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 14px; margin: 44px 0 8px;
-  }
-  .kpi-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 18px 18px 16px;
-    animation: fadeScale 0.4s ease-out both;
-    animation-delay: calc(var(--i, 0) * 0.08s);
-  }
-  .kpi-card__value {
-    font-family: var(--font-mono);
-    font-size: 30px; font-weight: 600;
-    letter-spacing: -1px; line-height: 1.05;
-    font-variant-numeric: tabular-nums;
-    color: var(--accent);
-  }
-  .kpi-card__value--alt { color: var(--accent-2); }
-  .kpi-card__value--warn { color: var(--amber); }
-  .kpi-card__label {
-    font-family: var(--font-mono);
-    font-size: 9.5px; font-weight: 600;
-    text-transform: uppercase; letter-spacing: 1.4px;
-    color: var(--text-dim); margin-top: 8px; line-height: 1.5;
-  }
-
-  /* ---------- Prose ---------- */
-  .prose {
-    font-size: clamp(17px, 1.1vw + 14px, 18.5px);
-    line-height: 1.72;
-    max-width: 65ch;
-    text-wrap: pretty;
-  }
-  .lead {
-    font-size: clamp(19px, 1.6vw + 15px, 22px);
-    line-height: 1.55;
-    margin: 40px 0 12px;
-  }
-  .prose p { margin: 0 0 1.5em; }
-  .prose code, .callout code {
-    font-family: var(--font-mono); font-size: 0.82em;
-    background: var(--accent-dim); color: var(--accent);
-    padding: 1px 6px; border-radius: 4px;
-  }
-  .prose strong { font-weight: 600; }
-
-  .section-label {
-    font-family: var(--font-mono);
-    font-size: 11px; font-weight: 600;
-    letter-spacing: 2px; text-transform: uppercase;
-    color: var(--accent);
-    display: flex; align-items: center; gap: 9px;
-    margin: 58px 0 6px;
-  }
-  .section-label::before {
-    content: ''; width: 8px; height: 8px; border-radius: 50%;
-    background: currentColor; flex-shrink: 0;
-  }
-  .section-label--alt { color: var(--accent-2); }
-  h2 {
-    font-family: var(--font-display); font-weight: 400;
-    font-size: clamp(26px, 3.6vw, 34px);
-    line-height: 1.15; margin: 6px 0 18px;
-  }
-
-  /* ---------- Table ---------- */
-  .table-wrap {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    margin: 26px 0 8px;
-    animation: fadeUp 0.45s ease-out both;
-  }
-  .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .data-table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  .data-table th {
-    font-family: var(--font-mono);
-    font-size: 10.5px; font-weight: 600;
-    text-transform: uppercase; letter-spacing: 1.2px;
-    color: var(--text-dim);
-    text-align: left; padding: 12px 16px;
-    border-bottom: 2px solid var(--border-bright);
-    white-space: nowrap;
-  }
-  .data-table td {
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--border);
-    font-variant-numeric: tabular-nums;
-  }
-  .data-table td.num, .data-table th.num {
-    text-align: right; font-family: var(--font-mono);
-  }
-  .data-table tbody tr:nth-child(even) { background: var(--accent-dim); }
-  .data-table tbody tr:last-child td { border-bottom: none; }
-  .data-table .pub { color: var(--text-dim); }
-  .table-note {
-    font-size: 13px; color: var(--text-dim); font-style: italic;
-    margin: 10px 0 0;
-  }
-
-  /* ---------- Bar chart ---------- */
-  .bars { margin: 30px 0 6px; }
-  .bar-row { margin-bottom: 16px; }
-  .bar-row__head {
-    display: flex; justify-content: space-between; align-items: baseline;
-    font-family: var(--font-mono); font-size: 12px; margin-bottom: 6px;
-  }
-  .bar-row__label { color: var(--text-dim); letter-spacing: 0.5px; }
-  .bar-row__value { font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
-  .bar-track {
-    height: 14px; border-radius: 7px;
-    background: var(--border);
-    overflow: hidden;
-  }
-  .bar-fill {
-    height: 100%; border-radius: 7px;
-    background: linear-gradient(90deg, var(--accent), var(--amber));
-    animation: growX 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
-    transform-origin: left;
-  }
-  .bar-fill--alt { background: linear-gradient(90deg, var(--accent-2), var(--accent)); }
-  .bars-note {
-    font-size: 13px; color: var(--text-dim); font-style: italic; margin-top: 14px;
-  }
-
-  /* ---------- Callouts ---------- */
-  .callout {
-    padding: 18px 22px;
-    border-radius: 10px;
-    border-left: 4px solid var(--callout-border, var(--accent));
-    background: var(--callout-bg, var(--accent-dim));
-    margin: 26px 0;
-  }
-  .callout--warn { --callout-border: var(--amber); --callout-bg: var(--amber-dim); }
-  .callout--good { --callout-border: var(--green); --callout-bg: var(--green-dim); }
-  .callout__title {
-    font-family: var(--font-mono); font-size: 11px; font-weight: 600;
-    text-transform: uppercase; letter-spacing: 1.6px;
-    margin-bottom: 8px; color: var(--callout-border, var(--accent));
-  }
-  .callout p { font-size: 15.5px; line-height: 1.65; margin: 0; }
-  .callout p + p { margin-top: 10px; }
-  .callout ul { margin: 8px 0 0; padding-left: 1.4em; font-size: 15px; line-height: 1.7; }
-  .callout li + li { margin-top: 6px; }
-
-  /* ---------- Pull quote ---------- */
-  .pullquote {
-    margin: 52px 0;
-    padding-left: 26px;
-    border-left: 3px solid var(--accent);
-  }
-  .pullquote p {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: clamp(23px, 3vw, 28px);
-    line-height: 1.38;
-    margin: 0;
-  }
-
-  /* ---------- Score grid ---------- */
-  .score-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-    gap: 14px; margin: 26px 0;
-  }
-  .score-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px 18px;
-    animation: fadeUp 0.45s ease-out both;
-    animation-delay: calc(var(--i, 0) * 0.07s);
-  }
-  .score-card__head {
-    font-family: var(--font-mono); font-size: 10px; font-weight: 600;
-    text-transform: uppercase; letter-spacing: 1.3px;
-    color: var(--text-dim); margin-bottom: 10px;
-  }
-  .score-card__row {
-    display: flex; justify-content: space-between; align-items: baseline;
-    font-size: 14px; padding: 3px 0;
-  }
-  .score-card__row b { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
-  .ok { color: var(--green); } .miss { color: var(--red); }
-
-  /* ---------- Divider / footer ---------- */
-  .divider { text-align: center; margin: 60px 0; color: var(--text-dim); letter-spacing: 14px; font-size: 15px; }
-  footer {
-    margin-top: 70px; padding-top: 28px;
-    border-top: 1px solid var(--border);
-    font-size: 14px; color: var(--text-dim); line-height: 1.8;
-  }
-  footer a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
-  .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
-
-  /* ---------- Animations ---------- */
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-  @keyframes fadeScale { from { opacity: 0; transform: scale(0.93); } to { opacity: 1; transform: none; } }
-  @keyframes growX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-  .prose > *, .hero > * { animation: fadeUp 0.5s ease-out both; }
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
-</style>
+    /* ── Bottom wordmark ── */
+    .wordmark { overflow: hidden; padding: 2.5rem 0 1.25rem; line-height: 0; }
+    .wordmark svg { display: block; width: 100%; height: auto; }
+    .wordmark svg text { fill: #0d0d0d; }
+  </style>
 </head>
 <body>
-<div class="page">
+<nav>
+  <div class="wrap inner">
+    <a href="/" class="nav-name">Manish Tiwari</a>
+    <ul class="nav-links">
+      <li><a href="/projects/">Projects</a></li>
+      <li><a href="/blog/" style="color: var(--accent);">Blog</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/contact/">Contact</a></li>
+      <li><a href="/Manish_Tiwari_Applied_AI_Resume.pdf" download class="resume-btn">Resume ↓</a></li>
+    </ul>
+  </div>
+</nav>
 
-  <!-- ================= HERO ================= -->
-  <header class="hero">
-    <div class="hero__category">Benchmark log &middot; November 26, 2026</div>
+<div class="wrap">
+
+  <div class="post-hero fade f1">
+    <p class="section-label" style="margin-top:0;">Benchmark log &middot; November 26, 2026 &middot; 8 min read</p>
     <h1>I built a post-quantum benchmark. Then I spent a week trying to break it.</h1>
-    <p class="hero__subtitle">57 tasks, seven tiers, four validation gates &mdash; and the three bugs the gates caught in my own grading code.</p>
-    <div class="byline">
-      <div class="byline__avatar">MT</div>
-      <div>
-        <span class="byline__name">Manish Tiwari</span>
-        <span class="byline__meta">Independent research &middot; PQC-Eval v1.0.0 &middot; not affiliated with NIST or CERT-In</span>
-      </div>
+    <p class="dek">57 tasks, seven tiers, four validation gates &mdash; and the three bugs the gates caught in my own grading code.</p>
+    <div class="post-meta">
+      <span>Manish Tiwari</span>
+      <span>Independent research &middot; not affiliated with NIST or CERT-In</span>
+      <span><a href="/blog/" style="color:var(--text-3);">&larr; All posts</a></span>
     </div>
     <div class="hw-chips">
       <span class="chip">57 tasks</span>
@@ -358,37 +206,17 @@
       <span class="chip">74 sources</span>
       <span class="chip">4 gates</span>
       <span class="chip">Python 3.11&ndash;3.13</span>
-    </div>
-  </header>
-
-  <!-- ================= KPI ================= -->
-  <div class="kpi-row" aria-label="Key results">
-    <div class="kpi-card" style="--i:0">
-      <div class="kpi-card__value">847<span style="font-size:16px">&nbsp;ms</span></div>
-      <div class="kpi-card__label">median latency<br>one typed question</div>
-    </div>
-    <div class="kpi-card" style="--i:1">
-      <div class="kpi-card__value">15&ndash;22&times;</div>
-      <div class="kpi-card__label">slower than the<br>published T4 figures</div>
-    </div>
-    <div class="kpi-card" style="--i:2">
-      <div class="kpi-card__value kpi-card__value--alt">3.8&times;</div>
-      <div class="kpi-card__label">per-question savings<br>when batching 50 at once</div>
-    </div>
-    <div class="kpi-card" style="--i:3">
-      <div class="kpi-card__value kpi-card__value--warn">2.4&times;</div>
-      <div class="kpi-card__label">mean vs median on the<br>50-question workload</div>
+      <span class="chip">MIT</span>
     </div>
   </div>
 
-  <!-- ================= PROSE ================= -->
-    <article class="prose">
+  <article class="post-body fade f2">
 
     <p class="lead">Ask a language model when post-quantum migration has to happen and you get a confident answer. Ask the same model twice, in two different ways, and you get two different confident answers. That gap &mdash; between fluency and correctness &mdash; is the only reason this benchmark exists.</p>
 
     <p>PQC-Eval is a benchmark for evaluating language models on post-quantum cryptography: the algorithms, the standards that govern them, and the engineering work around them. I released v1.0.0 this week. This post is about what it measures, and more usefully, what broke while I was building it.</p>
 
-    <div class="section-label">Motivation</div>
+    <p class="section-label">Motivation</p>
     <h2>Why another crypto benchmark</h2>
 
     <p>There are already evaluations for cryptographic reasoning, and several are better resourced than mine. What none of them measure is the thing organisations will actually be judged on: whether a model can reason about <em>which</em> migration requirement applies, in <em>whose</em> jurisdiction, to <em>which</em> asset &mdash; and then do the engineering work.</p>
@@ -397,13 +225,20 @@
 
     <p>So the benchmark has three jobs: check whether the standards reasoning is jurisdiction-aware, check whether the implementation is correct against real reference outputs, and check whether the model can find cryptography in a codebase it has never seen.</p>
 
-    <div class="section-label">What exists</div>
+    <p class="section-label">What exists</p>
     <h2>Fifty-seven tasks across seven tiers</h2>
 
+    <div class="stats">
+      <div class="stat"><span class="stat-n">57</span><span class="stat-l">tasks</span></div>
+      <div class="stat"><span class="stat-n">7</span><span class="stat-l">tiers</span></div>
+      <div class="stat"><span class="stat-n">74</span><span class="stat-l">source URLs</span></div>
+      <div class="stat"><span class="stat-n">4</span><span class="stat-l">validation gates</span></div>
+    </div>
+
     <div class="table-wrap">
-      <table class="data-table">
+      <table>
         <thead>
-          <tr><th>Tier</th><th>Tasks</th><th>What it asks</th><th>How it is graded</th></tr>
+          <tr><th>tier</th><th>tasks</th><th>what it asks</th><th>how it is graded</th></tr>
         </thead>
         <tbody>
           <tr><td>Knowledge</td><td>10</td><td>Algorithm facts, parameter sets</td><td>Exact match</td></tr>
@@ -418,21 +253,39 @@
     </div>
     <p class="table-note">30 multiple choice, 15 executable code, 5 repository-level, 7 rubric-scored. 74 source URLs, all verified on 2026-11-25.</p>
 
+    <div class="bars">
+      <div class="bar-row">
+        <div class="bar-head"><span class="bar-label">Multiple choice</span><span class="bar-value">30 &middot; 53%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:53%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-head"><span class="bar-label">Executable code</span><span class="bar-value">15 &middot; 26%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:26%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-head"><span class="bar-label">Rubric-scored</span><span class="bar-value">7 &middot; 12%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:12%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-head"><span class="bar-label">Repository-level</span><span class="bar-value">5 &middot; 9%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:9%"></div></div>
+      </div>
+    </div>
+    <p class="bars-note">Still recall-heavy. Less so than the first version, which was 68% multiple choice.</p>
+
     <p>Every task is bound to at least one primary source, and the build fails if one is missing. That is not decoration: a benchmark about standards has no business being loose about which document says what.</p>
 
-    <div class="section-label">The part I got wrong first</div>
+    <p class="section-label">The part I got wrong first</p>
     <h2>I optimised for my own convenience</h2>
 
     <p>The first version was 68% multiple choice. The reason was not that knowledge questions are the most interesting &mdash; it is that a letter match grades deterministically and I could verify it in a second. Executable tasks need a checker, and a wrong checker quietly corrupts every score it produces.</p>
 
-    <p>That is a bad reason to shape a benchmark, and an audit pointed it out in blunter terms than I would have. The current split is 53% multiple choice, with fifteen executable code tasks and five repository-level tasks. Still recall-heavy. Less so than it was.</p>
+    <p>That is a bad reason to shape a benchmark, and an audit pointed it out in blunter terms than I would have. The current split is 53% multiple choice, with fifteen executable code tasks and five repository-level tasks.</p>
 
-    <div class="section-label">Verification</div>
+    <p class="section-label">Verification</p>
     <h2>Four gates, and the bugs they caught</h2>
 
-    <p>Four checks run on every push, and CI runs them on Python 3.11, 3.12 and 3.13:</p>
-
-    <p><strong>Provenance</strong> &mdash; every task resolves to at least one real source URL. <strong>Ground truth</strong> &mdash; my zeta tables and compress/decompress formulas are compared against <code>kyber-py</code>, and the schemes round-trip at the byte sizes the standards specify. <strong>Integrity</strong> &mdash; a gold answer must score 1.0, an empty answer 0.0, and every deliberately injected bug must be rejected. <strong>Plumbing</strong> &mdash; providers, cache, scorer, report generation, and a syntax guard.</p>
+    <p>Four checks run on every push, and CI runs them on Python 3.11, 3.12 and 3.13. <strong>Provenance</strong> &mdash; every task resolves to at least one real source URL. <strong>Ground truth</strong> &mdash; my zeta tables and compress/decompress formulas are compared against <code>kyber-py</code>, and the schemes round-trip at the byte sizes the standards specify. <strong>Integrity</strong> &mdash; a gold answer must score 1.0, an empty answer 0.0, and every deliberately injected bug must be rejected. <strong>Plumbing</strong> &mdash; providers, cache, scorer, report generation, and a syntax guard.</p>
 
     <p>Three of the bugs those gates caught were mine, and all three are worth describing because they are the failure modes any benchmark will have.</p>
 
@@ -450,10 +303,13 @@
 
     <p>Python 3.11 rejects a backslash inside an f-string replacement field; 3.12 relaxed that. One line in my report formatter did exactly that, and the 3.11 CI job failed. I fixed the line and added a guard that walks the AST looking for the pattern.</p>
 
-    <p>Then the guard failed CI &mdash; on legal code. <code>ast.get_source_segment</code> on a <code>FormattedValue</code> spans the whole f-string in 3.12, so it was flagging literal <code>
-</code> outside the braces. Seven false positives. The guard now inspects only the expression part, and it has its own two tests: one input that must be caught, one that must not. A detector without tests is indistinguishable from one that always says &ldquo;clean&rdquo;.</p>
+    <p>Then the guard failed CI &mdash; on legal code. <code>ast.get_source_segment</code> on a <code>FormattedValue</code> spans the whole f-string in 3.12, so it was flagging literal newlines outside the braces. Seven false positives. The guard now inspects only the expression part, and it has its own two tests: one input that must be caught, one that must not.</p>
 
-    <div class="section-label">Why execution matters</div>
+    <div class="pullquote">
+      <p>A detector without tests is indistinguishable from one that always says &ldquo;clean&rdquo;.</p>
+    </div>
+
+    <p class="section-label">Why execution matters</p>
     <h2>The FIPS 203 detail that separates reading from remembering</h2>
 
     <p>ML-KEM encapsulation derives a shared secret and a ciphertext from the encapsulation key and a random message. In the round-3 Kyber submission, the final shared secret went through an extra derivation step: <code>KDF(K || H(c))</code>.</p>
@@ -464,7 +320,7 @@
 
     <p>No rubric would catch that. A test does, in milliseconds, with a reason attached.</p>
 
-    <div class="section-label">One data point</div>
+    <p class="section-label">One data point</p>
     <h2>What a single model did, with caveats attached</h2>
 
     <p>I ran the standards and scenarios subset &mdash; 21 tasks &mdash; against Sarvam AI's <code>sarvam-105b</code>. Mean score: 0.48. Nine responses came back empty, because I had capped output at 4,096 tokens and this model reasons for thousands of tokens before answering. That was my configuration error, not a model failure.</p>
@@ -473,18 +329,19 @@
 
     <p>The most useful single observation: asked about NSA's CNSA 2.0 requirements, the model gave three different wrong answers across three phrasings &mdash; ML-KEM-768, then ECDH P-384 &ldquo;by 2025&rdquo;, then Diffie-Hellman MODP-3072 &ldquo;by 2024&rdquo;. The correct position is ML-KEM-1024, with exclusive use by 2033. It was fluent and confident in all three.</p>
 
-    <p>That is an anecdote with a receipt, not a result. One model, no repeats, no confidence intervals. It is the reason I want baselines across several models before anyone quotes a number from this.</p>
+    <p>That is an anecdote with a receipt, not a result. One model, no repeats, no confidence intervals.</p>
 
-    <div class="section-label">Limits</div>
-    <h2>What this does not establish</h2>
+    <div class="callout">
+      <div class="c-label">What this does not establish</div>
+      <ul>
+        <li>Not a validated leaderboard: no published baselines, no held-out split, no confidence intervals.</li>
+        <li>No human-calibrated scoring. The rubric tier is keyword coverage with a negation guard &mdash; a proxy, not a semantic judge.</li>
+        <li>Not a conformance suite. Round-trip consistency is not ACVP vector conformance, and passing these tasks does not certify an implementation.</li>
+        <li>Not agentic. Repository tasks receive fixture files in the prompt; they do not get a filesystem or a terminal.</li>
+      </ul>
+    </div>
 
-    <p>It is not a validated leaderboard. There are no published baselines, no held-out split, no human-calibrated scoring, and no confidence intervals. The rubric tier is keyword coverage with a negation guard &mdash; a proxy, not a semantic judge. Over half the tasks are multiple choice, which measures recall more than engineering.</p>
-
-    <p>It is not a conformance suite. Round-trip consistency is not ACVP vector conformance, and passing these tasks does not certify an implementation.</p>
-
-    <p>And the repository tasks are not agentic. The model receives the fixture files in its prompt; it does not get a filesystem or a terminal. That is repository <em>reasoning</em>, and calling it anything else would be overselling it.</p>
-
-    <div class="section-label">Next</div>
+    <p class="section-label">Next</p>
     <h2>The unit of evaluation has to change</h2>
 
     <p>The next version adds a tool loop: read-only discovery first &mdash; list files, read files, grep, inspect manifests &mdash; with the model deciding what to look at and a trajectory logged for every step. Then patching, graded by the fixture's own test suite. Then protocol integration.</p>
@@ -493,13 +350,42 @@
 
     <p>The thing I keep coming back to is that a benchmark is only useful if it is wrong in public. Every audit of this repository found something real &mdash; a scorer that rewarded contradiction, a version hash that didn't cover the questions, a repository task where the model never saw the repository. If you find a task this grades wrong, that is the most useful thing you can send me.</p>
 
+    <div class="credits">
+      <div class="row"><span class="k">Repository</span><span><a href="https://github.com/PredictiveManish/pqc-bench" target="_blank">github.com/PredictiveManish/pqc-bench</a> &middot; MIT</span></div>
+      <div class="row"><span class="k">Verified</span><span>2026-11-25 &middot; four gates &middot; CI on Python 3.11, 3.12, 3.13</span></div>
+      <div class="row"><span class="k">Scope</span><span>Independent research artefact. Not a certification, not a compliance attestation, not endorsed by NIST, CERT-In, TEC, the DST or any government body.</span></div>
+    </div>
+
   </article>
-
-    <footer>
-    <p><strong>Repository:</strong> <a href="https://github.com/PredictiveManish/pqc-bench">github.com/PredictiveManish/pqc-bench</a> &mdash; MIT licensed. Run the four gates yourself before trusting any number in it.</p>
-    <p><strong>Scope:</strong> PQC-Eval is an independent research artefact. It is not a certification, not a compliance attestation, and not endorsed by NIST, CERT-In, TEC, the DST or any government body. Facts verified 2026-11-25; standards drift, so the provenance registry exists to make re-verification cheap.</p>
-  </footer>
-
 </div>
+
+<footer>
+  <div class="wrap" style="width:100%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;">
+    <p>© <span id="yr"></span> Manish Tiwari</p>
+    <p><a href="https://github.com/predictivemanish" target="_blank">GitHub</a> · <a href="https://linkedin.com/in/manish-tiwari-977741286" target="_blank">LinkedIn</a> · <a href="https://x.com/compmanish" target="_blank">X</a></p>
+  </div>
+</footer>
+<div class="wordmark" aria-hidden="true">
+  <svg viewBox="0 0 1000 150" preserveAspectRatio="none" role="img" aria-label="Manish Tiwari">
+    <text x="0" y="116" textLength="1000" lengthAdjust="spacingAndGlyphs" font-family="DM Mono, ui-monospace, monospace" font-size="130" font-weight="500" letter-spacing="-3">MANISH TIWARI</text>
+  </svg>
+</div>
+
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+<script>
+document.getElementById('yr') && (document.getElementById('yr').textContent = new Date().getFullYear());
+(function(){
+  var c = document.getElementById('india-map-container');
+  if (!c) return;
+  var VISITED = ["Punjab","Delhi","Haryana","Himachal Pradesh","Uttar Pradesh","Rajasthan","Bihar","Jammu and Kashmir","Jharkhand","Madhya Pradesh","Chandigarh","Uttarakhand"];
+  var ID_MAP = {"Andaman and Nicobar":"INAN","Telangana":"INTG","Andhra Pradesh":"INAP","Arunachal Pradesh":"INAR","Assam":"INAS","Bihar":"INBR","Chandigarh":"INCH","Chhattisgarh":"INCT","Delhi":"INDL","Goa":"INGA","Gujarat":"INGJ","Haryana":"INHR","Himachal Pradesh":"INHP","Jharkhand":"INJH","Karnataka":"INKA","Kerala":"INKL","Madhya Pradesh":"INMP","Maharashtra":"INMH","Manipur":"INMN","Meghalaya":"INML","Mizoram":"INMZ","Nagaland":"INNL","Odisha":"INOR","Puducherry":"INPY","Punjab":"INPB","Rajasthan":"INRJ","Sikkim":"INSK","Tamil Nadu":"INTN","Tripura":"INTR","Uttar Pradesh":"INUP","Uttarakhand":"INUT","West Bengal":"INWB","Lakshadweep":"INLD","Jammu and Kashmir":"INJK","Ladakh":"INLA"};
+  fetch('/visited/in.svg').then(function(r){ if(!r.ok) throw 0; return r.text(); })
+    .then(function(t){ c.innerHTML = t; VISITED.forEach(function(s){ var el = c.querySelector('#' + ID_MAP[s]); if (el) el.classList.add('visited-state'); }); })
+    .catch(function(){ c.innerHTML = '<p class="map-load">Could not load map.</p>'; });
+})();
+</script>
 </body>
 </html>

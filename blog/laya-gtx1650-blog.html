@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Everyone Benchmarks AI Decision Models on Datacenter GPUs. I Used My 4GB VRAM Laptop.</title>
-<meta name="description" content="First measured numbers for the open-source Laya decision model on a GTX 1650 laptop — latency, a memory anomaly, and what ten labeled emails taught me.">
+<meta name="description" content="First measured numbers for the open-source Laya decision model on a GTX 1650 laptop, latency, a memory anomaly, and what ten labeled emails taught me.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -344,7 +344,7 @@
   <header class="hero">
     <div class="hero__category">Benchmark log &middot; September 22, 2026</div>
     <h1>Everyone benchmarks AI decision models on datacenter GPUs. I used my 4GB VRAM laptop.</h1>
-    <p class="hero__subtitle">First measured numbers for the open-source Laya decision model on a GTX&nbsp;1650 — including a memory problem the T4 tables won&rsquo;t show you.</p>
+    <p class="hero__subtitle">First measured numbers for the open-source Laya decision model on a GTX&nbsp;1650, including a memory problem the T4 tables won&rsquo;t show you.</p>
     <div class="byline">
       <div class="byline__avatar">MT</div>
       <div>
@@ -385,18 +385,18 @@
   <!-- ================= PROSE ================= -->
   <article class="prose">
 
-    <p class="lead">On September 15, 2026, a company called TypeSafe launched <strong>Jev</strong> — a &ldquo;System&nbsp;1&rdquo; decision model. You hand it a state (an email, a ticket, a JSON document) plus typed questions, and it returns choices, scores and calibrated probabilities instead of paragraphs. Three days later, Convai Innovations released <strong>Laya</strong>: the same idea, but open weights, Apache&nbsp;2.0, 421 million parameters, installable with <code>pip install laya</code>.</p>
+    <p class="lead">On September 15, 2026, a company called TypeSafe launched <strong>Jev</strong>, a &ldquo;System&nbsp;1&rdquo; decision model. You hand it a state (an email, a ticket, a JSON document) plus typed questions, and it returns choices, scores and calibrated probabilities instead of paragraphs. Three days later, Convai Innovations released <strong>Laya</strong>: the same idea, but open weights, Apache&nbsp;2.0, 421 million parameters, installable with <code>pip install laya</code>.</p>
 
-    <p>Every latency figure in that debate since — the 38&nbsp;ms headlines, the &ldquo;faster than Jev&rdquo; claims — comes from Tesla T4s, RTX 5090s and Mac M2s. Hardware most people will never touch. Nobody asked the obvious question: what happens on the laptop most of us actually own?</p>
+    <p>Every latency figure in that debate since, the 38&nbsp;ms headlines, the &ldquo;faster than Jev&rdquo; claims, comes from Tesla T4s, RTX 5090s and Mac M2s. Hardware most people will never touch. Nobody asked the obvious question: what happens on the laptop most of us actually own?</p>
 
-    <p>So I ran it on mine: an Acer Aspire 7 with an i5-12450H, 16&nbsp;GB of RAM and a GTX&nbsp;1650 with 4&nbsp;GB of VRAM. A 4GB VRAM-class gaming laptop — the kind a student buys, not the kind a lab benchmarks on.</p>
+    <p>So I ran it on mine: an Acer Aspire 7 with an i5-12450H, 16&nbsp;GB of RAM and a GTX&nbsp;1650 with 4&nbsp;GB of VRAM. A 4GB VRAM-class gaming laptop, the kind a student buys, not the kind a lab benchmarks on.</p>
 
     <div class="section-label">Methodology</div>
     <h2>What I actually measured</h2>
 
-    <p>I wrote a small benchmark harness (published, with raw JSON output) that measures cold load time and warm latency for 1, 10 and 50 typed questions answered in a single call — the three scenarios the model card publishes T4 numbers for. Each scenario ran 100 timed calls after 5 warmup calls, reporting p50, p95 and mean.</p>
+    <p>I wrote a small benchmark harness (published, with raw JSON output) that measures cold load time and warm latency for 1, 10 and 50 typed questions answered in a single call, the three scenarios the model card publishes T4 numbers for. Each scenario ran 100 timed calls after 5 warmup calls, reporting p50, p95 and mean.</p>
 
-    <p>Two details matter more than they sound. First, <code>torch.cuda.synchronize()</code> fires before every timer stops — CUDA calls are asynchronous, and without the sync you time the <em>launch</em>, not the work. Second, every timed call receives a different input email, so no pass ever sees byte-identical input. My environment is in the repo, because a latency number without its environment is a vibe, not a measurement.</p>
+    <p>Two details matter more than they sound. First, <code>torch.cuda.synchronize()</code> fires before every timer stops, CUDA calls are asynchronous, and without the sync you time the <em>launch</em>, not the work. Second, every timed call receives a different input email, so no pass ever sees byte-identical input. My environment is in the repo, because a latency number without its environment is a vibe, not a measurement.</p>
 
     <div class="section-label section-label--alt">Results</div>
     <h2>The numbers</h2>
@@ -420,9 +420,9 @@
         </table>
       </div>
     </div>
-    <p class="table-note">The T4 column is the model card&rsquo;s published figure — quoted, never measured here. Cross-hardware comparisons are indicative only.</p>
+    <p class="table-note">The T4 column is the model card&rsquo;s published figure, quoted, never measured here. Cross-hardware comparisons are indicative only.</p>
 
-    <p>Read it plainly: a 4GB VRAM consumer laptop is <strong>15&ndash;22&times; slower</strong> than the published T4 figures. Every single-question decision still completes in under a second — not fast, but real, local, free and offline. Cold load took 29.7&nbsp;s and 57.1&nbsp;s on two consecutive runs from a warm cache: &ldquo;time to first decision&rdquo; on a laptop is a different story from a warm server.</p>
+    <p>Read it plainly: a 4GB VRAM consumer laptop is <strong>15&ndash;22&times; slower</strong> than the published T4 figures. Every single-question decision still completes in under a second, not fast, but real, local, free and offline. Cold load took 29.7&nbsp;s and 57.1&nbsp;s on two consecutive runs from a warm cache: &ldquo;time to first decision&rdquo; on a laptop is a different story from a warm server.</p>
 
     <p>One number surprised me in the good direction: batching still amortizes on weak hardware.</p>
 
@@ -442,16 +442,16 @@
     </div>
     <p class="bars-note">Per-question cost, by number of questions answered in one forward pass (my p50 values).</p>
 
-    <p>Per-question cost drops from 847&nbsp;ms to 224&nbsp;ms — a 3.8&times; reduction. The &ldquo;one forward pass for everything&rdquo; design argument, which is Laya&rsquo;s whole pitch against paying per API call, holds even on a GTX&nbsp;1650. It is just uniformly slower.</p>
+    <p>Per-question cost drops from 847&nbsp;ms to 224&nbsp;ms, a 3.8&times; reduction. The &ldquo;one forward pass for everything&rdquo; design argument, which is Laya&rsquo;s whole pitch against paying per API call, holds even on a GTX&nbsp;1650. It is just uniformly slower.</p>
 
     <div class="section-label">The anomaly</div>
     <h2>The thing the T4 tables can&rsquo;t show you</h2>
 
-    <p>On the 50-question scenario, my <strong>mean (26.5&nbsp;s) is 2.4&times; my own median (11.2&nbsp;s)</strong> — and above my p95 (11.9&nbsp;s). That is not noise; that is a signature. A small number of runs took minutes instead of seconds.</p>
+    <p>On the 50-question scenario, my <strong>mean (26.5&nbsp;s) is 2.4&times; my own median (11.2&nbsp;s)</strong>, and above my p95 (11.9&nbsp;s). That is not noise; that is a signature. A small number of runs took minutes instead of seconds.</p>
 
     <div class="callout callout--warn">
       <div class="callout__title">Working hypothesis</div>
-      <p>The 50-question batch briefly needs more memory than the GTX&nbsp;1650&rsquo;s 4&nbsp;GB, and Windows spills into &ldquo;shared GPU memory&rdquo; — system RAM reached over the PCIe bus, which is brutally slow. Thermal throttling cannot produce a mean above the p95; memory spillover can. Stated as a hypothesis until I instrument GPU memory to confirm it.</p>
+      <p>The 50-question batch briefly needs more memory than the GTX&nbsp;1650&rsquo;s 4&nbsp;GB, and Windows spills into &ldquo;shared GPU memory&rdquo;, system RAM reached over the PCIe bus, which is brutally slow. Thermal throttling cannot produce a mean above the p95; memory spillover can. Stated as a hypothesis until I instrument GPU memory to confirm it.</p>
     </div>
 
     <p>If you are deploying anything like this on 4&nbsp;GB consumer cards: batch smaller, or verify your headroom first. Nobody publishing T4 numbers will ever tell you where the ceiling is, because their ceiling is nowhere in sight.</p>
@@ -459,7 +459,7 @@
     <div class="section-label section-label--alt">Smoke test</div>
     <h2>Does it get decisions right?</h2>
 
-    <p>Latency is only half the story. I also ran ten hand-labeled emails — billing complaints, phishing attempts, HR notices, bug reports, a lottery scam — and asked the model three questions about each.</p>
+    <p>Latency is only half the story. I also ran ten hand-labeled emails, billing complaints, phishing attempts, HR notices, bug reports, a lottery scam, and asked the model three questions about each.</p>
 
     <div class="score-grid" aria-label="Smoke test scores">
       <div class="score-card" style="--i:0">
@@ -482,13 +482,13 @@
       </div>
     </div>
 
-    <p>Phishing was the standout: the single miss was a P=0.60 shrug, not a confident error, and the separation between scams and legitimate mail was decisive. Department routing was the interesting failure: every miss was a scam or complaint email absorbed into &ldquo;billing&rdquo; or &ldquo;technical&rdquo; — because my answer space had <em>no security option</em>. The model reads your option descriptions and routes into the best semantic overlap. One of my own labels was arguably wrong too.</p>
+    <p>Phishing was the standout: the single miss was a P=0.60 shrug, not a confident error, and the separation between scams and legitimate mail was decisive. Department routing was the interesting failure: every miss was a scam or complaint email absorbed into &ldquo;billing&rdquo; or &ldquo;technical&rdquo;, because my answer space had <em>no security option</em>. The model reads your option descriptions and routes into the best semantic overlap. One of my own labels was arguably wrong too.</p>
 
     <div class="pullquote">
       <p>With this class of model, your question schema is part of the model. Design the answer space badly and you measure your own schema, not the model.</p>
     </div>
 
-    <p>To be clear about what this is not: ten emails is a smoke test, not an accuracy benchmark. The model&rsquo;s own card says base Laya scores near chance zero-shot on decision benchmarks — the intended workflow is fine-tuning on your own data.</p>
+    <p>To be clear about what this is not: ten emails is a smoke test, not an accuracy benchmark. The model&rsquo;s own card says base Laya scores near chance zero-shot on decision benchmarks, the intended workflow is fine-tuning on your own data.</p>
 
     <div class="section-label">Fine print</div>
     <h2>Honest caveats</h2>
@@ -496,7 +496,7 @@
     <div class="callout">
       <ul>
         <li>The T4 column is the model card&rsquo;s published figure. I did not measure it.</li>
-        <li>The Jev numbers circulating in this debate are third-party, from different prompts and sample sizes. Every cross-model comparison — including the vendors&rsquo; — is indicative at best.</li>
+        <li>The Jev numbers circulating in this debate are third-party, from different prompts and sample sizes. Every cross-model comparison, including the vendors&rsquo;, is indicative at best.</li>
         <li>The spillover explanation for the mean anomaly is my best diagnosis, stated as a hypothesis until instrumented with GPU memory telemetry.</li>
         <li>One machine, one session, fp32, plugged into power, no GPU-utilization telemetry for every run.</li>
       </ul>
@@ -507,7 +507,7 @@
     <div class="section-label section-label--alt">Takeaway</div>
     <h2>Why this number matters</h2>
 
-    <p>On a 4GB VRAM gaming laptop, the open decision model answers any single typed question in under a second — free, offline, on your own weights. The cloud one is faster and bills per call. Neither number tells you which is right for you; but only one of them runs when the wifi is down, and only one of them you can fine-tune on a free Kaggle GPU and put back in the same folder as your college notes.</p>
+    <p>On a 4GB VRAM gaming laptop, the open decision model answers any single typed question in under a second, free, offline, on your own weights. The cloud one is faster and bills per call. Neither number tells you which is right for you; but only one of them runs when the wifi is down, and only one of them you can fine-tune on a free Kaggle GPU and put back in the same folder as your college notes.</p>
 
     <p>The gap between the benchmark world and the real world is 15&ndash;22&times;, measured. It is not a reason to stay off this wave. It is just the number nobody had written down.</p>
 
