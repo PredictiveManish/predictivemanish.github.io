@@ -194,7 +194,7 @@
   <div class="post-hero fade f1">
     <p class="section-label" style="margin-top:0;">Benchmark log &middot; November 26, 2026 &middot; 8 min read</p>
     <h1>I built a post-quantum benchmark. Then I spent a week trying to break it.</h1>
-    <p class="dek">57 tasks, seven tiers, four validation gates &mdash; and the three bugs the gates caught in my own grading code.</p>
+    <p class="dek">57 tasks, seven tiers, four validation gates - and the three bugs the gates caught in my own grading code.</p>
     <div class="post-meta">
       <span>Manish Tiwari</span>
       <span>Independent research &middot; not affiliated with NIST or CERT-In</span>
@@ -212,14 +212,14 @@
 
   <article class="post-body fade f2">
 
-    <p class="lead">Ask a language model when post-quantum migration has to happen and you get a confident answer. Ask the same model twice, in two different ways, and you get two different confident answers. That gap &mdash; between fluency and correctness &mdash; is the only reason this benchmark exists.</p>
+    <p class="lead">Ask a language model when post-quantum migration has to happen and you get a confident answer. Ask the same model twice, in two different ways, and you get two different confident answers. That gap - between fluency and correctness - is the only reason this benchmark exists.</p>
 
     <p>PQC-Eval is a benchmark for evaluating language models on post-quantum cryptography: the algorithms, the standards that govern them, and the engineering work around them. I released v1.0.0 this week. This post is about what it measures, and more usefully, what broke while I was building it.</p>
 
     <p class="section-label">Motivation</p>
     <h2>Why another crypto benchmark</h2>
 
-    <p>There are already evaluations for cryptographic reasoning, and several are better resourced than mine. What none of them measure is the thing organisations will actually be judged on: whether a model can reason about <em>which</em> migration requirement applies, in <em>whose</em> jurisdiction, to <em>which</em> asset &mdash; and then do the engineering work.</p>
+    <p>There are already evaluations for cryptographic reasoning, and several are better resourced than mine. What none of them measure is the thing organisations will actually be judged on: whether a model can reason about <em>which</em> migration requirement applies, in <em>whose</em> jurisdiction, to <em>which</em> asset - and then do the engineering work.</p>
 
     <p>That distinction matters because post-quantum migration is not one deadline. US federal high-value assets target 2030 and exclusive use by 2033. India's CII guidance points at 2029, and it is a proposed milestone rather than a universal mandate. The UK says 2035. Germany's BSI says 2031 for specific categories. A model that has memorised &ldquo;2035&rdquo; is not wrong so much as answering a question nobody asked.</p>
 
@@ -278,24 +278,24 @@
     <p class="section-label">The part I got wrong first</p>
     <h2>I optimised for my own convenience</h2>
 
-    <p>The first version was 68% multiple choice. The reason was not that knowledge questions are the most interesting &mdash; it is that a letter match grades deterministically and I could verify it in a second. Executable tasks need a checker, and a wrong checker quietly corrupts every score it produces.</p>
+    <p>The first version was 68% multiple choice. The reason was not that knowledge questions are the most interesting - it is that a letter match grades deterministically and I could verify it in a second. Executable tasks need a checker, and a wrong checker quietly corrupts every score it produces.</p>
 
     <p>That is a bad reason to shape a benchmark, and an audit pointed it out in blunter terms than I would have. The current split is 53% multiple choice, with fifteen executable code tasks and five repository-level tasks.</p>
 
     <p class="section-label">Verification</p>
     <h2>Four gates, and the bugs they caught</h2>
 
-    <p>Four checks run on every push, and CI runs them on Python 3.11, 3.12 and 3.13. <strong>Provenance</strong> &mdash; every task resolves to at least one real source URL. <strong>Ground truth</strong> &mdash; my zeta tables and compress/decompress formulas are compared against <code>kyber-py</code>, and the schemes round-trip at the byte sizes the standards specify. <strong>Integrity</strong> &mdash; a gold answer must score 1.0, an empty answer 0.0, and every deliberately injected bug must be rejected. <strong>Plumbing</strong> &mdash; providers, cache, scorer, report generation, and a syntax guard.</p>
+    <p>Four checks run on every push, and CI runs them on Python 3.11, 3.12 and 3.13. <strong>Provenance</strong> - every task resolves to at least one real source URL. <strong>Ground truth</strong> - my zeta tables and compress/decompress formulas are compared against <code>kyber-py</code>, and the schemes round-trip at the byte sizes the standards specify. <strong>Integrity</strong> - a gold answer must score 1.0, an empty answer 0.0, and every deliberately injected bug must be rejected. <strong>Plumbing</strong> - providers, cache, scorer, report generation, and a syntax guard.</p>
 
     <p>Three of the bugs those gates caught were mine, and all three are worth describing because they are the failure modes any benchmark will have.</p>
 
     <h3>The version hash didn't hash the questions</h3>
 
-    <p>The report stamped a <code>benchmark_version</code> so a score could be tied to the exact task set that produced it. It hashed each task's id, answer, gold and rubric &mdash; but not the prompt. I could rewrite a question completely and the version would not change. Two different benchmarks, identical labels. It now hashes the full task, the <em>contents</em> of each checker file, and the scorer source itself.</p>
+    <p>The report stamped a <code>benchmark_version</code> so a score could be tied to the exact task set that produced it. It hashed each task's id, answer, gold and rubric - but not the prompt. I could rewrite a question completely and the version would not change. Two different benchmarks, identical labels. It now hashes the full task, the <em>contents</em> of each checker file, and the scorer source itself.</p>
 
     <h3>Rejecting an algorithm counted as recommending it</h3>
 
-    <p>One rubric criterion asked whether the model recommended ML-DSA-44 for a bandwidth-constrained IoT signature. The scorer looked for the string &ldquo;ml-dsa-44&rdquo;. So an answer that said <em>&ldquo;I would reject ML-DSA-44 and use SLH-DSA&rdquo;</em> scored 0.60 &mdash; it earned the point for recommending the exact thing it argued against.</p>
+    <p>One rubric criterion asked whether the model recommended ML-DSA-44 for a bandwidth-constrained IoT signature. The scorer looked for the string &ldquo;ml-dsa-44&rdquo;. So an answer that said <em>&ldquo;I would reject ML-DSA-44 and use SLH-DSA&rdquo;</em> scored 0.60 - it earned the point for recommending the exact thing it argued against.</p>
 
     <p>The fix is criterion-level exclusion: a criterion can declare that certain phrases cancel it. That answer now scores 0.40. It is still a keyword method, and I say so in the README rather than pretending it is semantic.</p>
 
@@ -303,7 +303,7 @@
 
     <p>Python 3.11 rejects a backslash inside an f-string replacement field; 3.12 relaxed that. One line in my report formatter did exactly that, and the 3.11 CI job failed. I fixed the line and added a guard that walks the AST looking for the pattern.</p>
 
-    <p>Then the guard failed CI &mdash; on legal code. <code>ast.get_source_segment</code> on a <code>FormattedValue</code> spans the whole f-string in 3.12, so it was flagging literal newlines outside the braces. Seven false positives. The guard now inspects only the expression part, and it has its own two tests: one input that must be caught, one that must not.</p>
+    <p>Then the guard failed CI - on legal code. <code>ast.get_source_segment</code> on a <code>FormattedValue</code> spans the whole f-string in 3.12, so it was flagging literal newlines outside the braces. Seven false positives. The guard now inspects only the expression part, and it has its own two tests: one input that must be caught, one that must not.</p>
 
     <div class="pullquote">
       <p>A detector without tests is indistinguishable from one that always says &ldquo;clean&rdquo;.</p>
@@ -314,7 +314,7 @@
 
     <p>ML-KEM encapsulation derives a shared secret and a ciphertext from the encapsulation key and a random message. In the round-3 Kyber submission, the final shared secret went through an extra derivation step: <code>KDF(K || H(c))</code>.</p>
 
-    <p>FIPS 203 removed that step. Encapsulation returns <code>K</code> directly. Decapsulation recomputes the ciphertext, compares, and returns an implicit-rejection value &mdash; <code>SHAKE256(z || c, 32)</code> &mdash; when the comparison fails.</p>
+    <p>FIPS 203 removed that step. Encapsulation returns <code>K</code> directly. Decapsulation recomputes the ciphertext, compares, and returns an implicit-rejection value - <code>SHAKE256(z || c, 32)</code> - when the comparison fails.</p>
 
     <p>A model that learned Kyber from 2021 material writes the KDF. It looks right, it runs, and it produces the wrong shared secret. I put that exact bug into a fixture and graded it against three fixed vectors generated from the reference implementation. Gold passes; the round-3 version fails on vector 0 with a shared-secret mismatch.</p>
 
@@ -323,11 +323,11 @@
     <p class="section-label">One data point</p>
     <h2>What a single model did, with caveats attached</h2>
 
-    <p>I ran the standards and scenarios subset &mdash; 21 tasks &mdash; against Sarvam AI's <code>sarvam-105b</code>. Mean score: 0.48. Nine responses came back empty, because I had capped output at 4,096 tokens and this model reasons for thousands of tokens before answering. That was my configuration error, not a model failure.</p>
+    <p>I ran the standards and scenarios subset - 21 tasks - against Sarvam AI's <code>sarvam-105b</code>. Mean score: 0.48. Nine responses came back empty, because I had capped output at 4,096 tokens and this model reasons for thousands of tokens before answering. That was my configuration error, not a model failure.</p>
 
     <p>Re-running the four scenarios at 16,384 tokens gave 0.75. After applying the critical-criteria caps, the standards subset rescored to 0.50.</p>
 
-    <p>The most useful single observation: asked about NSA's CNSA 2.0 requirements, the model gave three different wrong answers across three phrasings &mdash; ML-KEM-768, then ECDH P-384 &ldquo;by 2025&rdquo;, then Diffie-Hellman MODP-3072 &ldquo;by 2024&rdquo;. The correct position is ML-KEM-1024, with exclusive use by 2033. It was fluent and confident in all three.</p>
+    <p>The most useful single observation: asked about NSA's CNSA 2.0 requirements, the model gave three different wrong answers across three phrasings - ML-KEM-768, then ECDH P-384 &ldquo;by 2025&rdquo;, then Diffie-Hellman MODP-3072 &ldquo;by 2024&rdquo;. The correct position is ML-KEM-1024, with exclusive use by 2033. It was fluent and confident in all three.</p>
 
     <p>That is an anecdote with a receipt, not a result. One model, no repeats, no confidence intervals.</p>
 
@@ -335,7 +335,7 @@
       <div class="c-label">What this does not establish</div>
       <ul>
         <li>Not a validated leaderboard: no published baselines, no held-out split, no confidence intervals.</li>
-        <li>No human-calibrated scoring. The rubric tier is keyword coverage with a negation guard &mdash; a proxy, not a semantic judge.</li>
+        <li>No human-calibrated scoring. The rubric tier is keyword coverage with a negation guard - a proxy, not a semantic judge.</li>
         <li>Not a conformance suite. Round-trip consistency is not ACVP vector conformance, and passing these tasks does not certify an implementation.</li>
         <li>Not agentic. Repository tasks receive fixture files in the prompt; they do not get a filesystem or a terminal.</li>
       </ul>
@@ -344,11 +344,11 @@
     <p class="section-label">Next</p>
     <h2>The unit of evaluation has to change</h2>
 
-    <p>The next version adds a tool loop: read-only discovery first &mdash; list files, read files, grep, inspect manifests &mdash; with the model deciding what to look at and a trajectory logged for every step. Then patching, graded by the fixture's own test suite. Then protocol integration.</p>
+    <p>The next version adds a tool loop: read-only discovery first - list files, read files, grep, inspect manifests - with the model deciding what to look at and a trajectory logged for every step. Then patching, graded by the fixture's own test suite. Then protocol integration.</p>
 
     <p>That changes the unit of evaluation from one response to one episode, which changes the harness, the scoring, and how noisy the numbers are. Agents vary far more between runs than single completions do. Doing that badly would produce numbers that fall apart on the first rerun, so it is a separate track with its own leaderboard rather than more rows in this one.</p>
 
-    <p>The thing I keep coming back to is that a benchmark is only useful if it is wrong in public. Every audit of this repository found something real &mdash; a scorer that rewarded contradiction, a version hash that didn't cover the questions, a repository task where the model never saw the repository. If you find a task this grades wrong, that is the most useful thing you can send me.</p>
+    <p>The thing I keep coming back to is that a benchmark is only useful if it is wrong in public. Every audit of this repository found something real - a scorer that rewarded contradiction, a version hash that didn't cover the questions, a repository task where the model never saw the repository. If you find a task this grades wrong, that is the most useful thing you can send me.</p>
 
     <div class="credits">
       <div class="row"><span class="k">Repository</span><span><a href="https://github.com/PredictiveManish/pqc-bench" target="_blank">github.com/PredictiveManish/pqc-bench</a> &middot; MIT</span></div>
