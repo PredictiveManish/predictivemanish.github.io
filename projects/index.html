@@ -260,7 +260,7 @@ footer a:hover{color:#ff3d00}
 
 
 .thumb[data-c="me"]{background:#cdeac0}
-.thumb[data-c="ly"]{background:#f6d8ae}
+.thumb[data-c="ly"]{background:#f6d8ae}.thumb[data-c="pq"]{background:#d9c2f0}
 .btn-wa{background:#25d366;border-color:#0d0d0d;color:#0d0d0d}
 .btn-wa:hover{background:#1ebe5b;color:#0d0d0d;box-shadow:5px 5px 0 #0d0d0d}
 .wa-fab{position:fixed;right:1.1rem;bottom:1.1rem;z-index:90;display:inline-flex;align-items:center;gap:.5rem;font-family:'DM Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;background:#25d366;color:#0d0d0d;border:3px solid #0d0d0d;box-shadow:5px 5px 0 #0d0d0d;padding:.65rem .95rem;text-decoration:none;transition:transform .15s,box-shadow .15s}
@@ -270,7 +270,7 @@ footer a:hover{color:#ff3d00}
 </style>
 </head>
 <body>
-<nav><div class="wrap inner"><a href="/" class="nav-name">Manish Tiwari</a><ul class="nav-links"><li><a href="/projects/">Projects</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li><li><a href="/Manish-Tiwari-Resume.pdf" download class="resume-btn">Resume &darr;</a></li></ul></div></nav>
+<nav><div class="wrap inner"><a href="/" class="nav-name">Manish Tiwari</a><ul class="nav-links"><li><a href="/projects/">Projects</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li><li><a href="/Manish_Tiwari_Applied_AI_Resume.pdf" download class="resume-btn">Resume &darr;</a></li></ul></div></nav>
 <div class="wrap">
   <div class="page-head">
     <span class="eyebrow">Portfolio</span>
@@ -280,6 +280,51 @@ footer a:hover{color:#ff3d00}
   <section>
     <div class="sec-head"><h2>Selected projects</h2></div>
     <div class="work-grid">
+      <article class="card">
+        <div class="thumb" data-c="pq"><span>PQ</span></div>
+        <div class="card-body">
+          <div class="card-name">PQC-Eval</div>
+          <p class="card-desc">Benchmark for post-quantum cryptography &mdash; 57 tasks across seven tiers, every task bound to a primary source. Executable graders checked against kyber-py and fixed KAT vectors, with four validation gates on CI.</p>
+          <div class="card-tags"><span class="tag">Python</span><span class="tag">FIPS 203</span><span class="tag">Evaluation</span></div>
+          <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/pqc-bench" target="_blank">GitHub</a><a class="pill" href="/blog/pqc-eval-technical-report/">Write-up</a></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="thumb" data-c="lm"><span>SS</span></div>
+        <div class="card-body">
+          <div class="card-name">Semicon software gap</div>
+          <p class="card-desc">Interactive map of India&rsquo;s semiconductor ecosystem &mdash; who does what part of chip production, and which EDA and design software a new builder should start with.</p>
+          <div class="card-tags"><span class="tag">Data</span><span class="tag">HTML</span></div>
+          <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/semicon-software-gap" target="_blank">GitHub</a></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="thumb" data-c="jd"><span>BF</span></div>
+        <div class="card-body">
+          <div class="card-name">Bharat friction index</div>
+          <p class="card-desc">A sourced, interactive map of the policies, rules and government bodies that create friction for founders and innovators in India.</p>
+          <div class="card-tags"><span class="tag">Data</span><span class="tag">Policy</span></div>
+          <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/bharat-friction-index" target="_blank">GitHub</a></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="thumb" data-c="sr"><span>RA</span></div>
+        <div class="card-body">
+          <div class="card-name">resume-agent</div>
+          <p class="card-desc">AI agent that tailors a resume to a job description and returns an ATS score before and after, a change preview and a compile-ready LaTeX resume. Built on Sarvam AI.</p>
+          <div class="card-tags"><span class="tag">Python</span><span class="tag">Agents</span><span class="tag">Sarvam AI</span></div>
+          <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/resume-agent" target="_blank">GitHub</a></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="thumb" data-c="tl"><span>QA</span></div>
+        <div class="card-body">
+          <div class="card-name">Q&amp;A with Sarvam</div>
+          <p class="card-desc">Streamlit document Q&amp;A app on Sarvam AI&rsquo;s 105B model, with vector search, streaming answers, chat history and source tracking.</p>
+          <div class="card-tags"><span class="tag">Python</span><span class="tag">Streamlit</span><span class="tag">RAG</span></div>
+          <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/Q-A-with-sarvam" target="_blank">GitHub</a></div>
+        </div>
+      </article>
       <article class="card">
         <div class="thumb" data-c="me"><span>ME</span></div>
         <div class="card-body">

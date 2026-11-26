@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I built a post-quantum benchmark. Then I spent a week trying to break it.</title>
+<meta name="description" content="57 tasks, seven tiers and four validation gates — and the three bugs the gates caught in my own grading code.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --font-display: 'Instrument Serif', Georgia, serif;
+    --font-body: 'Literata', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+
+    --bg: #faf7f5;
+    --surface: #ffffff;
+    --surface-elevated: #ffffff;
+    --border: rgba(60, 40, 30, 0.10);
+    --border-bright: rgba(60, 40, 30, 0.18);
+    --text: #2b2118;
+    --text-dim: #7a6a5c;
+    --accent: #c2410c;         /* terracotta */
+    --accent-dim: rgba(194, 65, 12, 0.08);
+    --accent-2: #65a30d;       /* sage */
+    --accent-2-dim: rgba(101, 163, 13, 0.10);
+    --amber: #b45309;
+    --amber-dim: rgba(180, 83, 9, 0.09);
+    --red: #b91c1c;
+    --red-dim: rgba(185, 28, 28, 0.07);
+    --green: #3f6212;
+    --green-dim: rgba(63, 98, 18, 0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17120e;
+      --surface: #4GB VRAM13;
+      --surface-elevated: #261e17;
+      --border: rgba(250, 240, 230, 0.09);
+      --border-bright: rgba(250, 240, 230, 0.16);
+      --text: #ede4d8;
+      --text-dim: #a39486;
+      --accent: #e8763f;
+      --accent-dim: rgba(232, 118, 63, 0.10);
+      --accent-2: #a3c76a;
+      --accent-2-dim: rgba(163, 199, 106, 0.10);
+      --amber: #e3a04a;
+      --amber-dim: rgba(227, 160, 74, 0.10);
+      --red: #e8746a;
+      --red-dim: rgba(232, 116, 106, 0.09);
+      --green: #b5cf7a;
+      --green-dim: rgba(181, 207, 122, 0.10);
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    color: var(--text);
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(ellipse 60% 30% at 50% -5%, var(--accent-dim) 0%, transparent 70%);
+    overflow-wrap: break-word;
+    -webkit-font-smoothing: antialiased;
+  }
+  .grid > *, .flex > * { min-width: 0; }
+
+  .page { max-width: 720px; margin: 0 auto; padding: 0 24px 96px; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 72px 0 8px; }
+  .hero__category {
+    font-family: var(--font-mono);
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--accent);
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 22px;
+  }
+  .hero__category::before {
+    content: ''; width: 9px; height: 9px; border-radius: 50%;
+    background: currentColor; flex-shrink: 0;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(34px, 6.2vw, 52px);
+    line-height: 1.08;
+    letter-spacing: -0.5px;
+    margin: 0 0 18px;
+  }
+  .hero__subtitle {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(19px, 2.6vw, 24px);
+    line-height: 1.4;
+    color: var(--text-dim);
+    margin: 0 0 30px;
+  }
+  .byline {
+    display: flex; align-items: center; gap: 14px;
+    padding-bottom: 26px;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .byline__avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--amber));
+    color: #fff; font-family: var(--font-display); font-size: 20px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .byline__name { font-weight: 600; display: block; }
+  .byline__meta { font-size: 13px; color: var(--text-dim); font-family: var(--font-body); }
+  .hw-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+  .chip {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--text-dim);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 5px 12px;
+  }
+
+  /* ---------- KPI row ---------- */
+  .kpi-row {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px; margin: 44px 0 8px;
+  }
+  .kpi-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 18px 16px;
+    animation: fadeScale 0.4s ease-out both;
+    animation-delay: calc(var(--i, 0) * 0.08s);
+  }
+  .kpi-card__value {
+    font-family: var(--font-mono);
+    font-size: 30px; font-weight: 600;
+    letter-spacing: -1px; line-height: 1.05;
+    font-variant-numeric: tabular-nums;
+    color: var(--accent);
+  }
+  .kpi-card__value--alt { color: var(--accent-2); }
+  .kpi-card__value--warn { color: var(--amber); }
+  .kpi-card__label {
+    font-family: var(--font-mono);
+    font-size: 9.5px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1.4px;
+    color: var(--text-dim); margin-top: 8px; line-height: 1.5;
+  }
+
+  /* ---------- Prose ---------- */
+  .prose {
+    font-size: clamp(17px, 1.1vw + 14px, 18.5px);
+    line-height: 1.72;
+    max-width: 65ch;
+    text-wrap: pretty;
+  }
+  .lead {
+    font-size: clamp(19px, 1.6vw + 15px, 22px);
+    line-height: 1.55;
+    margin: 40px 0 12px;
+  }
+  .prose p { margin: 0 0 1.5em; }
+  .prose code, .callout code {
+    font-family: var(--font-mono); font-size: 0.82em;
+    background: var(--accent-dim); color: var(--accent);
+    padding: 1px 6px; border-radius: 4px;
+  }
+  .prose strong { font-weight: 600; }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--accent);
+    display: flex; align-items: center; gap: 9px;
+    margin: 58px 0 6px;
+  }
+  .section-label::before {
+    content: ''; width: 8px; height: 8px; border-radius: 50%;
+    background: currentColor; flex-shrink: 0;
+  }
+  .section-label--alt { color: var(--accent-2); }
+  h2 {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: clamp(26px, 3.6vw, 34px);
+    line-height: 1.15; margin: 6px 0 18px;
+  }
+
+  /* ---------- Table ---------- */
+  .table-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 26px 0 8px;
+    animation: fadeUp 0.45s ease-out both;
+  }
+  .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .data-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .data-table th {
+    font-family: var(--font-mono);
+    font-size: 10.5px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1.2px;
+    color: var(--text-dim);
+    text-align: left; padding: 12px 16px;
+    border-bottom: 2px solid var(--border-bright);
+    white-space: nowrap;
+  }
+  .data-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    font-variant-numeric: tabular-nums;
+  }
+  .data-table td.num, .data-table th.num {
+    text-align: right; font-family: var(--font-mono);
+  }
+  .data-table tbody tr:nth-child(even) { background: var(--accent-dim); }
+  .data-table tbody tr:last-child td { border-bottom: none; }
+  .data-table .pub { color: var(--text-dim); }
+  .table-note {
+    font-size: 13px; color: var(--text-dim); font-style: italic;
+    margin: 10px 0 0;
+  }
+
+  /* ---------- Bar chart ---------- */
+  .bars { margin: 30px 0 6px; }
+  .bar-row { margin-bottom: 16px; }
+  .bar-row__head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: var(--font-mono); font-size: 12px; margin-bottom: 6px;
+  }
+  .bar-row__label { color: var(--text-dim); letter-spacing: 0.5px; }
+  .bar-row__value { font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
+  .bar-track {
+    height: 14px; border-radius: 7px;
+    background: var(--border);
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%; border-radius: 7px;
+    background: linear-gradient(90deg, var(--accent), var(--amber));
+    animation: growX 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    transform-origin: left;
+  }
+  .bar-fill--alt { background: linear-gradient(90deg, var(--accent-2), var(--accent)); }
+  .bars-note {
+    font-size: 13px; color: var(--text-dim); font-style: italic; margin-top: 14px;
+  }
+
+  /* ---------- Callouts ---------- */
+  .callout {
+    padding: 18px 22px;
+    border-radius: 10px;
+    border-left: 4px solid var(--callout-border, var(--accent));
+    background: var(--callout-bg, var(--accent-dim));
+    margin: 26px 0;
+  }
+  .callout--warn { --callout-border: var(--amber); --callout-bg: var(--amber-dim); }
+  .callout--good { --callout-border: var(--green); --callout-bg: var(--green-dim); }
+  .callout__title {
+    font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1.6px;
+    margin-bottom: 8px; color: var(--callout-border, var(--accent));
+  }
+  .callout p { font-size: 15.5px; line-height: 1.65; margin: 0; }
+  .callout p + p { margin-top: 10px; }
+  .callout ul { margin: 8px 0 0; padding-left: 1.4em; font-size: 15px; line-height: 1.7; }
+  .callout li + li { margin-top: 6px; }
+
+  /* ---------- Pull quote ---------- */
+  .pullquote {
+    margin: 52px 0;
+    padding-left: 26px;
+    border-left: 3px solid var(--accent);
+  }
+  .pullquote p {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(23px, 3vw, 28px);
+    line-height: 1.38;
+    margin: 0;
+  }
+
+  /* ---------- Score grid ---------- */
+  .score-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 14px; margin: 26px 0;
+  }
+  .score-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    animation: fadeUp 0.45s ease-out both;
+    animation-delay: calc(var(--i, 0) * 0.07s);
+  }
+  .score-card__head {
+    font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1.3px;
+    color: var(--text-dim); margin-bottom: 10px;
+  }
+  .score-card__row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 14px; padding: 3px 0;
+  }
+  .score-card__row b { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .ok { color: var(--green); } .miss { color: var(--red); }
+
+  /* ---------- Divider / footer ---------- */
+  .divider { text-align: center; margin: 60px 0; color: var(--text-dim); letter-spacing: 14px; font-size: 15px; }
+  footer {
+    margin-top: 70px; padding-top: 28px;
+    border-top: 1px solid var(--border);
+    font-size: 14px; color: var(--text-dim); line-height: 1.8;
+  }
+  footer a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ---------- Animations ---------- */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @keyframes fadeScale { from { opacity: 0; transform: scale(0.93); } to { opacity: 1; transform: none; } }
+  @keyframes growX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  .prose > *, .hero > * { animation: fadeUp 0.5s ease-out both; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <div class="hero__category">Benchmark log &middot; November 26, 2026</div>
+    <h1>I built a post-quantum benchmark. Then I spent a week trying to break it.</h1>
+    <p class="hero__subtitle">57 tasks, seven tiers, four validation gates &mdash; and the three bugs the gates caught in my own grading code.</p>
+    <div class="byline">
+      <div class="byline__avatar">MT</div>
+      <div>
+        <span class="byline__name">Manish Tiwari</span>
+        <span class="byline__meta">Independent research &middot; PQC-Eval v1.0.0 &middot; not affiliated with NIST or CERT-In</span>
+      </div>
+    </div>
+    <div class="hw-chips">
+      <span class="chip">57 tasks</span>
+      <span class="chip">7 tiers</span>
+      <span class="chip">74 sources</span>
+      <span class="chip">4 gates</span>
+      <span class="chip">Python 3.11&ndash;3.13</span>
+    </div>
+  </header>
+
+  <!-- ================= KPI ================= -->
+  <div class="kpi-row" aria-label="Key results">
+    <div class="kpi-card" style="--i:0">
+      <div class="kpi-card__value">847<span style="font-size:16px">&nbsp;ms</span></div>
+      <div class="kpi-card__label">median latency<br>one typed question</div>
+    </div>
+    <div class="kpi-card" style="--i:1">
+      <div class="kpi-card__value">15&ndash;22&times;</div>
+      <div class="kpi-card__label">slower than the<br>published T4 figures</div>
+    </div>
+    <div class="kpi-card" style="--i:2">
+      <div class="kpi-card__value kpi-card__value--alt">3.8&times;</div>
+      <div class="kpi-card__label">per-question savings<br>when batching 50 at once</div>
+    </div>
+    <div class="kpi-card" style="--i:3">
+      <div class="kpi-card__value kpi-card__value--warn">2.4&times;</div>
+      <div class="kpi-card__label">mean vs median on the<br>50-question workload</div>
+    </div>
+  </div>
+
+  <!-- ================= PROSE ================= -->
+    <article class="prose">
+
+    <p class="lead">Ask a language model when post-quantum migration has to happen and you get a confident answer. Ask the same model twice, in two different ways, and you get two different confident answers. That gap &mdash; between fluency and correctness &mdash; is the only reason this benchmark exists.</p>
+
+    <p>PQC-Eval is a benchmark for evaluating language models on post-quantum cryptography: the algorithms, the standards that govern them, and the engineering work around them. I released v1.0.0 this week. This post is about what it measures, and more usefully, what broke while I was building it.</p>
+
+    <div class="section-label">Motivation</div>
+    <h2>Why another crypto benchmark</h2>
+
+    <p>There are already evaluations for cryptographic reasoning, and several are better resourced than mine. What none of them measure is the thing organisations will actually be judged on: whether a model can reason about <em>which</em> migration requirement applies, in <em>whose</em> jurisdiction, to <em>which</em> asset &mdash; and then do the engineering work.</p>
+
+    <p>That distinction matters because post-quantum migration is not one deadline. US federal high-value assets target 2030 and exclusive use by 2033. India's CII guidance points at 2029, and it is a proposed milestone rather than a universal mandate. The UK says 2035. Germany's BSI says 2031 for specific categories. A model that has memorised &ldquo;2035&rdquo; is not wrong so much as answering a question nobody asked.</p>
+
+    <p>So the benchmark has three jobs: check whether the standards reasoning is jurisdiction-aware, check whether the implementation is correct against real reference outputs, and check whether the model can find cryptography in a codebase it has never seen.</p>
+
+    <div class="section-label">What exists</div>
+    <h2>Fifty-seven tasks across seven tiers</h2>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Tier</th><th>Tasks</th><th>What it asks</th><th>How it is graded</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Knowledge</td><td>10</td><td>Algorithm facts, parameter sets</td><td>Exact match</td></tr>
+          <tr><td>Standards</td><td>20</td><td>NIST, CNSA 2.0, CERT-In, TEC, DST, BSI, ANSSI</td><td>Exact match</td></tr>
+          <tr><td>Implementation</td><td>9</td><td>Write a FIPS 203 component</td><td>Executed against kyber-py</td></tr>
+          <tr><td>Debugging</td><td>6</td><td>Find the defect in real PQC code</td><td>Executed, bug injected</td></tr>
+          <tr><td>Judgment</td><td>3</td><td>IoT signature choice, TLS trade-offs</td><td>Weighted rubric</td></tr>
+          <tr><td>Scenarios</td><td>4</td><td>India bank migration, SSH fleet, firmware signing</td><td>Weighted rubric + sources</td></tr>
+          <tr><td>Engineering</td><td>5</td><td>Repo discovery, CBOM, patching, ML-KEM encapsulation</td><td>P/R/F1, fixture tests, KAT vectors</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-note">30 multiple choice, 15 executable code, 5 repository-level, 7 rubric-scored. 74 source URLs, all verified on 2026-11-25.</p>
+
+    <p>Every task is bound to at least one primary source, and the build fails if one is missing. That is not decoration: a benchmark about standards has no business being loose about which document says what.</p>
+
+    <div class="section-label">The part I got wrong first</div>
+    <h2>I optimised for my own convenience</h2>
+
+    <p>The first version was 68% multiple choice. The reason was not that knowledge questions are the most interesting &mdash; it is that a letter match grades deterministically and I could verify it in a second. Executable tasks need a checker, and a wrong checker quietly corrupts every score it produces.</p>
+
+    <p>That is a bad reason to shape a benchmark, and an audit pointed it out in blunter terms than I would have. The current split is 53% multiple choice, with fifteen executable code tasks and five repository-level tasks. Still recall-heavy. Less so than it was.</p>
+
+    <div class="section-label">Verification</div>
+    <h2>Four gates, and the bugs they caught</h2>
+
+    <p>Four checks run on every push, and CI runs them on Python 3.11, 3.12 and 3.13:</p>
+
+    <p><strong>Provenance</strong> &mdash; every task resolves to at least one real source URL. <strong>Ground truth</strong> &mdash; my zeta tables and compress/decompress formulas are compared against <code>kyber-py</code>, and the schemes round-trip at the byte sizes the standards specify. <strong>Integrity</strong> &mdash; a gold answer must score 1.0, an empty answer 0.0, and every deliberately injected bug must be rejected. <strong>Plumbing</strong> &mdash; providers, cache, scorer, report generation, and a syntax guard.</p>
+
+    <p>Three of the bugs those gates caught were mine, and all three are worth describing because they are the failure modes any benchmark will have.</p>
+
+    <h3>The version hash didn't hash the questions</h3>
+
+    <p>The report stamped a <code>benchmark_version</code> so a score could be tied to the exact task set that produced it. It hashed each task's id, answer, gold and rubric &mdash; but not the prompt. I could rewrite a question completely and the version would not change. Two different benchmarks, identical labels. It now hashes the full task, the <em>contents</em> of each checker file, and the scorer source itself.</p>
+
+    <h3>Rejecting an algorithm counted as recommending it</h3>
+
+    <p>One rubric criterion asked whether the model recommended ML-DSA-44 for a bandwidth-constrained IoT signature. The scorer looked for the string &ldquo;ml-dsa-44&rdquo;. So an answer that said <em>&ldquo;I would reject ML-DSA-44 and use SLH-DSA&rdquo;</em> scored 0.60 &mdash; it earned the point for recommending the exact thing it argued against.</p>
+
+    <p>The fix is criterion-level exclusion: a criterion can declare that certain phrases cancel it. That answer now scores 0.40. It is still a keyword method, and I say so in the README rather than pretending it is semantic.</p>
+
+    <h3>My own guard was wrong</h3>
+
+    <p>Python 3.11 rejects a backslash inside an f-string replacement field; 3.12 relaxed that. One line in my report formatter did exactly that, and the 3.11 CI job failed. I fixed the line and added a guard that walks the AST looking for the pattern.</p>
+
+    <p>Then the guard failed CI &mdash; on legal code. <code>ast.get_source_segment</code> on a <code>FormattedValue</code> spans the whole f-string in 3.12, so it was flagging literal <code>
+</code> outside the braces. Seven false positives. The guard now inspects only the expression part, and it has its own two tests: one input that must be caught, one that must not. A detector without tests is indistinguishable from one that always says &ldquo;clean&rdquo;.</p>
+
+    <div class="section-label">Why execution matters</div>
+    <h2>The FIPS 203 detail that separates reading from remembering</h2>
+
+    <p>ML-KEM encapsulation derives a shared secret and a ciphertext from the encapsulation key and a random message. In the round-3 Kyber submission, the final shared secret went through an extra derivation step: <code>KDF(K || H(c))</code>.</p>
+
+    <p>FIPS 203 removed that step. Encapsulation returns <code>K</code> directly. Decapsulation recomputes the ciphertext, compares, and returns an implicit-rejection value &mdash; <code>SHAKE256(z || c, 32)</code> &mdash; when the comparison fails.</p>
+
+    <p>A model that learned Kyber from 2021 material writes the KDF. It looks right, it runs, and it produces the wrong shared secret. I put that exact bug into a fixture and graded it against three fixed vectors generated from the reference implementation. Gold passes; the round-3 version fails on vector 0 with a shared-secret mismatch.</p>
+
+    <p>No rubric would catch that. A test does, in milliseconds, with a reason attached.</p>
+
+    <div class="section-label">One data point</div>
+    <h2>What a single model did, with caveats attached</h2>
+
+    <p>I ran the standards and scenarios subset &mdash; 21 tasks &mdash; against Sarvam AI's <code>sarvam-105b</code>. Mean score: 0.48. Nine responses came back empty, because I had capped output at 4,096 tokens and this model reasons for thousands of tokens before answering. That was my configuration error, not a model failure.</p>
+
+    <p>Re-running the four scenarios at 16,384 tokens gave 0.75. After applying the critical-criteria caps, the standards subset rescored to 0.50.</p>
+
+    <p>The most useful single observation: asked about NSA's CNSA 2.0 requirements, the model gave three different wrong answers across three phrasings &mdash; ML-KEM-768, then ECDH P-384 &ldquo;by 2025&rdquo;, then Diffie-Hellman MODP-3072 &ldquo;by 2024&rdquo;. The correct position is ML-KEM-1024, with exclusive use by 2033. It was fluent and confident in all three.</p>
+
+    <p>That is an anecdote with a receipt, not a result. One model, no repeats, no confidence intervals. It is the reason I want baselines across several models before anyone quotes a number from this.</p>
+
+    <div class="section-label">Limits</div>
+    <h2>What this does not establish</h2>
+
+    <p>It is not a validated leaderboard. There are no published baselines, no held-out split, no human-calibrated scoring, and no confidence intervals. The rubric tier is keyword coverage with a negation guard &mdash; a proxy, not a semantic judge. Over half the tasks are multiple choice, which measures recall more than engineering.</p>
+
+    <p>It is not a conformance suite. Round-trip consistency is not ACVP vector conformance, and passing these tasks does not certify an implementation.</p>
+
+    <p>And the repository tasks are not agentic. The model receives the fixture files in its prompt; it does not get a filesystem or a terminal. That is repository <em>reasoning</em>, and calling it anything else would be overselling it.</p>
+
+    <div class="section-label">Next</div>
+    <h2>The unit of evaluation has to change</h2>
+
+    <p>The next version adds a tool loop: read-only discovery first &mdash; list files, read files, grep, inspect manifests &mdash; with the model deciding what to look at and a trajectory logged for every step. Then patching, graded by the fixture's own test suite. Then protocol integration.</p>
+
+    <p>That changes the unit of evaluation from one response to one episode, which changes the harness, the scoring, and how noisy the numbers are. Agents vary far more between runs than single completions do. Doing that badly would produce numbers that fall apart on the first rerun, so it is a separate track with its own leaderboard rather than more rows in this one.</p>
+
+    <p>The thing I keep coming back to is that a benchmark is only useful if it is wrong in public. Every audit of this repository found something real &mdash; a scorer that rewarded contradiction, a version hash that didn't cover the questions, a repository task where the model never saw the repository. If you find a task this grades wrong, that is the most useful thing you can send me.</p>
+
+  </article>
+
+    <footer>
+    <p><strong>Repository:</strong> <a href="https://github.com/PredictiveManish/pqc-bench">github.com/PredictiveManish/pqc-bench</a> &mdash; MIT licensed. Run the four gates yourself before trusting any number in it.</p>
+    <p><strong>Scope:</strong> PQC-Eval is an independent research artefact. It is not a certification, not a compliance attestation, and not endorsed by NIST, CERT-In, TEC, the DST or any government body. Facts verified 2026-11-25; standards drift, so the provenance registry exists to make re-verification cheap.</p>
+  </footer>
+
+</div>
+</body>
+</html>
