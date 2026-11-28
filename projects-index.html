@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects | Manish Tiwari, AI Systems, MLOps & Open Source</title>
+<meta name="description" content="Selected projects by Manish Tiwari, AI systems, MLOps tooling, secure code execution and open-source contributions.">
+<link rel="canonical" href="https://predictivemanish.github.io/projects/">
+<meta name="theme-color" content="#f2f1ea">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Manish Tiwari">
+<meta property="og:title" content="Projects | Manish Tiwari, AI Systems, MLOps & Open Source">
+<meta property="og:description" content="Selected projects by Manish Tiwari, AI systems, MLOps tooling, secure code execution and open-source contributions.">
+<meta property="og:url" content="https://predictivemanish.github.io/projects/">
+<meta property="og:image" content="https://predictivemanish.github.io/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@compmanish">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:1080px;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1}
+nav .inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.nav-links{display:flex;align-items:center;gap:1.4rem;list-style:none;flex-wrap:wrap}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:3.5rem;align-items:center;padding:4.5rem 0 4rem}
+.eyebrow{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .75rem;border-radius:100px;margin-bottom:1.5rem}
+.dot{width:7px;height:7px;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
+.hero h1{font-size:clamp(2.3rem,5vw,3.6rem);line-height:1.08;letter-spacing:-.03em;margin-bottom:1.4rem}
+.hero-lead{font-size:1.1rem;line-height:1.7;max-width:520px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2rem}
+.btn{font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;padding:.7rem 1.2rem;transition:all .15s;display:inline-block}
+.status{display:inline-flex;align-items:center;gap:.45rem;font-size:.7rem;margin-top:1.75rem}
+.term{overflow:hidden}
+.term-bar{display:flex;align-items:center;gap:.4rem;padding:.7rem .9rem}
+.term-bar i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.term-bar span{margin-left:auto;font-size:.64rem}
+.term pre{padding:1.1rem 1.2rem;font-size:.78rem;line-height:1.85;white-space:pre-wrap;font-family:'DM Mono',monospace}
+section{padding:3.25rem 0}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:1.75rem;flex-wrap:wrap}
+.sec-head h2{font-size:1.55rem;letter-spacing:-.02em}
+.sec-head a{font-size:.7rem;letter-spacing:.04em;text-decoration:none}
+.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+.card{overflow:hidden;display:flex;flex-direction:column;transition:transform .18s,box-shadow .18s,border-color .18s}
+.card:hover{transform:translateY(-4px)}
+.thumb{height:116px;display:flex;align-items:center;justify-content:center}
+.thumb span{font-family:'DM Mono',monospace;font-size:1.7rem;letter-spacing:.05em}
+.card-body{padding:1.05rem 1.1rem 1.15rem;display:flex;flex-direction:column;flex:1}
+.card-name{font-size:1.05rem;margin-bottom:.4rem}
+.card-desc{font-size:.85rem;line-height:1.6;flex:1}
+.card-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.85rem}
+.tag{font-family:'DM Mono',monospace;font-size:.6rem;padding:.15rem .45rem;border-radius:100px;letter-spacing:.02em}
+.card-links{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.85rem}
+.pill{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.03em;padding:.25rem .6rem;border-radius:100px;text-decoration:none;transition:all .15s}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;margin-bottom:1.75rem}
+.stat{padding:1.3rem 1.2rem}
+.stat-n{font-family:'DM Mono',monospace;font-size:2rem;line-height:1;display:block}
+.stat-l{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;display:block;margin-top:.5rem}
+.org-row{display:flex;flex-wrap:wrap;gap:.45rem}
+.org{font-family:'DM Mono',monospace;font-size:.68rem;padding:.3rem .7rem;border-radius:100px}
+.exp{display:grid;grid-template-columns:168px 1fr;gap:1.5rem;padding:1.4rem 0}
+.exp-when{font-family:'DM Mono',monospace;font-size:.68rem;line-height:1.6}
+.exp-role{font-size:1.02rem;margin-bottom:.3rem}
+.exp p{font-size:.92rem;line-height:1.7}
+.skills{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem}
+.skill{padding:1.1rem 1.2rem}
+.skill h3{font-family:'DM Mono',monospace;font-size:.64rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem}
+.skill p{font-size:.9rem;line-height:1.7}
+.post{display:flex;justify-content:space-between;align-items:baseline;gap:1.25rem;padding:.95rem 0}
+.post a{text-decoration:none;font-size:.98rem}
+.post .date{font-family:'DM Mono',monospace;font-size:.65rem;flex-shrink:0}
+.cta{text-align:center;padding:4.5rem 0}
+.cta h2{font-size:clamp(1.8rem,4vw,2.6rem);letter-spacing:-.02em;margin-bottom:.8rem}
+.cta p{max-width:500px;margin:0 auto 2rem}
+.cta-links{display:flex;justify-content:center;flex-wrap:wrap;gap:.7rem}
+.map-wrap{padding:1.2rem}
+#india-map-container svg{width:100%;height:auto;display:block}
+.map-load{font-family:'DM Mono',monospace;font-size:.7rem;text-align:center;padding:2rem 0}
+.map-note{font-family:'DM Mono',monospace;font-size:.68rem;margin-top:.9rem;line-height:1.6}
+footer .inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem;padding:2rem 0 3rem}
+footer p{font-family:'DM Mono',monospace;font-size:.68rem}
+footer a{text-decoration:none}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none}}
+@media(max-width:900px){.hero{grid-template-columns:1fr;gap:2.5rem;padding:3rem 0 2.5rem}.work-grid{grid-template-columns:repeat(2,1fr)}.skills{grid-template-columns:1fr}}
+@media(max-width:600px){.work-grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.exp{grid-template-columns:1fr;gap:.4rem}.nav-links{gap:.9rem}.nav-links a{font-size:.65rem}}
+
+
+body{background:#f2f1ea;color:#0d0d0d;font-family:'Lora',Georgia,serif;font-size:17px}
+nav{padding:1rem 0;border-bottom:3px solid #0d0d0d;background:#f2f1ea;position:sticky;top:0;z-index:60}
+.nav-name{font-family:'DM Mono',monospace;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:#0d0d0d;text-decoration:none;font-size:.95rem}
+.nav-links a{font-family:'DM Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:#0d0d0d;text-decoration:none;padding:.2rem 0;border-bottom:2px solid transparent}
+.nav-links a:hover{border-bottom-color:#ff3d00;color:#ff3d00}
+.resume-btn{font-family:'DM Mono',monospace;font-size:.68rem;background:#0d0d0d;color:#f2f1ea;padding:.5rem .9rem;text-decoration:none;text-transform:uppercase;letter-spacing:.06em;border:2px solid #0d0d0d;box-shadow:4px 4px 0 #ff3d00}
+.resume-btn:hover{box-shadow:2px 2px 0 #ff3d00}
+.eyebrow{font-family:'DM Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:#f2f1ea;background:#0d0d0d;border-radius:0;padding:.4rem .8rem}
+.dot{background:#ff3d00}
+.hero h1{font-family:'DM Mono',monospace;font-weight:500;text-transform:uppercase;letter-spacing:-.02em;line-height:1.02;color:#0d0d0d;font-size:clamp(2rem,4.4vw,3.3rem)}
+.hero h1 .grad{color:#ff3d00;-webkit-text-fill-color:currentColor;background:none;text-decoration:underline;text-decoration-thickness:4px;text-underline-offset:6px}
+.hero-lead{color:#2b2b2b;font-size:1.05rem}
+.hero-lead strong{color:#0d0d0d;background:#ffe600;padding:0 .15rem}
+.btn{font-family:'DM Mono',monospace;border:2px solid #0d0d0d;color:#0d0d0d;background:#f2f1ea;text-transform:uppercase;letter-spacing:.06em;box-shadow:3px 3px 0 #0d0d0d}
+.btn:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 #0d0d0d;background:#fff}
+.btn-primary{background:#0d0d0d;color:#f2f1ea;border-color:#0d0d0d}
+.btn-primary:hover{background:#ff3d00;border-color:#ff3d00;color:#0d0d0d}
+.status{font-family:'DM Mono',monospace;color:#0d0d0d;text-transform:uppercase;letter-spacing:.05em;font-size:.66rem}
+.term{background:#0d0d0d;border:3px solid #0d0d0d;box-shadow:8px 8px 0 #ff3d00}
+.term-bar{background:#0d0d0d;border-bottom:2px solid #333}
+.term-bar i{opacity:.9}
+.term-bar span{color:#888}
+.term pre{color:#e8e8e8}
+.term .p{color:#ff3d00}.term .c{color:#fff}.term .g{color:#ffe600}.term .a{color:#7cd4ff}
+section{border-top:3px solid #0d0d0d}
+.sec-head h2{font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.01em;font-size:1.4rem;font-weight:500}
+.sec-head a{font-family:'DM Mono',monospace;color:#ff3d00;text-transform:uppercase;font-weight:500}
+.card{background:#fff;border:3px solid #0d0d0d;box-shadow:6px 6px 0 #0d0d0d}
+.card:hover{transform:translate(-2px,-2px);box-shadow:9px 9px 0 #ff3d00}
+.thumb{height:110px;border-bottom:3px solid #0d0d0d}
+.thumb span{font-family:'DM Mono',monospace;font-weight:500;color:#0d0d0d;font-size:1.6rem;text-shadow:none}
+.thumb[data-c="sr"]{background:#ffb86b}
+.thumb[data-c="ls"]{background:#c3b9ff}
+.thumb[data-c="jd"]{background:#8ce8c4}
+.thumb[data-c="lm"]{background:#9fd0f5}
+.thumb[data-c="tl"]{background:#ffb3c4}
+.thumb[data-c="md"]{background:#ffe066}
+.card-name{font-weight:700;font-size:1.02rem}
+.card-desc{color:#2b2b2b}
+.tag{font-family:'DM Mono',monospace;background:#f2f1ea;border:2px solid #0d0d0d;border-radius:0;color:#0d0d0d;text-transform:uppercase}
+.pill{font-family:'DM Mono',monospace;border:2px solid #0d0d0d;border-radius:0;color:#0d0d0d;text-transform:uppercase;font-weight:500}
+.pill:hover{background:#0d0d0d;color:#f2f1ea}
+.stat{background:#fff;border:3px solid #0d0d0d;box-shadow:5px 5px 0 #0d0d0d}
+.stat-n{color:#0d0d0d;font-weight:500}
+.stat-l{color:#0d0d0d;opacity:.65}
+.org{font-family:'DM Mono',monospace;background:#fff;border:2px solid #0d0d0d;border-radius:0;color:#0d0d0d;text-transform:uppercase}
+.exp{border-bottom:3px solid #0d0d0d}
+.exp-when{color:#0d0d0d;opacity:.7;text-transform:uppercase}
+.exp-role{font-weight:700}
+.exp-role span{color:#0d0d0d;opacity:.6;font-weight:400}
+.exp p{color:#2b2b2b}
+.skill{background:#fff;border:3px solid #0d0d0d;box-shadow:5px 5px 0 #0d0d0d}
+.skill h3{color:#0d0d0d;background:#ffe600;display:inline-block;padding:.15rem .5rem;border:2px solid #0d0d0d}
+.skill p{color:#2b2b2b}
+.post{border-bottom:3px solid #0d0d0d}
+.post a{color:#0d0d0d;font-weight:600}
+.post a:hover{color:#ff3d00}
+.post .date{color:#0d0d0d;opacity:.6;text-transform:uppercase}
+.cta{border-top:3px solid #0d0d0d}
+.cta h2{font-family:'DM Mono',monospace;text-transform:uppercase;font-weight:500}
+.cta p{color:#2b2b2b}
+.map-wrap{background:#fff;border:3px solid #0d0d0d;box-shadow:6px 6px 0 #0d0d0d}
+#india-map-container svg path,#india-map-container svg polygon{fill:#f2f1ea;stroke:#0d0d0d;stroke-width:1}
+#india-map-container svg .visited-state{fill:#ff3d00;stroke:#0d0d0d}
+.map-load{color:#0d0d0d;opacity:.6}
+.map-note{color:#0d0d0d;opacity:.7}
+footer{border-top:3px solid #0d0d0d;background:#0d0d0d}
+footer .inner{padding:2rem 0 3rem}
+footer p{color:#f2f1ea}
+footer a{color:#f2f1ea}
+footer a:hover{color:#ff3d00}
+
+
+    /* ── Playground ── */
+    .playground { padding: 3.25rem 0 3.5rem; border-top: 1px solid var(--pg-line); }
+    .pg-tag { display: block; font-family: 'DM Mono', monospace; font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; color: var(--pg-text); margin-bottom: 1.5rem; }
+    .marquee { overflow: hidden; border-top: 1px solid var(--pg-line); border-bottom: 1px solid var(--pg-line); padding: 1rem 0; white-space: nowrap; user-select: none; }
+    .marquee-track { display: inline-flex; animation: pgScroll 32s linear infinite; will-change: transform; }
+    .mq-set { display: inline-flex; align-items: center; gap: 2rem; padding-right: 2rem; }
+    .mq-set span { font-family: 'DM Mono', monospace; font-size: clamp(1.05rem, 2.4vw, 1.6rem); letter-spacing: .02em; color: var(--pg-text); transition: color .25s; }
+    .mq-set i { font-style: normal; color: var(--pg-accent); font-size: .95rem; }
+    .marquee:hover .marquee-track { animation-duration: 7s; }
+    .marquee:hover .mq-set span { color: var(--pg-accent); }
+    @keyframes pgScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .dotgrid-wrap { position: relative; margin-top: 2rem; border: 1px solid var(--pg-line); border-radius: 14px; overflow: hidden; height: 240px; cursor: crosshair; }
+    #dotgrid { display: block; width: 100%; height: 100%; }
+    .dotgrid-hint { position: absolute; left: 1rem; bottom: .8rem; font-family: 'DM Mono', monospace; font-size: .62rem; letter-spacing: .05em; text-transform: uppercase; color: var(--pg-text); opacity: .65; pointer-events: none; }
+    .jitter { display: inline-block; font-family: 'DM Mono', monospace; font-size: clamp(1.25rem, 3.2vw, 2.1rem); letter-spacing: -.01em; color: var(--pg-text); margin-top: 2.25rem; }
+    .jitter span { display: inline-block; transition: transform .18s ease, color .2s; }
+    .jitter span.on { color: var(--pg-accent); }
+    .toys { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+    .toy { font-family: 'DM Mono', monospace; font-size: .68rem; text-transform: uppercase; letter-spacing: .06em; background: transparent; border: 1px solid var(--pg-line); color: var(--pg-text); padding: .5rem .95rem; border-radius: 100px; cursor: pointer; transition: border-color .15s, color .15s, transform .1s; }
+    .toy:hover { border-color: var(--pg-accent); color: var(--pg-accent); }
+    .toy:active { transform: scale(.95); }
+    .toy-note { font-family: 'DM Mono', monospace; font-size: .66rem; color: var(--pg-text); opacity: .7; }
+    @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+    .playground { --pg-line: #0d0d0d; --pg-dot: #b9b7ac; --pg-accent: #ff3d00; --pg-text: #0d0d0d; }
+    .dotgrid-wrap { border-width: 3px; border-radius: 0; box-shadow: 6px 6px 0 #0d0d0d; }
+    .toy { border-width: 2px; border-radius: 0; }
+    .mq-set span { text-transform: uppercase; }
+
+    .page-head { padding: 3.5rem 0 2.5rem; }
+    .page-head h1 { margin: 1rem 0 1rem; font-size: clamp(2rem, 4.6vw, 3rem); line-height: 1.05; }
+    .page-head p { font-size: 1.05rem; max-width: 640px; line-height: 1.7; }
+    .prose p { line-height: 1.85; margin-bottom: 1rem; }
+    .prose p:last-child { margin-bottom: 0; }
+    .archive-list { list-style: none; }
+    .archive-item { display: flex; justify-content: space-between; align-items: baseline; gap: 1.25rem; padding: .9rem 0; }
+    .archive-title { text-decoration: none; font-weight: 600; font-size: .98rem; }
+    .archive-desc { font-size: .85rem; line-height: 1.6; margin-top: .15rem; }
+    .archive-date { font-family: 'DM Mono', monospace; font-size: .65rem; flex-shrink: 0; }
+    .pr-list { list-style: none; }
+    .pr-list li { display: flex; align-items: baseline; gap: .75rem; padding: .65rem 0; font-size: .9rem; }
+    .pr-list a { text-decoration: none; flex: 1; }
+    .pr-date { font-family: 'DM Mono', monospace; font-size: .65rem; flex-shrink: 0; }
+    .simple-list { list-style: none; }
+    .simple-list li { padding: .7rem 0; font-size: .93rem; line-height: 1.65; }
+    .simple-list a { text-decoration: none; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+    .contact-method { padding: 1.2rem; }
+    .contact-title { font-family: 'DM Mono', monospace; font-size: .64rem; text-transform: uppercase; letter-spacing: .06em; margin-bottom: .45rem; }
+    .contact-detail { font-size: .95rem; }
+    .social-links { display: flex; flex-wrap: wrap; gap: .6rem; }
+    .social-btn { display: inline-flex; align-items: center; gap: .45rem; font-family: 'DM Mono', monospace; font-size: .72rem; text-decoration: none; padding: .55rem 1rem; }
+    .timeline { list-style: none; }
+    .timeline li { display: grid; grid-template-columns: 84px 1fr; gap: 1rem; padding: .75rem 0; font-size: .95rem; line-height: 1.65; }
+    .timeline .yr { font-family: 'DM Mono', monospace; font-size: .72rem; }
+    .post .sub { font-size: .83rem; margin-top: .2rem; }
+    @media (max-width: 600px) { .contact-grid { grid-template-columns: 1fr; } .timeline li { grid-template-columns: 1fr; gap: .15rem; } }
+
+    .page-head h1 { font-family: 'DM Mono', monospace; text-transform: uppercase; font-weight: 500; letter-spacing: -.02em; color: #0d0d0d; }
+    .page-head p { color: #2b2b2b; }
+    .prose p { color: #2b2b2b; }
+    .prose strong { color: #0d0d0d; background: #ffe600; padding: 0 .15rem; }
+    .prose a { color: #ff3d00; }
+    .archive-item { border-bottom: 2px solid #0d0d0d; }
+    .archive-item:last-child { border-bottom: none; }
+    .archive-title { color: #0d0d0d; }
+    .archive-title:hover { color: #ff3d00; }
+    .archive-desc { color: #2b2b2b; }
+    .archive-date { color: #0d0d0d; opacity: .6; text-transform: uppercase; }
+    .pr-list li { border-bottom: 2px solid #0d0d0d; }
+    .pr-list li:last-child { border-bottom: none; }
+    .pr-list a { color: #2b2b2b; }
+    .pr-list a:hover { color: #0d0d0d; }
+    .pr-list strong { color: #0d0d0d; }
+    .pr-date { color: #0d0d0d; opacity: .6; text-transform: uppercase; }
+    .simple-list li { border-bottom: 2px solid #0d0d0d; color: #2b2b2b; }
+    .simple-list li:last-child { border-bottom: none; }
+    .simple-list a { color: #2b2b2b; }
+    .simple-list a:hover { color: #ff3d00; }
+    .contact-method { background: #fff; border: 3px solid #0d0d0d; box-shadow: 5px 5px 0 #0d0d0d; }
+    .contact-title { color: #ff3d00; }
+    .contact-detail { color: #2b2b2b; }
+    .contact-detail a { color: #0d0d0d; border-bottom: 2px solid #0d0d0d; }
+    .social-btn { border: 2px solid #0d0d0d; color: #0d0d0d; box-shadow: 3px 3px 0 #0d0d0d; text-transform: uppercase; }
+    .social-btn:hover { background: #0d0d0d; color: #f2f1ea; box-shadow: 1px 1px 0 #0d0d0d; }
+    .timeline li { border-bottom: 2px solid #0d0d0d; color: #2b2b2b; }
+    .timeline li:last-child { border-bottom: none; }
+    .timeline .yr { color: #ff3d00; font-weight: 500; }
+    .post .sub { color: #5a5a55; }
+
+    /* ── Bottom wordmark ── */
+    .wordmark { overflow: hidden; padding: 2.5rem 0 1.25rem; line-height: 0; }
+    .wordmark svg { display: block; width: 100%; height: auto; }
+    .wordmark svg text { fill: #0d0d0d; }
+
+
+.thumb[data-c="me"]{background:#cdeac0}
+.thumb[data-c="ly"]{background:#f6d8ae}.thumb[data-c="pq"]{background:#d9c2f0}
+.btn-wa{background:#25d366;border-color:#0d0d0d;color:#0d0d0d}
+.btn-wa:hover{background:#1ebe5b;color:#0d0d0d;box-shadow:5px 5px 0 #0d0d0d}
+.wa-fab{position:fixed;right:1.1rem;bottom:1.1rem;z-index:90;display:inline-flex;align-items:center;gap:.5rem;font-family:'DM Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;background:#25d366;color:#0d0d0d;border:3px solid #0d0d0d;box-shadow:5px 5px 0 #0d0d0d;padding:.65rem .95rem;text-decoration:none;transition:transform .15s,box-shadow .15s}
+.wa-fab:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 #0d0d0d;color:#0d0d0d}
+.wa-fab svg{width:17px;height:17px;display:block;flex:none;fill:currentColor}
+@media(max-width:600px){.wa-fab span{display:none}.wa-fab{padding:.8rem}}
+</style>
+
+<style>
+.nav-links a.resume-btn{color:#f2f1ea;background:#0d0d0d;border:2px solid #0d0d0d;padding:.5rem .9rem}
+.tier-note{font-family:'DM Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.07em;opacity:.55}
+.flagship{display:grid;gap:1.15rem}
+.flag{background:#fff;border:3px solid #0d0d0d;box-shadow:8px 8px 0 #0d0d0d;padding:1.45rem 1.5rem;transition:transform .18s,box-shadow .18s}
+.flag:hover{transform:translate(-2px,-2px);box-shadow:11px 11px 0 #ff3d00}
+.flag-head{display:flex;align-items:baseline;gap:.75rem;flex-wrap:wrap;margin-bottom:.95rem;padding-bottom:.75rem;border-bottom:2px solid #0d0d0d}
+.flag-num{font-family:'DM Mono',monospace;font-size:.78rem;color:#ff3d00;font-weight:500}
+.flag-head h3{font-family:'DM Mono',monospace;font-size:1.22rem;text-transform:uppercase;font-weight:500;letter-spacing:.01em;margin:0}
+.flag-tag{font-family:'DM Mono',monospace;font-size:.56rem;text-transform:uppercase;letter-spacing:.07em;border:2px solid #0d0d0d;padding:.08rem .4rem;margin-left:auto}
+.flag p{font-size:.94rem;line-height:1.62;margin:0 0 .5rem;color:#2b2b2b}
+.flag p b{font-family:'DM Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.07em;color:#0d0d0d;display:inline-block;min-width:5.2rem;vertical-align:2px}
+.flag .card-links{margin-top:.9rem}
+.t2{list-style:none;margin:0;padding:0}
+.t2 li{display:grid;grid-template-columns:1fr auto;gap:1.4rem;align-items:start;padding:1.15rem 0;border-bottom:2px solid #0d0d0d}
+.t2 li:last-child{border-bottom:none}
+.t2 h3{font-family:'DM Mono',monospace;font-size:1rem;font-weight:500;margin:0 0 .35rem}
+.t2 h3 .up{font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.07em;text-transform:uppercase;background:#ffe600;padding:.08rem .35rem;margin-left:.45rem;vertical-align:2px}
+.t2 p{font-size:.9rem;line-height:1.62;color:#2b2b2b;margin:0;max-width:72ch}
+.t2-links{display:flex;gap:.35rem;flex-wrap:wrap;justify-content:flex-end}
+.t3{list-style:none;margin:0;padding:0}
+.t3 li{display:grid;grid-template-columns:13.5rem 1fr auto;gap:1rem;align-items:baseline;padding:.6rem 0;border-bottom:1px solid #c9c7bd}
+.t3 li:last-child{border-bottom:none}
+.t3-name{font-family:'DM Mono',monospace;font-size:.82rem;text-decoration:none;color:#0d0d0d;border-bottom:2px solid transparent}
+.t3-name:hover{border-bottom-color:#ff3d00;color:#ff3d00}
+.t3-fact{font-size:.85rem;color:#2b2b2b;line-height:1.5}
+.t3-link{font-family:'DM Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:.06em;color:#0d0d0d;text-decoration:none;white-space:nowrap}
+.t3-link:hover{color:#ff3d00}
+@media(max-width:760px){.t2 li{grid-template-columns:1fr}.t2-links{justify-content:flex-start}.t3 li{grid-template-columns:1fr;gap:.15rem}.t3-link{display:none}}
+</style>
+</head>
+<body>
+<nav><div class="wrap inner"><a href="/" class="nav-name">Manish Tiwari</a><ul class="nav-links"><li><a href="/projects/">Projects</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li><li><a href="/Manish_Tiwari_Applied_AI_Resume.pdf" download class="resume-btn">Resume &darr;</a></li></ul></div></nav>
+<div class="wrap">
+  <div class="page-head">
+    <span class="eyebrow">Portfolio</span>
+    <h1>Things I&rsquo;ve built</h1>
+    <p>Ordered by signal, not by date: how verifiable the work is, how deep it goes, and how close it sits to
+    evaluation, ML systems and secure execution roles. Tier 1 is the three I would defend for twenty minutes in an
+    interview. Everything below is real work, but it carries less weight.</p>
+  </div>
+
+  <section>
+    <div class="sec-head"><h2>Tier 1  Flagship</h2><span class="tier-note">3 projects &middot; defend these</span></div>
+    <div class="flagship">
+
+      <article class="flag">
+        <div class="flag-head"><span class="flag-num">01</span><h3>pqc-bench</h3><span class="flag-tag">Evaluation</span></div>
+        <p><b>Problem</b>Post-quantum crypto is moving into production on the strength of known-answer tests, which only prove a library agrees with its own vectors  not that it computes the right thing.</p>
+        <p><b>Built</b>57 tasks across seven tiers, each bound to a primary source (FIPS 203/204, RFCs), with executable graders checked against kyber-py and 74 cited sources.</p>
+        <p><b>Decision</b>Every task runs three ways: gold must pass, null must fail, buggy must fail. A task that scores well by accident is deleted before it can inflate a leaderboard.</p>
+        <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/pqc-bench" target="_blank">GitHub</a><a class="pill" href="/blog/pqc-eval-technical-report/">Technical report</a></div>
+      </article>
+
+      <article class="flag">
+        <div class="flag-head"><span class="flag-num">02</span><h3>mesh</h3><span class="flag-tag">Distributed systems</span></div>
+        <p><b>Problem</b>People plan training runs on pooled VRAM  ten laptops at 8&nbsp;GB is not 80&nbsp;GB  and find out halfway through the run.</p>
+        <p><b>Built</b>A planner that scans a fleet of consumer GPUs, computes the real per-node ceiling for a given model, then coordinates distributed PyTorch training across the machines that actually fit.</p>
+        <p><b>Decision</b>Capacity is computed per node against the model shard and never summed. On a fleet of 100 consumer GPUs, only 8 can hold a 7B model  the number the tool exists to tell you.</p>
+        <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/mesh" target="_blank">GitHub</a><a class="pill" href="https://pypi.org/project/mesh-train/" target="_blank">PyPI</a></div>
+      </article>
+
+      <article class="flag">
+        <div class="flag-head"><span class="flag-num">03</span><h3>SafeRun AI</h3><span class="flag-tag">Security &amp; infra</span></div>
+        <p><b>Problem</b>LLM-generated Python usually runs with whatever privileges the host happens to have.</p>
+        <p><b>Built</b>A sandbox that executes untrusted code in isolated Docker containers behind an AST scanner, a YAML policy engine, four risk levels and a full audit log  as a FastAPI service, a CLI and an MCP server.</p>
+        <p><b>Decision</b>Policy is enforced statically, before execution, not only by the container. Import-level attacks are rejected at the AST instead of being absorbed silently at runtime.</p>
+        <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/SafeRun-AI" target="_blank">GitHub</a><a class="pill" href="https://pypi.org/project/saferun-ai/" target="_blank">PyPI</a><a class="pill" href="https://saferun-ai.onrender.com/" target="_blank">Live</a></div>
+      </article>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>Tier 2  Shipped and in use</h2><span class="tier-note">5 projects</span></div>
+    <ul class="t2">
+      <li>
+        <div>
+          <h3>Repo2RLEnv, merged upstream at Hugging Face<span class="up">merged PR</span></h3>
+          <p>My pull request adds an egress guard that blocks the Go and Rust module registries at solve time, closing a hole where a generated solution could pull packages mid-run and escape the sandbox contract. It is merged into <em>huggingface/Repo2RLEnv</em>  the one piece of my work a stranger has reviewed and accepted.</p>
+        </div>
+        <div class="t2-links"><a class="pill" href="https://github.com/huggingface/Repo2RLEnv/pull/257" target="_blank">PR #257</a></div>
+      </li>
+      <li>
+        <div>
+          <h3>Bharat Benefits<span class="up">merged into Moss</span></h3>
+          <p>An agent that answers questions about Indian government schemes straight from official sources, with a voice pipeline on top. It was merged into <em>usemoss/moss</em> as a community demo, so the code lives in someone else&rsquo;s repository now.</p>
+        </div>
+        <div class="t2-links"><a class="pill" href="https://github.com/PredictiveManish/bharat-benefits" target="_blank">GitHub</a><a class="pill" href="https://github.com/usemoss/moss/pull/189" target="_blank">PR #189</a></div>
+      </li>
+      <li>
+        <div>
+          <h3>Little Sparks</h3>
+          <p>A Slack-integrated product-design platform used daily at Smartivity Labs by 100+ designers and managers across 200+ projects. OAuth, per-project channels, reminders and analytics  built for a company that still runs it, not for a demo.</p>
+        </div>
+        <div class="t2-links"><a class="pill" href="https://github.com/PredictiveManish/little-sparks" target="_blank">GitHub</a><a class="pill" href="https://little-sparks-six.vercel.app/" target="_blank">Live</a></div>
+      </li>
+      <li>
+        <div>
+          <h3>Trimurti-LM</h3>
+          <p>A 4.2M-parameter English/Hindi/Punjabi GPT trained from scratch on a 4&nbsp;GB GTX&nbsp;1650  450K rows, a custom SentencePiece tokenizer, perplexity 3.32 in 2.38 hours. Trained end to end rather than fine-tuned, which is the unusual part at this scale.</p>
+        </div>
+        <div class="t2-links"><a class="pill" href="https://github.com/PredictiveManish/trimurti-lm" target="_blank">GitHub</a><a class="pill" href="https://huggingface.co/spaces/PredictiveManish/Trimurti-LM-Demo" target="_blank">Demo</a></div>
+      </li>
+      <li>
+        <div>
+          <h3>Laya on a GTX 1650</h3>
+          <p>A latency benchmark of a 421M-parameter model on 2019-era laptop hardware, with CUDA-synchronised timing and p50/p95 instead of single runs. Measured numbers are kept separate from the published ones  the gap between them is the finding.</p>
+        </div>
+        <div class="t2-links"><a class="pill" href="https://github.com/PredictiveManish/laya-gtx1650-benchmark" target="_blank">GitHub</a><a class="pill" href="/blog/laya-gtx1650-benchmark/">Write-up</a></div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>Tier 3  Also built</h2><span class="tier-note">9 projects &middot; breadth, not depth</span></div>
+    <ul class="t3">
+      <li><a class="t3-name" href="https://predictivemanish.github.io/indiaciv/" target="_blank">indiaciv</a><span class="t3-fact">India as a strategy-game map: all 720 districts and 5,147 hexes built from Census 2011, ISFR 2023 and RBI state accounts.</span><a class="t3-link" href="https://github.com/PredictiveManish/predictivemanish.github.io/tree/main/indiaciv" target="_blank">source</a></li>
+      <li><a class="t3-name" href="https://github.com/PredictiveManish/localmind" target="_blank">LocalMind</a><span class="t3-fact">PyPI CLI that scans your GPU and says which local models actually fit, rather than what the model card claims.</span><a class="t3-link" href="https://pypi.org/project/localmind-ai/" target="_blank">PyPI</a></li>
+      <li><a class="t3-name" href="https://github.com/PredictiveManish/mlops-drift-detector" target="_blank">ML Drift Monitor</a><span class="t3-fact">Drift detection with versioned baselines and per-feature statistical tests, so a baseline can be reverted.</span><a class="t3-link" href="https://github.com/PredictiveManish/mlops-drift-detector" target="_blank">GitHub</a></li>
+      <li><a class="t3-name" href="https://github.com/PredictiveManish/resume-agent" target="_blank">resume-agent</a><span class="t3-fact">Tailors a resume to a job description and returns an ATS score before and after, plus a compile-ready LaTeX file.</span><a class="t3-link" href="https://github.com/PredictiveManish/resume-agent" target="_blank">GitHub</a></li>
+      <li><a class="t3-name" href="https://github.com/PredictiveManish/Q-A-with-sarvam" target="_blank">Q&amp;A with Sarvam</a><span class="t3-fact">Document Q&amp;A on Sarvam&rsquo;s 105B model with vector search, streaming answers and source tracking.</span><a class="t3-link" href="https://github.com/PredictiveManish/Q-A-with-sarvam" target="_blank">GitHub</a></li>
+      <li><a class="t3-name" href="https://github.com/PredictiveManish/JanDrishti" target="_blank">JanDrishti</a><span class="t3-fact">Budget against actual expenditure for every state and UT, served behind 15 FastAPI endpoints.</span><a class="t3-link" href="https://github.com/PredictiveManish/JanDrishti" target="_blank">GitHub</a></li>
+      <li><a class="t3-name" href="https://github.com/PredictiveManish/bharat-friction-index" target="_blank">Bharat friction index</a><span class="t3-fact">A sourced map of the policies, rules and bodies that slow founders down in India.</span><a class="t3-link" href="https://github.com/PredictiveManish/bharat-friction-index" target="_blank">GitHub</a></li>
+      <li><a class="t3-name" href="https://github.com/PredictiveManish/semicon-software-gap" target="_blank">Semicon software gap</a><span class="t3-fact">Which EDA and design software a new Indian chip builder should actually start with.</span><a class="t3-link" href="https://github.com/PredictiveManish/semicon-software-gap" target="_blank">GitHub</a></li>
+      <li><a class="t3-name" href="https://github.com/PredictiveManish/Hack-EVM" target="_blank">Hack-EVM</a><span class="t3-fact">A satirical &ldquo;EVM hacking&rdquo; toolkit on PyPI where every operation fails by design.</span><a class="t3-link" href="https://pypi.org/project/hack-evm/" target="_blank">PyPI</a></li>
+    </ul>
+  </section>
+
+  <section style="text-align:center;">
+    <p class="muted">Full source and the rest of the experiments on <a href="https://github.com/PredictiveManish" target="_blank" style="color:#ff3d00;text-decoration:none;">GitHub</a>  49 public repositories, 48 merged pull requests.</p>
+  </section>
+</div>
+<footer><div class="wrap inner"><p>&copy; <span id="yr"></span> Manish Tiwari</p><p>
+<a href="https://github.com/PredictiveManish" target="_blank">GitHub</a> &middot;
+<a href="https://linkedin.com/in/manish-tiwari-977741286" target="_blank">LinkedIn</a> &middot;
+<a href="https://x.com/compmanish" target="_blank">X</a> &middot;
+<a href="https://huggingface.co/PredictiveManish" target="_blank">HuggingFace</a> &middot;
+<a href="mailto:manish.tiwari.09@zohomail.in">Email</a></p></div></footer>
+<div class="wordmark" aria-hidden="true">
+  <svg viewBox="0 0 1000 150" preserveAspectRatio="none" role="img" aria-label="Manish Tiwari">
+    <text x="0" y="116" textLength="1000" lengthAdjust="spacingAndGlyphs" font-family="DM Mono, ui-monospace, monospace" font-size="130" font-weight="500" letter-spacing="-3">MANISH TIWARI</text>
+  </svg>
+</div>
+<script>
+document.getElementById('yr') && (document.getElementById('yr').textContent = new Date().getFullYear());
+(function(){
+  var c = document.getElementById('india-map-container');
+  if (!c) return;
+  var VISITED = ["Punjab","Delhi","Haryana","Himachal Pradesh","Uttar Pradesh","Rajasthan","Bihar","Jammu and Kashmir","Jharkhand","Madhya Pradesh","Chandigarh","Uttarakhand"];
+  var ID_MAP = {"Andaman and Nicobar":"INAN","Telangana":"INTG","Andhra Pradesh":"INAP","Arunachal Pradesh":"INAR","Assam":"INAS","Bihar":"INBR","Chandigarh":"INCH","Chhattisgarh":"INCT","Delhi":"INDL","Goa":"INGA","Gujarat":"INGJ","Haryana":"INHR","Himachal Pradesh":"INHP","Jharkhand":"INJH","Karnataka":"INKA","Kerala":"INKL","Madhya Pradesh":"INMP","Maharashtra":"INMH","Manipur":"INMN","Meghalaya":"INML","Mizoram":"INMZ","Nagaland":"INNL","Odisha":"INOR","Puducherry":"INPY","Punjab":"INPB","Rajasthan":"INRJ","Sikkim":"INSK","Tamil Nadu":"INTN","Tripura":"INTR","Uttar Pradesh":"INUP","Uttarakhand":"INUT","West Bengal":"INWB","Lakshadweep":"INLD","Jammu and Kashmir":"INJK","Ladakh":"INLA"};
+  fetch('/visited/in.svg').then(function(r){ if(!r.ok) throw 0; return r.text(); })
+    .then(function(t){ c.innerHTML = t; VISITED.forEach(function(s){ var el = c.querySelector('#' + ID_MAP[s]); if (el) el.classList.add('visited-state'); }); })
+    .catch(function(){ c.innerHTML = '<p class="map-load">Could not load map.</p>'; });
+})();
+</script>
+<a class="wa-fab" href="https://wa.me/919779405863?text=Hello%2C%20I%27ve%20an%20opportunity%20for%20you" target="_blank" rel="noopener" aria-label="Message me on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.488"/></svg><span>Hire me</span></a>
+</body>
+</html>

@@ -268,6 +268,37 @@ footer a:hover{color:#ff3d00}
 .wa-fab svg{width:17px;height:17px;display:block;flex:none;fill:currentColor}
 @media(max-width:600px){.wa-fab span{display:none}.wa-fab{padding:.8rem}}
 </style>
+
+<style>
+.nav-links a.resume-btn{color:#f2f1ea;background:#0d0d0d;border:2px solid #0d0d0d;padding:.5rem .9rem}
+.tier-note{font-family:'DM Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.07em;opacity:.55}
+.flagship{display:grid;gap:1.15rem}
+.flag{background:#fff;border:3px solid #0d0d0d;box-shadow:8px 8px 0 #0d0d0d;padding:1.45rem 1.5rem;transition:transform .18s,box-shadow .18s}
+.flag:hover{transform:translate(-2px,-2px);box-shadow:11px 11px 0 #ff3d00}
+.flag-head{display:flex;align-items:baseline;gap:.75rem;flex-wrap:wrap;margin-bottom:.95rem;padding-bottom:.75rem;border-bottom:2px solid #0d0d0d}
+.flag-num{font-family:'DM Mono',monospace;font-size:.78rem;color:#ff3d00;font-weight:500}
+.flag-head h3{font-family:'DM Mono',monospace;font-size:1.22rem;text-transform:uppercase;font-weight:500;letter-spacing:.01em;margin:0}
+.flag-tag{font-family:'DM Mono',monospace;font-size:.56rem;text-transform:uppercase;letter-spacing:.07em;border:2px solid #0d0d0d;padding:.08rem .4rem;margin-left:auto}
+.flag p{font-size:.94rem;line-height:1.62;margin:0 0 .5rem;color:#2b2b2b}
+.flag p b{font-family:'DM Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.07em;color:#0d0d0d;display:inline-block;min-width:5.2rem;vertical-align:2px}
+.flag .card-links{margin-top:.9rem}
+.t2{list-style:none;margin:0;padding:0}
+.t2 li{display:grid;grid-template-columns:1fr auto;gap:1.4rem;align-items:start;padding:1.15rem 0;border-bottom:2px solid #0d0d0d}
+.t2 li:last-child{border-bottom:none}
+.t2 h3{font-family:'DM Mono',monospace;font-size:1rem;font-weight:500;margin:0 0 .35rem}
+.t2 h3 .up{font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.07em;text-transform:uppercase;background:#ffe600;padding:.08rem .35rem;margin-left:.45rem;vertical-align:2px}
+.t2 p{font-size:.9rem;line-height:1.62;color:#2b2b2b;margin:0;max-width:72ch}
+.t2-links{display:flex;gap:.35rem;flex-wrap:wrap;justify-content:flex-end}
+.t3{list-style:none;margin:0;padding:0}
+.t3 li{display:grid;grid-template-columns:13.5rem 1fr auto;gap:1rem;align-items:baseline;padding:.6rem 0;border-bottom:1px solid #c9c7bd}
+.t3 li:last-child{border-bottom:none}
+.t3-name{font-family:'DM Mono',monospace;font-size:.82rem;text-decoration:none;color:#0d0d0d;border-bottom:2px solid transparent}
+.t3-name:hover{border-bottom-color:#ff3d00;color:#ff3d00}
+.t3-fact{font-size:.85rem;color:#2b2b2b;line-height:1.5}
+.t3-link{font-family:'DM Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:.06em;color:#0d0d0d;text-decoration:none;white-space:nowrap}
+.t3-link:hover{color:#ff3d00}
+@media(max-width:760px){.t2 li{grid-template-columns:1fr}.t2-links{justify-content:flex-start}.t3 li{grid-template-columns:1fr;gap:.15rem}.t3-link{display:none}}
+</style>
 </head>
 <body>
 <nav><div class="wrap inner"><a href="/" class="nav-name">Manish Tiwari</a><ul class="nav-links"><li><a href="/projects/">Projects</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li><li><a href="/Manish_Tiwari_Applied_AI_Resume.pdf" download class="resume-btn">Resume &darr;</a></li></ul></div></nav>
@@ -275,241 +306,99 @@ footer a:hover{color:#ff3d00}
   <div class="page-head">
     <span class="eyebrow">Portfolio</span>
     <h1>Things I&rsquo;ve built</h1>
-    <p>From production ML systems and MLOps tooling to open-source contributions and side experiments - most recent first.</p>
+    <p>Ordered by signal, not by date: how verifiable the work is, how deep it goes, and how close it sits to
+    evaluation, ML systems and secure execution roles. </p>
   </div>
+
   <section>
-    <div class="sec-head"><h2>Selected projects</h2></div>
-    <div class="work-grid">
-      <article class="card">
-        <div class="thumb" data-c="pq"><span>PQ</span></div>
-        <div class="card-body">
-          <div class="card-name">PQC-Eval</div>
-          <p class="card-desc">Benchmark for post-quantum cryptography - 57 tasks across seven tiers, every task bound to a primary source. Executable graders checked against kyber-py and fixed KAT vectors, with four validation gates on CI.</p>
-          <div class="card-tags"><span class="tag">Python</span><span class="tag">FIPS 203</span><span class="tag">Evaluation</span></div>
-          <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/pqc-bench" target="_blank">GitHub</a><a class="pill" href="/blog/pqc-eval-technical-report/">Write-up</a></div>
-        </div>
+    <div class="sec-head"><h2>Tier 1  Favourite ones</h2><span class="tier-note">3 projects</span></div>
+    <div class="flagship">
+
+      <article class="flag">
+        <div class="flag-head"><span class="flag-num">01</span><h3>pqc-bench</h3><span class="flag-tag">Evaluation</span></div>
+        <p><b>Problem</b>Post-quantum crypto is moving into production on the strength of known-answer tests, which only prove a library agrees with its own vectors  not that it computes the right thing.</p>
+        <p><b>Built</b>57 tasks across seven tiers, each bound to a primary source (FIPS 203/204, RFCs), with executable graders checked against kyber-py and 74 cited sources.</p>
+        <p><b>Decision</b>Every task runs three ways: gold must pass, null must fail, buggy must fail. A task that scores well by accident is deleted before it can inflate a leaderboard.</p>
+        <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/pqc-bench" target="_blank">GitHub</a><a class="pill" href="/blog/pqc-eval-technical-report/">Technical report</a></div>
       </article>
-      <article class="card">
-        <div class="thumb" data-c="lm"><span>SS</span></div>
-        <div class="card-body">
-          <div class="card-name">Semicon software gap</div>
-          <p class="card-desc">Interactive map of India&rsquo;s semiconductor ecosystem - who does what part of chip production, and which EDA and design software a new builder should start with.</p>
-          <div class="card-tags"><span class="tag">Data</span><span class="tag">HTML</span></div>
-          <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/semicon-software-gap" target="_blank">GitHub</a></div>
-        </div>
+
+      <article class="flag">
+        <div class="flag-head"><span class="flag-num">02</span><h3>mesh</h3><span class="flag-tag">Distributed systems</span></div>
+        <p><b>Problem</b>People plan training runs on pooled VRAM  ten laptops at 8&nbsp;GB is not 80&nbsp;GB  and find out halfway through the run.</p>
+        <p><b>Built</b>A planner that scans a fleet of consumer GPUs, computes the real per-node ceiling for a given model, then coordinates distributed PyTorch training across the machines that actually fit.</p>
+        <p><b>Decision</b>Capacity is computed per node against the model shard and never summed. On a fleet of 100 consumer GPUs, only 8 can hold a 7B model  the number the tool exists to tell you.</p>
+        <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/mesh" target="_blank">GitHub</a><a class="pill" href="https://pypi.org/project/mesh-train/" target="_blank">PyPI</a></div>
       </article>
-      <article class="card">
-        <div class="thumb" data-c="jd"><span>BF</span></div>
-        <div class="card-body">
-          <div class="card-name">Bharat friction index</div>
-          <p class="card-desc">A sourced, interactive map of the policies, rules and government bodies that create friction for founders and innovators in India.</p>
-          <div class="card-tags"><span class="tag">Data</span><span class="tag">Policy</span></div>
-          <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/bharat-friction-index" target="_blank">GitHub</a></div>
-        </div>
+
+      <article class="flag">
+        <div class="flag-head"><span class="flag-num">03</span><h3>SafeRun AI</h3><span class="flag-tag">Security &amp; infra</span></div>
+        <p><b>Problem</b>LLM-generated Python usually runs with whatever privileges the host happens to have.</p>
+        <p><b>Built</b>A sandbox that executes untrusted code in isolated Docker containers behind an AST scanner, a YAML policy engine, four risk levels and a full audit log  as a FastAPI service, a CLI and an MCP server.</p>
+        <p><b>Decision</b>Policy is enforced statically, before execution, not only by the container. Import-level attacks are rejected at the AST instead of being absorbed silently at runtime.</p>
+        <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/SafeRun-AI" target="_blank">GitHub</a><a class="pill" href="https://pypi.org/project/saferun-ai/" target="_blank">PyPI</a><a class="pill" href="https://saferun-ai.onrender.com/" target="_blank">Live</a></div>
       </article>
-      <article class="card">
-        <div class="thumb" data-c="sr"><span>RA</span></div>
-        <div class="card-body">
-          <div class="card-name">resume-agent</div>
-          <p class="card-desc">AI agent that tailors a resume to a job description and returns an ATS score before and after, a change preview and a compile-ready LaTeX resume. Built on Sarvam AI.</p>
-          <div class="card-tags"><span class="tag">Python</span><span class="tag">Agents</span><span class="tag">Sarvam AI</span></div>
-          <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/resume-agent" target="_blank">GitHub</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="thumb" data-c="tl"><span>QA</span></div>
-        <div class="card-body">
-          <div class="card-name">Q&amp;A with Sarvam</div>
-          <p class="card-desc">Streamlit document Q&amp;A app on Sarvam AI&rsquo;s 105B model, with vector search, streaming answers, chat history and source tracking.</p>
-          <div class="card-tags"><span class="tag">Python</span><span class="tag">Streamlit</span><span class="tag">RAG</span></div>
-          <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/Q-A-with-sarvam" target="_blank">GitHub</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="thumb" data-c="me"><span>ME</span></div>
-        <div class="card-body">
-          <div class="card-name">mesh</div>
-          <p class="card-desc">Capacity planner for heterogeneous GPU fleets - computes the real training ceiling per node instead of summing pooled VRAM. On 100 consumer GPUs, only 8 can hold a 7B model.</p>
-          <div class="card-tags"><span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">DiLoCo</span></div>
-          <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/mesh" target="_blank">GitHub</a><a class="pill" href="https://pypi.org/project/mesh-train/" target="_blank">PyPI</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="thumb" data-c="sr"><span>SR</span></div>
-        <div class="card-body">
-          <div class="card-name">SafeRun AI</div>
-          <p class="card-desc">Secure sandbox that executes untrusted AI-generated Python in isolated Docker containers, AST scanner + YAML policy engine, four risk levels, and a full audit log. Published as saferun-ai on PyPI.</p>
-          <div class="card-tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Docker</span></div>
-          <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/SafeRun-AI" target="_blank">GitHub</a><a class="pill" href="https://saferun-ai.onrender.com/" target="_blank">Live</a><a class="pill" href="https://pypi.org/project/saferun-ai/" target="_blank">PyPI</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="thumb" data-c="ls"><span>LS</span></div>
-        <div class="card-body">
-          <div class="card-name">Little Sparks</div>
-          <p class="card-desc">Slack-integrated product-design platform used by 100+ designers and managers across 200+ projects at Smartivity Labs, OAuth, per-project channels, reminders and analytics.</p>
-          <div class="card-tags"><span class="tag">JavaScript</span><span class="tag">Slack API</span><span class="tag">Full-stack</span></div>
-          <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/little-sparks" target="_blank">GitHub</a><a class="pill" href="https://little-sparks-six.vercel.app/" target="_blank">Live</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="thumb" data-c="jd"><span>JD</span></div>
-        <div class="card-body">
-          <div class="card-name">JanDrishti</div>
-          <p class="card-desc">Government transparency platform covering every Central department and all 28 states + 8 UTs, budgets, expenditure vs budget, CAG findings, live PIB feed, behind 15 FastAPI endpoints.</p>
-          <div class="card-tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">APScheduler</span></div>
-          <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/JanDrishti" target="_blank">GitHub</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="thumb" data-c="lm"><span>LM</span></div>
-        <div class="card-body">
-          <div class="card-name">LocalMind</div>
-          <p class="card-desc">CLI that scans your hardware, estimates what actually fits, and recommends local LLMs worth running, VRAM-aware comparison with Ollama chat built in.</p>
-          <div class="card-tags"><span class="tag">Python</span><span class="tag">CLI</span><span class="tag">Ollama</span></div>
-          <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/localmind" target="_blank">GitHub</a><a class="pill" href="https://pypi.org/project/localmind-ai/" target="_blank">PyPI</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="thumb" data-c="ly"><span>LY</span></div>
-        <div class="card-body">
-          <div class="card-name">Laya on a GTX 1650</div>
-          <p class="card-desc">Honest benchmark of a 421M-parameter LLM on 4GB consumer hardware - CUDA-synchronised timing, p50/p95, and measured numbers kept separate from published ones.</p>
-          <div class="card-tags"><span class="tag">PyTorch</span><span class="tag">CUDA</span><span class="tag">Benchmarking</span></div>
-          <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/laya-gtx1650-benchmark" target="_blank">GitHub</a><a class="pill" href="/blog/laya-gtx1650-benchmark/">Blog</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="thumb" data-c="tl"><span>TL</span></div>
-        <div class="card-body">
-          <div class="card-name">Trimurti-LM</div>
-          <p class="card-desc">4.2M-parameter multilingual (EN/HI/PA) GPT trained from scratch in PyTorch, perplexity 3.32 in 2.38 hours on a GTX 1650 4 GB, with a custom SentencePiece tokenizer.</p>
-          <div class="card-tags"><span class="tag">PyTorch</span><span class="tag">Transformers</span><span class="tag">HuggingFace</span></div>
-          <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/trimurti-lm" target="_blank">GitHub</a><a class="pill" href="https://huggingface.co/spaces/PredictiveManish/Trimurti-LM-Demo" target="_blank">Demo</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="thumb" data-c="md"><span>MD</span></div>
-        <div class="card-body">
-          <div class="card-name">ML Drift Monitor</div>
-          <p class="card-desc">End-to-end MLOps prototype, FastAPI async logging pipeline, KS-based concept-drift detection, Plotly dashboard and Discord alerts, under 500 ms inference.</p>
-          <div class="card-tags"><span class="tag">FastAPI</span><span class="tag">Docker</span><span class="tag">CI/CD</span></div>
-          <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/mlops-drift-detector" target="_blank">GitHub</a><a class="pill" href="https://huggingface.co/spaces/PredictiveManish/drift-monitor" target="_blank">Demo</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="thumb" data-c="bb"><span>BB</span></div>
-        <div class="card-body">
-          <div class="card-name">Bharat Benefits</div>
-          <p class="card-desc">Voice-first agent for Indian government welfare scheme discovery, STT → Retrieval → LLM → TTS, merged into Moss, with eligibility matching and vernacular support.</p>
-          <div class="card-tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">LLM</span><span class="tag">RAG</span></div>
-          <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/bharat-benefits" target="_blank">GitHub</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="thumb" data-c="en"><span>EC</span></div>
-        <div class="card-body">
-          <div class="card-name">Energix Copilot</div>
-          <p class="card-desc">Energy optimization platform using predictive analytics and real-time monitoring to reduce industrial power consumption. Won the Industrial Automation hackathon category.</p>
-          <div class="card-tags"><span class="tag">Python</span><span class="tag">Streamlit</span><span class="tag">Prophet</span></div>
-          <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/Energy-Optimization-Platform" target="_blank">GitHub</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="thumb" data-c="ss"><span>SS</span></div>
-        <div class="card-body">
-          <div class="card-name">Swasthya Saathi</div>
-          <p class="card-desc">Health assistant for rural areas, symptom checker, medicine reminders and a nearby clinic locator with offline-first support.</p>
-          <div class="card-tags"><span class="tag">Flask</span><span class="tag">SQLite</span></div>
-          <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/Swasthya-Saathi" target="_blank">GitHub</a></div>
-        </div>
-      </article>
+
     </div>
   </section>
+
   <section>
-    <div class="sec-head"><h2>More projects &amp; experiments</h2></div>
-    <ul class="archive-list">
-      <li class="archive-item">
-        <div class="archive-info">
-          <a href="https://github.com/PredictiveManish/Quantum-Simulation-Experience" class="archive-title" target="_blank">Quantum Computer Digital Twin</a>
-          <div class="archive-desc">Interactive quantum computer “flight simulator”, full stack from pulse layer and control electronics to circuit execution, noise and calibration.</div>
+    <div class="sec-head"><h2>Tier 2  Shipped and in use</h2><span class="tier-note">5 projects</span></div>
+    <ul class="t2">
+      <li>
+        <div>
+          <h3>Repo2RLEnv, merged upstream at Hugging Face<span class="up">merged PR</span></h3>
+          <p>My pull request adds an egress guard that blocks the Go and Rust module registries at solve time, closing a hole where a generated solution could pull packages mid-run and escape the sandbox contract. It is merged into <em>huggingface/Repo2RLEnv</em>  the one piece of my work a stranger has reviewed and accepted.</p>
         </div>
-        <span class="archive-date">Aug 2026</span>
+        <div class="t2-links"><a class="pill" href="https://github.com/huggingface/Repo2RLEnv/pull/257" target="_blank">PR #257</a></div>
       </li>
-      <li class="archive-item">
-        <div class="archive-info">
-          <a href="https://github.com/PredictiveManish/Hack-EVM" class="archive-title" target="_blank">hack-evm (satire)</a>
-          <div class="archive-desc">A 100% satirical “EVM hacking” CLI toolkit where every operation fails hilariously, a joke published to PyPI.</div>
+      <li>
+        <div>
+          <h3>Bharat Benefits<span class="up">merged into Moss</span></h3>
+          <p>An agent that answers questions about Indian government schemes straight from official sources, with a voice pipeline on top. It was merged into <em>usemoss/moss</em> as a community demo, so the code lives in someone else&rsquo;s repository now.</p>
         </div>
-        <span class="archive-date">Jun 2026</span>
+        <div class="t2-links"><a class="pill" href="https://github.com/PredictiveManish/bharat-benefits" target="_blank">GitHub</a><a class="pill" href="https://github.com/usemoss/moss/pull/189" target="_blank">PR #189</a></div>
       </li>
-      <li class="archive-item">
-        <div class="archive-info">
-          <a href="https://github.com/PredictiveManish/Q-A-with-sarvam" class="archive-title" target="_blank">Q&amp;A with Sarvam</a>
-          <div class="archive-desc">Question answering system using Sarvam AI models with Indic language support.</div>
+      <li>
+        <div>
+          <h3>Little Sparks</h3>
+          <p>A Slack-integrated product-design platform used daily at Smartivity Labs by 100+ designers and managers across 200+ projects. OAuth, per-project channels, reminders and analytics  built for a company that still runs it, not for a demo.</p>
         </div>
-        <span class="archive-date">Dec 2025</span>
+        <div class="t2-links"><a class="pill" href="https://github.com/PredictiveManish/little-sparks" target="_blank">GitHub</a><a class="pill" href="https://little-sparks-six.vercel.app/" target="_blank">Live</a></div>
       </li>
-      <li class="archive-item">
-        <div class="archive-info">
-          <a href="https://github.com/PredictiveManish/ai-caption-generator" class="archive-title" target="_blank">AI Caption Generator</a>
-          <div class="archive-desc">Generate engaging social media captions using transformer-based models (HuggingFace + Gradio).</div>
+      <li>
+        <div>
+          <h3>Trimurti-LM</h3>
+          <p>A 4.2M-parameter English/Hindi/Punjabi GPT trained from scratch on a 4&nbsp;GB GTX&nbsp;1650  450K rows, a custom SentencePiece tokenizer, perplexity 3.32 in 2.38 hours. Trained end to end rather than fine-tuned, which is the unusual part at this scale.</p>
         </div>
-        <span class="archive-date">Dec 2025</span>
+        <div class="t2-links"><a class="pill" href="https://github.com/PredictiveManish/trimurti-lm" target="_blank">GitHub</a><a class="pill" href="https://huggingface.co/spaces/PredictiveManish/Trimurti-LM-Demo" target="_blank">Demo</a></div>
       </li>
-      <li class="archive-item">
-        <div class="archive-info">
-          <a href="https://github.com/PredictiveManish/wall-crack-detection-project" class="archive-title" target="_blank">Wall Crack Detection</a>
-          <div class="archive-desc">Computer vision system to identify structural cracks in walls using CNNs (PyTorch, OpenCV).</div>
+      <li>
+        <div>
+          <h3>Laya on a GTX 1650</h3>
+          <p>A latency benchmark of a 421M-parameter model on 2019-era laptop hardware, with CUDA-synchronised timing and p50/p95 instead of single runs. Measured numbers are kept separate from the published ones  the gap between them is the finding.</p>
         </div>
-        <span class="archive-date">Sep 2025</span>
-      </li>
-      <li class="archive-item">
-        <div class="archive-info">
-          <a href="https://github.com/PredictiveManish/21DaysofEDA" class="archive-title" target="_blank">21 Days of EDA</a>
-          <div class="archive-desc">21-day exploratory data analysis challenge covering real-world datasets and visual insights.</div>
-        </div>
-        <span class="archive-date">May 2025</span>
-      </li>
-      <li class="archive-item">
-        <div class="archive-info">
-          <a href="https://github.com/PredictiveManish/Network-Device-Scanner" class="archive-title" target="_blank">Network Device Scanner</a>
-          <div class="archive-desc">Python tool to scan the local network, discover active devices and retrieve basic info (Scapy).</div>
-        </div>
-        <span class="archive-date">Dec 2024</span>
-      </li>
-      <li class="archive-item">
-        <div class="archive-info">
-          <a href="https://github.com/PredictiveManish/Youtube-playlist-downloader" class="archive-title" target="_blank">YouTube Playlist Downloader</a>
-          <div class="archive-desc">CLI tool to download entire YouTube playlists in high quality with progress tracking.</div>
-        </div>
-        <span class="archive-date">Oct 2024</span>
-      </li>
-      <li class="archive-item">
-        <div class="archive-info">
-          <a href="https://github.com/PredictiveManish/Scientific-Calculator-in-Cpp" class="archive-title" target="_blank">Scientific Calculator (C++)</a>
-          <div class="archive-desc">Console-based scientific calculator with trigonometric, logarithmic and algebraic functions.</div>
-        </div>
-        <span class="archive-date">Aug 2024</span>
-      </li>
-      <li class="archive-item">
-        <div class="archive-info">
-          <a href="https://github.com/PredictiveManish/phishKavach" class="archive-title" target="_blank">PhishKavach (Spam Classifier)</a>
-          <div class="archive-desc">NLP-based SMS/email spam detection using TF-IDF and Naive Bayes.</div>
-        </div>
-        <span class="archive-date">Dec 2023</span>
-      </li>
-      <li class="archive-item">
-        <div class="archive-info">
-          <a href="https://github.com/PredictiveManish/datadreamer-coursefinder" class="archive-title" target="_blank">DataDream Coursefinder</a>
-          <div class="archive-desc">Course recommendation engine for data science learners based on skill level and interests.</div>
-        </div>
-        <span class="archive-date">Oct 2023</span>
+        <div class="t2-links"><a class="pill" href="https://github.com/PredictiveManish/laya-gtx1650-benchmark" target="_blank">GitHub</a><a class="pill" href="/blog/laya-gtx1650-benchmark/">Write-up</a></div>
       </li>
     </ul>
   </section>
+
+  <section>
+    <div class="sec-head"><h2>Tier 3  Also built</h2><span class="tier-note">9 projects &middot; breadth, not depth, some for fun</span></div>
+    <ul class="t3">
+      <li><a class="t3-name" href="https://predictivemanish.github.io/indiaciv/" target="_blank">indiaciv</a><span class="t3-fact">India as a strategy-game map: all 720 districts and 5,147 hexes built from Census 2011, ISFR 2023 and RBI state accounts.</span><a class="t3-link" href="https://github.com/PredictiveManish/predictivemanish.github.io/tree/main/indiaciv" target="_blank">source</a></li>
+      <li><a class="t3-name" href="https://github.com/PredictiveManish/localmind" target="_blank">LocalMind</a><span class="t3-fact">PyPI CLI that scans your GPU and says which local models actually fit, rather than what the model card claims.</span><a class="t3-link" href="https://pypi.org/project/localmind-ai/" target="_blank">PyPI</a></li>
+      <li><a class="t3-name" href="https://github.com/PredictiveManish/mlops-drift-detector" target="_blank">ML Drift Monitor</a><span class="t3-fact">Drift detection with versioned baselines and per-feature statistical tests, so a baseline can be reverted.</span><a class="t3-link" href="https://github.com/PredictiveManish/mlops-drift-detector" target="_blank">GitHub</a></li>
+      <li><a class="t3-name" href="https://github.com/PredictiveManish/resume-agent" target="_blank">resume-agent</a><span class="t3-fact">Tailors a resume to a job description and returns an ATS score before and after, plus a compile-ready LaTeX file.</span><a class="t3-link" href="https://github.com/PredictiveManish/resume-agent" target="_blank">GitHub</a></li>
+      <li><a class="t3-name" href="https://github.com/PredictiveManish/Q-A-with-sarvam" target="_blank">Q&amp;A with Sarvam</a><span class="t3-fact">Document Q&amp;A on Sarvam&rsquo;s 105B model with vector search, streaming answers and source tracking.</span><a class="t3-link" href="https://github.com/PredictiveManish/Q-A-with-sarvam" target="_blank">GitHub</a></li>
+      <li><a class="t3-name" href="https://github.com/PredictiveManish/JanDrishti" target="_blank">JanDrishti</a><span class="t3-fact">Budget against actual expenditure for every state and UT, served behind 15 FastAPI endpoints.</span><a class="t3-link" href="https://github.com/PredictiveManish/JanDrishti" target="_blank">GitHub</a></li>
+      <li><a class="t3-name" href="https://github.com/PredictiveManish/bharat-friction-index" target="_blank">Bharat friction index</a><span class="t3-fact">A sourced map of the policies, rules and bodies that slow founders down in India.</span><a class="t3-link" href="https://github.com/PredictiveManish/bharat-friction-index" target="_blank">GitHub</a></li>
+      <li><a class="t3-name" href="https://github.com/PredictiveManish/semicon-software-gap" target="_blank">Semicon software gap</a><span class="t3-fact">Which EDA and design software a new Indian chip builder should actually start with.</span><a class="t3-link" href="https://github.com/PredictiveManish/semicon-software-gap" target="_blank">GitHub</a></li>
+      <li><a class="t3-name" href="https://github.com/PredictiveManish/Hack-EVM" target="_blank">Hack-EVM</a><span class="t3-fact">A satirical &ldquo;EVM hacking&rdquo; toolkit on PyPI where every operation fails by design.</span><a class="t3-link" href="https://pypi.org/project/hack-evm/" target="_blank">PyPI</a></li>
+    </ul>
+  </section>
+
   <section style="text-align:center;">
-    <p class="muted">Full source and more experiments on <a href="https://github.com/PredictiveManish" target="_blank" style="color:#ff3d00;text-decoration:none;">GitHub</a> - 56 repositories, 42 merged PRs.</p>
+    <p class="muted">Full source and the rest of the experiments on <a href="https://github.com/PredictiveManish" target="_blank" style="color:#ff3d00;text-decoration:none;">GitHub</a>  49 public repositories, 48 merged pull requests.</p>
   </section>
 </div>
 <footer><div class="wrap inner"><p>&copy; <span id="yr"></span> Manish Tiwari</p><p>
@@ -535,10 +424,6 @@ document.getElementById('yr') && (document.getElementById('yr').textContent = ne
     .catch(function(){ c.innerHTML = '<p class="map-load">Could not load map.</p>'; });
 })();
 </script>
-<<<<<<< HEAD
 <a class="wa-fab" href="https://wa.me/919779405863?text=Hello%2C%20I%27ve%20an%20opportunity%20for%20you" target="_blank" rel="noopener" aria-label="Message me on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.488"/></svg><span>Hire me</span></a>
-=======
-<a class="wa-fab" href="https://wa.me/919779405863?text=Hello%2C%20I%27ve%20an%20opportunity%20for%20you" target="_blank" rel="noopener" aria-label="Message me on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.488"/></svg><span>Discuss or Hire</span></a>
->>>>>>> cdcdb618d0351cddb7ace43b471ddc2a011ef99b
 </body>
 </html>
