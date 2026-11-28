@@ -253,11 +253,6 @@ footer a:hover{color:#ff3d00}
     .timeline .yr { color: #ff3d00; font-weight: 500; }
     .post .sub { color: #5a5a55; }
 
-    /* ── Bottom wordmark ── */
-    .wordmark { overflow: hidden; padding: 2.5rem 0 1.25rem; line-height: 0; }
-    .wordmark svg { display: block; width: 100%; height: auto; }
-    .wordmark svg text { fill: #0d0d0d; }
-
 
 .thumb[data-c="me"]{background:#cdeac0}
 .thumb[data-c="ly"]{background:#f6d8ae}.thumb[data-c="pq"]{background:#d9c2f0}
@@ -267,6 +262,10 @@ footer a:hover{color:#ff3d00}
 .wa-fab:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 #0d0d0d;color:#0d0d0d}
 .wa-fab svg{width:17px;height:17px;display:block;flex:none;fill:currentColor}
 @media(max-width:600px){.wa-fab span{display:none}.wa-fab{padding:.8rem}}
+html{height:100%}
+body{min-height:100vh;display:flex;flex-direction:column}
+body>.wrap{flex:1 0 auto;width:100%}
+footer{margin-top:auto}
 </style>
 
 <style>
@@ -307,16 +306,17 @@ footer a:hover{color:#ff3d00}
     <span class="eyebrow">Portfolio</span>
     <h1>Things I&rsquo;ve built</h1>
     <p>Ordered by signal, not by date: how verifiable the work is, how deep it goes, and how close it sits to
-    evaluation, ML systems and secure execution roles. </p>
+    evaluation, ML systems and secure execution roles. Tier 1 is the three I would defend for twenty minutes in an
+    interview. Everything below is real work, but it carries less weight.</p>
   </div>
 
   <section>
-    <div class="sec-head"><h2>Tier 1  Favourite ones</h2><span class="tier-note">3 projects</span></div>
+    <div class="sec-head"><h2>Tier 1 &mdash; Flagship</h2><span class="tier-note">3 projects &middot; defend these</span></div>
     <div class="flagship">
 
       <article class="flag">
         <div class="flag-head"><span class="flag-num">01</span><h3>pqc-bench</h3><span class="flag-tag">Evaluation</span></div>
-        <p><b>Problem</b>Post-quantum crypto is moving into production on the strength of known-answer tests, which only prove a library agrees with its own vectors  not that it computes the right thing.</p>
+        <p><b>Problem</b>Post-quantum crypto is moving into production on the strength of known-answer tests, which only prove a library agrees with its own vectors &mdash; not that it computes the right thing.</p>
         <p><b>Built</b>57 tasks across seven tiers, each bound to a primary source (FIPS 203/204, RFCs), with executable graders checked against kyber-py and 74 cited sources.</p>
         <p><b>Decision</b>Every task runs three ways: gold must pass, null must fail, buggy must fail. A task that scores well by accident is deleted before it can inflate a leaderboard.</p>
         <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/pqc-bench" target="_blank">GitHub</a><a class="pill" href="/blog/pqc-eval-technical-report/">Technical report</a></div>
@@ -324,16 +324,16 @@ footer a:hover{color:#ff3d00}
 
       <article class="flag">
         <div class="flag-head"><span class="flag-num">02</span><h3>mesh</h3><span class="flag-tag">Distributed systems</span></div>
-        <p><b>Problem</b>People plan training runs on pooled VRAM  ten laptops at 8&nbsp;GB is not 80&nbsp;GB  and find out halfway through the run.</p>
+        <p><b>Problem</b>People plan training runs on pooled VRAM &mdash; ten laptops at 8&nbsp;GB is not 80&nbsp;GB &mdash; and find out halfway through the run.</p>
         <p><b>Built</b>A planner that scans a fleet of consumer GPUs, computes the real per-node ceiling for a given model, then coordinates distributed PyTorch training across the machines that actually fit.</p>
-        <p><b>Decision</b>Capacity is computed per node against the model shard and never summed. On a fleet of 100 consumer GPUs, only 8 can hold a 7B model  the number the tool exists to tell you.</p>
+        <p><b>Decision</b>Capacity is computed per node against the model shard and never summed. On a fleet of 100 consumer GPUs, only 8 can hold a 7B model &mdash; the number the tool exists to tell you.</p>
         <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/mesh" target="_blank">GitHub</a><a class="pill" href="https://pypi.org/project/mesh-train/" target="_blank">PyPI</a></div>
       </article>
 
       <article class="flag">
         <div class="flag-head"><span class="flag-num">03</span><h3>SafeRun AI</h3><span class="flag-tag">Security &amp; infra</span></div>
         <p><b>Problem</b>LLM-generated Python usually runs with whatever privileges the host happens to have.</p>
-        <p><b>Built</b>A sandbox that executes untrusted code in isolated Docker containers behind an AST scanner, a YAML policy engine, four risk levels and a full audit log  as a FastAPI service, a CLI and an MCP server.</p>
+        <p><b>Built</b>A sandbox that executes untrusted code in isolated Docker containers behind an AST scanner, a YAML policy engine, four risk levels and a full audit log &mdash; as a FastAPI service, a CLI and an MCP server.</p>
         <p><b>Decision</b>Policy is enforced statically, before execution, not only by the container. Import-level attacks are rejected at the AST instead of being absorbed silently at runtime.</p>
         <div class="card-links"><a class="pill" href="https://github.com/PredictiveManish/SafeRun-AI" target="_blank">GitHub</a><a class="pill" href="https://pypi.org/project/saferun-ai/" target="_blank">PyPI</a><a class="pill" href="https://saferun-ai.onrender.com/" target="_blank">Live</a></div>
       </article>
@@ -342,12 +342,12 @@ footer a:hover{color:#ff3d00}
   </section>
 
   <section>
-    <div class="sec-head"><h2>Tier 2  Shipped and in use</h2><span class="tier-note">5 projects</span></div>
+    <div class="sec-head"><h2>Tier 2 &mdash; Shipped and in use</h2><span class="tier-note">5 projects</span></div>
     <ul class="t2">
       <li>
         <div>
           <h3>Repo2RLEnv, merged upstream at Hugging Face<span class="up">merged PR</span></h3>
-          <p>My pull request adds an egress guard that blocks the Go and Rust module registries at solve time, closing a hole where a generated solution could pull packages mid-run and escape the sandbox contract. It is merged into <em>huggingface/Repo2RLEnv</em>  the one piece of my work a stranger has reviewed and accepted.</p>
+          <p>My pull request adds an egress guard that blocks the Go and Rust module registries at solve time, closing a hole where a generated solution could pull packages mid-run and escape the sandbox contract. It is merged into <em>huggingface/Repo2RLEnv</em> &mdash; the one piece of my work a stranger has reviewed and accepted.</p>
         </div>
         <div class="t2-links"><a class="pill" href="https://github.com/huggingface/Repo2RLEnv/pull/257" target="_blank">PR #257</a></div>
       </li>
@@ -361,21 +361,21 @@ footer a:hover{color:#ff3d00}
       <li>
         <div>
           <h3>Little Sparks</h3>
-          <p>A Slack-integrated product-design platform used daily at Smartivity Labs by 100+ designers and managers across 200+ projects. OAuth, per-project channels, reminders and analytics  built for a company that still runs it, not for a demo.</p>
+          <p>A Slack-integrated product-design platform used daily at Smartivity Labs by 100+ designers and managers across 200+ projects. OAuth, per-project channels, reminders and analytics &mdash; built for a company that still runs it, not for a demo.</p>
         </div>
         <div class="t2-links"><a class="pill" href="https://github.com/PredictiveManish/little-sparks" target="_blank">GitHub</a><a class="pill" href="https://little-sparks-six.vercel.app/" target="_blank">Live</a></div>
       </li>
       <li>
         <div>
           <h3>Trimurti-LM</h3>
-          <p>A 4.2M-parameter English/Hindi/Punjabi GPT trained from scratch on a 4&nbsp;GB GTX&nbsp;1650  450K rows, a custom SentencePiece tokenizer, perplexity 3.32 in 2.38 hours. Trained end to end rather than fine-tuned, which is the unusual part at this scale.</p>
+          <p>A 4.2M-parameter English/Hindi/Punjabi GPT trained from scratch on a 4&nbsp;GB GTX&nbsp;1650 &mdash; 450K rows, a custom SentencePiece tokenizer, perplexity 3.32 in 2.38 hours. Trained end to end rather than fine-tuned, which is the unusual part at this scale.</p>
         </div>
         <div class="t2-links"><a class="pill" href="https://github.com/PredictiveManish/trimurti-lm" target="_blank">GitHub</a><a class="pill" href="https://huggingface.co/spaces/PredictiveManish/Trimurti-LM-Demo" target="_blank">Demo</a></div>
       </li>
       <li>
         <div>
           <h3>Laya on a GTX 1650</h3>
-          <p>A latency benchmark of a 421M-parameter model on 2019-era laptop hardware, with CUDA-synchronised timing and p50/p95 instead of single runs. Measured numbers are kept separate from the published ones  the gap between them is the finding.</p>
+          <p>A latency benchmark of a 421M-parameter model on 2019-era laptop hardware, with CUDA-synchronised timing and p50/p95 instead of single runs. Measured numbers are kept separate from the published ones &mdash; the gap between them is the finding.</p>
         </div>
         <div class="t2-links"><a class="pill" href="https://github.com/PredictiveManish/laya-gtx1650-benchmark" target="_blank">GitHub</a><a class="pill" href="/blog/laya-gtx1650-benchmark/">Write-up</a></div>
       </li>
@@ -383,7 +383,7 @@ footer a:hover{color:#ff3d00}
   </section>
 
   <section>
-    <div class="sec-head"><h2>Tier 3  Also built</h2><span class="tier-note">9 projects &middot; breadth, not depth, some for fun</span></div>
+    <div class="sec-head"><h2>Tier 3 &mdash; Also built</h2><span class="tier-note">9 projects &middot; breadth, not depth</span></div>
     <ul class="t3">
       <li><a class="t3-name" href="https://predictivemanish.github.io/indiaciv/" target="_blank">indiaciv</a><span class="t3-fact">India as a strategy-game map: all 720 districts and 5,147 hexes built from Census 2011, ISFR 2023 and RBI state accounts.</span><a class="t3-link" href="https://github.com/PredictiveManish/predictivemanish.github.io/tree/main/indiaciv" target="_blank">source</a></li>
       <li><a class="t3-name" href="https://github.com/PredictiveManish/localmind" target="_blank">LocalMind</a><span class="t3-fact">PyPI CLI that scans your GPU and says which local models actually fit, rather than what the model card claims.</span><a class="t3-link" href="https://pypi.org/project/localmind-ai/" target="_blank">PyPI</a></li>
@@ -398,7 +398,7 @@ footer a:hover{color:#ff3d00}
   </section>
 
   <section style="text-align:center;">
-    <p class="muted">Full source and the rest of the experiments on <a href="https://github.com/PredictiveManish" target="_blank" style="color:#ff3d00;text-decoration:none;">GitHub</a>  49 public repositories, 48 merged pull requests.</p>
+    <p class="muted">Full source and the rest of the experiments on <a href="https://github.com/PredictiveManish" target="_blank" style="color:#ff3d00;text-decoration:none;">GitHub</a> &mdash; 49 public repositories, 48 merged pull requests.</p>
   </section>
 </div>
 <footer><div class="wrap inner"><p>&copy; <span id="yr"></span> Manish Tiwari</p><p>
@@ -407,11 +407,6 @@ footer a:hover{color:#ff3d00}
 <a href="https://x.com/compmanish" target="_blank">X</a> &middot;
 <a href="https://huggingface.co/PredictiveManish" target="_blank">HuggingFace</a> &middot;
 <a href="mailto:manish.tiwari.09@zohomail.in">Email</a></p></div></footer>
-<div class="wordmark" aria-hidden="true">
-  <svg viewBox="0 0 1000 150" preserveAspectRatio="none" role="img" aria-label="Manish Tiwari">
-    <text x="0" y="116" textLength="1000" lengthAdjust="spacingAndGlyphs" font-family="DM Mono, ui-monospace, monospace" font-size="130" font-weight="500" letter-spacing="-3">MANISH TIWARI</text>
-  </svg>
-</div>
 <script>
 document.getElementById('yr') && (document.getElementById('yr').textContent = new Date().getFullYear());
 (function(){
@@ -424,6 +419,6 @@ document.getElementById('yr') && (document.getElementById('yr').textContent = ne
     .catch(function(){ c.innerHTML = '<p class="map-load">Could not load map.</p>'; });
 })();
 </script>
-<a class="wa-fab" href="https://wa.me/919779405863?text=Hello%2C%20I%27ve%20an%20opportunity%20for%20you" target="_blank" rel="noopener" aria-label="Message me on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.488"/></svg><span>Hire me</span></a>
+<a class="wa-fab" href="https://wa.me/919779405863?text=Hello%2C%20I%27ve%20an%20opportunity%20for%20you" target="_blank" rel="noopener" aria-label="Message me on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.488"/></svg><span>Discuss or Hire</span></a>
 </body>
 </html>
